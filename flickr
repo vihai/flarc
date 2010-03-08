@@ -1,0 +1,5 @@
+>> flickr = Flickr.new("/tmp/flickr.cache", "b18c48dcc7c1f8811a291d537551c585", "cf3bf707d062d898")
+>> flickr.auth.login_link
+>> flickr.auth.getToken('72157617263049664-f5bba40af015acf3-610021')
+>> flickr.tags.getListUser '82552702 at N00'
+

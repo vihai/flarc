@@ -1,0 +1,3531 @@
+--- 
+plane_types_320: 
+  name: Ventus2-c
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "709885543"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_106: 
+  name: SZD-20x Wampir 2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1460143155"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_132: 
+  name: PW-9A
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2015972825"
+  manufacturer: Politechnika Warszawska
+  link_wp: http://en.wikipedia.org/wiki/Politechniki_Warszawskiej_PW-6
+plane_types_213: 
+  name: G-102 Astir
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1118746158"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G-102_Astir
+plane_types_025: 
+  name: SZD-24 Foka
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315086"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_051: 
+  name: OBS
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "440854516"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_321: 
+  name: LS6-18w
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "4922214"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS6
+plane_types_240: 
+  name: G-103C Twin III SL
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "936942919"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_103_Twin_Astir
+plane_types_107: 
+  name: SZD-12 Mucha 100
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382737"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_133: 
+  name: SZD-42 Jantar 2/2b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179790"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_214: 
+  name: ASW 20CL
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2114787119"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_026: 
+  name: G-102 Astir CS 77
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1062754432"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G-102_Astir
+plane_types_052: 
+  name: 604 Kestrel 22
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1783926094"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel"
+plane_types_322: 
+  name: ASW 20F
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "598321967"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_241: 
+  name: ASK 21Mi
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "0.92"
+  id: "1683145329"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_21
+plane_types_134: 
+  name: PIK-4
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "30598993"
+  manufacturer: PIK
+  link_wp: 
+plane_types_160: 
+  name: LS5
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904805"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS5
+plane_types_215: 
+  name: ASK 21
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "0.92"
+  id: "691904772"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_21
+plane_types_027: 
+  name: SZD-52 Jantar 15 Krokus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112142"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_053: 
+  name: DG-300 Club
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1844929916"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-300
+plane_types_080: 
+  name: ASW 15
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589736292"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_15
+plane_types_108: 
+  name: SZD-40 Halny
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179793"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_323: 
+  name: Ventus a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2004968712"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus
+plane_types_242: 
+  name: "Ka1 Rh\xC3\xB6nlaus"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "918167442"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_135: 
+  name: SZD-9bis Bocian-Z
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1388483234"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-9
+plane_types_161: 
+  name: Discus cs
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1133580619"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus
+plane_types_216: 
+  name: LAK-5
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "812154026"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_028: 
+  name: "Ka 6E Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "550888476"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_054: 
+  name: DuoDiscus XL
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.1"
+  id: "706347578"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Duo_Discus
+plane_types_109: 
+  name: ASW 22BLE 50R
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "151254386"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_350: 
+  name: Ventus2-cM
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "669666607"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_324: 
+  name: Discus 2c
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1130265823"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus-2
+plane_types_243: 
+  name: LAK-9
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "812154021"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_162: 
+  name: LS6
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904806"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS6
+plane_types_217: 
+  name: PIK-7 Harakka III
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1967787396"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-7
+plane_types_029: 
+  name: SZD-25 Lis
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315085"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_055: 
+  name: DG-808
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1597586888"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_081: 
+  name: ASG 29
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "725983472"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASG_29
+plane_types_136: 
+  name: 401 Kestrel
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1800965451"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_401"
+plane_types_351: 
+  name: DG-505/22
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "44629637"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-500
+plane_types_325: 
+  name: ASW 20
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589668648"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_270: 
+  name: PIK-17b Tintti
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2021611368"
+  manufacturer: PIK
+  link_wp: 
+plane_types_244: 
+  name: Discus bM
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1133512964"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus
+plane_types_163: 
+  name: ASH 25Mi
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "385879496"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_25
+plane_types_190: 
+  name: Taurus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1149278725"
+  manufacturer: Pipistrel
+  link_wp: 
+plane_types_218: 
+  name: DG-808B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1203447894"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_056: 
+  name: LS8-st
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1014316362"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_082: 
+  name: Grunau Baby IIb
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "102670077"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Grunau_Baby
+plane_types_137: 
+  name: ASH 31Mi
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1658867027"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_31
+plane_types_352: 
+  name: K 10
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1711261823"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_326: 
+  name: G-102 Speed Astir
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "183905010"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G-102_Astir
+plane_types_271: 
+  name: SZD-9bis Bocian-1C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1355739104"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-9
+plane_types_245: 
+  name: SZD-31 Zefir 4
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247440"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_219: 
+  name: ASW 22BL
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.28"
+  id: "704504456"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_057: 
+  name: SZD-59 Acro
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112134"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-59
+plane_types_083: 
+  name: S10vt
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.1"
+  id: "1633891785"
+  manufacturer: Stemme
+  link_wp: http://en.wikipedia.org/wiki/Stemme_S10
+plane_types_138: 
+  name: SZD-16 Gil
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382733"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_164: 
+  name: Genesis 2
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2057181083"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_353: 
+  name: DG-1000S Club
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "264382468"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-1000
+plane_types_327: 
+  name: H-301 Libelle
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "141364365"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-301"
+plane_types_272: 
+  name: Ventus-cT
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "706570726"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus
+plane_types_246: 
+  name: 202 Standard-Libelle
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1818004804"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-201"
+plane_types_191: 
+  name: G-104 Speed Astir II 17.5
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "889911550"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_104_Speed_Astir
+plane_types_058: 
+  name: PIK-30
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842472685"
+  manufacturer: PIK
+  link_wp: 
+plane_types_084: 
+  name: Ventus2-cxM
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "805626378"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_139: 
+  name: Janus A
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1093922356"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Janus
+plane_types_165: 
+  name: Janus CM
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1443310163"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Janus
+plane_types_328: 
+  name: PIK-16 Vasama
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842337393"
+  manufacturer: PIK
+  link_wp: 
+plane_types_273: 
+  name: Nimbus-2B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.16"
+  id: "1369767967"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-2
+plane_types_247: 
+  name: DG-303 Club
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1433357737"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-300
+plane_types_059: 
+  name: ASH 30
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "717396155"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_30
+plane_types_085: 
+  name: Nimbus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1715192801"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus
+plane_types_166: 
+  name: Nimbus-4DM
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2142396203"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-4
+plane_types_192: 
+  name: DG-101
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1537949142"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-100
+plane_types_329: 
+  name: DG-200
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1546468818"
+  manufacturer: Glaser-Dirks
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-200
+plane_types_274: 
+  name: SZD-36 Cobra 15
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247435"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-36
+plane_types_248: 
+  name: "Ka 2 Rh\xC3\xB6nschwalbe"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "918167443"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_086: 
+  name: LS8-b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1483986715"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_167: 
+  name: LS7
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904807"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS7
+plane_types_193: 
+  name: Discus 2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1130265801"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus-2
+plane_types_275: 
+  name: EW 18
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1834323587"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_249: 
+  name: Grunau Baby IIIb
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1271751653"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Grunau_Baby
+plane_types_087: 
+  name: DG-303
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.06"
+  id: "1554988498"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-300
+plane_types_168: 
+  name: SZD-48 Jantar Standard 2 and 3
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179784"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_194: 
+  name: LS8-s
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1483986697"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_276: 
+  name: "Ka 6 Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "918167448"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_088: 
+  name: PIK-20B Tiu
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2013565234"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/Eiri-Avion_PIK-20
+plane_types_169: 
+  name: ASW 19 Club
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "731023565"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_19
+plane_types_195: 
+  name: LS6-a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1501026070"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS6
+plane_types_277: 
+  name: SZD-9bis Bocian-1D
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1355739103"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-9
+plane_types_089: 
+  name: Hornet C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "795696167"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_206"
+plane_types_196: 
+  name: LS3-17
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1414133746"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS3
+plane_types_278: 
+  name: MDM-1 Fox
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "14991031"
+  manufacturer: MDM
+  link_wp: http://en.wikipedia.org/wiki/MDM_MDM-1_Fox
+plane_types_197: 
+  name: DG-101 G
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1775950496"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-100
+plane_types_279: 
+  name: Nimbus-2C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.16"
+  id: "1369767968"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-2
+plane_types_198: 
+  name: "Ka 2b Rh\xC3\xB6nschwalbe"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "516809764"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_199: 
+  name: B-4
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1282229104"
+  manufacturer: Pilatus Aircraft
+  link_wp: http://en.wikipedia.org/wiki/MDM_MDM-1_Fox
+plane_types_010: 
+  name: "Ka 6B Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "550888473"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_011: 
+  name: SZD-22 Mucha Standard
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315088"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_012: 
+  name: LAK-17a
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "691759659"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_200: 
+  name: Janus CT
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1443310170"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Janus
+plane_types_013: 
+  name: LS6-c18
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "430432457"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS6
+plane_types_120: 
+  name: PIK-20F Tiu
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2013565230"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/Eiri-Avion_PIK-20
+plane_types_201: 
+  name: Nimbus-4DT
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.26"
+  id: "2142396210"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-4
+plane_types_014: 
+  name: SZD-50 Puchacz
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112144"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_040: 
+  name: Cirrus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1656453352"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Cirrus
+plane_types_121: 
+  name: DG-1000T
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1482998461"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-1000
+plane_types_202: 
+  name: Discus 2b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1130265802"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus-2
+plane_types_310: 
+  name: PIK-13
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842337390"
+  manufacturer: PIK
+  link_wp: 
+plane_types_015: 
+  name: "SZD-8 Jas\xC3\xB3lka"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "535582487"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_041: 
+  name: SZD-54 Perkoz
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112139"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_122: 
+  name: "SZD-14 Jask\xC3\xB3lka M"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382735"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_203: 
+  name: LS8-t
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1483986696"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_311: 
+  name: G-102 Astir CS
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "805529251"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G-102_Astir
+plane_types_230: 
+  name: Ventus-cM
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "706570733"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus
+plane_types_016: 
+  name: SZD-23 Bocian 2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315087"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_042: 
+  name: SZD-28
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315082"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_123: 
+  name: Condor IIa
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1693990923"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_204: 
+  name: LS6-b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1501026069"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS6
+plane_types_312: 
+  name: Ventus2-b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.14"
+  id: "709885544"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_231: 
+  name: PW-7
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "962254111"
+  manufacturer: Politechnika Warszawska
+  link_wp: http://en.wikipedia.org/wiki/Politechniki_Warszawskiej_PW-6
+plane_types_017: 
+  name: ASH 25E
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "466618583"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_25
+plane_types_043: 
+  name: G-103C Twin III ACRO
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1562099951"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_103_Twin_Astir
+plane_types_124: 
+  name: G-104 Speed Astir
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1659598349"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_104_Speed_Astir
+plane_types_150: 
+  name: Condor IV
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1697711638"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_205: 
+  name: PW-9M
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2015972838"
+  manufacturer: Politechnika Warszawska
+  link_wp: http://en.wikipedia.org/wiki/Politechniki_Warszawskiej_PW-6
+plane_types_313: 
+  name: DuoDiscus X
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.1"
+  id: "380931959"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Duo_Discus
+plane_types_232: 
+  name: G-102 Astir CS III
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1462605237"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G-102_Astir
+plane_types_018: 
+  name: DG-200 17
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "702053099"
+  manufacturer: Glaser-Dirks
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-200
+plane_types_044: 
+  name: Ventus2-cxa
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "805626366"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_070: 
+  name: ASW 12
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589736295"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_12
+plane_types_125: 
+  name: LAK-11 Nida
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120472171"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_151: 
+  name: PIK-6
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "30598995"
+  manufacturer: PIK
+  link_wp: 
+plane_types_206: 
+  name: ASW 19X
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1326625404"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_19
+plane_types_340: 
+  name: Ventus2-bx
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.14"
+  id: "669599002"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_314: 
+  name: Discus 2T
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1130265821"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus-2
+plane_types_233: 
+  name: DG-1000S 18/20
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "400168745"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-1000
+plane_types_019: 
+  name: ASK 18B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "691972413"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_18
+plane_types_045: 
+  name: SZD-55 Promyk
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112138"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-55
+plane_types_071: 
+  name: ASW 19B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1326625427"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_19
+plane_types_126: 
+  name: K 8C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "567229512"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_K_8
+plane_types_152: 
+  name: DG-202 17C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1394150226"
+  manufacturer: Glaser-Dirks
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-200
+plane_types_207: 
+  name: ASH 25
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "717463799"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_25
+plane_types_341: 
+  name: ASK 14
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "691972418"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_14
+plane_types_315: 
+  name: LS4-b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1518065423"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS4
+plane_types_260: 
+  name: SZD-34 Bocian 3 (ver. 2)
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247437"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_234: 
+  name: SZD-30 Pirat
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247442"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-30
+plane_types_046: 
+  name: SZD-29 Zefir 3
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315081"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_072: 
+  name: "G\xC3\xB6ppingen G\xC3\xB6 4"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "289408057"
+  manufacturer: Schempp-Hirth
+  link_wp: "http://en.wikipedia.org/wiki/G\xC3\xB6ppingen_G\xC3\xB6_4"
+plane_types_127: 
+  name: ASW 28-18
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "307121040"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_28
+plane_types_153: 
+  name: SZD-18 Czajka
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382731"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_208: 
+  name: Standard Austria S
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1279049286"
+  manufacturer: Schempp-Hirth
+  link_wp: 
+plane_types_342: 
+  name: ASW 24
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589668644"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_24
+plane_types_316: 
+  name: ASW 17X
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1343664758"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_17
+plane_types_261: 
+  name: 205 Club-Libelle
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1818004801"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-201"
+plane_types_235: 
+  name: rhonbussard
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "807237417"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_047: 
+  name: SZD-19-2 Zefir 2A
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "894558749"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_073: 
+  name: DG-300
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.06"
+  id: "1554988495"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-300
+plane_types_128: 
+  name: ASW 20FLP
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1441651973"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_154: 
+  name: LAK-15
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120472167"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_180: 
+  name: LS9
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904809"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS9
+plane_types_209: 
+  name: LS6-c
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1501026068"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS6
+plane_types_343: 
+  name: "Ka 6B-Pe Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "822984179"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_317: 
+  name: DG-808S
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1203447911"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_262: 
+  name: G-104 Speed Astir IIB
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1355629158"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_104_Speed_Astir
+plane_types_236: 
+  name: ASW 20FL
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2114990066"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_048: 
+  name: SZD-56 Diana
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112137"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-56
+plane_types_074: 
+  name: ASW 24B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "564243263"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_24
+plane_types_129: 
+  name: SZD-15 Sroka
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382734"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_155: 
+  name: Janus C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1093922354"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Janus
+plane_types_181: 
+  name: K 8
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "790284898"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_K_8
+plane_types_344: 
+  name: PIK-3C Kajava
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842472737"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-3
+plane_types_318: 
+  name: G-104 Speed Astir III
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1375789717"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_104_Speed_Astir
+plane_types_263: 
+  name: PIK-17a Tumppi
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2021611369"
+  manufacturer: PIK
+  link_wp: 
+plane_types_237: 
+  name: DG-202 17
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "907907999"
+  manufacturer: Glaser-Dirks
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-200
+plane_types_049: 
+  name: G-103 Twin Astir
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "282176889"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_103_Twin_Astir
+plane_types_075: 
+  name: Ventus2-ax
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.14"
+  id: "669531353"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_156: 
+  name: SZD-45 Ogar
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179787"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_182: 
+  name: K 9
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "790284897"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_345: 
+  name: Ventus-bM
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "706638382"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus
+plane_types_319: 
+  name: PIK-14
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842337391"
+  manufacturer: PIK
+  link_wp: 
+plane_types_290: 
+  name: SZD-38 Jantar 1
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247433"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_264: 
+  name: ASC Spirit
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2017309835"
+  manufacturer: Advanced Soaring Concepts
+  link_wp: http://en.wikipedia.org/wiki/Advanced_Soaring_Concepts_Spirit
+plane_types_238: 
+  name: LAK-8
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "812154022"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_076: 
+  name: ""
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "289408056"
+  manufacturer: Schempp-Hirth
+  link_wp: 
+plane_types_157: 
+  name: PIK-7 Harakka I
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "30598996"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-7
+plane_types_183: 
+  name: PIK-22
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842405038"
+  manufacturer: PIK
+  link_wp: 
+plane_types_346: 
+  name: LS8-18
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1009851468"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_291: 
+  name: Nimbus-3
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "345416879"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-3
+plane_types_265: 
+  name: SZD-9bis Bocian-1B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1355739105"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-9
+plane_types_239: 
+  name: A-21 Calif
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2011644118"
+  manufacturer: Caproni Vizzola
+  link_wp: http://en.wikipedia.org/wiki/Caproni_Vizzola_Calif
+plane_types_077: 
+  name: Grunau Baby IIa
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "102670078"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Grunau_Baby
+plane_types_158: 
+  name: SZD-19 Zefir 2A
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382730"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_184: 
+  name: H-201 Standard-Libelle
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "132844688"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-201"
+plane_types_347: 
+  name: DG-500
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1572027849"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-500
+plane_types_292: 
+  name: LS1-c
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624453"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_266: 
+  name: DG-800B
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1135290477"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_078: 
+  name: LS8-a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1483986716"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_159: 
+  name: LAK-16
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120472166"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_185: 
+  name: ASW 28-18E
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1529626669"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_28
+plane_types_348: 
+  name: ASW 20L
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "598321961"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_293: 
+  name: SZD-39 Cobra 17
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247432"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_267: 
+  name: Nimbus-4T
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1386807339"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-4
+plane_types_079: 
+  name: PIK-20A Tiu
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2013565235"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/Eiri-Avion_PIK-20
+plane_types_186: 
+  name: DG-100
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1537949141"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-100
+plane_types_349: 
+  name: G-103C Twin III
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "217703671"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_103_Twin_Astir
+plane_types_294: 
+  name: DG-800LA
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1603732975"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_268: 
+  name: SZD-35 Bekas
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247436"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_187: 
+  name: ASW 22B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.26"
+  id: "581282617"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_295: 
+  name: Standard-Cirrus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "567332739"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Standard_Cirrus
+plane_types_269: 
+  name: 206 Hornet
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1818004800"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_206"
+plane_types_188: 
+  name: LS10-a
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "593140276"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS10
+plane_types_296: 
+  name: Nimbus-4
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.28"
+  id: "345416880"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-4
+plane_types_189: 
+  name: PIK-24 Pileus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842405040"
+  manufacturer: PIK
+  link_wp: 
+plane_types_297: 
+  name: LS1-d
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624452"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_298: 
+  name: DG-500M
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2038948494"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-500
+plane_types_001: 
+  name: ASW 27
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589668641"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_27
+plane_types_299: 
+  name: ASW 20B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "598321971"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_002: 
+  name: SZD-6x Nietoperz
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "535582489"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_003: 
+  name: DG-800S
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1135290495"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_110: 
+  name: PIK-1
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "30598990"
+  manufacturer: PIK
+  link_wp: 
+plane_types_004: 
+  name: Diana 2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1607539794"
+  manufacturer: Diana Sailplanes
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-1000
+plane_types_030: 
+  name: 303 Mosquito
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1809485126"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_303"
+plane_types_111: 
+  name: PIK-20E Tiu
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2013565231"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/Eiri-Avion_PIK-20
+plane_types_300: 
+  name: LS1-e
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624451"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_005: 
+  name: Nimbus-2CS
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "532367462"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-2
+plane_types_031: 
+  name: Ventus-bT
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "706638375"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus
+plane_types_112: 
+  name: ASW 19
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589736288"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_19
+plane_types_301: 
+  name: Antares 18T
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2127650934"
+  manufacturer: Lange Flugzeugbau
+  link_wp: 
+plane_types_006: 
+  name: LS1-0
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624506"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_032: 
+  name: DuoDiscus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.1"
+  id: "2055615029"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Duo_Discus
+plane_types_113: 
+  name: ASH 25MB
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "385879488"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_25
+plane_types_220: 
+  name: DG-400
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1563508172"
+  manufacturer: Glaser-Dirks
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-400
+plane_types_302: 
+  name: PIK-12
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842337389"
+  manufacturer: PIK
+  link_wp: 
+plane_types_007: 
+  name: ASW 28
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589668640"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_28
+plane_types_033: 
+  name: H-30
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1357739300"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-30_GFK"
+plane_types_114: 
+  name: DG-1000S
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1482998462"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-1000
+plane_types_140: 
+  name: Ventus2-cxT
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "805626385"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_221: 
+  name: ASK 23B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1387315945"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_23
+plane_types_303: 
+  name: ASW 20C
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "598321970"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_008: 
+  name: SZD-7 Osa
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "535582488"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_034: 
+  name: SZD-26 Wilk
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315084"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_060: 
+  name: ASW 22BE
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "671260424"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_115: 
+  name: SZD-13 Wampir
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382736"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_141: 
+  name: LS2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904802"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS2
+plane_types_222: 
+  name: PW-5 Smyk
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "962254109"
+  manufacturer: Politechnika Warszawska
+  link_wp: http://en.wikipedia.org/wiki/Politechniki_Warszawskiej_PW-5
+plane_types_330: 
+  name: Arcus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1560510188"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Arcus
+plane_types_304: 
+  name: Ventus2-a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.14"
+  id: "709885545"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_223: 
+  name: DG-808C
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1203447895"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_009: 
+  name: Virus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1502706905"
+  manufacturer: Pipistrel
+  link_wp: 
+plane_types_035: 
+  name: "304"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1809485125"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_304"
+plane_types_061: 
+  name: "G\xC3\xB6ppingen G\xC3\xB6-1 Wolf"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "289408060"
+  manufacturer: Schempp-Hirth
+  link_wp: "http://en.wikipedia.org/wiki/G\xC3\xB6ppingen_G\xC3\xB6_1"
+plane_types_116: 
+  name: Janus Ce
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1443310155"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Janus
+plane_types_142: 
+  name: SZD-43 Orion
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179789"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_331: 
+  name: ASW 20BL
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2114719470"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_20
+plane_types_305: 
+  name: LSD Ornith
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "543315907"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LSD_Ornith
+plane_types_250: 
+  name: SZD-32 Foka 5
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247439"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_224: 
+  name: ASK 23
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "691904770"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_23
+plane_types_036: 
+  name: Ventus2-cT
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "669666614"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_062: 
+  name: ASH 31
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "717396154"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_31
+plane_types_117: 
+  name: SZD-41 Jantar Standard
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179792"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_143: 
+  name: PIK-5 Cumulus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "30598994"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-5
+plane_types_332: 
+  name: AS 12
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "659139473"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_306: 
+  name: LS4-a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1518065424"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS4
+plane_types_251: 
+  name: 203 Standard-Libelle
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1818004803"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-201"
+plane_types_225: 
+  name: Ventus2-cx
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "669666651"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Ventus-2
+plane_types_037: 
+  name: G-103a Twin II ACRO
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2029886494"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/G103a_Twin_II
+plane_types_063: 
+  name: DG-100 G
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1767430819"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-100
+plane_types_090: 
+  name: ASW 24E
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "564243260"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_24
+plane_types_118: 
+  name: K 8B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "567229513"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_K_8
+plane_types_144: 
+  name: ASH 26E
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "458098905"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_26
+plane_types_170: 
+  name: Antares 20E
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2135629404"
+  manufacturer: Lange Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Antares_20E
+plane_types_333: 
+  name: S-1 Swift
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1031257897"
+  manufacturer: MDM
+  link_wp: http://en.wikipedia.org/wiki/MDM_MDM-1_Fox
+plane_types_307: 
+  name: LS1f
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624450"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_252: 
+  name: ASW 22M
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "581282606"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_226: 
+  name: PW-6
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "962254110"
+  manufacturer: Politechnika Warszawska
+  link_wp: http://en.wikipedia.org/wiki/Politechniki_Warszawskiej_PW-6
+plane_types_038: 
+  name: SZD-27 Kormoran
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380315083"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_064: 
+  name: DuoDiscus XLT
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.1"
+  id: "1990237377"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Duo_Discus
+plane_types_091: 
+  name: PIK-5A Cumulus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842608033"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-5
+plane_types_119: 
+  name: PIK-2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "30598991"
+  manufacturer: PIK
+  link_wp: 
+plane_types_145: 
+  name: "402"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1800965450"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_402"
+plane_types_171: 
+  name: ASC Falcon
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "198689372"
+  manufacturer: Advanced Soaring Concepts
+  link_wp: http://en.wikipedia.org/wiki/Advanced_Soaring_Concepts_Falcon
+plane_types_334: 
+  name: Nimbus-2M
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1369767978"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-2
+plane_types_308: 
+  name: G-104 Speed Astir II
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1375789718"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G_104_Speed_Astir
+plane_types_253: 
+  name: Discus a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1132920150"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus
+plane_types_227: 
+  name: DG-303 Acro
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1308986162"
+  manufacturer: Glaser-Dirks/DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-300
+plane_types_039: 
+  name: "Ka 6BR Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "12335778"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_065: 
+  name: LS11
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "662723483"
+  manufacturer: "Akaflieg K\xC3\xB6ln"
+  link_wp: "http://en.wikipedia.org/wiki/Akaflieg_K\xC3\xB6ln_LS11"
+plane_types_146: 
+  name: ES 49
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1868199347"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_172: 
+  name: LAK-19
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120472163"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_335: 
+  name: ASW 22
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589668646"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_309: 
+  name: DG-500/22
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "448911916"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-500
+plane_types_280: 
+  name: LS1-a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624455"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_254: 
+  name: DG-800A
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1135290476"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/DG_Flugzeugbau_DG-800
+plane_types_228: 
+  name: Seeadler
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1692135123"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_066: 
+  name: "Rh\xC3\xB6nlerche I"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2104173560"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_092: 
+  name: ASW 15B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1609000742"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_15
+plane_types_147: 
+  name: LAK-14
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120472168"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_173: 
+  name: LS8
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "927904808"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS8
+plane_types_336: 
+  name: PIK-3a Knttikolmonen
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842472735"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-3
+plane_types_281: 
+  name: SZD-37 Jantar
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247434"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_255: 
+  name: SZD-33 Bocian 3
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380247438"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_229: 
+  name: G-102 Astir CS II
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1462605236"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/Grob_G-102_Astir
+plane_types_067: 
+  name: Falke
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "434930518"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_093: 
+  name: ETA
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.32"
+  id: "868334760"
+  manufacturer: ETA Aircraft
+  link_wp: http://en.wikipedia.org/wiki/Eta_Aircraft_eta
+plane_types_148: 
+  name: Janus B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1093922355"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Janus
+plane_types_174: 
+  name: LS3-a
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1526585101"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS3
+plane_types_337: 
+  name: DG-202
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1546468820"
+  manufacturer: Glaser-Dirks
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-202
+plane_types_282: 
+  name: "Ka 6CR Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "12403427"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_256: 
+  name: 204 Standard-Libelle
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1818004802"
+  manufacturer: "Glasl\xC3\xBCgel"
+  link_wp: "http://en.wikipedia.org/wiki/Glasfl\xC3\xBCgel_H-201"
+plane_types_068: 
+  name: SHK
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "986798461"
+  manufacturer: Schempp-Hirth
+  link_wp: 
+plane_types_094: 
+  name: SZD-10 Czapla
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382739"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_149: 
+  name: LS3
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904803"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS3
+plane_types_175: 
+  name: SZD-49 Jantar K
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380179783"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_338: 
+  name: ASK 13
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "691972419"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASK_13
+plane_types_283: 
+  name: ASW 17S
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1343664764"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_17
+plane_types_257: 
+  name: "Ka 4 Rh\xC3\xB6nlerche II"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "918167445"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_069: 
+  name: "G\xC3\xB6ppingen G\xC3\xB6 3"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "289408058"
+  manufacturer: Schempp-Hirth
+  link_wp: "http://en.wikipedia.org/wiki/G\xC3\xB6ppingen_G\xC3\xB6_3"
+plane_types_095: 
+  name: ASW 17
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "589736290"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_17
+plane_types_176: 
+  name: ASH 30Mi
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1965337448"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_30
+plane_types_339: 
+  name: PIK-3B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842472736"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-3
+plane_types_284: 
+  name: SZD-9bis Bocian-1E
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1355739102"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-9
+plane_types_258: 
+  name: SZD-9bis Bocian-1A
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1355739106"
+  manufacturer: PZL Bielsko
+  link_wp: http://en.wikipedia.org/wiki/PZL_Bielsko_SZD-9
+plane_types_096: 
+  name: Condor
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "938718797"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_177: 
+  name: "K 7 Rh\xC3\xB6nadler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "790284899"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_285: 
+  name: Condor III
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1675174537"
+  manufacturer: Schleicher
+  link_wp: 
+plane_types_259: 
+  name: Discus b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1132920151"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus
+plane_types_097: 
+  name: G-103a Twin II
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1229819677"
+  manufacturer: Grob
+  link_wp: http://en.wikipedia.org/wiki/G103a_Twin_II
+plane_types_178: 
+  name: ASW 22BE
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "704504464"
+  manufacturer: Alexander-Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Alexander_Schleicher_ASW_22
+plane_types_286: 
+  name: "SZD-17x Jask\xC3\xB3lka L"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1468189289"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_098: 
+  name: Grunau Baby III
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2128875458"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Grunau_Baby
+plane_types_179: 
+  name: Nimbus-4D
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1386807323"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-4
+plane_types_287: 
+  name: Nimbus-2
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.16"
+  id: "345416878"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-2
+plane_types_099: 
+  name: PIK-5B Cumulus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842608034"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-5
+plane_types_288: 
+  name: Discus bT
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.08"
+  id: "1133512971"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Discus
+plane_types_289: 
+  name: LS1-b
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1543624454"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_100: 
+  name: ASG 29E
+  motor: "1"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1607715547"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASG_29
+plane_types_020: 
+  name: S10
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: "1.1"
+  id: "1904895874"
+  manufacturer: Stemme
+  link_wp: http://en.wikipedia.org/wiki/Stemme_S10
+plane_types_101: 
+  name: SZD-11 Albatros
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380382738"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_021: 
+  name: LAK-20
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120404523"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_102: 
+  name: ASW 27B
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "538684232"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASW_27
+plane_types_103: 
+  name: DG-600
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1580547526"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-600
+plane_types_210: 
+  name: LS1-ef
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "192309557"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_022: 
+  name: Mini-Nimbus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1727482058"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Mini-Nimbus
+plane_types_104: 
+  name: "Ka 6CR-Pe Rh\xC3\xB6nsegler"
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1788088725"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_Ka_6
+plane_types_130: 
+  name: LAK-12
+  motor: 
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "2120472170"
+  manufacturer: "Sportin\xC4\x97 Aviacija (LAK)"
+  link_wp: 
+plane_types_211: 
+  name: ASH 26
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "717463798"
+  manufacturer: Schleicher
+  link_wp: http://en.wikipedia.org/wiki/Schleicher_ASH_26
+plane_types_023: 
+  name: SZD-51 Junior
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: 
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1380112143"
+  manufacturer: PZL Bielsko
+  link_wp: 
+plane_types_105: 
+  name: PIK-5C Cumulus
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "842608035"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-5
+plane_types_131: 
+  name: LS1
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "927904801"
+  manufacturer: Rolladen-Schneider
+  link_wp: http://en.wikipedia.org/wiki/Rolladen-Schneider_LS1
+plane_types_212: 
+  name: PIK-7 Harakka II
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1967787397"
+  manufacturer: PIK
+  link_wp: http://en.wikipedia.org/wiki/PIK-7
+plane_types_024: 
+  name: DG-505
+  motor: "0"
+  created_at: 2009-04-20 01:05:21
+  seats: "2"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1572027854"
+  manufacturer: DG Flugzeugbau
+  link_wp: http://en.wikipedia.org/wiki/Glaser-Dirks_DG-500
+plane_types_050: 
+  name: Nimbus-4M
+  motor: "2"
+  created_at: 2009-04-20 01:05:21
+  seats: "1"
+  updated_at: 2009-04-20 01:05:21
+  handicap: 
+  id: "1386807299"
+  manufacturer: Schempp-Hirth
+  link_wp: http://en.wikipedia.org/wiki/Schempp-Hirth_Nimbus-4

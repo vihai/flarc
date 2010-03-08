@@ -1,0 +1,63 @@
+<div id="list_div">
+<% if !session[:authenticated_identity].nil? &&
+       session[:authenticated_identity].is_admin then %>
+  <div class="edit_box">
+  <%= link_to_remote image_tag(
+         "action_new.png", :alt => "New..."),
+         :url => { :action => "new" }, :method => :get %>
+  </div>
+<% end %>
+
+<% @dates.sort.each do |x|  %>
+<%  year = x[0] %>
+<%  months = x[1] %>
+  <h1><%=h year %></h1>
+  <% months.sort.each do |y| %>
+    <% month = y[0] %>
+    <% days = y[1] %>
+    <% firstwday = (Time.gm(year, month, 1).wday + 6) % 7 %>
+    <% month_days = Date.civil(year, month, -1).day %>
+    <table class="standard flight_calendar">
+      <caption><%=h l Time::gm(0, month), :format => "%B" %></caption>
+      <tr>
+        <th>Lun</th>
+        <th>Mar</th>
+        <th>Mer</th>
+        <th>Gio</th>
+        <th>Ven</th>
+        <th>Sab</th>
+        <th>Dom</th>
+      </tr>
+      <% dom = 0 %>
+      <% for row in 0...6 %>
+        <% break if dom > month_days %>
+        <tr>
+        <% for col in 0...7 %>
+          <% dom = row * 7 + col - firstwday + 1 %>
+          <% break if dom > month_days %>
+          <% if dom > 0 %>
+          <% today = Time.now.year == year && Time.now.month == month && Time.now.mday == dom %>
+          <td class="d<%=h col %><%= today ? " today" : "" %>">
+          <span class="dom"><%=h dom %></span>
+          <span class="cnt">
+          <% if dom > 0 && days[dom] %>
+            <%= link_to(days[dom].cnt, :action => "index",
+                        :year => year, 
+                        :month => month,
+                        :day => dom) %>
+          <% end %>
+          </span>
+          </td>
+          <% else %>
+            <td class="empty"></td>
+          <% end %>
+        <% end %>
+        </tr>
+     <% end %>
+    </table>
+  <% end %>
+<% end %>
+</div>
+<div id="info_div" style="display: none"></div>
+<div id="send_div" style="display: none"></div>
+<div id="edit_div" style="display: none"></div>

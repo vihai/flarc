@@ -1,0 +1,55 @@
+--- 
+planes_003: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: D-7153
+  id: "589744909"
+  plane_type_id: "1554988495"
+planes_004: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: D-8240
+  id: "1403177483"
+  plane_type_id: "1554988495"
+planes_005: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: I-IVWP
+  id: "1381814418"
+  plane_type_id: "691904772"
+planes_006: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: I-NIBO
+  id: "865355708"
+  plane_type_id: "691904772"
+planes_007: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: I-ZEDA
+  id: "1632808823"
+  plane_type_id: "691904772"
+planes_008: 
+  created_at: 2009-03-24 23:49:36.122597
+  updated_at: 2009-03-24 23:49:36.122597
+  registration: D-7206
+  id: "1632808824"
+  plane_type_id: "1554988495"
+planes_009: 
+  created_at: 2009-04-08 09:45:43.111007
+  updated_at: 2009-04-08 09:45:43.111007
+  registration: D-KQAS
+  id: "1632808828"
+  plane_type_id: "805626352"
+planes_001: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: D-2153
+  id: "994027189"
+  plane_type_id: "691904772"
+planes_002: 
+  created_at: 2009-03-19 01:15:48
+  updated_at: 2009-03-19 01:15:48
+  registration: D-2155
+  id: "994027191"
+  plane_type_id: "691904772"

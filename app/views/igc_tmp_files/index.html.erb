@@ -1,0 +1,42 @@
+<h1>Voli IGC</h1>
+<% if !@igc_tmp_files.empty? then %>
+  <table class="standard igc_tmp_files">
+    <tr>
+      <th></th>
+      <th>Pilota</th>
+      <th>Data</th>
+      <th>Aliante</th>
+      <th>Dimensione</th>
+    </tr>
+    <% @igc_tmp_files.each do |x| %>
+
+    <% y = IgcFile.open(x.filename, "rb") %>
+    <% y.read_contents(:headers_only => true) { } %>
+
+    <tr>
+      <td class="view">
+        <%= link_to(image_tag("view.png", :alt => "View", :title => "Apri la pagina del volo"), x) %>
+      </td>
+      <td class="pilot">
+        <%=h y.pilot_name %>
+      </td>
+      <td class="date">
+        <%=h y.date.strftime("%d-%m-%Y") %>
+      </td>
+      <td class="plane">
+        <%=h y.glider_id  %>
+        (<%=h y.glider_type  %>)
+      </td>
+      <td class="size">
+        <%=h File.size(x.filename)  %>
+      </td>
+      <td class="actions">
+        <% #link_to(image_tag("edit-delete.png", :alt => "Rimuovi", :title => "Rimuovi"), :action => "delete") %>
+        %>
+        <%= link_to(image_tag("list-add.png", :alt => "Aggiungi", :title => "Aggiungi volo"),
+                    new_flight_path(:igc_tmp_file_id => x.id)) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

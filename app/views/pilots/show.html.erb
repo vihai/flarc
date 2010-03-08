@@ -1,0 +1,77 @@
+<div id="pilot_info_div">
+
+<% if !session[:authenticated_identity].nil? &&
+       session[:authenticated_identity].is_admin then %>
+  <div class="edit_box">
+  <%= link_to_remote image_tag(
+         "action_edit.png", :alt => "Edit..."),
+         :url => { :action => "edit" }, :method => :get %>
+  <%= link_to_remote image_tag(
+         "action_delete.png", :alt => "Delete..."),
+         :method => "DELETE",
+         :confirm => "Sei sicurisssimo?" %>
+                    <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/planes'; }" }) %>
+  </div>
+<% end %>
+
+<%= content_tag(:object, "",
+                :type => "image/svg+xml",
+                :data => stats_plane_pilot_url(:format => :svg),
+                :width => "300px", :height => "200px",
+                :style => "float: right;") %>
+
+<table class="standard pilot">
+  <caption>Pilota</caption>
+  <tr>
+    <th>Nome</th>
+    <td class="name">
+       <%= @pilot.person.name %>
+    </td>
+  </tr>
+  <% if session[:authenticated_identity] &&
+        session[:authenticated_identity].is_admin %>
+  <tr>
+    <th>Indirizzo</th>
+    <td class="address">
+      <%=h @pilot.person.home_location %><br />
+    </td>
+  </tr>
+  <tr>
+    <th>Telefono</th>
+    <td class="phone">
+      <%=h @pilot.person.tmp_telefono %><br />
+    </td>
+  </tr>
+  <tr>
+    <th>Cellulare</th>
+    <td class="phone">
+      <%=h @pilot.person.tmp_cellulare %><br />
+    </td>
+  </tr>
+  <tr>
+    <th>e-Mail</th>
+    <td class="email">
+      <% @pilot.person.identities.each do |identity|  %>
+          <%= mail_to identity.fqdn %><br />
+      <% end %> 
+    </td>
+  </tr>
+  <% end %>
+  <tr>
+    <th>Campionati</th>
+    <td>
+      <ul>
+      <% for x in @pilot.championships do %>
+        <li><%= link_to x.name, x %></li>
+      <% end %>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<% @flights = @pilot.flights.all(:order => "takeoff_time DESC") %>
+<%= render :partial => "flights/list", :locals => {
+              :options => { :hide_pilot => true } } %>
+
+</div>
+<div id="pilot_edit_form_div" style="display: none"></div>

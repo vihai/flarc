@@ -1,0 +1,121 @@
+--- 
+regions_015: 
+  name: PIEMONTE
+  created_at: 
+  updated_at: 
+  id: "1"
+  istat_id: "01"
+regions_004: 
+  name: PUGLIA
+  created_at: 
+  updated_at: 
+  id: "16"
+  istat_id: "16"
+regions_016: 
+  name: LAZIO
+  created_at: 
+  updated_at: 
+  id: "12"
+  istat_id: "12"
+regions_005: 
+  name: FRIULI VENEZIA GIULIA
+  created_at: 
+  updated_at: 
+  id: "6"
+  istat_id: "06"
+regions_017: 
+  name: VALLE D'AOSTA
+  created_at: 
+  updated_at: 
+  id: "2"
+  istat_id: "02"
+regions_006: 
+  name: BASILICATA
+  created_at: 
+  updated_at: 
+  id: "17"
+  istat_id: "17"
+regions_018: 
+  name: ABRUZZO
+  created_at: 
+  updated_at: 
+  id: "13"
+  istat_id: "13"
+regions_007: 
+  name: LIGURIA
+  created_at: 
+  updated_at: 
+  id: "7"
+  istat_id: "07"
+regions_019: 
+  name: LOMBARDIA
+  created_at: 
+  updated_at: 
+  id: "3"
+  istat_id: "03"
+regions_008: 
+  name: CALABRIA
+  created_at: 
+  updated_at: 
+  id: "18"
+  istat_id: "18"
+regions_020: 
+  name: MOLISE
+  created_at: 
+  updated_at: 
+  id: "14"
+  istat_id: "14"
+regions_009: 
+  name: EMILIA ROMAGNA
+  created_at: 
+  updated_at: 
+  id: "8"
+  istat_id: 08
+regions_010: 
+  name: SICILIA
+  created_at: 
+  updated_at: 
+  id: "19"
+  istat_id: "19"
+regions_011: 
+  name: TOSCANA
+  created_at: 
+  updated_at: 
+  id: "9"
+  istat_id: 09
+regions_012: 
+  name: SARDEGNA
+  created_at: 
+  updated_at: 
+  id: "20"
+  istat_id: "20"
+regions_001: 
+  name: TRENTINO ALTO ADIGE
+  created_at: 
+  updated_at: 
+  id: "4"
+  istat_id: "04"
+regions_013: 
+  name: UMBRIA
+  created_at: 
+  updated_at: 
+  id: "10"
+  istat_id: "10"
+regions_002: 
+  name: CAMPANIA
+  created_at: 
+  updated_at: 
+  id: "15"
+  istat_id: "15"
+regions_014: 
+  name: MARCHE
+  created_at: 
+  updated_at: 
+  id: "11"
+  istat_id: "11"
+regions_003: 
+  name: VENETO
+  created_at: 
+  updated_at: 
+  id: "5"
+  istat_id: "05"

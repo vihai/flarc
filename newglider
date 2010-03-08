@@ -1,0 +1,138 @@
+  <table>
+    <tr>
+      <td><%= f.label :pilot, "Pilot" %></td>
+      <td>
+    <%= f.select :pilot_id,
+                      Pilot.find(:all,
+                                 :order => 'people.last_name ASC, people.first_name ASC',
+                                 :include => :person).collect { |p|
+                      [ "#{p.person.name}", p.id ] },
+                   { :include_blank => true } %>
+      </td>
+    </tr>
+    <tr>
+      <td>Logger</td>
+      <td>
+        <%=h @flight.igc_file.fr_manufacturer %>
+        <%=h @flight.igc_file.fr_model %>
+        (hw<%=h @flight.igc_file.hardware %>
+         sw<%=h @flight.igc_file.firmware %>)
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label :pilot, "Pilota" %></td>
+      <td><%=h @flight.igc_file.pilot_name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :logger_date, "Data" %></td>
+      <td><%= f.text_field :logger_date, :size => 10,
+              :value => @flight.igc_file.date.strftime("%d-%m-%Y"),
+              :title => "Data in cui è stato effettuato il volo, nel formato GG-MM-AAAA" %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label :takoff_time, "Decollo" %></td>
+      <td><%= f.text_field :takeoff_time %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :landing_time, "Atterraggio" %></td>
+      <td><%= f.text_field :landing_time %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :plane, "Aliante" %></td>
+      <td>
+        <% javascript_tag do -%>
+          Element.observe(window, 'load', plane_on_change);
+          
+          function plane_on_change() {
+          if ($('flight_plane_id').value == "NEW")
+            $('new_plane_div').appear();
+          else
+            $('new_plane_div').fade();
+          }
+        <% end -%>
+        <%=
+          selections = [ [ "Nuovo aliante", "NEW" ] ] +
+                      Plane.find(:all,
+                                 :order => 'registration ASC',
+                                 :include => :plane_type).collect { |p|
+                      [ "#{p.registration} (#{p.plane_type.name})", p.id ] }
+
+          f.select :plane_id, selections,
+                   { :include_blank => true },
+                   { :onchange => "plane_on_change()" }
+        %>
+        <div id="new_plane_div" style="display: none">
+          <% fields_for @flight.plane do |plane| %>
+          <table>
+            <tr>
+              <td><%= plane.label :registration, "Marche" %></td>
+              <td><%= plane.text_field :registration, :size => 10 %></td>
+            </tr>
+            <tr>
+              <td><%= plane.label :plane_type, "Tipo" %></td>
+              <td>
+                <% javascript_tag do -%>
+                  Element.observe(window, 'load', plane_type_on_change);
+
+                  function plane_type_on_change() {
+                    if ($('plane_plane_type_id').value == "NEW")
+                      $('new_plane_type_div').appear();
+                    else
+                      $('new_plane_type_div').fade();
+                  }
+                <% end -%>
+                <%=
+                    selections = [ [ "Nuovo modello", "NEW" ] ] +
+                             PlaneType.find(:all,
+                                            :order => 'name ASC').collect { |p|
+                               [ "#{p.name}", p.id ] };
+
+                    plane.select :plane_type_id, selections,
+                             { :include_blank => true },
+                             { :onchange => "plane_type_on_change()" }
+                %>
+                <div id="new_plane_type_div" style="display: none">
+                  <% fields_for @flight.plane.plane_type do |pt| %>
+                  <table>
+                    <tr>
+                      <td><%= pt.label :name, "Nome" %></td>
+                      <td><%= pt.text_field :name, :size => 32 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= pt.label :seats, "Posti" %></td>
+                      <td><%= pt.text_field :seats, :size => 1 %></td>
+                    </tr>
+                    <tr>
+                      <td><%= pt.label :handicap, "Handicap" %></td>
+                      <td><%= pt.text_field :handicap, :size => 3 %></td>
+                    </tr>
+                 </table>
+                 <% end %>
+                </div>
+              </td>
+            </tr>
+         </table>
+         <% end %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label :passenger, "Passeggero" %></td>
+      <td>
+        <%= f.text_field :passenger, :id => "passenger_input" %>
+        <div class="autocomplete" id="passenger_autocomplete"></div>
+        <% javascript_tag do -%>
+var r = new Ajax.Autocompleter('passenger_input', 'passenger_autocomplete', '/flights/autocomplete_passenger', {method:'get'})
+        <% end -%>
+      </td>
+    </tr>
+    <tr>
+      <td><%= f.label :distance, "Distanza" %></td>
+      <td><%= f.text_field :distance, :size => 5 %></td>
+    </tr>
+ </table>
+  <p style="text-align: center">
+    <%= button_to_function("Annulla", "cancel_form()") %>
+    <%= submit_tag "Inivia" %>
+  </p>

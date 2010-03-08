@@ -1,0 +1,26 @@
+--- 
+glider_classes_004: 
+  name: 15 meter
+  created_at: 2009-03-19 01:15:47
+  updated_at: 2009-03-19 01:15:47
+  id: "421049682"
+glider_classes_005: 
+  name: Standard
+  created_at: 2009-03-19 01:15:47
+  updated_at: 2009-03-19 01:15:47
+  id: "1101356648"
+glider_classes_001: 
+  name: Club
+  created_at: 2009-03-19 01:15:47
+  updated_at: 2009-03-19 01:15:47
+  id: "895784065"
+glider_classes_002: 
+  name: Open
+  created_at: 2009-03-19 01:15:47
+  updated_at: 2009-03-19 01:15:47
+  id: "1730176942"
+glider_classes_003: 
+  name: 18 meter
+  created_at: 2009-03-19 01:15:47
+  updated_at: 2009-03-19 01:15:47
+  id: "421252629"

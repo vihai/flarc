@@ -1,0 +1,15 @@
+<table class="standard plane_types">
+  <tr>
+    <th>Name</th>
+    <th>Seats</th>
+    <th>Handicap</th>
+  </tr>
+
+<% for plane_type in @plane_types %>
+  <tr>
+    <td><%= link_to plane_type.name, plane_type %></td>
+    <td><%=h plane_type.seats %></td>
+    <td><%=h fmt_handicap(plane_type.handicap) %></td>
+  </tr>
+<% end %>
+</table>

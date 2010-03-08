@@ -1,0 +1,34 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+#
+
+nibo:
+   registration: "I-NIBO"
+   plane_type: ask21
+
+zeda:
+   registration: "I-ZEDA"
+   plane_type: ask21
+
+ivwp:
+   registration: "I-IVWP"
+   plane_type: ask21
+
+D2153:
+   registration: "D-2153"
+   plane_type: ask21
+
+D2155:
+   registration: "D-2155"
+   plane_type: ask21
+
+D8240:
+   registration: "D-8240"
+   plane_type: dg300
+
+D7153:
+   registration: "D-7153"
+   plane_type: dg300
+
+D1234:
+   registration: "D-1234"
+   plane_type: dg800_a

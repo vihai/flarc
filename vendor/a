@@ -1,0 +1,2 @@
+INSERT INTO "people" ("vat_number", "home_address", "nickname", "birth_date", "home_zip", "gender", "italian_fiscal_code", "last_name", "middle_name", "first_name") VALUES (E'05035900967', E'Via Tagliamento, 13', E'Vihai', E'1975-12-07', E'20030', E'M', E'RLNDNL75T07F205T', E'Orlandi', NULL, E'Daniele')
+

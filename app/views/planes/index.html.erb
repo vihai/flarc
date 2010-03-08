@@ -1,0 +1,28 @@
+<div id="list_div">
+
+<% if !session[:authenticated_identity].nil? &&
+       session[:authenticated_identity].is_admin then %>
+  <div class="edit_box">
+  <%= link_to_remote image_tag(
+         "action_new.png", :alt => "New..."),
+         :url => { :action => "new" }, :method => :get %>
+  </div>
+<% end %>
+
+<% if !@planes.empty? then %>
+  <table class="standard planes">
+    <caption>Alianti</caption>
+    <tr>
+      <th>Marche</th>
+      <th>Tipo</th>
+    </tr>
+    <% for x in @planes do %>
+    <tr>
+      <td class="registration"><%= link_to(x.registration, x) %></td>
+      <td class="type"><%= link_to(x.plane_type.name, x.plane_type) %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+</div>
+<div id="edit_form_div" style="display: none"></div>

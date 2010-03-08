@@ -1,0 +1,88 @@
+--- 
+ranking_members_006: 
+  position: "1"
+  data: "--- \n\
+    :flights_b: []\n\n\
+    :flights_a: \n\
+    - 6764963\n\
+    - 6764947\n\
+    - 6764950\n"
+  pilot_id: "1606574631"
+  id: "1"
+  value: "346.7596390484"
+  ranking_id: "1859428371"
+ranking_members_007: 
+  position: "2"
+  data: "--- \n\
+    :flights_b: []\n\n\
+    :flights_a: \n\
+    - 6764951\n"
+  pilot_id: "833376615"
+  id: "2"
+  value: "170.652173913043"
+  ranking_id: "1859428371"
+ranking_members_008: 
+  position: "1"
+  data: "--- \n\
+    :flights_b: []\n\n\
+    :flights_a: \n\
+    - 6764963\n\
+    - 6764947\n\
+    - 6764950\n"
+  pilot_id: "1606574631"
+  id: "3"
+  value: "346.7596390484"
+  ranking_id: "1074967272"
+ranking_members_009: 
+  position: "2"
+  data: "--- \n\
+    :flights_b: []\n\n\
+    :flights_a: \n\
+    - 6764951\n"
+  pilot_id: "833376615"
+  id: "4"
+  value: "170.652173913043"
+  ranking_id: "1074967272"
+ranking_members_001: 
+  position: 
+  data: 
+  pilot_id: "706921719"
+  id: "5"
+  value: 
+  ranking_id: "613693420"
+ranking_members_002: 
+  position: "1"
+  data: "--- \n\
+    :flights_b: []\n\n\
+    :flights_a: \n\
+    - 6764963\n\
+    - 6764947\n\
+    - 6764950\n"
+  pilot_id: "1606574631"
+  id: "6"
+  value: "5"
+  ranking_id: "2100978067"
+ranking_members_003: 
+  position: "2"
+  data: "--- \n\
+    :flights_b: []\n\n\
+    :flights_a: \n\
+    - 6764951\n"
+  pilot_id: "833376615"
+  id: "7"
+  value: "1"
+  ranking_id: "2100978067"
+ranking_members_004: 
+  position: "3"
+  data: 
+  pilot_id: "706921719"
+  id: "8"
+  value: "0"
+  ranking_id: "2100978067"
+ranking_members_005: 
+  position: "4"
+  data: 
+  pilot_id: "1606574632"
+  id: "9"
+  value: "0"
+  ranking_id: "2100978067"

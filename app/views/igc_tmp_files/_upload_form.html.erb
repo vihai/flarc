@@ -1,0 +1,18 @@
+<iframe id="upload_iframe" name="upload_iframe" style="display: none"></iframe>
+<% form_for :igc_tmp_file,
+             :url => { :action => "", :format => :js },
+             :html => { :multipart => true,
+                        :id => "upload_form",
+                        :class => "standard",
+                        :method => "post",
+                        :target => "upload_iframe" } do |igcfile| -%>
+
+  <p>
+    Il primo passo è caricare il file .IGC che hai scaricato dal logger.
+  </p>
+  <p> <%= igcfile.file_field :file %> </p>
+  <p>
+    <!--<%= button_to_function("Annulla", "cancel_form()") %>-->
+    <%= igcfile.submit "Invia...", :style => "width: 15em; height: 3em;" %>
+  </p>
+<% end %>

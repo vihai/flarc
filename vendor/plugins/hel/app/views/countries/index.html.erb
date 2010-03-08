@@ -1,0 +1,15 @@
+<%= link_to 'Nuovo', new_country_path %>
+<p>&nbsp;</p>
+
+<ul>
+<% @targets.each do | t | %>
+	<li>
+		<%= t.name %>
+		&nbsp;|&nbsp;
+		<%=link_to 'modifica', edit_country_path(t) %>
+		&nbsp;|&nbsp;
+	    <%=link_to 'elimina', country_path(t), :confirm => "Vuoi veramente eliminare la country?", :method => :delete%>
+
+	</li>
+<% end%>
+<ul>	

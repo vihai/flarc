@@ -1,0 +1,2 @@
+module PlaneTypesHelper
+end

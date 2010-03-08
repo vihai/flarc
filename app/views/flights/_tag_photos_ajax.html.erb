@@ -1,0 +1,9 @@
+<% @photos.each do |photo| %>
+  <span style="display: inline-block; text-align: center;">
+  <%= image_tag flickr_url(photo) %><br />
+  <span style="font-size: 50%"><%=h photo.datetaken %></span><br />
+  <%= check_box_tag "photo[#{photo.id}]", 1,
+            Time.parse(photo.datetaken) > @min_taken &&
+            Time.parse(photo.datetaken) < @max_taken %>
+  </span>
+<% end %>

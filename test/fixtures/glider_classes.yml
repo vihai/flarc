@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+club:
+  name: Club
+
+standard:
+  name: Standard
+
+15m:
+  name: 15 meter
+
+18m:
+  name: 18 meter
+
+open:
+  name: Open

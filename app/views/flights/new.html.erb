@@ -1,0 +1,9 @@
+<div id="list_div" style="display: none"></div>
+<div id="info_div">
+<% if @igc_tmp_file %>
+  <%= render :partial => "info" %>
+<% end %>
+</div>
+<div id="edit_div">
+<%= render :partial => "form" %>
+</div>

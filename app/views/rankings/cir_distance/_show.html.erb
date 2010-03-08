@@ -1,0 +1,59 @@
+<% limit ||= nil %>
+<% if !ranking.standings.empty? then %>
+  <table class="standard ranking cir_dist">
+    <caption style="background-color: #<%=h ranking.color %>">
+      Tentativi di record <%=h ranking[:name] %><br />
+      <span class="generated_at">(aggiornata al <%=h l(ranking.generated_at, :format => :short) %>)</span>
+    </caption>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Punti</th>
+      <th>Distanza</th>
+      <th>Handicap</th>
+    </tr>
+    <% ranking.standings.each_with_index do |r,i| %>
+    <tr class="<%= i==0 ? "record" : "" %>">
+      <td class="number"><%=h r.position %>
+        <% weeksnap = r.history_entries.last(
+                          :order => "snapshot_time DESC",
+                          :conditions => "snapshot_time < now() + '1 week'::interval") %>
+        <% if !weeksnap.nil? then %>
+          <% if weeksnap.position > r.position then %>
+            <%= image_tag("arrow-up.png", :alt => "Up",
+                   :title => "Era alla posizione ##{weeksnap.position}" +
+                             " il #{l weeksnap.snapshot_time, :format => :dateonly} "+
+                             " con #{weeksnap.value.to_i} voli" ) %>
+          <% elsif weeksnap.position < r.position then %>
+            <%= image_tag("arrow-down.png", :alt => "Down",
+                   :title => "Era alla posizione ##{weeksnap.position}" +
+                             " il #{l weeksnap.snapshot_time, :format => :dateonly}" +
+                             " con #{weeksnap.value.to_i} voli" ) %>
+          <% else %>
+            <%= image_tag("ranking-no-change.png", :alt => "No change") %>
+          <% end %>
+        <% else %>
+          <%= image_tag("ranking-new.png", :alt => "No change") %>
+        <% end %>
+      </td>
+      <td class="name">
+        <%= link_to(r.pilot.person.name, r.pilot) %>
+      </td>
+      <td class="points"><%=h r.value.round %></td>
+      <td class="distance"><%=h fmt_distance_in_km(r.flight.distance) %></td>
+      <td class="handicap"><%=h r.flight.handicap %></td>
+      <td class="view">
+        <%= link_to(image_tag("view.png", :alt => "View", :title => "Apri la pagina del volo"), r.flight) %>
+      </td>
+    </tr>
+    <% if !limit.nil? && i >= limit then %>
+      <tr>
+        <td colspan=6><%= link_to("Classifica completa...", ranking) %></td>
+      </tr>
+      <% break %>
+    <% end %>
+    <% end %>
+  </table>
+<% else %>
+<p>Nessun tentativo di record <%=h ranking[:name] %></p>
+<% end %>

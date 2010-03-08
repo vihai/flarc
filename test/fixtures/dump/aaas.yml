@@ -1,0 +1,15 @@
+--- 
+aaas_001: 
+  created_at: 
+  body: MyText
+  title: MyString
+  updated_at: 
+  published: 
+  id: "31"
+aaas_002: 
+  created_at: 
+  body: MyText
+  title: MyString
+  updated_at: 
+  published: 
+  id: "32"

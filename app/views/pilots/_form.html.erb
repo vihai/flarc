@@ -1,0 +1,38 @@
+<% form_for(@pilot,
+            :html => { :class => "standard" }) do |f| -%>
+  <%= f.error_messages %>
+  <table>
+    <tr>
+      <th>Alianti</th>
+      <td>
+        <% for plane in @pilot.planes %>
+          <div class="plane">
+            <%= plane.registration %>
+            <%= link_to_function(
+                   image_tag("edit-delete.png", :alt => "Remove", :title => "Remove"),
+                  "$(this).up('.plane').remove()") %>
+          </div>
+        <% end %>
+        <%= select_tag "add_plane", options_for_select(Plane.all.collect {|x| [ x.registration, x.id ] }) %>
+        <%= image_tag("list-add.png", :alt => "Add", :title => "Add") %>
+      </td>
+    </tr>
+    <tr>
+      <th>Campionati</th>
+      <td>
+        <% for championship in Championship.find(:all, :order => "name ASC") %>
+          <%= check_box_tag "pilot[championships][]", championship.id,
+                            !@pilot.championships.index(championship).nil?
+           %>
+          <%= label_tag "pilot[championships][]", championship.name %><br />
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <p style="text-align: center">
+    <%= #button_to_function("Annulla", "cancel_form()")
+    %>
+    <%= submit_tag "Save" %>
+  </p>
+
+<% end -%>

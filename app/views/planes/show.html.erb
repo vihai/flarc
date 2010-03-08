@@ -1,0 +1,60 @@
+<div id="plane_info_div">
+
+<% if !session[:authenticated_identity].nil? &&
+       session[:authenticated_identity].is_admin then %>
+  <div class="edit_box">
+  <%= link_to_remote image_tag(
+         "action_edit.png", :alt => "Edit..."),
+         :url => { :action => "edit" }, :method => :get %>
+  <%= link_to_remote image_tag(
+         "action_delete.png", :alt => "Delete..."),
+         :method => "DELETE",
+         :confirm => "Sei sicurisssimo?" %>
+                    <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/planes'; }" }) %>
+  </div>
+<% end %>
+
+<%= content_tag(:object, "",
+                :type => "image/svg+xml",
+                :data => stats_pilot_plane_url(:format => :svg),
+                :width => "300px", :height => "200px",
+                :style => "float: right;") %>
+
+<table class="standard plane">
+  <tr>
+    <th>Marche</th>
+    <td class="registration">
+      <%= link_to @plane.registration, @plane %>
+    </td>
+  </tr>
+  <tr>
+    <th>Tipo</th>
+    <td class="type">
+      <%= link_to @plane.plane_type.name, @plane.plane_type %><br />
+    </td>
+  </tr>
+ <% if !@plane.plane_type.configurations.empty? then %>
+  <tr>
+    <th>Configurazioni</th>
+    <td class="configurations">
+      <% for config in @plane.plane_type.configurations %>
+        <%=h config.name %> (handicap <%=h fmt_handicap(config.handicap) %>)<br />
+      <% end %>
+    </td>
+  </tr>
+<% else %>
+  <tr>
+    <th>Handicap</th>
+    <td class="handicap">
+      <%=h fmt_handicap(@plane.plane_type.handicap) %>
+    </td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<% @flights = @plane.flights.all(:order => "takeoff_time DESC") %>
+<%= render :partial => "flights/list", :locals => {
+              :options => { :hide_pilot => true } } %>
+
+<div id="plane_edit_form_div" style="display: none"></div>

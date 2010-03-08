@@ -1,0 +1,19 @@
+<h1>Campionati</h1>
+
+<% if !@championships.empty? then %>
+  <table class="standard championship">
+    <caption>Campionati</caption>
+    <tr>
+      <th>Nome</th>
+      <th>Partecipanti</th>
+    </tr>
+    <% for r in @championships do %>
+    <tr>
+      <td class="name">
+        <%= link_to(r.name, r) %>
+      </td>
+      <td class="count"><%=h r.pilots.count %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,9 @@
+<% fields_for @flight do |f| %>
+<%= f.select :plane_id,
+                Plane.all(:order => "registration ASC").collect { |p|
+                    [ p.registration, p.id ] }, { },
+                 :onchange => remote_function(
+                   :url => { :action => "new_plane_changed" },
+                   :with => "'plane_id=' + $('flight_plane_id').value",
+                   :method => :get ) %>
+<% end %>

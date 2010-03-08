@@ -1,0 +1,30 @@
+<% form_for(@plane,
+            :html => { :id => "plane_form",
+                       :class => "standard" }) do |f| -%>
+  <%= f.error_messages %>
+  <table>
+    <tr>
+      <td><%= f.label :registration, "Marche" %></td>
+      <td><%= f.text_field :registration %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :plane_type_id, "Tipo" %></td>
+      <td>
+        <%=
+            f.select :plane_type_id,
+                     PlaneType.find(:all, :order => "name ASC").collect { |p|
+                       [ "#{p.name}", p.id ] },
+                     { :include_blank => true }
+        %>
+<!--        <%= link_to_remote "Nuovo tipo", :update => "new_plane_type_form",
+                            :url => new_plane_type_path %>
+        <div id="new_plane_type_form"></div>-->
+      </td>
+    </tr>
+ </table>
+  <p style="text-align: center">
+    <%= button_to_function("Annulla", "cancel_form()") %>
+    <%= submit_tag "Salva" %>
+  </p>
+
+<% end -%>

@@ -1,0 +1,15 @@
+embed_images: on
+javascript_compressor: yui
+gzip_assets: on
+
+javascripts:
+  default:
+    - public/javascripts/prototype.js
+    - public/javascripts/effects.js
+    - public/javascripts/**/*.js
+    - public/plugin_assets/**/*.js
+
+stylesheets:
+  csvva:
+    - public/stylesheets/csvva.css
+    - public/stylesheets/lightbox.css

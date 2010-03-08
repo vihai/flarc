@@ -1,0 +1,311 @@
+
+dg800_a_15m:
+  plane_type: dg800_a
+  name: "18m"
+  handicap: 1.18
+
+dg800_a_18m:
+  plane_type: dg800_a
+  name: "18m"
+  handicap: 1.20
+
+dg800_b_15m:
+  plane_type: dg800_b
+  name: "15m"
+  handicap: 1.14
+
+dg800_b_18m:
+  plane_type: dg800_b
+  name: "18m"
+  handicap: 1.20
+
+ls8_18_15m:
+  plane_type: ls8_18
+  name: "15m"
+  handicap: 1.08
+
+ls8_18_18m:
+  plane_type: ls8_18
+  name: "18m"
+  handicap: 1.14
+
+ls8_b_15m:
+  plane_type: ls8_b
+  name: "15m"
+  handicap: 1.08
+
+ls8_b_18m:
+  plane_type: ls8_b
+  name: "18m"
+  handicap: 1.14
+
+ls8_s_15m:
+  plane_type: ls8_s
+  name: "15m"
+  handicap: 1.08
+
+ls8_s_18m:
+  plane_type: ls8_s
+  name: "18m"
+  handicap: 1.14
+
+ls8_t_15m:
+  plane_type: ls8_t
+  name: "15m"
+  handicap: 1.08
+
+ls8_t_18m:
+  plane_type: ls8_t
+  name: "18m"
+  handicap: 1.14
+
+ls8_st_15m:
+  plane_type: ls8_t
+  name: "15m"
+  handicap: 1.08
+
+ls8_st_18m:
+  plane_type: ls8_t
+  name: "18m"
+  handicap: 1.14
+
+asw20_15m:
+  plane_type: asw20
+  name: "15m"
+  handicap: 1.10
+
+asw20_166m:
+  plane_type: asw20
+  name: "16.6m"
+  handicap: 1.12
+
+asw20_b_15m:
+  plane_type: asw20_b
+  name: "15m"
+  handicap: 1.10
+
+asw20_b_166m:
+  plane_type: asw20_b
+  name: "16.6m"
+  handicap: 1.12
+
+asw20_l_15m:
+  plane_type: asw20_l
+  name: "15m"
+  handicap: 1.10
+
+asw20_l_166m:
+  plane_type: asw20_l
+  name: "16.6m"
+  handicap: 1.12
+
+asw20_bl_15m:
+  plane_type: asw20_bl
+  name: "15m"
+  handicap: 1.10
+
+asw20_bl_166m:
+  plane_type: asw20_bl
+  name: "16.6m"
+  handicap: 1.12
+
+asw20_f_15m:
+  plane_type: asw20_f
+  name: "15m"
+  handicap: 1.10
+
+asw20_f_166m:
+  plane_type: asw20_f
+  name: "16.6m"
+  handicap: 1.12
+
+asw20_fl_15m:
+  plane_type: asw20_fl
+  name: "15m"
+  handicap: 1.10
+
+asw20_fl_166m:
+  plane_type: asw20_fl
+  name: "16.6m"
+  handicap: 1.12
+
+asw20_flp_15m:
+  plane_type: asw20_flp
+  name: "15m"
+  handicap: 1.10
+
+asw20_flp_166m:
+  plane_type: asw20_flp
+  name: "16.6m"
+  handicap: 1.12
+
+asg29_15m:
+  plane_type: asg29
+  name: "15m"
+  handicap: 1.14
+
+asg29_18m:
+  plane_type: asg29
+  name: "18m"
+  handicap: 1.20
+
+asg29_e_15m:
+  plane_type: asg29_e
+  name: "15m"
+  handicap: 1.14
+
+asg29_e_18m:
+  plane_type: asg29_e
+  name: "18m"
+  handicap: 1.20
+
+dg600_15m:
+  plane_type: dg600
+  name: "15m"
+  handicap: 1.10
+
+dg600_17m:
+  plane_type: dg600
+  name: "17m"
+  handicap: 1.16
+
+dg600_18m:
+  plane_type: dg600
+  name: "18m"
+  handicap: 1.18
+
+ventus_2c_15m:
+  plane_type: ventus_2c
+  name: "15m"
+  handicap: 1.14
+ventus_2c_166m:
+  plane_type: ventus_2c
+  name: "16.6m"
+  handicap: 1.14
+ventus_2c_176m:
+  plane_type: ventus_2c
+  name: "17.6m"
+  handicap: 1.16
+ventus_2c_18m:
+  plane_type: ventus_2c
+  name: "18m"
+  handicap: 1.20
+
+ventus_2ct_15m:
+  plane_type: ventus_2ct
+  name: "15m"
+  handicap: 1.14
+ventus_2ct_166m:
+  plane_type: ventus_2ct
+  name: "16.6m"
+  handicap: 1.14
+ventus_2ct_176m:
+  plane_type: ventus_2ct
+  name: "17.6m"
+  handicap: 1.16
+ventus_2ct_18m:
+  plane_type: ventus_2ct
+  name: "18m"
+  handicap: 1.20
+
+ventus_2cm_15m:
+  plane_type: ventus_2cm
+  name: "15m"
+  handicap: 1.14
+ventus_2cm_166m:
+  plane_type: ventus_2cm
+  name: "16.6m"
+  handicap: 1.14
+ventus_2cm_176m:
+  plane_type: ventus_2cm
+  name: "17.6m"
+  handicap: 1.16
+ventus_2cm_18m:
+  plane_type: ventus_2cm
+  name: "18m"
+  handicap: 1.20
+
+ventus_2cx_15m:
+  plane_type: ventus_2cx
+  name: "15m"
+  handicap: 1.14
+ventus_2cx_166m:
+  plane_type: ventus_2cx
+  name: "16.6m"
+  handicap: 1.14
+ventus_2cx_176m:
+  plane_type: ventus_2cx
+  name: "17.6m"
+  handicap: 1.16
+ventus_2cx_18m:
+  plane_type: ventus_2cx
+  name: "18m"
+  handicap: 1.20
+
+ventus_2cx_15m:
+  plane_type: ventus_2cx
+  name: "15m"
+  handicap: 1.14
+ventus_2cx_166m:
+  plane_type: ventus_2cx
+  name: "16.6m"
+  handicap: 1.14
+ventus_2cx_176m:
+  plane_type: ventus_2cx
+  name: "17.6m"
+  handicap: 1.16
+ventus_2cx_18m:
+  plane_type: ventus_2cx
+  name: "18m"
+  handicap: 1.20
+
+ventus_2cxt_15m:
+  plane_type: ventus_2cxt
+  name: "15m"
+  handicap: 1.14
+ventus_2cxt_166m:
+  plane_type: ventus_2cxt
+  name: "16.6m"
+  handicap: 1.14
+ventus_2cxt_176m:
+  plane_type: ventus_2cxt
+  name: "17.6m"
+  handicap: 1.16
+ventus_2cxt_18m:
+  plane_type: ventus_2cxt
+  name: "18m"
+  handicap: 1.20
+
+ventus_2cxm_15m:
+  plane_type: ventus_2cxm
+  name: "15m"
+  handicap: 1.14
+ventus_2cxm_166m:
+  plane_type: ventus_2cxm
+  name: "16.6m"
+  handicap: 1.14
+ventus_2cxm_176m:
+  plane_type: ventus_2cxm
+  name: "17.6m"
+  handicap: 1.16
+ventus_2cxm_18m:
+  plane_type: ventus_2cxm
+  name: "18m"
+  handicap: 1.20
+
+ventus_2cxa_15m:
+  plane_type: ventus_2cxa
+  name: "15m"
+  handicap: 1.14
+ventus_2cxa_166m:
+  plane_type: ventus_2cxa
+  name: "16.6m"
+  handicap: 1.14
+ventus_2cxa_176m:
+  plane_type: ventus_2cxa
+  name: "17.6m"
+  handicap: 1.16
+ventus_2cxa_18m:
+  plane_type: ventus_2cxa
+  name: "18m"
+  handicap: 1.20

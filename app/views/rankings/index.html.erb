@@ -1,0 +1,38 @@
+<h1>Classifiche</h1>
+
+<% if !@rankings.empty? then %>
+  <table class="standard ranking">
+    <caption>Classifiche Ufficiali</caption>
+    <tr>
+      <th>Nome</th>
+      <th>Partecipanti</th>
+    </tr>
+    <% for r in @rankings do %>
+    <tr>
+      <td class="name">
+        <%= link_to(r.name, r) %>
+      </td>
+      <td class="count"><%=h r.pilots.count %></td>
+      <td class="count"><%=h r.flights.count %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if !@rankings_unofficial.empty? then %>
+  <table class="standard ranking">
+    <caption>Classifiche Non ufficiali</caption>
+    <tr>
+      <th>Nome</th>
+      <th>Partecipanti</th>
+    </tr>
+    <% for r in @rankings_unofficial do %>
+    <tr>
+      <td class="name">
+        <%= link_to(r.name, r) %>
+      </td>
+      <td class="count"><%=h r.pilots.count %></td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

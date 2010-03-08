@@ -1,0 +1,2381 @@
+--- 
+countries_227: 
+  name: TAIWAN, PROVINCE OF CHINA
+  created_at: 2008-09-19 19:27:23
+  area_code: "886"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "200"
+  num: "158"
+  a2: TW
+  a3: TWN
+countries_039: 
+  name: LIECHTENSTEIN
+  created_at: 2008-09-19 19:27:23
+  area_code: "41"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "184"
+  num: "438"
+  a2: LI
+  a3: LIE
+countries_065: 
+  name: "TOKELAU ISLANDS "
+  created_at: 2008-09-19 19:27:23
+  area_code: "690"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "195"
+  num: "772"
+  a2: TK
+  a3: TKL
+countries_092: 
+  name: ZIMBABWE
+  created_at: 2008-09-19 19:27:23
+  area_code: "263"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "228"
+  num: "716"
+  a2: ZW
+  a3: ZWE
+countries_146: 
+  name: NAURU
+  created_at: 2008-09-19 19:27:23
+  area_code: "674"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "114"
+  num: "520"
+  a2: NR
+  a3: NRU
+countries_172: 
+  name: CANADA
+  created_at: 2008-09-19 19:27:23
+  area_code: "1"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "60"
+  num: "124"
+  a2: CA
+  a3: CAN
+countries_228: 
+  name: ANGUILLA
+  created_at: 2008-09-19 19:27:23
+  area_code: "809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "232"
+  num: "660"
+  a2: AI
+  a3: AIA
+countries_066: 
+  name: NIGERIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "234"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "124"
+  num: "566"
+  a2: NG
+  a3: NGA
+countries_093: 
+  name: TONGA
+  created_at: 2008-09-19 19:27:23
+  area_code: "676"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "197"
+  num: "776"
+  a2: TO
+  a3: TON
+countries_147: 
+  name: UZBEKISTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "7"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "69"
+  num: "860"
+  a2: UZ
+  a3: UZB
+countries_173: 
+  name: MALTA
+  created_at: 2008-09-19 19:27:23
+  area_code: "356"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "16"
+  num: "470"
+  a2: MT
+  a3: MLT
+countries_229: 
+  name: BULGARIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "359"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "49"
+  num: "100"
+  a2: BG
+  a3: BGR
+countries_067: 
+  name: WALLIS AND FUTUNA ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "681"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "209"
+  num: "876"
+  a2: WF
+  a3: WLF
+countries_148: 
+  name: WESTERN SAHARA
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "213"
+  num: "732"
+  a2: EH
+  a3: ESH
+countries_174: 
+  name: EAST TIMOR
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "222"
+  num: "626"
+  a2: TP
+  a3: TMP
+countries_068: 
+  name: MICRONESIA, FEDERATED STATES OF
+  created_at: 2008-09-19 19:27:23
+  area_code: "691"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "160"
+  num: "583"
+  a2: FM
+  a3: FSM
+countries_094: 
+  name: BELGIUM
+  created_at: 2008-09-19 19:27:23
+  area_code: "32"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "44"
+  num: "56"
+  a2: BE
+  a3: BEL
+countries_149: 
+  name: BRAZIL
+  created_at: 2008-09-19 19:27:23
+  area_code: "55"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "55"
+  num: "76"
+  a2: BR
+  a3: BRA
+countries_175: 
+  name: NIUE
+  created_at: 2008-09-19 19:27:23
+  area_code: "683"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "119"
+  num: "570"
+  a2: NU
+  a3: NIU
+countries_069: 
+  name: MALAWI
+  created_at: 2008-09-19 19:27:23
+  area_code: "265"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "115"
+  num: "454"
+  a2: MW
+  a3: MWI
+countries_095: 
+  name: MEXICO
+  created_at: 2008-09-19 19:27:23
+  area_code: "52"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "116"
+  num: "484"
+  a2: MX
+  a3: MEX
+countries_176: 
+  name: ITALY
+  created_at: 2008-09-19 19:27:23
+  area_code: "39"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: f
+  id: "4"
+  num: "380"
+  a2: IT
+  a3: ITA
+countries_096: 
+  name: "SAINT KITTS AND NEVIS "
+  created_at: 2008-09-19 19:27:23
+  area_code: "809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "71"
+  num: "659"
+  a2: KN
+  a3: KNA
+countries_177: 
+  name: ARGENTINE
+  created_at: 2008-09-19 19:27:23
+  area_code: "54"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "42"
+  num: "32"
+  a2: AR
+  a3: ARG
+countries_097: 
+  name: FRANCE, METROPOLITAN
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "224"
+  num: "249"
+  a2: FX
+  a3: FXX
+countries_178: 
+  name: FRANCE
+  created_at: 2008-09-19 19:27:23
+  area_code: "33"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "8"
+  num: "250"
+  a2: FR
+  a3: FRA
+countries_098: 
+  name: ANGOLA
+  created_at: 2008-09-19 19:27:23
+  area_code: "244"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "40"
+  num: "24"
+  a2: AO
+  a3: AGO
+countries_179: 
+  name: "SOLOMON ISLANDS "
+  created_at: 2008-09-19 19:27:23
+  area_code: "677"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "145"
+  num: "90"
+  a2: SB
+  a3: SLB
+countries_099: 
+  name: NICARAGUA
+  created_at: 2008-09-19 19:27:23
+  area_code: "505"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "125"
+  num: "558"
+  a2: NI
+  a3: NIC
+countries_100: 
+  name: SPAIN
+  created_at: 2008-09-19 19:27:23
+  area_code: "34"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "10"
+  num: "724"
+  a2: ES
+  a3: ESP
+countries_101: 
+  name: JAPAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "81"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "66"
+  num: "392"
+  a2: JP
+  a3: JPN
+countries_020: 
+  name: NEW CALEDONIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "687"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "121"
+  num: "540"
+  a2: NC
+  a3: NCL
+countries_021: 
+  name: SENEGAL
+  created_at: 2008-09-19 19:27:23
+  area_code: "221"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "152"
+  num: "686"
+  a2: SN
+  a3: SEN
+countries_102: 
+  name: SIERRA LEONE
+  created_at: 2008-09-19 19:27:23
+  area_code: "232"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "151"
+  num: "694"
+  a2: SL
+  a3: SLE
+countries_210: 
+  name: TURKS AND CAICOS ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "1649"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "191"
+  num: "796"
+  a2: TC
+  a3: TCA
+countries_022: 
+  name: ICELAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "354"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "63"
+  num: "352"
+  a2: IS
+  a3: ISL
+countries_103: 
+  name: UNITED ARAB EMIRATES
+  created_at: 2008-09-19 19:27:23
+  area_code: "971"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "36"
+  num: "784"
+  a2: AE
+  a3: ARE
+countries_211: 
+  name: "SAINT LUCIA "
+  created_at: 2008-09-19 19:27:23
+  area_code: "809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "182"
+  num: "662"
+  a2: LC
+  a3: LCA
+countries_023: 
+  name: VIRGIN ISLANDS (GB)
+  created_at: 2008-09-19 19:27:23
+  area_code: "1284"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "207"
+  num: "92"
+  a2: VG
+  a3: VGB
+countries_104: 
+  name: COLOMBIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "57"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "93"
+  num: "170"
+  a2: CO
+  a3: COL
+countries_130: 
+  name: PITCAIRN ISLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "216"
+  num: "612"
+  a2: PN
+  a3: PCN
+countries_212: 
+  name: SWAZILAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "268"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "190"
+  num: "748"
+  a2: SZ
+  a3: SWZ
+countries_024: 
+  name: MOZAMBIQUE
+  created_at: 2008-09-19 19:27:23
+  area_code: "258"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "118"
+  num: "508"
+  a2: MZ
+  a3: MOZ
+countries_050: 
+  name: NEW ZEALAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "64"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "128"
+  num: "554"
+  a2: NZ
+  a3: NZL
+countries_105: 
+  name: VENEZUELA
+  created_at: 2008-09-19 19:27:23
+  area_code: "58"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "206"
+  num: "862"
+  a2: VE
+  a3: VEN
+countries_131: 
+  name: MACAU
+  created_at: 2008-09-19 19:27:23
+  area_code: "853"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "85"
+  num: "446"
+  a2: MO
+  a3: MAC
+countries_213: 
+  name: ALGERIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "213"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "102"
+  num: "12"
+  a2: DZ
+  a3: DZA
+countries_025: 
+  name: ARMENIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "374"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "233"
+  num: "51"
+  a2: AM
+  a3: ARM
+countries_051: 
+  name: ERITREA
+  created_at: 2008-09-19 19:27:23
+  area_code: "291"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "159"
+  num: "232"
+  a2: ER
+  a3: ERI
+countries_106: 
+  name: SUDAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "249"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "147"
+  num: "736"
+  a2: SD
+  a3: SDN
+countries_132: 
+  name: UKRAINE
+  created_at: 2008-09-19 19:27:23
+  area_code: "380"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "202"
+  num: "804"
+  a2: UA
+  a3: UKR
+countries_214: 
+  name: PHILIPINES
+  created_at: 2008-09-19 19:27:23
+  area_code: "63"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "134"
+  num: "608"
+  a2: PH
+  a3: PHL
+countries_026: 
+  name: SAUDI ARABIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "966"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "144"
+  num: "682"
+  a2: SA
+  a3: SAU
+countries_052: 
+  name: CHRISTMAS ISLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "672"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "97"
+  num: "162"
+  a2: CX
+  a3: CXR
+countries_107: 
+  name: THE FORMER YUGOSLAV REPUBLIC OF MACEDONIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "389"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "173"
+  num: "807"
+  a2: MK
+  a3: MKD
+countries_133: 
+  name: LESOTHO
+  created_at: 2008-09-19 19:27:23
+  area_code: "266"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "76"
+  num: "426"
+  a2: LS
+  a3: LSO
+countries_215: 
+  name: FRENCH GUIANA
+  created_at: 2008-09-19 19:27:23
+  area_code: "594"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "219"
+  num: "254"
+  a2: GF
+  a3: GUF
+countries_027: 
+  name: GUADELOUPE
+  created_at: 2008-09-19 19:27:23
+  area_code: "590"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "20"
+  num: "312"
+  a2: GP
+  a3: GLP
+countries_053: 
+  name: BAHAMAS
+  created_at: 2008-09-19 19:27:23
+  area_code: "1242"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "56"
+  num: "44"
+  a2: BS
+  a3: BHS
+countries_080: 
+  name: SEYCHELLES
+  created_at: 2008-09-19 19:27:23
+  area_code: "248"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "146"
+  num: "690"
+  a2: SC
+  a3: SYC
+countries_108: 
+  name: KENYA
+  created_at: 2008-09-19 19:27:23
+  area_code: "254"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "67"
+  num: "404"
+  a2: KE
+  a3: KEN
+countries_134: 
+  name: UNITED KINGDOM
+  created_at: 2008-09-19 19:27:23
+  area_code: "44"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "6"
+  num: "826"
+  a2: GB
+  a3: GBR
+countries_160: 
+  name: JAMAICA
+  created_at: 2008-09-19 19:27:23
+  area_code: "1876"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "64"
+  num: "388"
+  a2: JM
+  a3: JAM
+countries_028: 
+  name: SOUTH AFRICA
+  created_at: 2008-09-19 19:27:23
+  area_code: "27"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "226"
+  num: "710"
+  a2: ZA
+  a3: ZAF
+countries_054: 
+  name: THAILAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "66"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "194"
+  num: "764"
+  a2: TH
+  a3: THA
+countries_081: 
+  name: CZECH REPUBLIC
+  created_at: 2008-09-19 19:27:23
+  area_code: "420"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "99"
+  num: "203"
+  a2: CZ
+  a3: CZE
+countries_109: 
+  name: COSTA RICA
+  created_at: 2008-09-19 19:27:23
+  area_code: "506"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "94"
+  num: "188"
+  a2: CR
+  a3: CRI
+countries_135: 
+  name: PALAU
+  created_at: 2008-09-19 19:27:23
+  area_code: "680"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "175"
+  num: "585"
+  a2: PW
+  a3: PLW
+countries_161: 
+  name: SLOVAKIA (SLOVAK REPUBLIC)
+  created_at: 2008-09-19 19:27:23
+  area_code: "421"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "150"
+  num: "703"
+  a2: SK
+  a3: SVK
+countries_216: 
+  name: TURKEY
+  created_at: 2008-09-19 19:27:23
+  area_code: "90"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "198"
+  num: "792"
+  a2: TR
+  a3: TUR
+countries_029: 
+  name: BARBADOS
+  created_at: 2008-09-19 19:27:23
+  area_code: "1246"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "46"
+  num: "52"
+  a2: BB
+  a3: BRB
+countries_055: 
+  name: INDONESIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "62"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "154"
+  num: "360"
+  a2: ID
+  a3: IDN
+countries_082: 
+  name: TUNISIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "216"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "196"
+  num: "788"
+  a2: TN
+  a3: TUN
+countries_136: 
+  name: ETHIOPIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "251"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "105"
+  num: "231"
+  a2: ET
+  a3: ETH
+countries_162: 
+  name: FIJI
+  created_at: 2008-09-19 19:27:23
+  area_code: "679"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "106"
+  num: "242"
+  a2: FJ
+  a3: FJI
+countries_217: 
+  name: SAMOA
+  created_at: 2008-09-19 19:27:23
+  area_code: "685"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "210"
+  num: "882"
+  a2: WS
+  a3: WSM
+countries_056: 
+  name: SURINAME
+  created_at: 2008-09-19 19:27:23
+  area_code: "597"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "185"
+  num: "740"
+  a2: SR
+  a3: SUR
+countries_137: 
+  name: HUNGARY
+  created_at: 2008-09-19 19:27:23
+  area_code: "36"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "29"
+  num: "348"
+  a2: HU
+  a3: HUN
+countries_163: 
+  name: MARTINIQUE
+  created_at: 2008-09-19 19:27:23
+  area_code: "596"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "86"
+  num: "474"
+  a2: MQ
+  a3: MTQ
+countries_190: 
+  name: BERMUDA
+  created_at: 2008-09-19 19:27:23
+  area_code: "1441"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "52"
+  num: "60"
+  a2: BM
+  a3: BMU
+countries_218: 
+  name: COOK ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "682"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "1"
+  num: "184"
+  a2: CK
+  a3: COK
+countries_057: 
+  name: LEBANON
+  created_at: 2008-09-19 19:27:23
+  area_code: "961"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "178"
+  num: "422"
+  a2: LB
+  a3: LBN
+countries_083: 
+  name: CONGO
+  created_at: 2008-09-19 19:27:23
+  area_code: "242"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "231"
+  num: "178"
+  a2: CG
+  a3: COG
+countries_138: 
+  name: PARAGUAY
+  created_at: 2008-09-19 19:27:23
+  area_code: "595"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "140"
+  num: "600"
+  a2: PY
+  a3: PRY
+countries_164: 
+  name: UGANDA
+  created_at: 2008-09-19 19:27:23
+  area_code: "256"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "203"
+  num: "800"
+  a2: UG
+  a3: UGA
+countries_191: 
+  name: FALKLAND ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "500"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "107"
+  num: "238"
+  a2: FK
+  a3: FLK
+countries_219: 
+  name: EQUATORIAL GUINEA
+  created_at: 2008-09-19 19:27:23
+  area_code: "240"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "21"
+  num: "226"
+  a2: GQ
+  a3: GNQ
+countries_058: 
+  name: MYANMAR/BURMA
+  created_at: 2008-09-19 19:27:23
+  area_code: "95"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "83"
+  num: "104"
+  a2: MM
+  a3: MMR
+countries_084: 
+  name: EL SALVARDOR
+  created_at: 2008-09-19 19:27:23
+  area_code: "503"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "187"
+  num: "222"
+  a2: SV
+  a3: SLV
+countries_139: 
+  name: SWEDEN
+  created_at: 2008-09-19 19:27:23
+  area_code: "46"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "15"
+  num: "752"
+  a2: SE
+  a3: SWE
+countries_165: 
+  name: IRAN (ISLAMIC REPUBLIC OF)
+  created_at: 2008-09-19 19:27:23
+  area_code: "98"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "158"
+  num: "364"
+  a2: IR
+  a3: IRN
+countries_192: 
+  name: BOSNIA AND HERZEGOVINA
+  created_at: 2008-09-19 19:27:23
+  area_code: "387"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "235"
+  num: "70"
+  a2: BA
+  a3: BIH
+countries_059: 
+  name: KUWAIT
+  created_at: 2008-09-19 19:27:23
+  area_code: "965"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "169"
+  num: "414"
+  a2: KW
+  a3: KWT
+countries_085: 
+  name: GERMANY
+  created_at: 2008-09-19 19:27:23
+  area_code: "49"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "9"
+  num: "276"
+  a2: DE
+  a3: DEU
+countries_166: 
+  name: GUAM
+  created_at: 2008-09-19 19:27:23
+  area_code: "1671"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "33"
+  num: "316"
+  a2: GU
+  a3: GUM
+countries_086: 
+  name: MARSHALL ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "692"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "172"
+  num: "584"
+  a2: MH
+  a3: MHL
+countries_167: 
+  name: BURUNDI
+  created_at: 2008-09-19 19:27:23
+  area_code: "257"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "51"
+  num: "108"
+  a2: BI
+  a3: BDI
+countries_193: 
+  name: PAPUA NEW GUINEA
+  created_at: 2008-09-19 19:27:23
+  area_code: "675"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "133"
+  num: "598"
+  a2: PG
+  a3: PNG
+countries_087: 
+  name: TAJIKISTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "7"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "180"
+  num: "762"
+  a2: TJ
+  a3: TJK
+countries_168: 
+  name: LITHUANIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "370"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "167"
+  num: "440"
+  a2: LT
+  a3: LTU
+countries_194: 
+  name: UNITED STATES MINOR OUTLYING ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "218"
+  num: "581"
+  a2: UM
+  a3: UMI
+countries_088: 
+  name: MAURITIUS
+  created_at: 2008-09-19 19:27:23
+  area_code: "230"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "89"
+  num: "480"
+  a2: MU
+  a3: MUS
+countries_169: 
+  name: R&EACUTE;UNION
+  created_at: 2008-09-19 19:27:23
+  area_code: "262"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "141"
+  num: "638"
+  a2: RE
+  a3: REU
+countries_195: 
+  name: BURKINA FASO
+  created_at: 2008-09-19 19:27:23
+  area_code: "226"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "48"
+  num: "854"
+  a2: BF
+  a3: BFA
+countries_089: 
+  name: GREENLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "299"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "18"
+  num: "304"
+  a2: GL
+  a3: GRL
+countries_196: 
+  name: HEARD ISLAND AND MCDONALD ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "214"
+  num: "334"
+  a2: HM
+  a3: HMD
+countries_197: 
+  name: BHUTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "975"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "57"
+  num: "64"
+  a2: BT
+  a3: BTN
+countries_198: 
+  name: SRI LANKA
+  created_at: 2008-09-19 19:27:23
+  area_code: "94"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "74"
+  num: "144"
+  a2: LK
+  a3: LKA
+countries_199: 
+  name: HONDURAS
+  created_at: 2008-09-19 19:27:23
+  area_code: "504"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "27"
+  num: "340"
+  a2: HN
+  a3: HND
+countries_010: 
+  name: MOLDOVA, REPUBLIC OF
+  created_at: 2008-09-19 19:27:23
+  area_code: "373"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "171"
+  num: "498"
+  a2: MD
+  a3: MDA
+countries_011: 
+  name: GUATEMALA
+  created_at: 2008-09-19 19:27:23
+  area_code: "502"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "23"
+  num: "320"
+  a2: GT
+  a3: GTM
+countries_012: 
+  name: TANZANIA, UNITED REPUBLIC OF
+  created_at: 2008-09-19 19:27:23
+  area_code: "255"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "201"
+  num: "834"
+  a2: TZ
+  a3: TZA
+countries_200: 
+  name: PUERTO RICO
+  created_at: 2008-09-19 19:27:23
+  area_code: "1787"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "138"
+  num: "630"
+  a2: PR
+  a3: PRI
+countries_013: 
+  name: BOTSWANA
+  created_at: 2008-09-19 19:27:23
+  area_code: "267"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "31"
+  num: "72"
+  a2: BW
+  a3: BWA
+countries_120: 
+  name: ESTONIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "372"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "229"
+  num: "233"
+  a2: EE
+  a3: EST
+countries_201: 
+  name: OMAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "968"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "129"
+  num: "512"
+  a2: OM
+  a3: OMN
+countries_014: 
+  name: YUGOSLAVIA, FORMER
+  created_at: 2008-09-19 19:27:23
+  area_code: "381"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "225"
+  num: "891"
+  a2: YU
+  a3: YUG
+countries_040: 
+  name: BANGLADESH
+  created_at: 2008-09-19 19:27:23
+  area_code: "880"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "47"
+  num: "50"
+  a2: BD
+  a3: BGD
+countries_121: 
+  name: PAKISTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "92"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "135"
+  num: "586"
+  a2: PK
+  a3: PAK
+countries_202: 
+  name: DOMINICA
+  created_at: 2008-09-19 19:27:23
+  area_code: "1"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "100"
+  num: "212"
+  a2: DM
+  a3: DMA
+countries_015: 
+  name: BOUVET ISLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "212"
+  num: "74"
+  a2: BV
+  a3: BVT
+countries_041: 
+  name: GAMBIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "220"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "162"
+  num: "270"
+  a2: GM
+  a3: GMB
+countries_122: 
+  name: SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "220"
+  num: "239"
+  a2: GS
+  a3: SGS
+countries_203: 
+  name: BRUNEI DARUSSALAM
+  created_at: 2008-09-19 19:27:23
+  area_code: "673"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "53"
+  num: "96"
+  a2: BN
+  a3: BRN
+countries_230: 
+  name: YEMEN
+  created_at: 2008-09-19 19:27:23
+  area_code: "967"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "111"
+  num: "887"
+  a2: YE
+  a3: YEM
+countries_016: 
+  name: NETHERLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "31"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "14"
+  num: "528"
+  a2: NL
+  a3: NLD
+countries_042: 
+  name: CAPE VERDE
+  created_at: 2008-09-19 19:27:23
+  area_code: "238"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "96"
+  num: "132"
+  a2: CV
+  a3: CPV
+countries_123: 
+  name: C&OCIRC;TE D'IVOIRE
+  created_at: 2008-09-19 19:27:23
+  area_code: "225"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "237"
+  num: "384"
+  a2: CI
+  a3: CIV
+countries_204: 
+  name: KYRGYZSTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "996"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "164"
+  num: "417"
+  a2: KG
+  a3: KGZ
+countries_231: 
+  name: GREECE
+  created_at: 2008-09-19 19:27:23
+  area_code: "30"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "22"
+  num: "300"
+  a2: GR
+  a3: GRC
+countries_017: 
+  name: NORWAY
+  created_at: 2008-09-19 19:27:23
+  area_code: "47"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "126"
+  num: "578"
+  a2: "NO"
+  a3: NOR
+countries_043: 
+  name: LIBYAN ARAB JAMAHIRIYA
+  created_at: 2008-09-19 19:27:23
+  area_code: "218"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "78"
+  num: "434"
+  a2: LY
+  a3: LBY
+countries_070: 
+  name: CYPRUS
+  created_at: 2008-09-19 19:27:23
+  area_code: "357"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "98"
+  num: "196"
+  a2: CY
+  a3: CYP
+countries_124: 
+  name: CAMBODIA (KAMPUCHEA)
+  created_at: 2008-09-19 19:27:23
+  area_code: "855"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "68"
+  num: "116"
+  a2: KH
+  a3: KHM
+countries_150: 
+  name: TOGO
+  created_at: 2008-09-19 19:27:23
+  area_code: "228"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "193"
+  num: "768"
+  a2: TG
+  a3: TGO
+countries_205: 
+  name: CHINA
+  created_at: 2008-09-19 19:27:23
+  area_code: "86"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "90"
+  num: "156"
+  a2: CN
+  a3: CHN
+countries_232: 
+  name: "SAN MARINO "
+  created_at: 2008-09-19 19:27:23
+  area_code: "378"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "139"
+  num: "674"
+  a2: SM
+  a3: SMR
+countries_018: 
+  name: MALDIVES
+  created_at: 2008-09-19 19:27:23
+  area_code: "960"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "113"
+  num: "462"
+  a2: MV
+  a3: MDV
+countries_044: 
+  name: KOREA, REPUBLIC OF
+  created_at: 2008-09-19 19:27:23
+  area_code: "82"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "73"
+  num: "410"
+  a2: KR
+  a3: KOR
+countries_071: 
+  name: CROATIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "385"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "163"
+  num: "191"
+  a2: HR
+  a3: HRV
+countries_125: 
+  name: GEORGIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "995"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "161"
+  num: "268"
+  a2: GE
+  a3: GEO
+countries_151: 
+  name: ANTARCTICA
+  created_at: 2008-09-19 19:27:23
+  area_code: "672"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "41"
+  num: "10"
+  a2: AQ
+  a3: ATA
+countries_206: 
+  name: IRELAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "353"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "155"
+  num: "372"
+  a2: IE
+  a3: IRL
+countries_233: 
+  name: PORTUGAL
+  created_at: 2008-09-19 19:27:23
+  area_code: "351"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "11"
+  num: "620"
+  a2: PT
+  a3: PRT
+countries_045: 
+  name: MAURITANIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "222"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "87"
+  num: "478"
+  a2: MR
+  a3: MRT
+countries_126: 
+  name: BELIZE
+  created_at: 2008-09-19 19:27:23
+  area_code: "501"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "59"
+  num: "84"
+  a2: BZ
+  a3: BLZ
+countries_152: 
+  name: DJIBOUTI
+  created_at: 2008-09-19 19:27:23
+  area_code: "253"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "238"
+  num: "262"
+  a2: DJ
+  a3: DJI
+countries_207: 
+  name: AZERBAIJAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "994"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "189"
+  num: "31"
+  a2: AZ
+  a3: AZE
+countries_019: 
+  name: ANTIGUA AND BARBUDA
+  created_at: 2008-09-19 19:27:23
+  area_code: "809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "37"
+  num: "28"
+  a2: AG
+  a3: ATG
+countries_234: 
+  name: GUINEA
+  created_at: 2008-09-19 19:27:23
+  area_code: "224"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "19"
+  num: "324"
+  a2: GN
+  a3: GIN
+countries_046: 
+  name: SVALBARD AND JAN MAYEN
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "217"
+  num: "744"
+  a2: SJ
+  a3: SJM
+countries_072: 
+  name: MONTSERRAT
+  created_at: 2008-09-19 19:27:23
+  area_code: "809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "88"
+  num: "500"
+  a2: MS
+  a3: MSR
+countries_127: 
+  name: BAHRAIN
+  created_at: 2008-09-19 19:27:23
+  area_code: "973"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "50"
+  num: "48"
+  a2: BH
+  a3: BHR
+countries_153: 
+  name: FRENCH SOUTHERN TERRITORIES
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "221"
+  num: "260"
+  a2: TF
+  a3: ATF
+countries_180: 
+  name: NORFOLK ISLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "672"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "123"
+  num: "574"
+  a2: NF
+  a3: NFK
+countries_208: 
+  name: DOMINICAN REPUBLIC
+  created_at: 2008-09-19 19:27:23
+  area_code: "1809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "101"
+  num: "214"
+  a2: DO
+  a3: DOM
+countries_235: 
+  name: LIBERIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "231"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "75"
+  num: "430"
+  a2: LR
+  a3: LBR
+countries_073: 
+  name: SAINT VINCENT AND THE GRENADINES
+  created_at: 2008-09-19 19:27:23
+  area_code: "809"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "205"
+  num: "670"
+  a2: VC
+  a3: VCT
+countries_128: 
+  name: SAINT HELENA
+  created_at: 2008-09-19 19:27:23
+  area_code: "290"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "149"
+  num: "654"
+  a2: SH
+  a3: SHN
+countries_154: 
+  name: ALBANIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "355"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "38"
+  num: "8"
+  a2: AL
+  a3: ALB
+countries_181: 
+  name: IRAQ
+  created_at: 2008-09-19 19:27:23
+  area_code: "964"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "34"
+  num: "368"
+  a2: IQ
+  a3: IRQ
+countries_209: 
+  name: FAROE ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "298"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "108"
+  num: "234"
+  a2: FO
+  a3: FRO
+countries_047: 
+  name: RUSSIAN FEDERATION
+  created_at: 2008-09-19 19:27:23
+  area_code: "7"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "177"
+  num: "643"
+  a2: RU
+  a3: RUS
+countries_236: 
+  name: CAMEROON
+  created_at: 2008-09-19 19:27:23
+  area_code: "237"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "3"
+  num: "120"
+  a2: CM
+  a3: CMR
+countries_074: 
+  name: S&ATILDE;O TOME AND PRINCIPE
+  created_at: 2008-09-19 19:27:23
+  area_code: "239"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "186"
+  num: "678"
+  a2: ST
+  a3: STP
+countries_129: 
+  name: PERU
+  created_at: 2008-09-19 19:27:23
+  area_code: "51"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "131"
+  num: "604"
+  a2: PE
+  a3: PER
+countries_155: 
+  name: CUBA
+  created_at: 2008-09-19 19:27:23
+  area_code: "53"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "95"
+  num: "192"
+  a2: CU
+  a3: CUB
+countries_048: 
+  name: GRENADA
+  created_at: 2008-09-19 19:27:23
+  area_code: "1"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "30"
+  num: "308"
+  a2: GD
+  a3: GRD
+countries_237: 
+  name: MALAYSIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "60"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "117"
+  num: "458"
+  a2: MY
+  a3: MYS
+countries_156: 
+  name: FRENCH POLYNESIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "689"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "132"
+  num: "258"
+  a2: PF
+  a3: PYF
+countries_182: 
+  name: ZAMBIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "260"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "227"
+  num: "894"
+  a2: ZM
+  a3: ZMB
+countries_049: 
+  name: LATVIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "371"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "168"
+  num: "428"
+  a2: LV
+  a3: LVA
+countries_075: 
+  name: ROMANIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "40"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "142"
+  num: "642"
+  a2: RO
+  a3: ROM
+countries_238: 
+  name: AFGHANISTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "211"
+  num: "4"
+  a2: AF
+  a3: AFG
+countries_157: 
+  name: NIGER
+  created_at: 2008-09-19 19:27:23
+  area_code: "227"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "122"
+  num: "562"
+  a2: NE
+  a3: NER
+countries_183: 
+  name: URUGUAY
+  created_at: 2008-09-19 19:27:23
+  area_code: "598"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "204"
+  num: "858"
+  a2: UY
+  a3: URY
+countries_076: 
+  name: SLOVENIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "386"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "179"
+  num: "705"
+  a2: SI
+  a3: SVN
+countries_158: 
+  name: FINLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "358"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "77"
+  num: "246"
+  a2: FI
+  a3: FIN
+countries_184: 
+  name: NETHERLANDS ANTILLES
+  created_at: 2008-09-19 19:27:23
+  area_code: "599"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "39"
+  num: "530"
+  a2: AN
+  a3: ANT
+countries_077: 
+  name: CAYMAN ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "1345"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "170"
+  num: "136"
+  a2: KY
+  a3: CYM
+countries_159: 
+  name: AUSTRIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "43"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "7"
+  num: "40"
+  a2: AT
+  a3: AUT
+countries_185: 
+  name: GIBRALTAR
+  created_at: 2008-09-19 19:27:23
+  area_code: "350"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "17"
+  num: "292"
+  a2: GI
+  a3: GIB
+countries_078: 
+  name: MONACO
+  created_at: 2008-09-19 19:27:23
+  area_code: "377"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "80"
+  num: "492"
+  a2: MC
+  a3: MCO
+countries_186: 
+  name: JORDAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "962"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "65"
+  num: "400"
+  a2: JO
+  a3: JOR
+countries_079: 
+  name: VIRGIN ISLANDS (US)
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "223"
+  num: "850"
+  a2: VI
+  a3: VIR
+countries_187: 
+  name: "MAYOTTE "
+  created_at: 2008-09-19 19:27:23
+  area_code: "269"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "92"
+  num: "175"
+  a2: YT
+  a3: MYT
+countries_188: 
+  name: NAMIBIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "264"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "120"
+  num: "516"
+  a2: NA
+  a3: NAM
+countries_189: 
+  name: HONG KONG
+  created_at: 2008-09-19 19:27:23
+  area_code: "852"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "26"
+  num: "344"
+  a2: HK
+  a3: HKG
+countries_001: 
+  name: KIRIBATI
+  created_at: 2008-09-19 19:27:23
+  area_code: "686"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "165"
+  num: "296"
+  a2: KI
+  a3: KIR
+countries_002: 
+  name: DENMARK
+  created_at: 2008-09-19 19:27:23
+  area_code: "45"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "12"
+  num: "208"
+  a2: DK
+  a3: DNK
+countries_003: 
+  name: AUSTRALIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "61"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "45"
+  num: "36"
+  a2: AU
+  a3: AUS
+countries_110: 
+  name: BRITISH INDIAN OCEAN TERRITORY
+  created_at: 2008-09-19 19:27:23
+  area_code: 
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "215"
+  num: "86"
+  a2: IO
+  a3: IOT
+countries_004: 
+  name: TUVALU
+  created_at: 2008-09-19 19:27:23
+  area_code: "688"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "112"
+  num: "798"
+  a2: TV
+  a3: TUV
+countries_030: 
+  name: NEPAL
+  created_at: 2008-09-19 19:27:23
+  area_code: "977"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "127"
+  num: "524"
+  a2: NP
+  a3: NPL
+countries_111: 
+  name: HAITI
+  created_at: 2008-09-19 19:27:23
+  area_code: "509"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "28"
+  num: "332"
+  a2: HT
+  a3: HTI
+countries_005: 
+  name: RWANDA
+  created_at: 2008-09-19 19:27:23
+  area_code: "250"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "143"
+  num: "646"
+  a2: RW
+  a3: RWA
+countries_031: 
+  name: SOMALIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "252"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "153"
+  num: "706"
+  a2: SO
+  a3: SOM
+countries_112: 
+  name: BOLIVIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "591"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "54"
+  num: "68"
+  a2: BO
+  a3: BOL
+countries_006: 
+  name: EGYPT
+  created_at: 2008-09-19 19:27:23
+  area_code: "20"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "104"
+  num: "818"
+  a2: EG
+  a3: EGY
+countries_032: 
+  name: MALI
+  created_at: 2008-09-19 19:27:23
+  area_code: "223"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "82"
+  num: "466"
+  a2: ML
+  a3: MLI
+countries_113: 
+  name: SINGAPORE
+  created_at: 2008-09-19 19:27:23
+  area_code: "65"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "148"
+  num: "702"
+  a2: SG
+  a3: SGP
+countries_220: 
+  name: BELARUS
+  created_at: 2008-09-19 19:27:23
+  area_code: "375"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "58"
+  num: "112"
+  a2: BY
+  a3: BLR
+countries_007: 
+  name: LUXEMBOURG
+  created_at: 2008-09-19 19:27:23
+  area_code: "352"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "13"
+  num: "442"
+  a2: LU
+  a3: LUX
+countries_033: 
+  name: VIET NAM
+  created_at: 2008-09-19 19:27:23
+  area_code: "84"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "208"
+  num: "704"
+  a2: VN
+  a3: VNM
+countries_060: 
+  name: AMERICAN SAMOA
+  created_at: 2008-09-19 19:27:23
+  area_code: "684"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "43"
+  num: "16"
+  a2: AS
+  a3: ASM
+countries_114: 
+  name: MADAGASCAR
+  created_at: 2008-09-19 19:27:23
+  area_code: "261"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "81"
+  num: "450"
+  a2: MG
+  a3: MDG
+countries_140: 
+  name: INDIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "91"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "157"
+  num: "356"
+  a2: IN
+  a3: IND
+countries_221: 
+  name: TRINIDAD AND TOBAGO
+  created_at: 2008-09-19 19:27:23
+  area_code: "1868"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "199"
+  num: "780"
+  a2: TT
+  a3: TTO
+countries_008: 
+  name: KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF
+  created_at: 2008-09-19 19:27:23
+  area_code: "850"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "72"
+  num: "408"
+  a2: KP
+  a3: PRK
+countries_034: 
+  name: GHANA
+  created_at: 2008-09-19 19:27:23
+  area_code: "233"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "110"
+  num: "288"
+  a2: GH
+  a3: GHA
+countries_115: 
+  name: PANAMA
+  created_at: 2008-09-19 19:27:23
+  area_code: "507"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "130"
+  num: "591"
+  a2: PA
+  a3: PAN
+countries_141: 
+  name: QATAR
+  created_at: 2008-09-19 19:27:23
+  area_code: "974"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "32"
+  num: "634"
+  a2: QA
+  a3: QAT
+countries_222: 
+  name: COCOS (KEELING) ISLANDS
+  created_at: 2008-09-19 19:27:23
+  area_code: "672"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "236"
+  num: "166"
+  a2: CC
+  a3: CCK
+countries_223: 
+  name: CHILE
+  created_at: 2008-09-19 19:27:23
+  area_code: "56"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "2"
+  num: "152"
+  a2: CL
+  a3: CHL
+countries_009: 
+  name: SWITZERLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "41"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "5"
+  num: "756"
+  a2: CH
+  a3: CHE
+countries_035: 
+  name: LAO PEOPLE'S DEMOCRATIC REPUBLIC
+  created_at: 2008-09-19 19:27:23
+  area_code: "856"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "176"
+  num: "418"
+  a2: LA
+  a3: LAO
+countries_061: 
+  name: TURKMENISTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "993"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "181"
+  num: "795"
+  a2: TM
+  a3: TKM
+countries_116: 
+  name: MARIANA ISLANDS (NORTHERN)
+  created_at: 2008-09-19 19:27:23
+  area_code: "1670"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "174"
+  num: "580"
+  a2: MP
+  a3: MNP
+countries_142: 
+  name: BENIN
+  created_at: 2008-09-19 19:27:23
+  area_code: "229"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "230"
+  num: "204"
+  a2: BJ
+  a3: BEN
+countries_224: 
+  name: VATICAN CITY STATE (HOLY SEE)
+  created_at: 2008-09-19 19:27:23
+  area_code: "396"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "62"
+  num: "336"
+  a2: VA
+  a3: VAT
+countries_036: 
+  name: ARUBA
+  created_at: 2008-09-19 19:27:23
+  area_code: "297"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "234"
+  num: "533"
+  a2: AW
+  a3: ABW
+countries_062: 
+  name: MOROCCO
+  created_at: 2008-09-19 19:27:23
+  area_code: "212"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "79"
+  num: "504"
+  a2: MA
+  a3: MAR
+countries_117: 
+  name: GABON
+  created_at: 2008-09-19 19:27:23
+  area_code: "241"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "109"
+  num: "266"
+  a2: GA
+  a3: GAB
+countries_143: 
+  name: GUINEA-BISSAU
+  created_at: 2008-09-19 19:27:23
+  area_code: "245"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "24"
+  num: "624"
+  a2: GW
+  a3: GNB
+countries_170: 
+  name: VANUATU
+  created_at: 2008-09-19 19:27:23
+  area_code: "678"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "91"
+  num: "548"
+  a2: VU
+  a3: VUT
+countries_225: 
+  name: ECUADOR
+  created_at: 2008-09-19 19:27:23
+  area_code: "593"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "103"
+  num: "218"
+  a2: EC
+  a3: ECU
+countries_037: 
+  name: POLAND
+  created_at: 2008-09-19 19:27:23
+  area_code: "48"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "136"
+  num: "616"
+  a2: PL
+  a3: POL
+countries_063: 
+  name: CENTRAL AFRICAN REPUBLIC
+  created_at: 2008-09-19 19:27:23
+  area_code: "236"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "61"
+  num: "140"
+  a2: CF
+  a3: CAF
+countries_090: 
+  name: SYRIAN ARAB REPUBLIC
+  created_at: 2008-09-19 19:27:23
+  area_code: "963"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "188"
+  num: "760"
+  a2: SY
+  a3: SYR
+countries_118: 
+  name: CHAD
+  created_at: 2008-09-19 19:27:23
+  area_code: "235"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "192"
+  num: "148"
+  a2: TD
+  a3: TCD
+countries_144: 
+  name: KAZAKHSTAN
+  created_at: 2008-09-19 19:27:23
+  area_code: "7"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "166"
+  num: "398"
+  a2: KZ
+  a3: KAZ
+countries_226: 
+  name: MONGOLIA
+  created_at: 2008-09-19 19:27:23
+  area_code: "967"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "84"
+  num: "496"
+  a2: MN
+  a3: MNG
+countries_038: 
+  name: "COMOROS "
+  created_at: 2008-09-19 19:27:23
+  area_code: "269"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "70"
+  num: "174"
+  a2: KM
+  a3: COM
+countries_064: 
+  name: SAINT PIERRE AND MIQUELON
+  created_at: 2008-09-19 19:27:23
+  area_code: "508"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "137"
+  num: "666"
+  a2: PM
+  a3: SPM
+countries_091: 
+  name: ANDORRA
+  created_at: 2008-09-19 19:27:23
+  area_code: "376"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "35"
+  num: "20"
+  a2: AD
+  a3: AND
+countries_119: 
+  name: ISRAEL
+  created_at: 2008-09-19 19:27:23
+  area_code: "972"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "156"
+  num: "376"
+  a2: IL
+  a3: ISR
+countries_145: 
+  name: "UNITED STATES "
+  created_at: 2008-09-19 19:27:23
+  area_code: "1"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "183"
+  num: "840"
+  a2: US
+  a3: USA
+countries_171: 
+  name: GUYANA
+  created_at: 2008-09-19 19:27:23
+  area_code: "592"
+  updated_at: 2008-09-19 19:27:23
+  cities_are_authoritative: t
+  id: "25"
+  num: "328"
+  a2: GY
+  a3: GUY

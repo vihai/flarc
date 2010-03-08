@@ -1,0 +1,35 @@
+--- 
+organizations_001: 
+  vat_number: 
+  op_address: 
+  name: Snake Oil Ltd.
+  created_at: 
+  billing_city_id: 
+  ro_zip: 
+  notes: Sells audiophile-grade cables
+  updated_at: 
+  id: "1"
+  italian_fiscal_code: 
+  ro_city_id: 
+  billing_zip: 
+  billing_address: 
+  op_zip: 
+  op_city_id: 
+  ro_address: Crotalus Rd, 11
+organizations_002: 
+  vat_number: 
+  op_address: 
+  name: Daniele Orlandi
+  created_at: 
+  billing_city_id: 
+  ro_zip: 
+  notes: 
+  updated_at: 
+  id: "2"
+  italian_fiscal_code: 
+  ro_city_id: 
+  billing_zip: 
+  billing_address: 
+  op_zip: 
+  op_city_id: 
+  ro_address: Via Tagliamento, 13

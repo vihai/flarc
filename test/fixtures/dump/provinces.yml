@@ -1,0 +1,955 @@
+--- 
+provinces_081: 
+  name: CALTANISSETTA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "95"
+  region_id: "19"
+  istat_id: 085
+  short_name: CL
+provinces_017: 
+  name: BOLOGNA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "42"
+  region_id: "8"
+  istat_id: "037"
+  short_name: BO
+provinces_038: 
+  name: ORISTANO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "103"
+  region_id: "20"
+  istat_id: 095
+  short_name: OR
+provinces_060: 
+  name: PADOVA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "28"
+  region_id: "5"
+  istat_id: 028
+  short_name: PD
+provinces_059: 
+  name: PISTOIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "49"
+  region_id: "9"
+  istat_id: "047"
+  short_name: PT
+provinces_082: 
+  name: SIENA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "54"
+  region_id: "9"
+  istat_id: "052"
+  short_name: SI
+provinces_018: 
+  name: VITERBO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "63"
+  region_id: "12"
+  istat_id: "056"
+  short_name: VT
+provinces_040: 
+  name: BELLUNO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "25"
+  region_id: "5"
+  istat_id: "025"
+  short_name: BL
+provinces_039: 
+  name: CUNEO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "4"
+  region_id: "1"
+  istat_id: "004"
+  short_name: CN
+provinces_061: 
+  name: BIELLA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "7"
+  region_id: "1"
+  istat_id: 096
+  short_name: BI
+provinces_083: 
+  name: PORDENONE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "33"
+  region_id: "6"
+  istat_id: 093
+  short_name: PN
+provinces_020: 
+  name: PISA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "52"
+  region_id: "9"
+  istat_id: "050"
+  short_name: PI
+provinces_019: 
+  name: POTENZA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "84"
+  region_id: "17"
+  istat_id: "076"
+  short_name: PZ
+provinces_041: 
+  name: FORLI - CESENA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "45"
+  region_id: "8"
+  istat_id: "040"
+  short_name: FC
+provinces_062: 
+  name: CHIETI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "71"
+  region_id: "13"
+  istat_id: 069
+  short_name: CH
+provinces_084: 
+  name: SONDRIO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "12"
+  region_id: "3"
+  istat_id: "014"
+  short_name: SO
+provinces_021: 
+  name: RIETI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "64"
+  region_id: "12"
+  istat_id: "057"
+  short_name: RI
+provinces_042: 
+  name: FROSINONE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "67"
+  region_id: "12"
+  istat_id: "060"
+  short_name: FR
+provinces_063: 
+  name: PALERMO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "92"
+  region_id: "19"
+  istat_id: 082
+  short_name: PA
+provinces_100: 
+  name: SALERNO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "78"
+  region_id: "15"
+  istat_id: "065"
+  short_name: SA
+provinces_085: 
+  name: BENEVENTO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "75"
+  region_id: "15"
+  istat_id: "062"
+  short_name: BN
+provinces_043: 
+  name: REGGIO DI CALABRIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "88"
+  region_id: "18"
+  istat_id: 080
+  short_name: RC
+provinces_064: 
+  name: ""
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "106"
+  region_id: "5"
+  istat_id: "703"
+  short_name: 
+provinces_001: 
+  name: CREMONA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "17"
+  region_id: "3"
+  istat_id: 019
+  short_name: CR
+provinces_022: 
+  name: MATERA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "85"
+  region_id: "17"
+  istat_id: "077"
+  short_name: MT
+provinces_101: 
+  name: SIRACUSA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "99"
+  region_id: "19"
+  istat_id: 089
+  short_name: SR
+provinces_086: 
+  name: ENNA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "96"
+  region_id: "19"
+  istat_id: 086
+  short_name: EN
+provinces_065: 
+  name: FIRENZE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "50"
+  region_id: "9"
+  istat_id: 048
+  short_name: FI
+provinces_002: 
+  name: PIACENZA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "38"
+  region_id: "8"
+  istat_id: "033"
+  short_name: PC
+provinces_023: 
+  name: SASSARI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "100"
+  region_id: "20"
+  istat_id: 090
+  short_name: SS
+provinces_044: 
+  name: ""
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "104"
+  region_id: "5"
+  istat_id: "702"
+  short_name: 
+provinces_102: 
+  name: PAVIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "16"
+  region_id: "3"
+  istat_id: 018
+  short_name: PV
+provinces_087: 
+  name: GROSSETO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "55"
+  region_id: "9"
+  istat_id: "053"
+  short_name: GR
+provinces_003: 
+  name: ANCONA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "60"
+  region_id: "11"
+  istat_id: "042"
+  short_name: AN
+provinces_024: 
+  name: TORINO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "1"
+  region_id: "1"
+  istat_id: "001"
+  short_name: TO
+provinces_045: 
+  name: ASTI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "5"
+  region_id: "1"
+  istat_id: "005"
+  short_name: AT
+provinces_066: 
+  name: ROVIGO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "29"
+  region_id: "5"
+  istat_id: 029
+  short_name: RO
+provinces_103: 
+  name: LA SPEZIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "37"
+  region_id: "7"
+  istat_id: "011"
+  short_name: SP
+provinces_088: 
+  name: IMPERIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "34"
+  region_id: "7"
+  istat_id: 008
+  short_name: IM
+provinces_067: 
+  name: UDINE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "30"
+  region_id: "6"
+  istat_id: "030"
+  short_name: UD
+provinces_004: 
+  name: TARANTO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "81"
+  region_id: "16"
+  istat_id: "073"
+  short_name: TA
+provinces_025: 
+  name: TRENTO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "22"
+  region_id: "4"
+  istat_id: "022"
+  short_name: TN
+provinces_046: 
+  name: TREVISO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "26"
+  region_id: "5"
+  istat_id: "026"
+  short_name: TV
+provinces_104: 
+  name: BARI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "80"
+  region_id: "16"
+  istat_id: "072"
+  short_name: BA
+provinces_090: 
+  name: NAPOLI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "76"
+  region_id: "15"
+  istat_id: "063"
+  short_name: NA
+provinces_089: 
+  name: MILANO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "13"
+  region_id: "3"
+  istat_id: "015"
+  short_name: MI
+provinces_068: 
+  name: VERBANO-CUSIO-OSSOLA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "8"
+  region_id: "1"
+  istat_id: "103"
+  short_name: VB
+provinces_005: 
+  name: PESARO E URBINO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "59"
+  region_id: "11"
+  istat_id: "041"
+  short_name: PU
+provinces_026: 
+  name: ROMA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "65"
+  region_id: "12"
+  istat_id: 058
+  short_name: RM
+provinces_047: 
+  name: RIMINI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "46"
+  region_id: "8"
+  istat_id: 099
+  short_name: RN
+provinces_105: 
+  name: TERNI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "58"
+  region_id: "10"
+  istat_id: "055"
+  short_name: TR
+provinces_091: 
+  name: CATANIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "97"
+  region_id: "19"
+  istat_id: 087
+  short_name: CT
+provinces_070: 
+  name: MESSINA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "93"
+  region_id: "19"
+  istat_id: 083
+  short_name: ME
+provinces_069: 
+  name: CAMPOBASSO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "72"
+  region_id: "14"
+  istat_id: "070"
+  short_name: CB
+provinces_006: 
+  name: MANTOVA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "18"
+  region_id: "3"
+  istat_id: "020"
+  short_name: MN
+provinces_027: 
+  name: COSENZA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "86"
+  region_id: "18"
+  istat_id: 078
+  short_name: CS
+provinces_048: 
+  name: VIBO VALENTIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "90"
+  region_id: "18"
+  istat_id: "102"
+  short_name: VV
+provinces_106: 
+  name: FOGGIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "79"
+  region_id: "16"
+  istat_id: "071"
+  short_name: FG
+provinces_092: 
+  name: RAGUSA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "98"
+  region_id: "19"
+  istat_id: 088
+  short_name: RG
+provinces_071: 
+  name: GORIZIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "31"
+  region_id: "6"
+  istat_id: "031"
+  short_name: GO
+provinces_007: 
+  name: REGGIO NELL'EMILIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "40"
+  region_id: "8"
+  istat_id: "035"
+  short_name: RE
+provinces_028: 
+  name: NUORO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "101"
+  region_id: "20"
+  istat_id: 091
+  short_name: NU
+provinces_050: 
+  name: CROTONE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "89"
+  region_id: "18"
+  istat_id: "101"
+  short_name: KR
+provinces_049: 
+  name: L'AQUILA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "68"
+  region_id: "13"
+  istat_id: "066"
+  short_name: AQ
+provinces_093: 
+  name: BERGAMO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "14"
+  region_id: "3"
+  istat_id: "016"
+  short_name: BG
+provinces_072: 
+  name: AOSTA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "9"
+  region_id: "2"
+  istat_id: "007"
+  short_name: AO
+provinces_008: 
+  name: PARMA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "39"
+  region_id: "8"
+  istat_id: "034"
+  short_name: PR
+provinces_030: 
+  name: VERONA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "23"
+  region_id: "5"
+  istat_id: "023"
+  short_name: VR
+provinces_029: 
+  name: VERCELLI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "2"
+  region_id: "1"
+  istat_id: "002"
+  short_name: VC
+provinces_051: 
+  name: MASSA - CARRARA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "47"
+  region_id: "9"
+  istat_id: "045"
+  short_name: MS
+provinces_094: 
+  name: SAVONA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "35"
+  region_id: "7"
+  istat_id: 009
+  short_name: SV
+provinces_073: 
+  name: VARESE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "10"
+  region_id: "3"
+  istat_id: "012"
+  short_name: VA
+provinces_010: 
+  name: BRINDISI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "82"
+  region_id: "16"
+  istat_id: "074"
+  short_name: BR
+provinces_009: 
+  name: MACERATA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "61"
+  region_id: "11"
+  istat_id: "043"
+  short_name: MC
+provinces_031: 
+  name: FERRARA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "43"
+  region_id: "8"
+  istat_id: 038
+  short_name: FE
+provinces_052: 
+  name: VENEZIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "27"
+  region_id: "5"
+  istat_id: "027"
+  short_name: VE
+provinces_095: 
+  name: PRATO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "56"
+  region_id: "9"
+  istat_id: "100"
+  short_name: PO
+provinces_074: 
+  name: LIVORNO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "51"
+  region_id: "9"
+  istat_id: 049
+  short_name: LI
+provinces_032: 
+  name: CATANZARO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "87"
+  region_id: "18"
+  istat_id: 079
+  short_name: CZ
+provinces_053: 
+  name: ALESSANDRIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "6"
+  region_id: "1"
+  istat_id: "006"
+  short_name: AL
+provinces_011: 
+  name: LODI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "20"
+  region_id: "3"
+  istat_id: 098
+  short_name: LO
+provinces_096: 
+  name: AVELLINO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "77"
+  region_id: "15"
+  istat_id: "064"
+  short_name: AV
+provinces_075: 
+  name: ISERNIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "73"
+  region_id: "14"
+  istat_id: 094
+  short_name: IS
+provinces_054: 
+  name: TERAMO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "69"
+  region_id: "13"
+  istat_id: "067"
+  short_name: TE
+provinces_012: 
+  name: LECCO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "19"
+  region_id: "3"
+  istat_id: 097
+  short_name: LC
+provinces_033: 
+  name: CAGLIARI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "102"
+  region_id: "20"
+  istat_id: 092
+  short_name: CA
+provinces_097: 
+  name: BRESCIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "15"
+  region_id: "3"
+  istat_id: "017"
+  short_name: BS
+provinces_076: 
+  name: AGRIGENTO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "94"
+  region_id: "19"
+  istat_id: 084
+  short_name: AG
+provinces_013: 
+  name: MODENA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "41"
+  region_id: "8"
+  istat_id: "036"
+  short_name: MO
+provinces_034: 
+  name: NOVARA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "3"
+  region_id: "1"
+  istat_id: "003"
+  short_name: "NO"
+provinces_055: 
+  name: PESCARA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "70"
+  region_id: "13"
+  istat_id: 068
+  short_name: PE
+provinces_098: 
+  name: GENOVA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "36"
+  region_id: "7"
+  istat_id: "010"
+  short_name: GE
+provinces_077: 
+  name: AREZZO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "53"
+  region_id: "9"
+  istat_id: "051"
+  short_name: AR
+provinces_014: 
+  name: ASCOLI PICENO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "62"
+  region_id: "11"
+  istat_id: "044"
+  short_name: AP
+provinces_035: 
+  name: VICENZA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "24"
+  region_id: "5"
+  istat_id: "024"
+  short_name: VI
+provinces_056: 
+  name: TRAPANI
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "91"
+  region_id: "19"
+  istat_id: 081
+  short_name: TP
+provinces_099: 
+  name: PERUGIA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "57"
+  region_id: "10"
+  istat_id: "054"
+  short_name: PG
+provinces_078: 
+  name: TRIESTE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "32"
+  region_id: "6"
+  istat_id: "032"
+  short_name: TS
+provinces_015: 
+  name: LECCE
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "83"
+  region_id: "16"
+  istat_id: "075"
+  short_name: LE
+provinces_036: 
+  name: RAVENNA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "44"
+  region_id: "8"
+  istat_id: 039
+  short_name: RA
+provinces_057: 
+  name: ""
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "105"
+  region_id: "5"
+  istat_id: "701"
+  short_name: 
+provinces_080: 
+  name: CASERTA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "74"
+  region_id: "15"
+  istat_id: "061"
+  short_name: CE
+provinces_079: 
+  name: COMO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "11"
+  region_id: "3"
+  istat_id: "013"
+  short_name: CO
+provinces_016: 
+  name: BOLZANO
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "21"
+  region_id: "4"
+  istat_id: "021"
+  short_name: BZ
+provinces_037: 
+  name: LATINA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "66"
+  region_id: "12"
+  istat_id: 059
+  short_name: LT
+provinces_058: 
+  name: LUCCA
+  created_at: 
+  updated_at: 
+  old_region_id: 
+  id: "48"
+  region_id: "9"
+  istat_id: "046"
+  short_name: LU
