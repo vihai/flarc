@@ -42,13 +42,6 @@ end
 
 
 
-##Hel::Person
-##
-##class Hel::Person
-##  has_one :pilot, :class_name => "::Pilot"
-##end
-##
-##
 ### These defaults are used in GeoKit::Mappable.distance_to and in acts_as_mappable
 ##GeoKit::default_units = :miles
 ##GeoKit::default_formula = :sphere
@@ -102,4 +95,3 @@ end
 ##
 # Auto-require default libraries and those for the current Rails environment.
 Bundler.require :default, Rails.env
-

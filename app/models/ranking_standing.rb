@@ -7,4 +7,5 @@ class RankingStanding < ActiveRecord::Base
            :class_name => "RankingHistoryEntry"
 
   serialize :data
+#  serialize :data, Hash
 end

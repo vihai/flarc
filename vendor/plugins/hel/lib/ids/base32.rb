@@ -1,15 +1,13 @@
 
-
 #
 # Base32 encoding compliant with RFC-3548
 # Author Lele Forzani <lele@windmill.it>
-# 
+#
 # Direct port from the Perl implementation by Daniel Peder <Daniel.Peder@InfoSet.COM>
 #
 
 class Base32
-  
-  
+
   #
   # Base32.encode(string)
   #
@@ -23,10 +21,9 @@ class Base32
       data = data.to_a.pack('B*')
       data.tr!("\0-\37", 'A-Z2-7')
       data
-    end 
+    end
   end
-  
-  
+
   #
   # Base32.decode(string)
   #
@@ -38,5 +35,5 @@ class Base32
     data = data.to_a.pack('B*')
     data
   end
-  
+
 end

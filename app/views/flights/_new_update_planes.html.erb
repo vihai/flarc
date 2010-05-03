@@ -1,4 +1,4 @@
-<% fields_for @flight do |f| %>
+<%= fields_for @flight do |f| %>
 <%= f.select :plane_id,
                 Plane.all(:order => "registration ASC").collect { |p|
                     [ p.registration, p.id ] }, { },

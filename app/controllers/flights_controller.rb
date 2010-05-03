@@ -7,18 +7,18 @@ class FlightsController < ApplicationController
 
   def autocomplete_passenger
 
-    @items = Hel::Person.where([ "LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?",
+    @items = Hel::Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
                        params['flight']['passenger'].downcase + '%',
                        params['flight']['passenger'].downcase + '%' ]).
-                         order("last_name ASC, first_name ASC").
+                         order('last_name ASC, first_name ASC').
                          limit(10)
 
     render :inline => "<%= auto_complete_result @items, 'name' %>"
   end
 
   def autocomplete_plane
-    @items = Plane.where([ "LOWER(registration) LIKE ?", '%' + params['flight']['plane'].downcase + '%' ]).
-                   order("registration ASC").
+    @items = Plane.where([ 'LOWER(registration) LIKE ?', '%' + params['flight']['plane'].downcase + '%' ]).
+                   order('registration ASC').
                    limit(10)
 
     render :inline => "<%= auto_complete_result @items, 'registration' %>"
@@ -26,17 +26,13 @@ class FlightsController < ApplicationController
 
   # GET /flights
   def index
-    expires_in 1.hour, :public => true if EXPIRES
+#    expires_in 1.hour, :public => true if EXPIRES
 
-    if params[:pending]
-      scope = Flight.pending
-    else
-      scope = Flight
+    find_flights
+
+    if params[:calendar]
+      return calendar
     end
-
-    @flights = scope.where(flight_search_conditions(params)).
-                     order("takeoff_time ASC").
-                     limit(100)
 
     respond_to do |format|
       format.html
@@ -44,20 +40,16 @@ class FlightsController < ApplicationController
   end
 
   def calendar
-    expires_in 1.hour, :public => true if EXPIRES
+#    expires_in 1.hour, :public => true if EXPIRES
 
-    @flights = Flight.select("takeoff_time::date AS takeoff_time, count(*) AS cnt").
-                 where(flight_search_conditions(params)).
-                 group("takeoff_time::date").
-                 order("takeoff_time::date ASC")
+    find_flights
 
-    auto_hash = lambda { |h,k| h[k] = Hash.new(&auto_hash)  }
-
-    @dates = Hash.new
-
-    @flights.each do |x|
-      @dates[x.takeoff_time.year] ||= Hash.new
-      @dates[x.takeoff_time.year][x.takeoff_time.month] ||= Hash.new
+    @dates = {}
+    @flights.select('takeoff_time::date AS takeoff_time, count(*) AS cnt').
+               group('takeoff_time::date').
+               order('takeoff_time::date ASC').each do |x|
+      @dates[x.takeoff_time.year] ||= {}
+      @dates[x.takeoff_time.year][x.takeoff_time.month] ||= {}
       @dates[x.takeoff_time.year][x.takeoff_time.month][x.takeoff_time.day] = x
     end
 
@@ -96,7 +88,7 @@ end
   def new
     @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
 
-    @igc_file = IgcFile.open(@igc_tmp_file.filename, "rb")
+    @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
     @igc_file.read_contents { }
 
     @flight = Flight.new(params['flight'])
@@ -109,7 +101,7 @@ end
       Flight.transaction do
         if @flight.pilot
           @flight.ranking_flights = @flight.pilot.championships.all.collect { |x|
-            x.rankings.all(:order => "name").collect { |y|
+            x.rankings.all(:order => 'name').collect { |y|
               RankingFlight.new(:ranking => y, :flight => @flight, :status => nil) } }.flatten
          end
 
@@ -132,19 +124,19 @@ end
 
         if @flight.new_record?
           @flight.ranking_flights = @flight.pilot.championships.all.collect { |x|
-            x.rankings.all(:order => "name").collect { |y|
+            x.rankings.all(:order => 'name').collect { |y|
               RankingFlight.new(:ranking => y, :flight => @flight, :status => nil) } }.flatten
         else
-          @flight.rankings = @flight.pilot.championships.all.collect { |x| x.rankings.all(:order => "name") }.flatten
+          @flight.rankings = @flight.pilot.championships.all.collect { |x| x.rankings.all(:order => 'name') }.flatten
         end
 
     render :update do |page|
-      page.replace "flight_plane_id",
-                        :partial => "new_update_planes"
-      page.replace "flight_plane_type_configuration_id",
-                        :partial => "new_update_config"
-      page.replace "approvals_table",
-                        :partial => "new_update_approvals"
+      page.replace 'flight_plane_id',
+                        :partial => 'new_update_planes'
+      page.replace 'flight_plane_type_configuration_id',
+                        :partial => 'new_update_config'
+      page.replace 'approvals_table',
+                        :partial => 'new_update_approvals'
     end
 
         raise AbortTransaction # workaround for ActiveRecord idiocy, the previous statement acts on db without save!
@@ -159,8 +151,8 @@ end
     @flight.plane = Plane .find(params[:plane_id])
 
     render :update do |page|
-      page.replace "flight_plane_type_configuration_id",
-                        :partial => "new_update_config"
+      page.replace 'flight_plane_type_configuration_id',
+                        :partial => 'new_update_config'
     end
   end
 
@@ -172,16 +164,16 @@ end
   # GET /flights/1/edit
   def edit
 
-    @flight.rankings = @flight.pilot.championships.all.collect { |x| x.rankings.all(:order => "name") }.flatten
+    @flight.rankings = @flight.pilot.championships.all.collect { |x| x.rankings.all(:order => 'name') }.flatten
 
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "edit_div" ,
-                            :partial => "form", :object => @flight
-          page.visual_effect :fade, "info_div",
+          page.replace_html 'edit_div' ,
+                            :partial => 'form', :object => @flight
+          page.visual_effect :fade, 'info_div',
                              :duration => 0.5, :queue => 'end'
-          page.visual_effect :appear, "edit_div",
+          page.visual_effect :appear, 'edit_div',
                              :duration => 0.5, :queue => 'end'
         end
 
@@ -193,7 +185,7 @@ end
   # POST /flights
   def create
     params[:flight][:passenger] = Hel::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
-                                                    "last_name ILIKE ?", params[:flight][:passenger_name] ] ).first
+                                                    'last_name ILIKE ?', params[:flight][:passenger_name] ] ).first
     params[:flight][:distance] = params[:flight][:distance].to_f * 1000.0;
 
     Flight.transaction do
@@ -201,7 +193,7 @@ end
 
       igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file][:id])
 
-#      igc_file = IgcFile.open(igc_tmp_file.filename, "rb")
+#      igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
 #      igc_file.read_contents {}
 #      @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
 
@@ -215,7 +207,7 @@ end
           format.html { redirect_to(@flight) }
         else
           format.js
-          format.html { render :action => "new" }
+          format.html { render :action => 'new' }
         end
       end
     end
@@ -233,7 +225,7 @@ end
         flash[:notice] = 'Flight was successfully updated.'
         format.html { redirect_to(flight_url(@flight, :ignore_cache => rand(1000000))) }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
       end
     end
   end
@@ -280,8 +272,8 @@ end
                               :user_id => 'me',
                               :min_taken_date => (@min_taken - @range).strftime('%Y-%m-%d %H:%M:%S'),
                               :max_taken_date => (@max_taken + @range).strftime('%Y-%m-%d %H:%M:%S'),
-                              :sort => "date-taken-asc",
-                              :extras => "date_taken")
+                              :sort => 'date-taken-asc',
+                              :extras => 'date_taken')
   end
 
   def tag_photos_ajax
@@ -302,10 +294,10 @@ end
                               :user_id => 'me',
                               :min_taken_date => (@min_taken - @range).strftime('%Y-%m-%d %H:%M:%S'),
                               :max_taken_date => (@max_taken + @range).strftime('%Y-%m-%d %H:%M:%S'),
-                              :sort => "date-taken-asc",
-                              :extras => "date_taken")
+                              :sort => 'date-taken-asc',
+                              :extras => 'date_taken')
 
-    render :partial => "tag_photos_ajax", :object => @photos
+    render :partial => 'tag_photos_ajax', :object => @photos
   end
 
   def do_tag_photos
@@ -317,7 +309,7 @@ end
 
     @messages = Array.new
 
-    @messages << "Apertura connessione a Flickr"
+    @messages << 'Apertura connessione a Flickr'
 
     @flickr = FlickRawVihai::Session.new(FLICKR_API_KEY, FLICKR_SHARED_KEY, session[:flickr_token])
 
@@ -334,7 +326,7 @@ end
                               :user_id => 'me',
                               :min_taken_date => (@min_taken - @range).strftime('%Y-%m-%d %H:%M:%S'),
                               :max_taken_date => (@max_taken + @range).strftime('%Y-%m-%d %H:%M:%S'),
-                              :extras => "date_taken")
+                              :extras => 'date_taken')
 
     FlightPhoto.transaction do
       @flight.photos.clear
@@ -352,7 +344,7 @@ end
           taken = Time.parse(info.dates.taken) + @shift.minutes
 
           if !info.respond_to?(:location) || !params[:overwrite_geotag].nil?
-            @messages << "La foto non contiene informazioni di geolocalizzazione"
+            @messages << 'La foto non contiene informazioni di geolocalizzazione'
 
             point = @flight.track_points.nearest(taken)
 
@@ -365,13 +357,13 @@ end
                        :accuracy => 16,
                        :context => 2)
 
-            @messages << "Geolocalizzazione effettuata su Flickr"
-            @messages << ""
+            @messages << 'Geolocalizzazione effettuata su Flickr'
+            @messages << ''
 
             info = @flickr.photos.getInfo(:photo_id => photo.id)
           end
 
-          url = info.urls.select { |url| url.type == "photopage" }.first.to_s
+          url = info.urls.select { |url| url.type == 'photopage' }.first.to_s
 
           lat = info.location.latitude
           lon = info.location.longitude
@@ -379,9 +371,9 @@ end
           @flight.photos << FlightPhoto.new(:farm_id => photo.farm, :server_id => photo.server,
                                             :photo_id => photo.id, :secret => photo.secret,
                                             :lat => lat, :lon => lon, :url => url,
-                                            :caption => ("Scattata da sopra " +
-                                                            info.location.locality.to_s + ", " +
-                                                            info.location.region.to_s + ", " +
+                                            :caption => ('Scattata da sopra ' +
+                                                            info.location.locality.to_s + ', ' +
+                                                            info.location.region.to_s + ', ' +
                                                             info.location.country.to_s))
 
           @messages << "Foto #{photo.id} inserita con successo"
@@ -398,8 +390,19 @@ end
     @flight = Flight.find(params[:id])
   end
 
+  def find_flights
+
+    @flights = Flight.where(flight_search_conditions(params)).
+                     order('takeoff_time ASC').
+                     limit(100)
+
+    if params[:pending]
+      @flights = @flights.pending
+    end
+  end
+
   def flight_search_conditions(params)
-    conditions = Hash.new
+    conditions = {}
 
     if params[:year] then
       day_beg = Time.local(params[:year], params[:month], params[:day])
@@ -426,7 +429,7 @@ end
       return
     end
 
-    headers['Content-Description'] = "Flight file in IGC format"
+    headers['Content-Description'] = 'Flight file in IGC format'
     headers['Last-Modified'] = File.mtime(flight.igc_file_path).httpdate
     send_file flight.igc_file_path,
           :filename => flight.igc_filename,

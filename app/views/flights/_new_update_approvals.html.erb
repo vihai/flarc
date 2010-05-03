@@ -1,6 +1,6 @@
 <table id="approvals_table" class="approvals">
-  <% fields_for @flight do |f| %>
-    <% f.fields_for :ranking_flights do |f2| %>
+  <%= fields_for @flight do |f| %>
+    <%= f.fields_for :ranking_flights do |f2| %>
   <tr>
     <th>
       <%= f2.label :status, f2.object.ranking.name %>

@@ -16,22 +16,23 @@
   <p>
     Se la macchina fotografica ha l'orologio mal impostato, puoi correggerlo inserendo il
     numero di minuti qui:<br />
-    <%= text_field_tag :shift, "0", :size => 5, :value => @shift %>
-    <%= link_to_remote "Aggiorna", :url => { :action => "tag_photos_ajax" },
-                       :update => "photo_geotagging_select_div", :method => :get,
-                       :with => "'shift=' + $('shift').value" %><br />
-    <%= check_box_tag :overwrite_geotag, 1, false %><%= label_tag :overwrite_geotag, "Sovrascrivi la geolocalizzazione esistente" %>
+    <%= text_field_tag :shift, '0', :size => 5, :value => @shift %>
+    <%= link_to 'Aggiorna', :url => { :action => 'tag_photos_ajax' },
+                :update => 'photo_geotagging_select_div', :method => :get,
+                :remote => true,
+                :with => "'shift=' + $('shift').value" %><br />
+    <%= check_box_tag :overwrite_geotag, 1, false %><%= label_tag :overwrite_geotag, 'Sovrascrivi la geolocalizzazione esistente' %>
   </p>
 
   <p>
     Seleziona le fotografie da aggiungere al tuo volo:
   </p>
   <div id="photo_geotagging_select_div">
-  <%= render :partial => "tag_photos_ajax", :object => @photos %>
+  <%= render :partial => 'tag_photos_ajax', :object => @photos %>
   </div>
     <br />
     <br />
-    <%= submit_tag "Invia" %>
+    <%= submit_tag 'Invia' %>
   <% end %>
 </div>
 <% else %>
@@ -39,6 +40,6 @@
     <span style="color: orange; font-size: 125%;">Non è stata trovata nessuna fotografia nel periodo selezionato</span>
   </p>
   <p>
-    <%= link_to "Ritorna alla pagina del volo", @flight %>
+    <%= link_to 'Ritorna alla pagina del volo', @flight %>
   </p>
 <% end %>

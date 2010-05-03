@@ -3,15 +3,15 @@ class IgcTmpFile < ActiveRecord::Base
   belongs_to :pilot
   belongs_to :club
 
-  def after_find
-  end
+  after_create :my_after_create
+  after_destroy :my_after_destroy
 
   def file=(file)
     @upload_filehandle = file
     self.original_filename = file.original_filename
   end
 
-  def after_create
+  def my_after_create
     File.open(self.filename, "wb") do |f| 
       @upload_filehandle.rewind
       f.write(@upload_filehandle.read)
@@ -21,7 +21,7 @@ class IgcTmpFile < ActiveRecord::Base
     @upload_filehandle = nil
   end
 
-  def after_destroy
+  def my_after_destroy
     begin
       File.delete(self.filename)
     rescue Errno::ENOENT

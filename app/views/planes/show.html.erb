@@ -3,13 +3,15 @@
 <% if !session[:authenticated_identity].nil? &&
        session[:authenticated_identity].is_admin then %>
   <div class="edit_box">
-  <%= link_to_remote image_tag(
+  <%= link_to image_tag(
          "action_edit.png", :alt => "Edit..."),
-         :url => { :action => "edit" }, :method => :get %>
-  <%= link_to_remote image_tag(
+         :url => { :action => "edit" }, :method => :get,
+         :remote => true %>
+  <%= link_to image_tag(
          "action_delete.png", :alt => "Delete..."),
          :method => "DELETE",
-         :confirm => "Sei sicurisssimo?" %>
+         :confirm => "Sei sicurisssimo?",
+         :remote => true %>
                     <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/planes'; }" }) %>
   </div>
 <% end %>

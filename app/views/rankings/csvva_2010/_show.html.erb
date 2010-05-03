@@ -1,9 +1,9 @@
 <% limit ||= nil %>
 <% if !ranking.sorted_standings.empty? then %>
   <table class="standard ranking">
-    <caption style="background-color: #<%=h ranking.color %>">
-      Classifica <%=h ranking.name %><br />
-      <span class="generated_at">(aggiornata al <%=h l(ranking.generated_at, :format => :short) %>)</span>
+    <caption style="background-color: #<%= ranking.color %>">
+      Classifica <%= ranking.name %><br />
+      <span class="generated_at">(aggiornata al <%= l(ranking.generated_at, :format => :short) %>)</span>
     </caption>
     <tr>
       <th>#</th>
@@ -20,7 +20,7 @@
     <% ranking.sorted_standings.each do |r| %>
     <tr>
       <td class="number">
-        <%=h cnt+=1 %>
+        <%= cnt+=1 %>
         <% weeksnap = r.history_entries.last(
                           :order => "snapshot_time DESC",
                           :conditions => "snapshot_time < now() + '1 week'::interval") %>
@@ -45,24 +45,24 @@
       <td class="name">
         <%= link_to(r.pilot.person.name, r.pilot) %>
       </td>
-      <td class="points"><%=h fmt_points(r.value) %></td>
+      <td class="points"><%= fmt_points(r.value) %></td>
       <% for i in 0..5 do %>
         <td class="points small">
-           <% flight = Flight.find(r.data[:flights_best][i]) rescue nil %>
-           <%= link_to(fmt_points(flight.points), flight) if flight %>
+           <% flight = r.data[:flights_best][i] %>
+           <%= link_to(fmt_points(flight.points), flight_path(flight.id)) if flight %>
         </td>
       <% end %>
     </tr>
     <% if limit && cnt >= limit then %>
       <tr>
-        <td colspan=6><%= link_to("Classifica completa...", ranking) %></td>
+        <td colspan=9><%= link_to("Classifica completa...", ranking) %></td>
       </tr>
       <% break %>
     <% end %>
     <% end %>
   </table>
 <% else %>
-<p>Nessun pilota attualmente nella classifica <%=h ranking.name %></p>
+<p>Nessun pilota attualmente nella classifica <%= ranking.name %></p>
 <% end %>
 
 

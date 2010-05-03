@@ -3,22 +3,24 @@
 <% if !session[:authenticated_identity].nil? &&
        session[:authenticated_identity].is_admin then %>
   <div class="edit_box">
-  <%= link_to_remote image_tag(
-         "action_edit.png", :alt => "Edit..."),
-         :url => { :action => "edit" }, :method => :get %>
-  <%= link_to_remote image_tag(
-         "action_delete.png", :alt => "Delete..."),
-         :method => "DELETE",
-         :confirm => "Sei sicurisssimo?" %>
-                    <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/planes'; }" }) %>
+  <%= link_to image_tag('action_edit.png', :alt => 'Edit...'),
+         edit_pilot_path,
+         :method => :get,
+         :remote => true %>
+  <%= link_to image_tag('action_delete.png', :alt => 'Delete...'),
+         pilot_path,
+         :method => 'DELETE',
+         :confirm => 'Sei sicurisssimo?',
+         :remote => true %>
+                    <%# :complete => visual_effect(:fade, 'body', { :duration => 1, :after_finish => 'function() { window.location='/planes'; }' }) %>
   </div>
 <% end %>
 
-<%= content_tag(:object, "",
-                :type => "image/svg+xml",
+<%= content_tag(:object, '',
+                :type => 'image/svg+xml',
                 :data => stats_plane_pilot_url(:format => :svg),
-                :width => "300px", :height => "200px",
-                :style => "float: right;") %>
+                :width => '300px', :height => '200px',
+                :style => 'float: right;') %>
 
 <table class="standard pilot">
   <caption>Pilota</caption>
@@ -69,8 +71,8 @@
   </tr>
 </table>
 
-<% @flights = @pilot.flights.all(:order => "takeoff_time DESC") %>
-<%= render :partial => "flights/list", :locals => {
+<% @flights = @pilot.flights.all(:order => 'takeoff_time DESC') %>
+<%= render :partial => 'flights/list', :locals => {
               :options => { :hide_pilot => true } } %>
 
 </div>

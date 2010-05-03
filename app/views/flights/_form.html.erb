@@ -1,8 +1,10 @@
-<% form_for(@flight,
-            :html => { :class => "standard" }) do |f| -%>
+<%= form_for(@flight,
+            :html => { :class => 'standard' }) do |f| -%>
 
-  <% fields_for @igc_tmp_file do |f2| %>
-    <%= f2.hidden_field :id %>
+  <% if @igc_tmp_file %>
+    <%= fields_for @igc_tmp_file do |f2| %>
+      <%= f2.hidden_field :id %>
+    <% end %>
   <% end %>
 
   <%= f.hidden_field :takeoff_time %>
@@ -11,19 +13,19 @@
   <%= f.error_messages %>
   <table>
     <tr>
-      <th><%= f.label :pilot_id, "Pilota" %></th>
+      <th><%= f.label :pilot_id, 'Pilota' %></th>
       <td>
-    <% changed_pars = "" %>
-    <% changed_pars += @flight.id ? " + '&flight_id=#{@flight.id}'" : "" %>
-    <% changed_pars += @flight.plane ?  " + '&plane_id=#{@flight.plane.id}'" : "" %>
+    <% changed_pars = '' %>
+    <% changed_pars += @flight.id ? " + '&flight_id=#{@flight.id}'" : '' %>
+    <% changed_pars += @flight.plane ?  " + '&plane_id=#{@flight.plane.id}'" : '' %>
     <%= f.select :pilot_id,
                  Pilot.find(:all,
-                            :order => "people.last_name ASC, people.first_name ASC",
+                            :order => 'people.last_name ASC, people.first_name ASC',
                             :include => :person).collect { |p|
-                      [ p.person.name.to_s_reversed + (p.old_pilot_id ? "" : "*") , p.id ] },
+                      [ p.person.name.to_s_reversed, p.id ] },
                    { :include_blank => true },
                      :onchange => remote_function(
-                       :url => { :action => "new_pilot_changed" },
+                       :url => { :action => 'new_pilot_changed' },
                        :method => :get,
                        :with => "'pilot_id=' + $('flight_pilot_id').value" +
                                 changed_pars )
@@ -31,60 +33,60 @@
       </td>
     </tr>
     <tr>
-      <th><%= f.label :plane_id, "Aliante" %></th>
+      <th><%= f.label :plane_id, 'Aliante' %></th>
       <td>
-        <%= render :partial => "new_update_planes" %>
+        <%= render :partial => 'new_update_planes' %>
       </td>
     </tr>
     <tr>
-      <th><%= f.label :plane_type_configuration_id, "Configurazione" %></th>
+      <th><%= f.label :plane_type_configuration_id, 'Configurazione' %></th>
       <td>
-        <%= render :partial => "new_update_config" %>
+        <%= render :partial => 'new_update_config' %>
       </td>
     </tr>
     <tr>
-      <th><%= f.label :passenger, "Passeggero" %></th>
+      <th><%= f.label :passenger, 'Passeggero' %></th>
       <td>
-        <%= f.text_field :passenger, :id => "passenger_input" %>
+        <%= f.text_field :passenger, :id => 'passenger_input' %>
         <div class="autocomplete" id="passenger_autocomplete"></div>
-        <% javascript_tag do -%>
+<script type="text/javascript">
 var pass_ac = new Ajax.Autocompleter('passenger_input', 'passenger_autocomplete',
                                      '/flights/autocomplete_passenger', {method:'get'})
-        <% end -%>
+</script>
       </td>
     </tr>
     <tr>
-      <th><%= f.label :distance, "Distanza" %></th>
+      <th><%= f.label :distance, 'Distanza' %></th>
       <td><%= f.text_field :distance, :size => 5,
                            :value => @flight.distance ? @flight.distance/1000.0 : nil %> km</td>
     </tr>
     <tr>
-      <th><%= f.label :speed, "Velocità" %></th>
+      <th><%= f.label :speed, 'Velocita\'' %></th>
       <td><%= f.text_field :speed, :size => 5 %> km/h</td>
     </tr>
     <tr>
-      <th><%= f.label :private, "Privato" %></th>
+      <th><%= f.label :private, 'Privato' %></th>
       <td><%= f.check_box :private %></td>
     </tr>
     <tr>
-      <th><%= f.label :notes_public, "Note (pubbliche)" %></th>
+      <th><%= f.label :notes_public, 'Note (pubbliche)' %></th>
       <td><%= f.text_area :notes_public, :cols => 80, :rows => 10 %></td>
     </tr>
     <tr>
-      <th><%= f.label :notes_private, "Note (private)" %></th>
+      <th><%= f.label :notes_private, 'Note (private)' %></th>
       <td><%= f.text_area :notes_private, :cols => 80, :rows => 10 %></td>
     </tr>
     <tr>
       <th>Classifiche</th>
       <td>
-        <%= render :partial => "new_update_approvals" %>
+        <%= render :partial => 'new_update_approvals' %>
       </td>
     </tr>
  </table>
  <p>
-   <%= #button_to_function("Annulla", "cancel_form()")
+   <%= #button_to_function('Annulla', 'cancel_form()')
    %>
-   <%= f.submit "Invia", :style => "width: 15em; height: 3em;" %>
+   <%= f.submit 'Invia', :style => 'width: 15em; height: 3em;' %>
  </p>
 
 <% end -%>

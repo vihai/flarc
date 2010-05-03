@@ -43,10 +43,22 @@ div.header
 
 div.header_text
 {
- padding: 0 1em 0 1em;
+ position: absolute;
+ top: 0px;
+ left: 0px;
+ width: 100%;
  background-color: #ddd;
  font-size: 300%;
  font-weight: bold;
+}
+
+div.header_right_text
+{
+ position: absolute;
+ top: 0px;
+ right: 0px;
+ padding: 0 1em 0 1em;
+ background-color: #ddd;
 }
 
 div#menu

@@ -327,8 +327,10 @@ protected
       return :oo
     when "P"
       return :pilot
+    when "S"
+      return :unknown_s
     else
-      throw :unknown_char
+      warn "unknown character #{c} in source"
     end
   end
 end

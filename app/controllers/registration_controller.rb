@@ -14,7 +14,7 @@ class RegistrationController < ApplicationController
       person.name = Hel::Name.new(params[:first_name], nil, params[:last_name])
       person.save!
 
-      if params[:email] != ""
+      if params[:email] != ''
         identity = Hel::Identity.new
         identity.fqdn = params[:email]
         identity.password = params[:password]
@@ -28,6 +28,6 @@ class RegistrationController < ApplicationController
       pilot.save!
     end
 
-    redirect_to "/"
+    redirect_to '/'
   end
 end

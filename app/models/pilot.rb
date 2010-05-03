@@ -11,11 +11,14 @@ class Pilot < ActiveRecord::Base
   has_many :ranking_snapshots, :through => :ranking_snapshot_members, :uniq => true
 
   has_many :championship_pilots
+  accepts_nested_attributes_for :championship_pilots, :allow_destroy => true
+
   has_many :championships, :through => :championship_pilots, :uniq => true
 
   validates_presence_of :person
   validates_uniqueness_of :person_id
   validates_presence_of :club
+
 
   def steal_from_other_pilot(unlucky)
     self.flights << unlucky.flights

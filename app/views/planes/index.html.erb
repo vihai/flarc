@@ -3,9 +3,10 @@
 <% if !session[:authenticated_identity].nil? &&
        session[:authenticated_identity].is_admin then %>
   <div class="edit_box">
-  <%= link_to_remote image_tag(
+  <%= link_to image_tag(
          "action_new.png", :alt => "New..."),
-         :url => { :action => "new" }, :method => :get %>
+         :url => { :action => "new" }, :method => :get,
+         :remote => true %>
   </div>
 <% end %>
 

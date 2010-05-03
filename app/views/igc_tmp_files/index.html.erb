@@ -3,6 +3,7 @@
   <table class="standard igc_tmp_files">
     <tr>
       <th></th>
+      <th>Nome</th>
       <th>Pilota</th>
       <th>Data</th>
       <th>Aliante</th>
@@ -16,6 +17,9 @@
     <tr>
       <td class="view">
         <%= link_to(image_tag("view.png", :alt => "View", :title => "Apri la pagina del volo"), x) %>
+      </td>
+      <td class="name">
+        <%=h x.original_filename %>
       </td>
       <td class="pilot">
         <%=h y.pilot_name %>
@@ -31,7 +35,7 @@
         <%=h File.size(x.filename)  %>
       </td>
       <td class="actions">
-        <% #link_to(image_tag("edit-delete.png", :alt => "Rimuovi", :title => "Rimuovi"), :action => "delete") %>
+        <% #link_to(image_tag("edit-delete.png", :alt => "Rimuovi", :title => "Rimuovi"), :action => "delete")
         %>
         <%= link_to(image_tag("list-add.png", :alt => "Aggiungi", :title => "Aggiungi volo"),
                     new_flight_path(:igc_tmp_file_id => x.id)) %>

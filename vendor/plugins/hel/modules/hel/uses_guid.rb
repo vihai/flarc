@@ -37,7 +37,7 @@ module Hel
         class_eval do
           set_primary_key options[:column] if options[:column]
           
-          def after_initialize; end
+#          def after_initialize; end
           
           after_initialize :set_uuid
           

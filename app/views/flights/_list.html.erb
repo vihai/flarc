@@ -18,7 +18,7 @@
     <% for x in @flights do %>
     <tr>
       <td class="view">
-        <%= link_to(image_tag("view.png", :alt => "View", :title => "Apri la pagina del volo"), x) %>
+        <%= link_to(image_tag('view.png', :alt => 'View', :title => 'Apri la pagina del volo'), x) %>
       </td>
       <% if !options[:hide_pilot] %>
         <td class="pilot">
@@ -34,7 +34,7 @@
       <% if !options[:hide_plane] %>
         <td class="glider">
           <%= link_to(x.plane.registration, x.plane) %>
-          (<%= link_to(x.plane.plane_type.name, x.plane.plane_type) -%><%=h x.plane_type_configuration ? (" " + x.plane_type_configuration.name) : "" -%>)
+          (<%= link_to(x.plane.plane_type.name, x.plane.plane_type) -%><%=h x.plane_type_configuration ? (' ' + x.plane_type_configuration.name) : '' -%>)
         </td>
       <% end %>
       <td class="points">
@@ -42,7 +42,7 @@
       </td>
       <td class="rankings">
         <% x.ranking_flights.all(
-              :conditions => "status IS NOT NULL AND status != ''").
+              :conditions => 'status IS NOT NULL AND status != \'\'').
               each do |ranking| %>
           <%= image_tag ranking.ranking.icon,
                         :alt => "Icona #{ranking.ranking.name}",

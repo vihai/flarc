@@ -5,8 +5,6 @@ class StaticController < ApplicationController
   def show
     expires_in 1.hour, :public => true
 
-pp params
-
     #workaround for rails3
     if !params[:site]
       params[:site] = 'jump'

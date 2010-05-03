@@ -18,21 +18,23 @@ class RankingCsvva2010 < Ranking
       results[flight.ranking_id][flight.pilot.id][:total_points] += flight.points
 
       results[flight.ranking_id][flight.pilot.id][:flights] ||= Array.new
-      results[flight.ranking_id][flight.pilot.id][:flights] << flight
+      fl_data = OpenStruct.new(flight.attributes)
+      fl_data.points = flight.points
+      results[flight.ranking_id][flight.pilot.id][:flights] << fl_data
     end
 
     # Pass 2: Compute points
     results.each do |ranking_id,result|
       result.each do |pilot_id,pilot|
         pilot[:flights].sort! { |a,b| b.points <=> a.points }
-        pilot[:flights_best] = (pilot[:flights].sort { |a,b| b.points <=> a.points })[0..5]
+        pilot[:flights_best] = (pilot[:flights].sort { |a,b| b.points <=> b.points })[0..5]
       end
     end
 
     # Pass 3: Update standings
     results.each do |ranking_id,result|
 
-      Ranking.transaction do
+#      Ranking.transaction do
 
         ranking = Ranking.find(ranking_id)
         ranking.generated_at = Time.now
@@ -44,21 +46,20 @@ class RankingCsvva2010 < Ranking
                       RankingStanding.new(:ranking => ranking,
                                           :pilot_id => pilot_id)
 
-          standing.data =  { :flights_best => pilot[:flights_best] }
+          standing.data = { :flights_best => pilot[:flights_best] }
           standing.value = pilot[:flights_best].collect { |x| x.points }.sum
 
           ranking.standings << standing
         end
 
         pos = 0
-        ranking.standings.find(:all,
-                   :order => "value DESC, id ASC").each do |standing|
+        ranking.standings.all(:order => "value DESC, id ASC").each do |standing|
 
           pos += 1
           standing.position = pos;
           standing.save!
         end
-      end
+#      end
     end
 
     return nil

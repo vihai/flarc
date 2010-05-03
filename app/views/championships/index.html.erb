@@ -13,6 +13,9 @@
         <%= link_to(r.name, r) %>
       </td>
       <td class="count"><%=h r.pilots.count %></td>
+      <td class="valid_from"><%=h r.valid_from.strftime("%d-%m-%Y") %></td>
+      <td class="valid_to"><%=h r.valid_to.strftime("%d-%m-%Y") %></td>
+    </td>
     </tr>
     <% end %>
   </table>

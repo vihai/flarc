@@ -20,7 +20,7 @@ class Flight < ActiveRecord::Base
 #  validates_presence_of :pilot, :plane, :takeoff_time, :landing_time, :distance
 #  validates_numericality_of :distance
 
-  named_scope :pending, :conditions => [ '(select count(*) from ranking_flights where flight_id=flights.id and status=\'pending\') > 0' ]
+  scope :pending, :conditions => [ '(select count(*) from ranking_flights where flight_id=flights.id and status=\'pending\') > 0' ]
 
   def igc_file_path
     return File.join(Rails.root, 'data', Rails.env, 'flights', self.id.to_s + '.igc')

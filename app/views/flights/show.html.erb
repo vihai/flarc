@@ -3,13 +3,15 @@
 <% if !session[:authenticated_identity].nil? &&
        session[:authenticated_identity].is_admin then %>
   <div class="edit_box">
-  <%= link_to_remote image_tag(
-         "action_edit.png", :alt => "Edit..."),
-         :url => { :action => "edit" }, :method => :get %>
-  <%= link_to_remote image_tag(
-         "action_delete.png", :alt => "Delete..."),
-         :method => "DELETE",
-         :confirm => "Sei sicurisssimo?" %>
+  <%= link_to image_tag('action_edit.png', :alt => 'Edit...'),
+         edit_flight_path(@flight), :method => :get,
+         :remote => true %>
+  <%= link_to image_tag('action_delete.png', :alt => 'Delete...'),
+         flight_path(@flight),
+         :method => :delete,
+         :confirm => 'Sei sicurisssimo?',
+         :remote => true
+ %>
   </div>
 <% end %>
 
@@ -70,7 +72,7 @@
   <tr>
     <th>Classifiche</th>
     <td class="rankings">
-      <% @flight.ranking_flights.all.each do |r| %>
+      <% @flight.ranking_flights.all.select { |x| x.status != '' }.each do |r| %>
         <%= status_icon(r.status) %>
         <%= link_to(h(r.ranking.name), r.ranking) %><br />
       <% end %>
@@ -80,21 +82,18 @@
   <tr>
     <th>Scarica</th>
     <td>
-      <% link_to(flight_path(@flight, :format => "igc")) do  -%>
-        <%= image_tag("show_with_seeyou.jpg",
-                      :alt => "Logo SeeYou",
-                      :title => "Apri con SeeYou") -%>
-      <% end -%>
-      <% link_to(flight_path(@flight, :format => "kml")) do -%>
-        <%= image_tag("show_with_google_earth.jpg",
-                      :alt => "Logo Google Earth",
-                      :title => "Apri con Google Earth") -%>
-      <% end -%>
-      <% link_to(flight_path(@flight, :format => "gpx")) do -%>
-        <%= image_tag("download_gpx.png",
-                      :alt => "Logo GPX",
-                      :title => "Scarica in formato GPX") -%>
-      <% end -%>
+      <%= link_to(image_tag('show_with_seeyou.jpg',
+                      :alt => 'Logo SeeYou',
+                      :title => 'Apri con SeeYou'),
+                 flight_path(@flight, :format => 'igc')) -%>
+      <%= link_to(image_tag('show_with_google_earth.jpg',
+                      :alt => 'Logo Google Earth',
+                      :title => 'Apri con Google Earth'),
+                 flight_path(@flight, :format => 'kml')) -%>
+      <%= link_to(image_tag('download_gpx.png',
+                      :alt => 'Logo GPX',
+                      :title => 'Scarica in formato GPX'),
+                 flight_path(@flight, :format => 'gpx')) -%>
     </td>
   </tr>
 <% end %>
@@ -105,16 +104,16 @@
 <% if !@flight.photos.empty? %>
   <% @flight.photos.each do |photo| %>
     <%= link_to image_tag(photo.flickr_url('s')), photo.flickr_url('-'),
-             :rel => "lightbox[gallery]", :title => photo.caption, :rev => photo.url  %>
+             :rel => 'lightbox[gallery]', :title => photo.caption, :rev => photo.url  %>
   <% end %>
   <br />
 <% end %>
 <% if !session[:authenticated_identity].nil? &&
        session[:authenticated_identity].person.pilot == @flight.pilot %>
   <% if @flight.photos.empty? %>
-    <%= link_to("Hai caricato qualche foto del volo su Flickr?", tag_photos_flight_url) %>
+    <%= link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url) %>
   <% else %>
-    <%= link_to("Modifica fotografie", tag_photos_flight_url) %>
+    <%= link_to('Modifica fotografie', tag_photos_flight_url) %>
   <% end %>
 <% end %>
 </div>
@@ -127,7 +126,7 @@
 <div id="map_container" class="map_container" style="width: 100%; height: 500px;">
   <div id="map" class="map" style="width: 100%; height: 100%;"></div>
 </div>
-<% javascript_tag do -%>
+<%= javascript_tag do -%>
 
 google.load("maps", 2, {"other_params":"sensor=false"});
 
@@ -191,7 +190,7 @@ Element.observe(window, 'load', function() {
   <% end %>
 
   <% AlpthermSource.all.each do |source| %>
-    <% entry = source.entries.first(:conditions => [ "taken_at::date = ?::date", @flight.takeoff_time ]) %>
+    <% entry = source.entries.first(:conditions => [ 'taken_at::date = ?::date', @flight.takeoff_time ]) %>
     <% next if entry.nil? %>
    {
     var marker;

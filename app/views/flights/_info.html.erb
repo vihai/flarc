@@ -16,15 +16,15 @@
   </tr>
   <tr>
     <th>Data</th>
-    <td><%=h @igc_file.date.strftime("%d-%m-%Y") %></td>
+    <td><%=h @igc_file.date.strftime('%d-%m-%Y') %></td>
   </tr>
   <tr>
     <th>Decollo</th>
-    <td><%=h @flight.takeoff_time.strftime("%H:%M:%S") %></td>
+    <td><%=h @flight.takeoff_time.strftime('%H:%M:%S') %></td>
   </tr>
   <tr>
     <th>Atterraggio</th>
-    <td><%=h @flight.landing_time.strftime("%H:%M:%S") %></td>
+    <td><%=h @flight.landing_time.strftime('%H:%M:%S') %></td>
   </tr>
   <tr>
     <th>Pilota</th>
@@ -69,10 +69,10 @@
   <tr>
     <th>Download</th>
     <td>
-      <%= link_to(image_tag("igc.png"),
-                  igc_tmp_file_path(@igc_tmp_file, :format => "igc"),
-                  :alt => "IGC icon",
-                  :title => "Apri il file IGC con seeyou") %>
+      <%= link_to(image_tag('igc.png'),
+                  igc_tmp_file_path(@igc_tmp_file, :format => 'igc'),
+                  :alt => 'IGC icon',
+                  :title => 'Apri il file IGC con seeyou') %>
     </td>
   </tr>
   <% end %>

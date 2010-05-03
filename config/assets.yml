@@ -6,8 +6,12 @@ javascripts:
   default:
     - public/javascripts/prototype.js
     - public/javascripts/effects.js
-    - public/javascripts/**/*.js
-    - public/plugin_assets/**/*.js
+    - public/javascripts/application.js
+    - public/javascripts/controls.js
+    - public/javascripts/dragdrop.js
+    - public/javascripts/lightbox.js
+    - public/javascripts/rails.js
+    - public/javascripts/application.js
 
 stylesheets:
   csvva:

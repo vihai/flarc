@@ -1,15 +1,3 @@
-<h1>Benvenuto al campionato CSVVA</h1>
-<br />
-<% stats = Flight.find_by_sql("SELECT count(*) AS cnt, sum(distance) AS dst FROM flights WHERE flights.id IN (SELECT DISTINCT ranking_flights.flight_id FROM ranking_flights,rankings WHERE ranking_flights.ranking_id=rankings.id AND rankings.symbol in ('csvva_junior_2010', 'csvva_expert_2010', 'csvva_master_2010', 'csvva_supermaster_2010'))").first %>
-<p>
-Sono stati inviati <b>
-<%=h stats.cnt %>
-</b> voli
-</p>
-<p>
-Per una distanza totale di <b><%=h fmt_distance_in_km(stats.dst.to_i)  %></b>
-</p>
-<br />
 <%= render :partial => "rankings/csvva_2010/show",
            :locals => {
              :ranking => Ranking.find_by_symbol("csvva_junior_2010"),

@@ -1,6 +1,4 @@
-<% form_for(@pilot,
-            :html => { :class => "standard" }) do |f| -%>
-  <%= f.error_messages %>
+<%= form_for(@pilot, :html => { :class => 'standard' }) do |f| -%>
   <table>
     <tr>
       <th>Alianti</th>
@@ -9,30 +7,41 @@
           <div class="plane">
             <%= plane.registration %>
             <%= link_to_function(
-                   image_tag("edit-delete.png", :alt => "Remove", :title => "Remove"),
-                  "$(this).up('.plane').remove()") %>
+                   image_tag('edit-delete.png', :alt => 'Remove', :title => 'Remove'),
+                  '$(this).up(\'.plane\').remove()') %>
           </div>
         <% end %>
-        <%= select_tag "add_plane", options_for_select(Plane.all.collect {|x| [ x.registration, x.id ] }) %>
-        <%= image_tag("list-add.png", :alt => "Add", :title => "Add") %>
+        <%= select_tag 'add_plane', options_for_select(Plane.all.collect {|x| [ x.registration, x.id ] }) %>
+        <%= image_tag('list-add.png', :alt => 'Add', :title => 'Add') %>
       </td>
     </tr>
     <tr>
       <th>Campionati</th>
       <td>
-        <% for championship in Championship.find(:all, :order => "name ASC") %>
-          <%= check_box_tag "pilot[championships][]", championship.id,
-                            !@pilot.championships.index(championship).nil?
-           %>
-          <%= label_tag "pilot[championships][]", championship.name %><br />
+        <%
+          Championship.find(:all, :order => 'name ASC').each do |championship|
+            cp = @pilot.championship_pilots.find_by_championship_id(championship.id) ||
+                   ChampionshipPilot.new(:championship_id => championship.id, :pilot_id => @pilot.id)
+        %>
+        <% f.fields_for :championship_pilots, cp do |fc| %>
+          <%= check_box_tag "#{fc.object_name}[_subscribed]", '1', !cp.id.nil? %>
+          <%= fc.label "#{fc.object_name}[_subscribed]", championship.name %>
+
+          <% if fc.object.championship.driver == 'csvva_2010' %>
+            <%= fc.select :csvva_pilot_level,
+                          options_for_select({ 'Junior' => 'junior', 'Expert' => 'expert',
+                                               'Master' => 'master', 'SuperMaster' => 'supermaster' }) %>
+          <% end %>
+          <br />
+        <% end %>
         <% end %>
       </td>
     </tr>
   </table>
   <p style="text-align: center">
-    <%= #button_to_function("Annulla", "cancel_form()")
+    <%= #button_to_function('Annulla', 'cancel_form()')
     %>
-    <%= submit_tag "Save" %>
+    <%= submit_tag 'Save' %>
   </p>
 
 <% end -%>

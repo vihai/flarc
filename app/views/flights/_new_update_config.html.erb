@@ -5,10 +5,10 @@
     configs = PlaneTypeConfiguration.all(
       :conditions => { :plane_type_id =>
                           @flight.plane.plane_type_id },
-      :order => "name ASC").collect { |p| [ p.name, p.id ] }
+      :order => 'name ASC').collect { |p| [ p.name, p.id ] }
   end
 %>
-<% fields_for @flight do |f| %>
+<%= fields_for @flight do |f| %>
   <% if configs.empty? %>
     <%= f.hidden_field :plane_type_configuration_id, :value => nil %>
   <% else %>

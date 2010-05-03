@@ -1,11 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
   <title>Campionato italiano recordman</title>
+  <meta charset="UTF-8" />
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="csrf-token" content="<%= form_authenticity_token %>" />
+  <meta name="csrf-param" content="authenticity_token" />
 
   <%= include_stylesheets :default, :media => 'all' %>
   <%= include_javascripts :everything %>
@@ -45,7 +47,7 @@
   <% if session[:authenticated_identity] %>
   <li>Elenchi
     <ul>
-      <li><%= link_to("Voli", calendar_flights_url(:year => Time.now.year)) %></li>
+      <li><%= link_to("Voli", flights_url(:calendar => true, :year => Time.now.year)) %></li>
       <li><%= link_to("Piloti", pilots_url) %></li>
       <li><%= link_to("Alianti", planes_url) %></li>
     </ul>
@@ -54,8 +56,7 @@
   <li>
     <% if !session[:authenticated_identity] %>
       <div class="menulogin">
-      <% form_remote_tag :url => { :controller => "session", :action => "login"},
-                  :html => { :class => "menulogin", :method => :post } do -%>
+      <% form_tag session_login_path, :class => "menulogin", :method => :post, :remote => true do -%>
         <%= label_tag :email, "e-Mail" %><br />
         <%= text_field_tag :email %><br />
         <%= label_tag :password, "Password" %><br />
@@ -74,7 +75,7 @@
       <%= link_to "I tuoi voli", flights_url(:pilot_id => session[:authenticated_identity].person.pilot.id.to_i) %>
       </li>
       <li>
-      <%= link_to_remote "Logout", :url => { :controller => "session", :action => "logout" }, :method => "post" %>
+      <%= link_to "Logout", :url => { :controller => "session", :action => "logout" }, :method => "post", :remote => true %>
       </li>
       </ul>
       </div>
