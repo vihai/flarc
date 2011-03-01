@@ -1,6 +1,5 @@
 <div id="list_div">
-<% if !session[:authenticated_identity].nil? &&
-       session[:authenticated_identity].is_admin then %>
+<% if authenticated_admin? %>
   <div class="edit_box">
   <%= link_to new_flight_path, :method => :get, :remote => true do
         image_tag('action_new.png', :alt => 'New...')
@@ -41,7 +40,7 @@
           <span class="dom"><%=h dom %></span>
           <span class="cnt">
           <% if dom > 0 && days[dom] %>
-            <%= link_to days[dom].cnt, day_flights_path(:year => year, :month => month, :day => dom) %>
+            <%= link_to days[dom].cnt, flarc_flights_path(:year => year, :month => month, :day => dom) %>
           <% end %>
           </span>
           </td>

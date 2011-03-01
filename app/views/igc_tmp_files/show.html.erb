@@ -1,3 +1,16 @@
+<div id="info_div">
+<% if authenticated_admin? then %>
+  <div class="edit_box">
+  <%= link_to(image_tag("action_new.png", :alt => "Aggiungi", :title => "Aggiungi volo"),
+              new_flight_path(:igc_tmp_file_id => @igc_tmp_file.id)) %>
+  <%= link_to image_tag('action_delete.png', :alt => 'Delete...'),
+         @igc_tmp_file,
+         :method => :delete,
+         :confirm => 'Sei sicurisssimo?',
+         :remote => true
+  %>
+  </div>
+<% end %>
 <table class="standard">
   <tr>
     <th>ID Volo</th>
@@ -66,3 +79,58 @@
     </td>
   </tr>
 </table>
+
+<div id="map_container" class="map_container" style="width: 600px; height: 300px;">
+  <div id="map" class="map" style="width: 100%; height: 100%;"></div>
+</div>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+
+  Element.observe(window, 'load', function() {
+
+   var latlng = new google.maps.LatLng(45.397, 9.644);
+
+    var track_coords = [
+      <% @track.each do |point| %>
+        new google.maps.LatLng(<%= point.lat.round(4) %>, <%= point.lon.round(4) %>),
+      <% end %>
+    ];
+
+    bounds = new google.maps.LatLngBounds();
+    for(i=0; i<track_coords.length; i++) {
+      if(track_coords[i])
+        bounds.extend(track_coords[i]);
+    }
+
+    var track = new google.maps.Polyline({
+      path: track_coords,
+      strokeColor: "#FF0000",
+      strokeOpacity: 0.6,
+      strokeWeight: 3,
+    });
+    
+//    var track_bounds = track.getBounds();
+
+
+
+
+//  map.setCenter(, map.getBoundsZoomLevel(track_bounds), G_PHYSICAL_MAP);
+
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+//      center: track_bounds.getCenter(),
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
+      disableDefaultUI: true,
+    };
+    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    track.setMap(map);
+    map.fitBounds(bounds);
+  })
+
+//  Element.observe(window, 'unload', function() {
+//    GUnload();
+//  });
+</script>

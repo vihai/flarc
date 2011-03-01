@@ -12,12 +12,14 @@ module RespondsToParent
       response.headers['Content-Type'] = 'text/html; charset=UTF-8'
       
       # Either pull out a redirect or the request body
-      script =  if location = erase_redirect_results
-                  "document.location.href = #{location.to_s.inspect}"
-                else
-                  response.body
-                end
+#      script =  if location = erase_redirect_results
+#                  "document.location.href = #{location.to_s.inspect}"
+#                else
+#                  response.body
+#                end
                 
+      script = response.body
+
       # Escape quotes, linebreaks and slashes, maintaining previously escaped slashes
       # Suggestions for improvement?
       script = (script || '').
@@ -27,7 +29,7 @@ module RespondsToParent
         gsub('</script>','</scr"+"ipt>')
 
       # Clear out the previous render to prevent double render
-      erase_results
+#      erase_results
       
       # Eval in parent scope and replace document location of this frame 
       # so back button doesn't replay action on targeted forms
@@ -35,7 +37,7 @@ module RespondsToParent
       # with(window.parent) - pull in variables from parent window
       # setTimeout - scope the execution in the windows parent for safari
       # window.eval - legal eval for Opera
-      render :text => "<html><body><script type='text/javascript' charset='utf-8'>
+      response.body = "<html><body><script type='text/javascript' charset='utf-8'>
         var loc = document.location;
         with(window.parent) { setTimeout(function() { window.eval('#{script}'); loc.replace('about:blank'); }, 1) } 
       </script></body></html>"

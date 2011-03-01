@@ -1,4 +1,4 @@
-R3::Application.configure do
+Csvva::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # In the development environment your application's code is reloaded on
@@ -16,8 +16,13 @@ R3::Application.configure do
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
-end
 
+  # Print deprecation notices to the Rails logger
+  config.active_support.deprecation = :log
+
+  config.fb_api_key = 'da3f8d09387745455f27e2851d19d0ec'
+  config.fb_secret_key = '28ce347b359a77f891ad66ffe2780ac8'
+end
 
 EXPIRES=false
 

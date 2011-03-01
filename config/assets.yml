@@ -1,19 +1,26 @@
-embed_images: on
+embed_images: off
 javascript_compressor: yui
-gzip_assets: on
 
 javascripts:
-  default:
+  csvva:
     - public/javascripts/prototype.js
     - public/javascripts/effects.js
-    - public/javascripts/application.js
-    - public/javascripts/controls.js
     - public/javascripts/dragdrop.js
-    - public/javascripts/lightbox.js
+    - public/javascripts/controls.js
     - public/javascripts/rails.js
     - public/javascripts/application.js
+#    - public/javascripts/**/*.js
+
+
+  asgard:
+    - public/*/javascripts/**/*.js
+    - public/*/core_javascripts/**/*.js
 
 stylesheets:
   csvva:
-    - public/stylesheets/csvva.css
-    - public/stylesheets/lightbox.css
+    - public/stylesheets/**/*.css
+
+  asgard:
+    - public/ext/resources/css/ext-all-notheme.css
+    - public/ext/resources/css/xtheme-gray.css
+    - public/*/stylesheets/**/*.css

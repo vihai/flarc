@@ -1,2 +1,2 @@
 <h1>Voli del <%=h [ params[:day], params[:month], params[:year] ].delete_if { |x| x.nil? }.join '/' %></h1>
-<%= render :partial => 'list', :locals => { :options => {} } %>
+<%= render :partial => 'flights', :object => @targets, :locals => { :options => {} } %>

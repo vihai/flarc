@@ -1,4 +1,4 @@
-class RankingFlight < ActiveRecord::Base
+class RankingFlight < Ygg::BasicModel
   belongs_to :ranking
   belongs_to :flight
 

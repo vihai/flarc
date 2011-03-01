@@ -34,12 +34,6 @@
       <td class="size">
         <%=h File.size(x.filename)  %>
       </td>
-      <td class="actions">
-        <% #link_to(image_tag("edit-delete.png", :alt => "Rimuovi", :title => "Rimuovi"), :action => "delete")
-        %>
-        <%= link_to(image_tag("list-add.png", :alt => "Aggiungi", :title => "Aggiungi volo"),
-                    new_flight_path(:igc_tmp_file_id => x.id)) %>
-      </td>
     </tr>
     <% end %>
   </table>

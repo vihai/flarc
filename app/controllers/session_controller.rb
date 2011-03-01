@@ -14,7 +14,7 @@ class SessionController < ApplicationController
     identity = Hel::Identity.find_by_fqdn(params[:email])
 
     if !identity.nil? && identity.password == params[:password]
-      session[:authenticated_identity] = identity
+      authenticated!(:username_password, identity.person, identity)
     end
 
     respond_to do |format|
@@ -32,7 +32,7 @@ class SessionController < ApplicationController
 
   # POST /session/logout
   def logout
-    session[:authenticated_identity] = nil
+    session_logout
 
     respond_to do |format|
       format.html {

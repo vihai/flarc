@@ -1,41 +1,52 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
+#require 'facebooker'
+
 class ApplicationController < ActionController::Base
+
   helper :all # include all helpers, all the time
 
-  # See ActionController::RequestForgeryProtection for details
-  protect_from_forgery
+  helper_method :facebook_uid, :asgard_session, :auth_method, :auth_person
+
+  before_filter :load_session
+
+#  protect_from_forgery
   
-  # See ActionController::Base for details 
-  # Uncomment this to filter the contents of submitted sensitive data parameters
-  # from your application log (in this case, all fields with names like "password"). 
-  # filter_parameter_logging :password
+  attr_accessor :asgard_session
 
-  layout :select_proper_layout
-
-  def select_proper_layout
-    if LAYOUTS.class == Hash
-      return LAYOUTS[request.host] 
-    else
-      return LAYOUTS
-    end
+  def auth_method
+    asgard_session ? asgard_session.auth_method : nil
   end
 
-#around_filter do |controller, action|
-#  if controller.params.key?("browser_profile!" )
-#    require 'ruby-prof'
-#    # Profile only the action
-#    profile_results = RubyProf.profile { action.call }
-#    # Use RubyProf's built in HTML printer to format the results
-#    printer = RubyProf::GraphHtmlPrinter.new(profile_results)
-#    # Append the results to the HTML response
-#    controller.response.body << printer.print("")
-#  else
-#    action.call
-#  end
-#end
+  def auth_person
+    asgard_session ? Flarc::Person.find(asgard_session.auth_identity.person_id) : nil
+  end
 
+  def load_session
+    @asgard_session = Ygg::Core::HttpSession.find_by_uuid(request.headers['X-Ygg-Session-Id'])
+    @asgard_session ||= Ygg::Core::HttpSession.find_by_uuid(request.cookies['X-Ygg-Session-Id'])
 
+    if @asgard_session
+      fb_cookie = cookies["fbs_#{Csvva::Application.config.fb_api_key}"]
+      @facebook_session = fb_cookie ? CGI.parse(fb_cookie).symbolize_keys! : nil
 
+      if @facebook_session && !@asgard_session.authenticated?
+        if person = Person.find_by_fb_uid(facebook_uid)
+          @asgard_session.authenticated!(:facebook, person, nil)
+        end
+      elsif @asgard_session.authenticated? && @asgard_session.auth_method == :facebook && !@facebook_session
+        @asgard_session.close(:not_authenticated_anymore)
+      end
+    end
+      
+  end
+
+  def facebook_session
+    @facebook_session
+  end
+
+  def facebook_uid
+    facebook_session ? facebook_session[:uid][0] : nil
+  end
 end

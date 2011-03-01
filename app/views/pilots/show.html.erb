@@ -1,7 +1,6 @@
 <div id="pilot_info_div">
 
-<% if !session[:authenticated_identity].nil? &&
-       session[:authenticated_identity].is_admin then %>
+<% if authenticated_admin? then %>
   <div class="edit_box">
   <%= link_to image_tag('action_edit.png', :alt => 'Edit...'),
          edit_pilot_path,
@@ -18,7 +17,7 @@
 
 <%= content_tag(:object, '',
                 :type => 'image/svg+xml',
-                :data => stats_plane_pilot_url(:format => :svg),
+                :data => stats_by_plane_flarc_pilot_url(:format => :svg),
                 :width => '300px', :height => '200px',
                 :style => 'float: right;') %>
 
@@ -27,33 +26,32 @@
   <tr>
     <th>Nome</th>
     <td class="name">
-       <%= @pilot.person.name %>
+       <%= @target.person.name %>
     </td>
   </tr>
-  <% if session[:authenticated_identity] &&
-        session[:authenticated_identity].is_admin %>
+  <% if authenticated_admin? %>
   <tr>
     <th>Indirizzo</th>
     <td class="address">
-      <%=h @pilot.person.home_location %><br />
+      <%=h @target.person.home_location %><br />
     </td>
   </tr>
   <tr>
     <th>Telefono</th>
     <td class="phone">
-      <%=h @pilot.person.tmp_telefono %><br />
+      <%=h @target.person.tmp_telefono %><br />
     </td>
   </tr>
   <tr>
     <th>Cellulare</th>
     <td class="phone">
-      <%=h @pilot.person.tmp_cellulare %><br />
-    </td>
+      <%=h @target.person.tmp_cellulare %><br />
+	    </td>
   </tr>
   <tr>
     <th>e-Mail</th>
     <td class="email">
-      <% @pilot.person.identities.each do |identity|  %>
+      <% @target.person.identities.each do |identity|  %>
           <%= mail_to identity.fqdn %><br />
       <% end %> 
     </td>
@@ -63,17 +61,19 @@
     <th>Campionati</th>
     <td>
       <ul>
-      <% for x in @pilot.championships do %>
-        <li><%= link_to x.name, x %></li>
+      <% @target.championship_pilots.each do |x| %>
+        <li>
+          <%= link_to x.championship.name, x.championship %>
+          <%= x.csvva_pilot_level %>
+        </li>
       <% end %>
       </ul>
     </td>
   </tr>
 </table>
 
-<% @flights = @pilot.flights.all(:order => 'takeoff_time DESC') %>
-<%= render :partial => 'flights/list', :locals => {
-              :options => { :hide_pilot => true } } %>
+<% @flights = @target.flights.all(:order => 'takeoff_time DESC') %>
+<%= render :partial => 'flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
 
 </div>
 <div id="pilot_edit_form_div" style="display: none"></div>

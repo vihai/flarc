@@ -1,7 +1,7 @@
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://gemcutter.org'
 
-gem 'rails', '3.0.0.beta3'
+gem 'rails', '>= 3.0.5'
 
 ## Bundle edge rails:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -26,9 +26,25 @@ gem 'pg'
 
 gem 'closure-compiler'
 gem 'yui-compressor'
-#gem 'jammit'
+gem 'jammit'
+
+gem 'wirble'
+gem 'thin'
+
+gem 'ym4r'
 
 gem 'scruffy'
 
-gem 'wirble'
 gem 'uuidtools'
+
+gem 'httpclient'
+
+gem 'geokit'
+
+gem 'runt'
+
+gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
+
+gem 'vihai-password', '>= 1.2.0', :git => 'https://github.com/vihai/vihai-password.git'
+
+#gem 'facebooker', :git => 'git://github.com/joren/facebooker.git', :branch => 'rails3'

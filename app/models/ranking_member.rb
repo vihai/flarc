@@ -1,4 +1,4 @@
-class RankingMember < ActiveRecord::Base
+class RankingMember < Ygg::BasicModel
   belongs_to :ranking
   belongs_to :pilot
 

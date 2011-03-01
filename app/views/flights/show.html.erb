@@ -1,13 +1,12 @@
 <div id="list_div" style="display: none"></div>
 <div id="info_div">
-<% if !session[:authenticated_identity].nil? &&
-       session[:authenticated_identity].is_admin then %>
+<% if authenticated_admin? %>
   <div class="edit_box">
   <%= link_to image_tag('action_edit.png', :alt => 'Edit...'),
-         edit_flight_path(@flight), :method => :get,
+         edit_flight_path(@target), :method => :get,
          :remote => true %>
   <%= link_to image_tag('action_delete.png', :alt => 'Delete...'),
-         flight_path(@flight),
+         flight_path(@target),
          :method => :delete,
          :confirm => 'Sei sicurisssimo?',
          :remote => true
@@ -22,78 +21,78 @@
   <tr>
     <th>Aliante</th>
     <td class="registration">
-        <%= link_to(@flight.plane.registration, @flight.plane) %> -
-        <%= link_to(@flight.plane.plane_type.name, @flight.plane.plane_type) %>
-        (handicap <%=h fmt_handicap(@flight.handicap) %>)
+        <%= link_to(@target.plane.registration, @target.plane) %> -
+        <%= link_to(@target.plane.plane_type.name, @target.plane.plane_type) %>
+        (handicap <%=h fmt_handicap(@target.handicap) %>)
     </td>
   </tr>
   <tr>
     <th>Pilota</th>
     <td class="pilot">
-        <%= link_to(@flight.pilot.person.name, @flight.pilot) %>
+        <%= link_to(@target.pilot.person.name, @target.pilot) %>
     </td>
   </tr>
   <tr>
     <th>Decollo</th>
     <td class="takoff">
-      <%=h l(@flight.takeoff_time) %>
+      <%=h l(@target.takeoff_time) %>
     </td>
   </tr>
   <tr>
     <th>Durata</th>
     <td class="duration">
-      <%=h fmt_duration(@flight.duration) %>
+      <%=h fmt_duration(@target.duration) %>
     </td>
   </tr>
-  <% if @flight.distance %>
+  <% if @target.distance %>
   <tr>
     <th>Distanza</th>
     <td class="distance">
-      <%=h fmt_distance_in_km(@flight.distance) %>
+      <%=h fmt_distance_in_km(@target.distance) %>
     </td>
   </tr>
   <% end %>
-  <% if @flight.points %>
+  <% if @target.points %>
   <tr>
     <th>Punteggio</th>
     <td class="points">
-      <%=h fmt_points(@flight.points) %>
+      <%=h fmt_points(@target.points) %>
     </td>
   </tr>
   <% end %>
-  <% if @flight.speed %>
+  <% if @target.speed %>
   <tr>
     <th>Velocità</th>
     <td class="speed">
-      <%=h @flight.speed %> km/h
+      <%=h @target.speed %> km/h
     </td>
   </tr>
   <% end %>
   <tr>
-    <th>Classifiche</th>
-    <td class="rankings">
-      <% @flight.ranking_flights.all.select { |x| x.status != '' }.each do |r| %>
+    <th>Tag</th>
+    <td class="tags">
+      <% @target.flight_tags.all.select { |x| x.status != '' }.each do |r| %>
         <%= status_icon(r.status) %>
-        <%= link_to(h(r.ranking.name), r.ranking) %><br />
+        <%= r.tag.name %><br />
       <% end %>
     </td>
   </tr>
-<% if @flight.has_igc_file? %>
+<% if @target.has_igc_file? %>
   <tr>
     <th>Scarica</th>
     <td>
       <%= link_to(image_tag('show_with_seeyou.jpg',
                       :alt => 'Logo SeeYou',
                       :title => 'Apri con SeeYou'),
-                 flight_path(@flight, :format => 'igc')) -%>
+                 flight_path(@target, :format => 'igc')) -%>
       <%= link_to(image_tag('show_with_google_earth.jpg',
                       :alt => 'Logo Google Earth',
                       :title => 'Apri con Google Earth'),
-                 flight_path(@flight, :format => 'kml')) -%>
+                 flight_path(@target, :format => 'kml')) -%>
       <%= link_to(image_tag('download_gpx.png',
                       :alt => 'Logo GPX',
                       :title => 'Scarica in formato GPX'),
-                 flight_path(@flight, :format => 'gpx')) -%>
+                 flight_path(@target, :format => 'gpx')) -%>
     </td>
   </tr>
 <% end %>
@@ -101,16 +100,15 @@
 </td>
 <td style="vertical-align: top">
 <div class="flight_photos_box">
-<% if !@flight.photos.empty? %>
-  <% @flight.photos.each do |photo| %>
+<% if !@target.photos.empty? %>
+  <% @target.photos.each do |photo| %>
     <%= link_to image_tag(photo.flickr_url('s')), photo.flickr_url('-'),
              :rel => 'lightbox[gallery]', :title => photo.caption, :rev => photo.url  %>
   <% end %>
   <br />
 <% end %>
-<% if !session[:authenticated_identity].nil? &&
-       session[:authenticated_identity].person.pilot == @flight.pilot %>
-  <% if @flight.photos.empty? %>
+<% if authenticated? && asgard_session.auth_person.pilot == @target.pilot %>
+  <% if @target.photos.empty? %>
     <%= link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url) %>
   <% else %>
     <%= link_to('Modifica fotografie', tag_photos_flight_url) %>
@@ -121,93 +119,118 @@
 </tr>
 </table>
 
-<% if @flight.encoded_polyline && @flight.encoded_polyline.size > 0 %>
-<script src="http://www.google.com/jsapi?key=<%= GMaps::ApiKey.get(:host => request.host) %>" type="text/javascript"></script>
+<% if @target.encoded_polyline && @target.encoded_polyline.size > 0 %>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>
+
 <div id="map_container" class="map_container" style="width: 100%; height: 500px;">
   <div id="map" class="map" style="width: 100%; height: 100%;"></div>
 </div>
 <%= javascript_tag do -%>
 
-google.load("maps", 2, {"other_params":"sensor=false"});
-
 Element.observe(window, 'load', function() {
-  var map;
 
-  if (!GBrowserIsCompatible())
-   { return; }
+  var map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 8,
+    center: google.maps.LatLng(0, 0),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+
+  var path = google.maps.geometry.encoding.decodePath("<%= @target.encoded_polyline %>");
+
+  var bounds = new google.maps.LatLngBounds();
+  for (var i = 0; i < path.length; i++) {
+    bounds.extend(path[i]);
+  }
+
+  poly = new google.maps.Polyline({
+    path: path,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  });
+
+  poly.setMap(map);
+
+  map.fitBounds(bounds);
+
+console.log("AAAAAAAAAAAAAAAAAAAA", google.maps);
 
   var logo = new google.maps.ScreenOverlay(
                   "<%= image_url("logo_acao_maps.png") %>",
                   new google.maps.ScreenPoint(15, 40, 'pixel', 'pixel'),
                   new google.maps.ScreenPoint(0, 0, 'fraction', 'fraction'),
                   new google.maps.ScreenSize(0,0));
+});
 
-  var base = new google.maps.Icon();
-  base.iconSize=new google.maps.Size(32,32);
-  base.shadowSize=new google.maps.Size(56,32);
-  base.iconAnchor=new google.maps.Point(16,32);
-  base.infoWindowAnchor=new google.maps.Point(16,0);
-          
-  var icon_alptherm = new google.maps.Icon(base,
-       "http://maps.google.com/mapfiles/kml/pal4/icon30.png", null,
-       "http://maps.google.com/mapfiles/kml/pal4/icon30s.png");
-  var icon_photo = new google.maps.Icon(base,
-       "http://maps.google.com/mapfiles/kml/pal4/icon46.png", null,
-       "http://maps.google.com/mapfiles/kml/pal4/icon46s.png");
 
-  var track = new google.maps.Polyline.fromEncoded({
-    color: "#FF0000",
-    weight: 3,
-    opacity: 0.6,
-    points: "<%= @flight.encoded_polyline %>",
-    levels: "BBB",
-    zoomFactor: 32,
-    numLevels: 4
-  });
-
-  var track_bounds = track.getBounds();
-
-  map = new google.maps.Map2(document.getElementById("map"));
-  map.setCenter(track_bounds.getCenter(), map.getBoundsZoomLevel(track_bounds), G_PHYSICAL_MAP);
-  map.setUIToDefault();
-  map.enableContinuousZoom();
-  map.enableGoogleBar();
-  map.addOverlay(logo);
-  map.addOverlay(track);
-
-  <% @flight.photos.each do |photo| %>
-   {
-    var marker;
-    marker = new google.maps.Marker(new google.maps.LatLng(<%=photo.lat %>, <%=photo.lon%>), icon_photo);
-
-    google.maps.Event.addListener(marker, "click", function() {
-    
-        this.openInfoWindowHtml('<div style="width: 240px; height: 240px; margin: 0; padding: 0"><%= link_to image_tag(photo.flickr_url('m')), photo.flickr_url('-'), :rel => "lightbox[gallery]", :title => photo.caption, :rev => photo.url %></div>', {maxWidth:640});
-    });
-
-    map.addOverlay(marker);
-   }
-  <% end %>
-
-  <% AlpthermSource.all.each do |source| %>
-    <% entry = source.entries.first(:conditions => [ 'taken_at::date = ?::date', @flight.takeoff_time ]) %>
-    <% next if entry.nil? %>
-   {
-    var marker;
-    marker = new google.maps.Marker(new google.maps.LatLng(<%=source.lat %>, <%=source.lon%>), icon_alptherm);
-
-    google.maps.Event.addListener(marker, "click", function() {
-        this.openInfoWindowHtml('<iframe style="width: 640px; height: 350px; margin: 0; padding: 0;" src="<%= alptherm_history_entry_path(entry) %>" />', {maxWidth:640});
-    });
-
-    map.addOverlay(marker);
-   }
-  <% end %>
-})
-
-Element.observe(window, 'unload', function() {
-  GUnload();
-})
+//
+//  var base = new google.maps.Icon();
+//  base.iconSize=new google.maps.Size(32,32);
+//  base.shadowSize=new google.maps.Size(56,32);
+//  base.iconAnchor=new google.maps.Point(16,32);
+//  base.infoWindowAnchor=new google.maps.Point(16,0);
+//          
+//  var icon_alptherm = new google.maps.Icon(base,
+//       "http://maps.google.com/mapfiles/kml/pal4/icon30.png", null,
+//       "http://maps.google.com/mapfiles/kml/pal4/icon30s.png");
+//  var icon_photo = new google.maps.Icon(base,
+//       "http://maps.google.com/mapfiles/kml/pal4/icon46.png", null,
+//       "http://maps.google.com/mapfiles/kml/pal4/icon46s.png");
+//
+//  var track = new google.maps.Polyline.fromEncoded({
+//    color: "#FF0000",
+//    weight: 3,
+//    opacity: 0.6,
+//    points: "<%= @target.encoded_polyline %>",
+//    levels: "BBB",
+//    zoomFactor: 32,
+//    numLevels: 4
+//  });
+//
+//  var track_bounds = track.getBounds();
+//
+//  map = new google.maps.Map2(document.getElementById("map"));
+//  map.setCenter(track_bounds.getCenter(), map.getBoundsZoomLevel(track_bounds), G_PHYSICAL_MAP);
+//  map.setUIToDefault();
+//  map.enableContinuousZoom();
+//  map.enableGoogleBar();
+//  map.addOverlay(logo);
+//  map.addOverlay(track);
+//
+//  <% @target.photos.each do |photo| %>
+//   {
+//    var marker;
+//    marker = new google.maps.Marker(new google.maps.LatLng(<%=photo.lat %>, <%=photo.lon%>), icon_photo);
+//
+//    google.maps.Event.addListener(marker, "click", function() {
+//    
+//        this.openInfoWindowHtml('<div style="width: 240px; height: 240px; margin: 0; padding: 0"><%= link_to image_tag(photo.flickr_url('m')), photo.flickr_url('-'), :rel => "lightbox[gallery]", :title => photo.caption, :rev => photo.url %></div>', {maxWidth:640});
+//    });
+//
+//    map.addOverlay(marker);
+//   }
+//  <% end %>
+//
+//  <% AlpthermSource.all.each do |source| %>
+//    <% entry = source.entries.first(:conditions => [ 'taken_at::date = ?::date', @target.takeoff_time ]) %>
+//    <% next if entry.nil? %>
+//   {
+//    var marker;
+//    marker = new google.maps.Marker(new google.maps.LatLng(<%=source.lat %>, <%=source.lon%>), icon_alptherm);
+//
+//    google.maps.Event.addListener(marker, "click", function() {
+//        this.openInfoWindowHtml('<iframe style="width: 640px; height: 350px; margin: 0; padding: 0;" src="<%= alptherm_history_entry_path(entry) %>" />', {maxWidth:640});
+//    });
+//
+//    map.addOverlay(marker);
+//   }
+//  <% end %>
+//})
+//
+//Element.observe(window, 'unload', function() {
+//  GUnload();
+//})
 <% end %>
 
 <% end %>

@@ -18,22 +18,18 @@
     <tr>
       <th>Campionati</th>
       <td>
-        <%
-          Championship.find(:all, :order => 'name ASC').each do |championship|
-            cp = @pilot.championship_pilots.find_by_championship_id(championship.id) ||
-                   ChampionshipPilot.new(:championship_id => championship.id, :pilot_id => @pilot.id)
-        %>
-        <% f.fields_for :championship_pilots, cp do |fc| %>
-          <%= check_box_tag "#{fc.object_name}[_subscribed]", '1', !cp.id.nil? %>
-          <%= fc.label "#{fc.object_name}[_subscribed]", championship.name %>
+        <% f.fields_for :championship_pilots, @championship_pilots do |fc| %>
+          <%= fc.hidden_field :championship_id %>
+          <%= fc.check_box :_subscribed %>
+          <%= fc.label :_subscribed, fc.object.championship.name %>
 
-          <% if fc.object.championship.driver == 'csvva_2010' %>
+          <% if fc.object.championship.driver == 'csvva_2009' ||
+                fc.object.championship.driver == 'csvva_2010' %>
             <%= fc.select :csvva_pilot_level,
-                          options_for_select({ 'Junior' => 'junior', 'Expert' => 'expert',
-                                               'Master' => 'master', 'SuperMaster' => 'supermaster' }) %>
+                          { 'Junior' => 'junior', 'Expert' => 'expert',
+                            'Master' => 'master', 'SuperMaster' => 'supermaster' } %>
           <% end %>
           <br />
-        <% end %>
         <% end %>
       </td>
     </tr>

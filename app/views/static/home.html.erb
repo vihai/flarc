@@ -1,0 +1,16 @@
+<%= render :partial => "rankings/csvva_2011/show",
+           :locals => {
+             :ranking => Ranking.find_by_symbol("csvva_junior_2011"),
+             :limit => 3 } %>
+<%= render :partial => "rankings/csvva_2011/show",
+           :locals => {
+             :ranking => Ranking.find_by_symbol("csvva_expert_2011"),
+             :limit => 3 } %>
+<%= render :partial => "rankings/csvva_2011/show",
+           :locals => {
+             :ranking => Ranking.find_by_symbol("csvva_master_2011"),
+             :limit => 3 } %>
+<%= render :partial => "rankings/csvva_2011/show",
+           :locals => {
+             :ranking => Ranking.find_by_symbol("csvva_supermaster_2011"),
+             :limit => 3 } %>

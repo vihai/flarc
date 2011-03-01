@@ -1,0 +1,1 @@
+../../vendor/plugins/core_models/db/migrate/20080918003300_create_core_log_entries.rb

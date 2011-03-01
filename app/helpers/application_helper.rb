@@ -1,7 +1,15 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def authenticated?
+    asgard_session && asgard_session.authenticated?
+  end
+
+  def authenticated_admin?
+    asgard_session && asgard_session.authenticated_admin?
+  end
+
   def fmt_points(pts)
-    pts ? (number_with_delimiter(pts.round) + ' pts') : 'N/A'
+    pts ? (number_with_delimiter(pts.round)) : 'N/A'
   end
 
   def fmt_distance_in_km(dist)

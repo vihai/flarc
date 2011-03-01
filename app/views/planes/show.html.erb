@@ -1,7 +1,6 @@
 <div id="plane_info_div">
 
-<% if !session[:authenticated_identity].nil? &&
-       session[:authenticated_identity].is_admin then %>
+<% if authenticated_admin? %>
   <div class="edit_box">
   <%= link_to image_tag(
          "action_edit.png", :alt => "Edit..."),
@@ -18,7 +17,7 @@
 
 <%= content_tag(:object, "",
                 :type => "image/svg+xml",
-                :data => stats_pilot_plane_url(:format => :svg),
+                :data => stats_by_pilot_flarc_plane_path(:format => :svg),
                 :width => "300px", :height => "200px",
                 :style => "float: right;") %>
 
@@ -26,20 +25,20 @@
   <tr>
     <th>Marche</th>
     <td class="registration">
-      <%= link_to @plane.registration, @plane %>
+      <%= link_to @target.registration, @target %>
     </td>
   </tr>
   <tr>
     <th>Tipo</th>
     <td class="type">
-      <%= link_to @plane.plane_type.name, @plane.plane_type %><br />
+      <%= link_to @target.plane_type.name, @target.plane_type %><br />
     </td>
   </tr>
- <% if !@plane.plane_type.configurations.empty? then %>
+ <% if !@target.plane_type.configurations.empty? then %>
   <tr>
     <th>Configurazioni</th>
     <td class="configurations">
-      <% for config in @plane.plane_type.configurations %>
+      <% for config in @target.plane_type.configurations %>
         <%=h config.name %> (handicap <%=h fmt_handicap(config.handicap) %>)<br />
       <% end %>
     </td>
@@ -48,15 +47,14 @@
   <tr>
     <th>Handicap</th>
     <td class="handicap">
-      <%=h fmt_handicap(@plane.plane_type.handicap) %>
+      <%=h fmt_handicap(@target.plane_type.handicap) %>
     </td>
   </tr>
 <% end %>
 </table>
 </div>
 
-<% @flights = @plane.flights.all(:order => "takeoff_time DESC") %>
-<%= render :partial => "flights/list", :locals => {
-              :options => { :hide_pilot => true } } %>
+<% @flights = @target.flights.all(:order => "takeoff_time DESC") %>
+<%= render :partial => 'flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
 
 <div id="plane_edit_form_div" style="display: none"></div>

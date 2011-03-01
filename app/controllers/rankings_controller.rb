@@ -3,7 +3,7 @@ class RankingsController < ApplicationController
   before_filter :find_object, :only => [ :show, :update, :destroy, :history ]
 
   def index
-    expires_in 1.hour, :public => true
+#    expires_in 1.hour, :public => true
 
     @rankings = Ranking.find(:all, :conditions => "official",
                                           :order => "priority ASC, name ASC")
@@ -12,7 +12,7 @@ class RankingsController < ApplicationController
   end
 
   def show
-    expires_in 1.hour, :public => true
+#    expires_in 1.hour, :public => true
     fresh_when :etag => @ranking, :last_modified => @ranking.updated_at.utc
   end
 

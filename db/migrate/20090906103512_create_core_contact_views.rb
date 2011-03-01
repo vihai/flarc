@@ -1,0 +1,1 @@
+../../vendor/plugins/core_models/db/migrate/20090906103512_create_core_contact_views.rb

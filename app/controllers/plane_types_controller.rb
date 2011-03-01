@@ -1,22 +1,6 @@
-class PlaneTypesController < ApplicationController
+class PlaneTypesController < RestController
 
-  before_filter :find_object, :only => [ :show, :update, :destroy, :edit ]
-
-  # GET /plane_types
-  def index
-    @plane_types = PlaneType.find(:all, :order => "name")
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
-  # GET /plane_types/1
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-    end
-  end
+  rest_controller_for Flarc::PlaneType
 
   # GET /plane_types/new
   def new

@@ -1,0 +1,1 @@
+../../vendor/plugins/core_models/db/migrate/20081003090233_create_core_contact_areas.rb

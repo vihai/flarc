@@ -1,7 +1,6 @@
 <div id="plane_type_info_div">
 
-<% if !session[:authenticated_identity].nil? &&
-       session[:authenticated_identity].is_admin then %>
+<% if authenticated_admin? then %>
   <div class="edit_box">
   <%= link_to image_tag(
          "action_edit.png", :alt => "Edit..."),
@@ -16,37 +15,37 @@
 <% end %>
 
 <table class="standard plane_type">
-  <caption><%=h @plane_type.name %></caption>
+  <caption><%=h @target.name %></caption>
   <tr>
     <th>Nome</th>
     <td class="name">
-      <%=h @plane_type.name %>
+      <%= @target.name %>
     </td>
   </tr>
   <tr>
     <th>Produttore</th>
     <td class="manufacturer">
-      <%= @plane_type.manufacturer %>
+      <%= @target.manufacturer %>
     </td>
   </tr>
   <tr>
     <th>Pagina WikiPedia</th>
     <td class="link_wp">
-      <%= link_to @plane_type.link_wp, @plane_type.link_wp %>
+      <%= link_to @target.link_wp, @target.link_wp %>
     </td>
   </tr>
   <tr>
     <th>Posti</th>
     <td class="seats">
-      <%= @plane_type.seats %>
+      <%= @target.seats %>
     </td>
   </tr>
- <% if !@plane_type.configurations.empty? then %>
+ <% if !@target.configurations.empty? then %>
   <tr>
     <th>Configurazioni</th>
     <td class="configurations">
-      <% for config in @plane_type.configurations %>
-        <%=h config.name %> (handicap <%=h fmt_handicap(config.handicap) %>)<br />
+      <% for config in @target.configurations %>
+        <%= config.name %> (handicap <%=h fmt_handicap(config.handicap) %>)<br />
       <% end %>
     </td>
   </tr>
@@ -54,7 +53,7 @@
   <tr>
     <th>Handicap</th>
     <td class="handicap">
-      <%=h fmt_handicap(@plane_type.handicap) %>
+      <%= fmt_handicap(@target.handicap) %>
     </td>
   </tr>
 <% end %>

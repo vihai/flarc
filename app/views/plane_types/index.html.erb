@@ -5,7 +5,7 @@
     <th>Handicap</th>
   </tr>
 
-<% for plane_type in @plane_types %>
+<% for plane_type in @targets %>
   <tr>
     <td><%= link_to plane_type.name, plane_type %></td>
     <td><%=h plane_type.seats %></td>

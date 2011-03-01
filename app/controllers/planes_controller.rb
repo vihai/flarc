@@ -1,20 +1,6 @@
-class PlanesController < ApplicationController
+class PlanesController < RestController
 
-  before_filter :find_object, :only => [ :show, :update, :destroy, :edit, :stats_pilot ]
-
-  def index
-    @planes = Plane.find(:all, :order => "registration")
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def show
-    respond_to do |format|
-      format.html
-    end
-  end
+  rest_controller_for Flarc::Plane
 
   def stats_pilot
     respond_to do |format|

@@ -1,6 +1,9 @@
-class RankingStanding < ActiveRecord::Base
+class RankingStanding < Ygg::BasicModel
   belongs_to :ranking
-  belongs_to :pilot
+
+  belongs_to :pilot,
+             :class_name => 'Flarc::Pilot'
+
   belongs_to :flight
 
   has_many :history_entries,

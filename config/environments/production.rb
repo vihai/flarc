@@ -1,4 +1,4 @@
-R3::Application.configure do
+Csvva::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # The production environment is meant for finished, "live" apps.
@@ -8,6 +8,15 @@ R3::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  # Specifies the header that your server uses for sending files
+  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+
+  # For nginx:
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
+
+  # If you have no front-end server that supports something like X-Sendfile,
+  # just comment this out and Rails will serve the files
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
@@ -30,6 +39,16 @@ R3::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation can not be found)
+  config.i18n.fallbacks = true
+
+  # Send deprecation notices to registered listeners
+  config.active_support.deprecation = :notify
+
+  config.fb_api_key = '83b6646aa51c340d9f3a9bb4b40e105b'
+  config.fb_secret_key = 'abbbba5dccf459257fc90f5777cea9f0'
 end
 
 EXPIRES=false
@@ -48,5 +67,5 @@ GOOGLE_MAPS_KEY = {
   "cir.fivv.it" => "ABQIAAAAVJLfFXWBxmyHNCyIIApsnxStT6R7z5BM687XreQduSirwLQwRhTGunUCZCE96hn81ADkhUx-tl266w"
 }
 
-FLIGHTS_STORAGE_DIR = File.join(RAILS_ROOT, "data", RAILS_ENV, "flights")
-FLIGHTS_TMP_DIR = File.join(RAILS_ROOT, "data", RAILS_ENV, "igc_tmp_files")
+FLIGHTS_STORAGE_DIR = File.join(Rails.root, "data", Rails.env, "flights")
+FLIGHTS_TMP_DIR = File.join(Rails.root, "data", Rails.env, "igc_tmp_files")

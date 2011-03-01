@@ -1,6 +1,6 @@
 <iframe id="upload_iframe" name="upload_iframe" style="display: none"></iframe>
 <% form_for :igc_tmp_file,
-             :url => igc_tmp_files_path,
+             :url => igc_tmp_files_path(:iframed => true),
              :html => { :multipart => true,
                         :id => 'upload_form',
                         :class => 'standard',

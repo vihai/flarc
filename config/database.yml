@@ -21,7 +21,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: csvva
+  database: flarc
   username:
   password:
 

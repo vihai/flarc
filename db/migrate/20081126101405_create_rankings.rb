@@ -15,31 +15,6 @@ class CreateRankings < ActiveRecord::Migration
 
     add_index :rankings, :symbol
 
-    create_table :ranking_members do |t|
-      t.timestamps
-      t.references :ranking
-      t.references :pilot
-      t.integer :position
-      t.float :value
-      t.text :data
-    end
-
-    add_index :ranking_members, :ranking_id
-    add_index :ranking_members, :pilot_id
-    add_index :ranking_members, :position
-    add_index :ranking_members, [ :ranking_id, :pilot_id ], :unique => true
-
-    create_table :ranking_flights do |t|
-      t.timestamps
-      t.references :ranking
-      t.references :flight
-      t.string :status, :limit => 8
-    end
-
-    add_index :ranking_flights, :ranking_id
-    add_index :ranking_flights, :flight_id
-    add_index :ranking_flights, [ :ranking_id, :flight_id ], :unique => true
-
     create_table :ranking_groups do |t|
       t.timestamps
       t.string :name
@@ -54,13 +29,27 @@ class CreateRankings < ActiveRecord::Migration
       t.references :championship
       t.references :pilot
     end
+
+    create_table :ranking_standings do |t|
+      t.timestamps
+      t.references :ranking, :null => false
+      t.references :pilot, :null => false
+      t.references :flight
+      t.integer :position
+      t.float :value
+      t.text :data
+    end
+    add_index :ranking_standings, [ :ranking_id, :pilot_id ], :unique => true
+    add_index :ranking_standings, :ranking_id
+    add_index :ranking_standings, :pilot_id
+    add_index :ranking_standings, :flight_id
+
+    add_index :championship_pilots, [ :championship_id, :pilot_id], :unique => true
   end
 
   def self.down
     drop_table :championship_pilots
     drop_table :championships
-    drop_table :ranking_flights
-    drop_table :ranking_members
     drop_table :rankings
   end
 end

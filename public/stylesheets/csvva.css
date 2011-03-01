@@ -5,7 +5,7 @@ body
  margin: 0;
  padding: 0;
  font-family: verdana, arial, helvetica, sans-serif;
- font-size: 4mm;
+ font-size: 10pt;
  height: 100%;
 }
 
@@ -100,6 +100,7 @@ div#menu div.userdata
  padding: 0.5em;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
 
@@ -119,6 +120,7 @@ div.errorExplanation
  padding: 1em;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
 div.autocomplete {
@@ -152,6 +154,7 @@ div.map_container
  padding: 5px;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
 div.flight_photos_box
@@ -161,6 +164,7 @@ div.flight_photos_box
  padding: 5px;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
 table.standard
@@ -170,6 +174,7 @@ table.standard
  padding: 5px;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 } 
 table.standard > caption {  } 
 table.standard > tbody > tr { background-color: #ddd; }
@@ -186,6 +191,7 @@ table.ranking > caption
 {
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 } 
 
 table.ranking > caption > span.generated_at
@@ -241,6 +247,12 @@ table.junior > caption { background-color: #cfc; }
 table.expert > caption { background-color: #ccf; }
 table.master > caption { background-color: #fcc; }
 
+table.flight_calendar
+{
+ display: inline-block;
+ vertical-align: top;
+}
+
 table.flight_calendar > tbody > tr > td
 {
  vertical-align: top;
@@ -294,6 +306,7 @@ div.edit_box
  padding: 1em;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
  float: right;
  clear: none;
 }
@@ -317,6 +330,7 @@ div.menulogin
  padding: 1em;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
 div.menulogin input
@@ -332,6 +346,7 @@ form.standard
  padding: 1em;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
 form#send_flight_form
@@ -353,14 +368,15 @@ div#photo_geotagging_select_div
  padding: 1em;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
 }
 
-img.ranking_icon_pending
+img.tag_icon_pending
 {
  opacity: 0.5;
 }
 
-img.ranking_icon_invalid
+img.tag_icon_invalid
 {
  background-color: #f77;
 }

@@ -1,6 +1,6 @@
-class Championship < ActiveRecord::Base
+class Championship < Ygg::PublicModel
   has_many :members,
-           :class_name => "ChampionshipPilot"
+           :class_name => 'ChampionshipPilot'
   has_many :pilots, :through => :members
 
   has_many :rankings

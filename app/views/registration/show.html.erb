@@ -1,0 +1,31 @@
+<div id="registration_div">
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <table>
+    <tr>
+      <th><%= label_tag :first_name, 'Nome' %></th>
+      <td><%= text_field_tag :first_name %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag :last_name, 'Cognome' %></th>
+      <td><%= text_field_tag :last_name %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag :email, 'e-Mail' %></th>
+      <td><%= text_field_tag :email %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag :club_id, 'Club' %></th>
+      <td><%= select_tag :club_id,
+                      options_for_select(Club.find(:all,
+                                 :order => 'clubs.name ASC').collect { |c|
+                                   [ c.name, c.id ] }) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2>
+        <%= submit_tag 'Invia' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>
+<div>

@@ -1,13 +1,47 @@
 require 'flickraw_vihai'
 
-class FlightsController < ApplicationController
+class FlightsController < RestController
 
-  before_filter :find_object, :only => [ :show, :update, :destroy, :edit, :show_map,
-                                         :tag_photos, :tag_photos_ajax, :do_tag_photos ]
+  rest_controller_for Flarc::Flight
+
+  def flight_search_conditions
+    conditions = {}
+
+    if params[:year] then
+      day_beg = Time.local(params[:year], params[:month], params[:day])
+
+      if params[:day] then
+         day_end = day_beg + 1.days
+      elsif params[:month] then
+         day_end = day_beg + 1.month
+      else
+         day_end = day_beg + 1.year
+      end
+
+      conditions[:takeoff_time] = day_beg...day_end
+    end
+
+    conditions
+  end
+
+  def find_targets
+    @targets_relation = model.scoped.where(flight_search_conditions)
+
+    super
+  end
+
+
+
+
+
+
+
+
+
 
   def autocomplete_passenger
 
-    @items = Hel::Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
+    @items = Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
                        params['flight']['passenger'].downcase + '%',
                        params['flight']['passenger'].downcase + '%' ]).
                          order('last_name ASC, first_name ASC').
@@ -24,25 +58,11 @@ class FlightsController < ApplicationController
     render :inline => "<%= auto_complete_result @items, 'registration' %>"
   end
 
-  # GET /flights
-  def index
-#    expires_in 1.hour, :public => true if EXPIRES
-
-    find_flights
-
-    if params[:calendar]
-      return calendar
-    end
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
   def calendar
 #    expires_in 1.hour, :public => true if EXPIRES
 
-    find_flights
+    find_targets
+    @flights = @targets
 
     @dates = {}
     @flights.select('takeoff_time::date AS takeoff_time, count(*) AS cnt').
@@ -52,83 +72,56 @@ class FlightsController < ApplicationController
       @dates[x.takeoff_time.year][x.takeoff_time.month] ||= {}
       @dates[x.takeoff_time.year][x.takeoff_time.month][x.takeoff_time.day] = x
     end
+  end
+
+  def show
+##    expires_in 1.hour, :private => @target.private if EXPIRES
+
+    if stale?(:etag => @target, :last_modified => @target.updated_at.utc)
+      respond_to do |format|
+        format.html # show.html.erb
+
+        format.igc { serve_igc_file(@target) }
+        format.gpx {
+          if !@target.has_igc_file?
+            render_optional_error_file :not_found
+            return
+          end
+          render :layout => false }
+        format.kml {
+          if !@target.has_igc_file?
+            render_optional_error_file :not_found
+            return
+          end
+          render :layout => false }
+      end
+    end
+  end
+
+  def new
+    @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
+
+    @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
+    @igc_file.read_contents
+
+    @flight = Flarc::Flight.new(params['flight'])
+    @flight.update_from_igcfile(@igc_file, @igc_tmp_file.original_filename)
+
+    @flight.pilot ||= auth_person.pilot
+
+    prepare_form_tags
 
     respond_to do |format|
       format.html
     end
   end
 
-  def show
-    expires_in 1.hour, :private => @flight.private if EXPIRES
-
-    if stale?(:etag => @flight, :last_modified => @flight.updated_at.utc)
-      respond_to do |format|
-        format.html # show.html.erb
-
-        format.igc { serve_igc_file(@flight) }
-        format.gpx {
-          if !@flight.has_igc_file?
-            render_optional_error_file :not_found
-            return
-          end
-          render :layout => false }
-        format.kml {
-          if !@flight.has_igc_file?
-            render_optional_error_file :not_found
-            return
-          end
-          render :layout => false }
-      end
-    end
-  end
-
-class AbortTransaction < StandardError
-end
-
-  def new
-    @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
-
-    @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
-    @igc_file.read_contents { }
-
-    @flight = Flight.new(params['flight'])
-    @flight.update_from_igcfile(@igc_file, @igc_tmp_file.original_filename)
-
-    @flight.pilot ||= session[:authenticated_identity].person.pilot
-
-    begin
-
-      Flight.transaction do
-        if @flight.pilot
-          @flight.ranking_flights = @flight.pilot.championships.all.collect { |x|
-            x.rankings.all(:order => 'name').collect { |y|
-              RankingFlight.new(:ranking => y, :flight => @flight, :status => nil) } }.flatten
-         end
-
-      respond_to do |format|
-        format.html
-      end
-
-        raise AbortTransaction # workaround for ActiveRecord idiocy, the previous statement acts on db without save!
-      end
-    rescue AbortTransaction
-    end
-  end
-
   def new_pilot_changed
-    @flight = params[:flight_id] ? Flight.find(params[:flight_id]) : @flight = Flight.new
+    @flight = params[:flight_id] ? Flarc::Flight.find(params[:flight_id]) : @flight = Flarc::Flight.new
 
-    begin
-      Flight.transaction do
-        @flight.pilot = Pilot.find(params[:pilot_id])
+    @flight.pilot = Pilot.find(params[:pilot_id])
 
-        if @flight.new_record?
-          @flight.ranking_flights = @flight.pilot.championships.all.collect { |x|
-            x.rankings.all(:order => 'name').collect { |y|
-              RankingFlight.new(:ranking => y, :flight => @flight, :status => nil) } }.flatten
-        else
-          @flight.rankings = @flight.pilot.championships.all.collect { |x| x.rankings.all(:order => 'name') }.flatten
-        end
+    prepare_form_tags
 
     render :update do |page|
       page.replace 'flight_plane_id',
@@ -138,16 +131,10 @@ end
       page.replace 'approvals_table',
                         :partial => 'new_update_approvals'
     end
-
-        raise AbortTransaction # workaround for ActiveRecord idiocy, the previous statement acts on db without save!
-      end
-    rescue AbortTransaction
-    end
-
   end
 
   def new_plane_changed
-    @flight = params[:id] ? Flight.find(params[:id]) : @flight = Flight.new
+    @flight = params[:id] ? Flarc::Flight.find(params[:id]) : @flight = Flarc::Flight.new
     @flight.plane = Plane .find(params[:plane_id])
 
     render :update do |page|
@@ -164,7 +151,7 @@ end
   # GET /flights/1/edit
   def edit
 
-    @flight.rankings = @flight.pilot.championships.all.collect { |x| x.rankings.all(:order => 'name') }.flatten
+    prepare_form_tags
 
     respond_to do |format|
       format.js {
@@ -184,21 +171,28 @@ end
 
   # POST /flights
   def create
-    params[:flight][:passenger] = Hel::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
+    params[:flight][:passenger] = Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
                                                     'last_name ILIKE ?', params[:flight][:passenger_name] ] ).first
     params[:flight][:distance] = params[:flight][:distance].to_f * 1000.0;
 
-    Flight.transaction do
-      @flight = Flight.new(params[:flight])
+    if params[:flight][:flight_tags_attributes]
+      params[:flight][:flight_tags_attributes].delete_if { |k,v| v[:status].empty? }
+    end
+
+    Flarc::Flight.transaction do
+      @flight = Flarc::Flight.new
 
       igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file][:id])
 
-#      igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
-#      igc_file.read_contents {}
-#      @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
+      igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
+      igc_file.read_contents {}
+      @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
+
+      @flight.update_attributes(params[:flight])
 
       respond_to do |format|
-        if @flight.save
+# FIXME disabled validations because of rails3 bug
+        if @flight.save(false)
           File.rename(igc_tmp_file.filename, @flight.igc_file_path)
           igc_tmp_file.destroy
 
@@ -215,16 +209,28 @@ end
 
   # PUT /flights/1
   def update
-    params[:flight][:passenger] = Hel::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || last_name ILIKE ?", params[:flight][:passenger_name] ] ).first
+    params[:flight][:passenger] = Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || last_name ILIKE ?", params[:flight][:passenger_name] ] ).first
     params[:flight][:distance] = params[:flight][:distance].to_f * 1000.0;
 
-#    @flight.ranking_flights.each { |x| x.destroy if x.status.blank? }
+    params[:flight][:flight_tags_attributes].each { |k,v|
+       v[:_destroy] = v[:status].empty?
+    }
 
-    respond_to do |format|
-      if @flight.update_attributes(params[:flight])
-        flash[:notice] = 'Flight was successfully updated.'
+    update_successful = @flight.update_attributes(params[:flight])
+
+    if update_successful
+      flash[:notice] = 'Flight was successfully updated.'
+
+      if params[:publish_to_facebook]
+        facebook_user.session.post 'facebook.stream.publish',
+              :message => "#{facebook_user.name} ha fatto un volo di #{(@flight.distance/1000.0).round} km."
+      end
+
+      respond_to do |format|
         format.html { redirect_to(flight_url(@flight, :ignore_cache => rand(1000000))) }
-      else
+      end
+    else
+      respond_to do |format|
         format.html { render :action => 'edit' }
       end
     end
@@ -245,8 +251,7 @@ end
   end
 
   def tag_photos
-    if session[:authenticated_identity].nil? ||
-       session[:authenticated_identity].person.pilot != @flight.pilot
+    if !authenticated? || auth_person.pilot != @flight.pilot
       render :text => 'You are not authorized to access this section', :status => 403
       return
     end
@@ -277,8 +282,7 @@ end
   end
 
   def tag_photos_ajax
-    if session[:authenticated_identity].nil? ||
-       session[:authenticated_identity].person.pilot != @flight.pilot
+    if !authenticated? || auth_person.pilot != @flight.pilot
       render :text => 'You are not authorized to access this section', :status => 403
       return
     end
@@ -301,8 +305,7 @@ end
   end
 
   def do_tag_photos
-    if session[:authenticated_identity].nil? ||
-       session[:authenticated_identity].person.pilot != @flight.pilot
+    if !authenticated? || auth_person.pilot != @flight.pilot
       render :text => 'You are not authorized to access this section', :status => 403
       return
     end
@@ -386,43 +389,6 @@ end
 
   protected
   
-  def find_object
-    @flight = Flight.find(params[:id])
-  end
-
-  def find_flights
-
-    @flights = Flight.where(flight_search_conditions(params)).
-                     order('takeoff_time ASC').
-                     limit(100)
-
-    if params[:pending]
-      @flights = @flights.pending
-    end
-  end
-
-  def flight_search_conditions(params)
-    conditions = {}
-
-    if params[:year] then
-      day_beg = Time.local(params[:year], params[:month], params[:day])
-
-      if params[:day] then
-         day_end = day_beg + 1.days
-      elsif params[:month] then
-         day_end = day_beg + 1.month
-      else
-         day_end = day_beg + 1.year
-      end
-
-      conditions[:takeoff_time] = day_beg...day_end
-    end
-
-    conditions[:pilot_id] = params[:pilot_id] if params[:pilot_id]
-
-    return conditions
-  end
-
   def serve_igc_file(flight)
     if !flight.has_igc_file?
       render_optional_error_file :not_found
@@ -437,4 +403,9 @@ end
           :disposition => 'inline'
   end
 
+  def prepare_form_tags
+    @flight_tags = @flight.flight_tags |
+                       Tag.joins(:depends_on_championship => :pilots).where('pilots.id' => @flight.pilot.id).all.
+                       collect { |x| Flarc::FlightTag.new(:flight => @flight, :tag => x, :status => nil) }
+  end
 end

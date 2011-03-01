@@ -1,25 +1,15 @@
-
-<% if !@pilots.empty? then %>
+<% if !@targets.empty? then %>
   <table class="standard pilots">
     <caption>Piloti</caption>
     <tr>
       <th>Nome</th>
-<!--      <th>Classifiche</th>-->
     </tr>
-    <% for x in @pilots do %>
+    <% for x in @targets do %>
     <tr>
       <td class="name">
         <%= link_to(x.person.name, x) %>
-      </td>
-      <td class="rankings">
-        <% x.championships.each do |y| %>
-          <%= link_to((y.icon ?
-                 image_tag(y.icon, :alt => y.name, :title => y.name) :
-                 y.name), y) %>
-        <% end %>
       </td>
     </tr>
     <% end %>
   </table>
 <% end %>
-

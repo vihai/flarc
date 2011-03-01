@@ -2,12 +2,6 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-R3::Application.initialize!
+Csvva::Application.initialize!
 
-Hel::Person
-::Pilot
-
-class Hel::Person
-  has_one :pilot, :class_name => "::Pilot"
-end
-
+Csvva::Application.config.middleware.swap ActionDispatch::ShowExceptions, Ygg::Asgard::ExtjsShowExceptions, Csvva::Application.config.consider_all_requests_local

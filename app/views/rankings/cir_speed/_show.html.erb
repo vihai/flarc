@@ -1,11 +1,9 @@
-<% # encoding: utf-8 %>
-
 <% limit ||= nil %>
 <% if !ranking.standings.empty? then %>
   <table class="standard ranking cir_speed">
     <caption style="background-color: #<%=h ranking.color %>">
       Tentativi di record <%=h ranking[:name] %><br />
-      <span class="generated_at">(aggiornata al <%=h l(ranking.generated_at, :format => :short) %>)</span>
+      <span class="generated_at">(aggiornata al <%= l(ranking.generated_at, :format => :short) %>)</span>
     </caption>
     <tr>
       <th>#</th>

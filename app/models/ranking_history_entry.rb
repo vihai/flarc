@@ -1,6 +1,4 @@
-class RankingHistoryEntry < ActiveRecord::Base
-  belongs_to :pilot
-
+class RankingHistoryEntry < Ygg::BasicModel
   belongs_to :ranking_standing
 
   serialize :data

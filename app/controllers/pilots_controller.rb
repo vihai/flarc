@@ -1,21 +1,10 @@
 
-class PilotsController < ApplicationController
+class PilotsController < RestController
 
-  before_filter :find_object, :only => [ :show, :update, :destroy, :edit, :stats_plane ]
+  rest_controller_for Flarc::Pilot
 
-  def index
-    @pilots = Pilot.find(:all, :joins => :person,
-                         :order => 'last_name ASC, first_name ASC')
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-  def show
-    respond_to do |format|
-      format.html
-    end
+  attribute :championships do
+    included
   end
 
   def stats_plane
@@ -44,6 +33,14 @@ class PilotsController < ApplicationController
   end
 
   def edit
+    @pilot.championship_pilots.each { |x| x._subscribed = true }
+    @championship_pilots = @pilot.championship_pilots |
+                                  Championship.all.
+                                   collect { |x| ChampionshipPilot.new(:pilot_id => @pilot.id, :championship_id => x.id,
+                                                                       :_subscribed => false) }
+
+@championship_pilots.each { |x| puts "BBBBBBBBBB #{x.pilot_id} #{x.championship_id}" }
+
     respond_to do |format|
       format.js {
         render :update do |page|
@@ -51,11 +48,9 @@ class PilotsController < ApplicationController
           page.visual_effect :fade, 'pilot_info_div', :duration => 0.5, :queue => 'end'
           page.visual_effect :appear, 'pilot_edit_form_div', :duration => 0.5, :queue => 'end'
         end
+      }
 
-      }
-      format.html {
-        render :partial => 'form', :object => @pilot
-      }
+      format.html { render :partial => 'form', :object => @pilot }
     end
   end
 
@@ -80,8 +75,8 @@ class PilotsController < ApplicationController
   def update
 
     params[:pilot][:championship_pilots_attributes].each do |k,v|
-      v[:_destroy] = !v[:_subscribed]
-      v.delete(:_subscribed)
+      v[:_destroy] = v[:_subscribed] == '0'
+      v.delete :_subscribed
     end
 
     respond_to do |format|

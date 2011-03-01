@@ -1,6 +1,17 @@
 <%= form_for(@flight,
             :html => { :class => 'standard' }) do |f| -%>
 
+  <% if @flight.errors.any? %>
+  <div id="errorExplanation">
+    <h2>Errori:</h2>
+    <ul>
+    <% @flight.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
   <% if @igc_tmp_file %>
     <%= fields_for @igc_tmp_file do |f2| %>
       <%= f2.hidden_field :id %>
@@ -10,7 +21,6 @@
   <%= f.hidden_field :takeoff_time %>
   <%= f.hidden_field :landing_time %>
 
-  <%= f.error_messages %>
   <table>
     <tr>
       <th><%= f.label :pilot_id, 'Pilota' %></th>
@@ -76,8 +86,14 @@ var pass_ac = new Ajax.Autocompleter('passenger_input', 'passenger_autocomplete'
       <th><%= f.label :notes_private, 'Note (private)' %></th>
       <td><%= f.text_area :notes_private, :cols => 80, :rows => 10 %></td>
     </tr>
+    <% if facebook_uid && @flight.pilot.person == auth_person %>
     <tr>
-      <th>Classifiche</th>
+      <th><%= label_tag :publish_to_facebook, 'Pubblica su Facebook' %></th>
+      <td><%= check_box_tag :publish_to_facebook %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <th>Tag</th>
       <td>
         <%= render :partial => 'new_update_approvals' %>
       </td>

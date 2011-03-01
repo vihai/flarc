@@ -1,0 +1,1 @@
+../../vendor/plugins/core_models/db/migrate/20080918003401_create_core_credentials.rb
