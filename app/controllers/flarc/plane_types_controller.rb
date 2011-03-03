@@ -1,3 +1,5 @@
+module Flarc
+
 class PlaneTypesController < RestController
 
   rest_controller_for Flarc::PlaneType
@@ -67,4 +69,6 @@ class PlaneTypesController < RestController
   def find_object
     @plane_type = PlaneType.find(params[:id])
   end
+end
+
 end

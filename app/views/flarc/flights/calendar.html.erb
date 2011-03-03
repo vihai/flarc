@@ -7,6 +7,10 @@
   </div>
 <% end %>
 
+<% if @dates.empty? %>
+<h1>Nessun volo trovato</h1>
+<% end %>
+
 <% @dates.sort.each do |x|  %>
 <%  year = x[0] %>
 <%  months = x[1] %>

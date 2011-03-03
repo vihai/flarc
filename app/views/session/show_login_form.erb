@@ -1,16 +1,16 @@
-<%= form_tag '', { :class => "standard", :method => :post } do |f| -%>
+<%= form_tag '', { :class => 'standard', :method => :post } do |f| -%>
   <table>
     <tr>
-      <th><%= label_tag :email, "e-Mail" %></th>
+      <th><%= label_tag :email, 'e-Mail' %></th>
       <td><%= text_field_tag :email %></td>
     </tr>
     <tr>
-      <th><%= label_tag :password, "Password" %></th>
+      <th><%= label_tag :password, 'Password' %></th>
       <td><%= password_field_tag :password %></td>
     </tr>
     <tr>
       <td colspan=2>
-        <%= submit_tag "Invia" %>
+        <%= submit_tag 'Invia' %>
       </td>
     </tr>
   </table>

@@ -84,6 +84,9 @@ it:
       default: "%a %d %b %Y, %H:%M:%S %z"
       short: "%d %b %H:%M"
       long: "%d %B %Y %H:%M"
+      compact: "%d-%m-%Y %H:%M"
+      dateonly: "%d-%m-%Y"
+      timeonly: "%H:%M"
           
     am: 'am'
     pm: 'pm'

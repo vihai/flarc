@@ -48,13 +48,6 @@ Csvva::Application.routes.draw do
 
   aresources :alptherm_history_entry
 
-  get 'session/login' => 'session#show_login_form'
-
-  post 'session/login' => 'session#authenticate',
-         :as => :session_login
-
-  match 'session/logout' => 'session#logout'
-
   get  'registration' => 'registration#show', :as => :registration
   post 'registration' => 'registration#register'
   post 'registration/login_and_associate' => 'registration#login_and_associate'

@@ -1,5 +1,7 @@
 require 'flickraw_vihai'
 
+module Flarc
+
 class FlightsController < RestController
 
   rest_controller_for Flarc::Flight
@@ -408,4 +410,6 @@ class FlightsController < RestController
                        Tag.joins(:depends_on_championship => :pilots).where('pilots.id' => @flight.pilot.id).all.
                        collect { |x| Flarc::FlightTag.new(:flight => @flight, :tag => x, :status => nil) }
   end
+end
+
 end

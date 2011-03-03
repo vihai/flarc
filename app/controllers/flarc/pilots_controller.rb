@@ -1,4 +1,6 @@
 
+module Flarc
+
 class PilotsController < RestController
 
   rest_controller_for Flarc::Pilot
@@ -106,5 +108,7 @@ protected
   def find_object
     @pilot = Pilot.find(params[:id])
   end
+
+end
 
 end

@@ -16,7 +16,7 @@
     <tr>
       <th><%= label_tag :club_id, 'Club' %></th>
       <td><%= select_tag :club_id,
-                      options_for_select(Club.find(:all,
+                      options_for_select(Flarc::Club.find(:all,
                                  :order => 'clubs.name ASC').collect { |c|
                                    [ c.name, c.id ] }) %>
       </td>
