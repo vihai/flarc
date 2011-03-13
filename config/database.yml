@@ -3,7 +3,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: csvva_devel
+  database: flarc_devel
   username:
   password:
 
@@ -13,7 +13,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: csvva_test
+  database: flarc_test
   username:
   password:
 

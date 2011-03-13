@@ -1,4 +1,4 @@
-Csvva::Application.configure do
+Flarc::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # In the development environment your application's code is reloaded on
@@ -28,12 +28,6 @@ EXPIRES=false
 
 FLICKR_API_KEY = "54d361a1e6542e2c8047c23a926bda5f"
 FLICKR_SHARED_KEY = "c10b52eb00197665"
-
-LAYOUTS = {
-  "csvva.orlandi.com" => "csvva",
-  "cir.orlandi.com" => "cir",
-  "cir.fivv.it" => "cir"
-}
 
 GOOGLE_MAPS_KEY = {
   "csvva.orlandi.com" => "ABQIAAAAVJLfFXWBxmyHNCyIIApsnxSc2yIvQoNUWDuSwbldoVMAKYyAbxTszy7ZWfIeC7-Gq8AF07pCq9le4A",

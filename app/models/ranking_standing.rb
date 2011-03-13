@@ -2,7 +2,7 @@ class RankingStanding < Ygg::BasicModel
   belongs_to :ranking
 
   belongs_to :pilot,
-             :class_name => 'Flarc::Pilot'
+             :class_name => 'Pilot'
 
   belongs_to :flight
 

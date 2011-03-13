@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :load_session
 
+  layout :select_proper_layout
+
+  def select_proper_layout
+    return LAYOUTS[request.host]
+  end
+
 #  protect_from_forgery
   
   attr_accessor :asgard_session
@@ -20,7 +26,8 @@ class ApplicationController < ActionController::Base
   end
 
   def auth_person
-    asgard_session ? Flarc::Person.find(asgard_session.auth_identity.person_id) : nil
+
+    asgard_session ? asgard_session.auth_identity.person : nil
   end
 
   def load_session
@@ -28,7 +35,7 @@ class ApplicationController < ActionController::Base
     @asgard_session ||= Ygg::Core::HttpSession.find_by_uuid(request.cookies['X-Ygg-Session-Id'])
 
     if @asgard_session
-      fb_cookie = cookies["fbs_#{Csvva::Application.config.fb_api_key}"]
+      fb_cookie = cookies["fbs_#{Flarc::Application.config.fb_api_key}"]
       @facebook_session = fb_cookie ? CGI.parse(fb_cookie).symbolize_keys! : nil
 
       if @facebook_session && !@asgard_session.authenticated?

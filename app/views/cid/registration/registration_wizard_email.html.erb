@@ -1,0 +1,21 @@
+<p>
+  Per partecipare al Campionato Italiano di Distanza è necessaria una piccola registrazione, ti verrà inviata un'e-mail
+  all'indirizzo specificato con la password.
+</p>
+
+<div id="registration_div">
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :email, 'e-Mail' %></th>
+      <td><%= text_field_tag :email %></td>
+    </tr>
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>
+<div>

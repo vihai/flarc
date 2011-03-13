@@ -57,7 +57,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_csvva_session',
+    :session_key => '_flarc_session',
     :secret      => '6e24a223bf450987d67c6573b403766ee2755069ff76c339a9cd60f82b4492e061814261088d1f8f1394fa0bda69a2cbae328a3037544349dbaae1f30e922e5a'
   }
 

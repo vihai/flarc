@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>Campionato CSVVA</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <%= raw include_stylesheets :csvva, :media => 'all' %>
+  <%= raw include_javascripts :csvva %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<div id="fb-root">
+  <%= javascript_include_tag 'http://connect.facebook.net/en_US/all.js' %>
+</div>
+<script>
+
+
+//  window.fbAsyncInit = function() {
+//    FB.init({appId: '<%="#{Flarc::Application.config.fb_api_key}"%>', status: true, cookie: true, xfbml: true});
+//
+//    FB.Event.subscribe('auth.sessionChange', function(response) {
+//      if (response.session) {
+//        // A user has logged in, and a new cookie has been saved
+//        //alert("sessionChange + session");
+//        window.location = '<%="#{ENV['FACEBOOK_AUTHENTICATE_LOCATION']}"%>';
+//      } else {
+//        // alert("sessionChange - session");
+//        // The user has logged out, and the cookie has been cleared
+//      }
+//    });
+//
+//    FB.Event.subscribe('auth.statusChange', function(response) {
+//    });
+//
+//    FB.Event.subscribe('auth.login', function(response) {
+//        // alert("login");
+//    });
+//
+//    FB.Event.subscribe('auth.logout', function(response) {
+//        //alert("logout");
+//        window.reload();
+//    });
+//
+//  };
+</script>
+
+<div class="header">
+  <div class="header_text">
+    Campionato di Distanza CSVVA 2011
+  </div>
+  <div class="header_right_text">
+    <% flights = Flight.joins(:flight_tags).joins(:tags).where('tags.symbol' => 'csvva_2011') %>
+    <strong><%= flights.count %></strong> voli<br />
+    <strong><%= fmt_distance_in_km(flights.sum(:distance).to_i)  %></strong>
+  </div>
+</div>
+
+<div id="menu">
+<ul>
+
+  <li>
+    Principale<br />
+    <ul>
+      <li><%= link_to('Home', root_path) %></li>
+      <li><%= link_to('Regolamento', 'http://www.acao.it/download/doc_download/155-regolamento-campionato-csvva-2011.html') %></li>
+      <li><%= link_to('Contatti', static_path('contacts')) %></li>
+      <li><%= link_to('Campionati precedenti', championships_path) %></li>
+    </ul>
+  </li>
+  <li>
+    Classifiche
+    <ul>
+      <li><%= link_to('Junior', ranking_path('csvva_junior_2011')) %></li>
+      <li><%= link_to('Expert', ranking_path('csvva_expert_2011')) %></li>
+      <li><%= link_to('Master', ranking_path('csvva_master_2011')) %></li>
+      <li><%= link_to('SuperMaster', ranking_path('csvva_supermaster_2011')) %></li>
+      <li><%= link_to('Trofeo Tamborini', ranking_path('csvva_tt_2011')) %></li>
+    </ul>
+  </li>
+  <li>Elenchi
+    <ul>
+      <li><%= link_to('Voli', calendar_flights_path(:year => Time.now.year)) %></li>
+      <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'csvva_2011')) %></li>
+      <li><%= link_to('Alianti', planes_path) %></li>
+    </ul>
+  </li>
+  <li>
+    <% if !asgard_session || !asgard_session.authenticated? %>
+      <div class="menulogin">
+        <%= link_to('Registrati', csvva_registration_path) %><br />
+        <%= link_to_function('Login') do |page|
+              page[:login_div].toggle 'fade', {}, 1000
+            end %><br />
+        <br />
+        <div id="login_div" style="display: none; float: left;">
+          <%= form_tag ygg_asgard_session_authenticate_by_fqda_and_password_path,
+                         { :id => 'login-form', :onSubmit => 'aaa(); return false;', :class => 'standard', :method => :post } do |f| -%>
+            <table>
+              <tr>
+                <th><%= label_tag :username, 'e-Mail' %></th>
+                <td><%= text_field_tag :username %></td>
+              </tr>
+              <tr>
+                <th><%= label_tag :password, 'Password' %></th>
+                <td><%= password_field_tag :password %></td>
+              </tr>
+              <tr>
+                <td colspan=2>
+          	<%= submit_tag 'Invia' %>
+                </td>
+              </tr>
+            </table>
+            <%= link_to 'Ho dimenticato la password', csvva_registration_recover_password_path, :method => 'post' %>
+         <% end -%>
+<%= javascript_tag do %>
+function aaa()
+{
+ $('login-form').request({
+  onComplete: function(){ window.location.reload(); }
+ });
+
+ return false;
+}
+<% end %>
+         <iframe id="login_iframe" name="login_iframe" width="0" height="0" frameborder="0" style="display: none;"></iframe>
+        </div>
+<!--        Login via Facebook:<br />
+        <fb:login-button perms="email,publish_stream"></fb:login-button><br />-->
+      </div>
+    <% else %>
+      <div class="userdata">
+
+        <div>
+      <% if auth_method == :facebook %>
+          <div style="float: left; margin-right: 0.5em">
+            <fb:profile-pic uid="<%= facebook_uid %>" size="square" facebook-logo="true" ></fb:profile-pic>
+          </div>
+      <% end %>
+          <strong><%= auth_person.name %></strong>
+          <br style="clear: both" />
+        </div>
+      <ul>
+      <li><%= link_to 'Profilo', auth_person.pilot %></li>
+      <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
+      <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
+      <% if asgard_session && asgard_session.authenticated_admin? %>
+        <% cnt = Flight.pending.count %>
+        <% if cnt > 0 %>
+          <li>
+          <strong>
+          <%= link_to "#{cnt} voli pendenti", flights_path(:pending => 1) %>
+          </strong>
+          </li>
+        <% end %>
+
+        <% if IgcTmpFile.count > 0 %>
+          <li>
+          <strong>
+          <%= link_to "#{IgcTmpFile.count} file IGC da assegnare", igc_tmp_files_path() %>
+          </strong>
+          </li>
+        <% end %>
+      <% end %>
+      <li>
+      <% if auth_method == :facebook %>
+          <%= link_to_function 'Logout', 'FB.logout()' %>
+      <% else %>
+          <%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true %>
+      <% end %>
+      </li>
+      </ul>
+      </div>
+    <% end %>
+  </li>
+  <li>
+</div>
+
+<div id="body">
+<p style="color: orange" id="flash-message"><%= flash[:notice] %></p>
+
+<%= yield  %>
+</div>
+</body>
+</html>

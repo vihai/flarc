@@ -1,4 +1,4 @@
-Csvva::Application.configure do
+Flarc::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # The production environment is meant for finished, "live" apps.
@@ -55,12 +55,6 @@ EXPIRES=false
 
 FLICKR_API_KEY = "b18c48dcc7c1f8811a291d537551c585"
 FLICKR_SHARED_KEY = "cf3bf707d062d898"
-
-LAYOUTS = {
-  "csvva.orlandi.com" => "csvva",
-  "cir.orlandi.com" => "cir",
-  "cir.fivv.it" => "cir"
-}
 
 GOOGLE_MAPS_KEY = {
   "csvva.orlandi.com" => "ABQIAAAAVJLfFXWBxmyHNCyIIApsnxSc2yIvQoNUWDuSwbldoVMAKYyAbxTszy7ZWfIeC7-Gq8AF07pCq9le4A",

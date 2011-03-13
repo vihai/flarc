@@ -2,13 +2,13 @@
   <tr>
     <th>Nome</th>
     <td class="name">
-      <%=h @championship.name %>
+      <%=h @target.name %>
     </td>
   </tr>
   <tr>
     <th>Classifiche</th>
     <td class="rankings">
-      <% @championship.rankings.each do |ranking| %>
+      <% @target.rankings.each do |ranking| %>
         <%= link_to ranking.name, ranking %><br />
       <% end %>
     </td>

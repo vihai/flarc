@@ -2,6 +2,14 @@ embed_images: off
 javascript_compressor: yui
 
 javascripts:
+  cid:
+    - public/javascripts/prototype.js
+    - public/javascripts/effects.js
+    - public/javascripts/dragdrop.js
+    - public/javascripts/controls.js
+    - public/javascripts/rails.js
+    - public/javascripts/application.js
+
   csvva:
     - public/javascripts/prototype.js
     - public/javascripts/effects.js
@@ -17,8 +25,11 @@ javascripts:
     - public/*/core_javascripts/**/*.js
 
 stylesheets:
+  cid:
+    - public/stylesheets/cid/**/*.css
+
   csvva:
-    - public/stylesheets/**/*.css
+    - public/stylesheets/csvva/**/*.css
 
   asgard:
     - public/ext/resources/css/ext-all-notheme.css

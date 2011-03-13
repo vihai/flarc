@@ -6,7 +6,14 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-module Csvva
+LAYOUTS = {
+  'campionato.csvva.it' => 'csvva',
+  'csvva.orlandi.com' => 'csvva',
+  'www.cidvv.it' => 'cid',
+  'cid.orlandi.com' => 'cid'
+}
+
+module Flarc
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -36,7 +43,7 @@ module Csvva
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]

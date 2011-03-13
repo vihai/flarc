@@ -1,13 +1,13 @@
 <h1>Campionati</h1>
 
-<% if !@championships.empty? then %>
+<% if !@targets.empty? then %>
   <table class="standard championship">
     <caption>Campionati</caption>
     <tr>
       <th>Nome</th>
       <th>Partecipanti</th>
     </tr>
-    <% for r in @championships do %>
+    <% for r in @targets do %>
     <tr>
       <td class="name">
         <%= link_to(r.name, r) %>

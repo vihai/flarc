@@ -194,7 +194,6 @@ it:
       messages:
         taken: "è già in uso"
         record_invalid: "Validazione fallita: %{errors}"
-        <<: *errors_messages
 
       full_messages:
         format: "%{attribute}%{message}"
