@@ -1,0 +1,51 @@
+<h2>Dati per il CID</h2>
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :cid_tag_id, 'Classifica' %></th>
+      <td>
+        <%= select_tag :cid_tag_id, options_for_select(
+               [[ '' => '' ]] + @cid_available_tags.map { |x| [ x.name, x.id ] }), {} %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= label_tag :cid_task_eval, 'Volo da valutare come tema' %></th>
+      <td><%= select_tag :cid_task_eval, options_for_select({
+                '' => '',
+                'libero' => 'free',
+                'dichiarato' => 'declared' }) %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= label_tag :cid_task_type, 'Tipologia di tema volato' %></th>
+      <td><%= select_tag :cid_task_type, options_for_select({
+                '' => '',
+                'Farfalla' => 'butterfly',
+                'Triangolo semplice' => 'simple_triangle',
+                'Andata e ritorno' => 'round_trip',
+                'Triangolo FAI' => 'fai_triangle',
+                'Linea retta' => 'straight_line' }) %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= label_tag :cid_task_completed, 'Il tema è stato completato?' %></th>
+      <td><%= select_tag :cid_task_completed, options_for_select({
+                '' => '',
+                'Sì' => true,
+                'No' => false,
+                }) %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= label_tag :cid_distance, 'Distanza valida' %></th>
+      <td><%= text_field_tag :cid_distance, '', :size => 5 %> km</td>
+    </tr>
+
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>

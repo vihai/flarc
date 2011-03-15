@@ -22,6 +22,8 @@
   <%= f.hidden_field :landing_time %>
 
   <table>
+
+    <% if authenticated_admin? %>
     <tr>
       <th><%= f.label :pilot_id, 'Pilota' %></th>
       <td>
@@ -29,9 +31,7 @@
     <% changed_pars += @flight.id ? " + '&flight_id=#{@flight.id}'" : '' %>
     <% changed_pars += @flight.plane ?  " + '&plane_id=#{@flight.plane.id}'" : '' %>
     <%= f.select :pilot_id,
-                 Pilot.find(:all,
-                            :order => 'people.last_name ASC, people.first_name ASC',
-                            :include => :person).collect { |p|
+                 Pilot.order('core_people.last_name ASC').order('core_people.first_name ASC').joins(:person).collect { |p|
                       [ p.person.name.to_s_reversed, p.id ] },
                    { :include_blank => true },
                      :onchange => remote_function(
@@ -42,10 +42,16 @@
       %>
       </td>
     </tr>
+    <% end %>
+
+
     <tr>
       <th><%= f.label :plane_id, 'Aliante' %></th>
       <td>
         <%= render :partial => 'new_update_planes' %>
+        <div id="plane_type_div">
+          <%= render :partial => 'new_update_plane_type' %>
+        </div>
       </td>
     </tr>
     <tr>

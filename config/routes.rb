@@ -18,8 +18,13 @@ Flarc::Application.routes.draw do
     end
   
     collection do
+      match :wizard
       get :calendar
-      get :new_pilot_changed, :new_plane_changed, :autocomplete_passenger, :autocomplete_plane
+      get :new_pilot_changed
+      get :new_plane_changed
+      get :new_plane_type_changed
+      get :autocomplete_passenger
+      get :autocomplete_plane
     end
   end
 

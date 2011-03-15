@@ -30,29 +30,33 @@
     </td>
   </tr>
   <% if authenticated_admin? %>
+    <% if @target.person.residence_location %>
   <tr>
     <th>Indirizzo</th>
     <td class="address">
-      <%=h @target.person.home_location %><br />
+      <%=h @target.person.residence_location %><br />
     </td>
   </tr>
+    <% end %>
   <tr>
     <th>Telefono</th>
     <td class="phone">
       <%=h @target.person.tmp_telefono %><br />
     </td>
   </tr>
+    <% if @target.person.tmp_cellulare %>
   <tr>
     <th>Cellulare</th>
     <td class="phone">
       <%=h @target.person.tmp_cellulare %><br />
-	    </td>
+    </td>
   </tr>
+    <% end %>
   <tr>
     <th>e-Mail</th>
     <td class="email">
       <% @target.person.identities.each do |identity|  %>
-          <%= mail_to identity.fqdn %><br />
+          <%= mail_to identity.qualified %><br />
       <% end %> 
     </td>
   </tr>

@@ -1,6 +1,8 @@
 class IgcTmpFile < ActiveRecord::Base
 
-  belongs_to :pilot
+  belongs_to :pilot,
+             :class_name => '::Pilot'
+
   belongs_to :club
 
   after_create :my_after_create
@@ -17,7 +19,6 @@ class IgcTmpFile < ActiveRecord::Base
       f.write(@upload_filehandle.read)
     end
 
-    @upload_filehandle.close
     @upload_filehandle = nil
   end
 

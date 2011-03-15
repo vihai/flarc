@@ -41,9 +41,9 @@ class FlightsController < RestController
 
   def autocomplete_passenger
 
-    @items = Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
-                       params['flight']['passenger'].downcase + '%',
-                       params['flight']['passenger'].downcase + '%' ]).
+    @items = Ygg::Core::Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
+                       params['passenger'].downcase + '%',
+                       params['passenger'].downcase + '%' ]).
                          order('last_name ASC, first_name ASC').
                          limit(10)
 
@@ -98,6 +98,159 @@ class FlightsController < RestController
     end
   end
 
+  def wizard
+
+    championship = Championship.find_by_symbol(:cid_2011)
+    cp =  auth_person.pilot.championship_pilots.find_by_championship_id(championship.id)
+
+    if cp
+      if cp.cid_category == 'prom'
+        @cid_available_tags = [
+          Tag.find_by_symbol('cid_2011_prom')
+        ]
+      else
+        @cid_available_tags = [
+          Tag.find_by_symbol('cid_2011_naz_club'),
+          Tag.find_by_symbol('cid_2011_naz_open'),
+          Tag.find_by_symbol('cid_2011_naz_15m'),
+          Tag.find_by_symbol('cid_2011_naz_13m5')
+        ]
+      end
+    else
+      raise "NOT SUBSCRIBED"
+    end
+
+    catch :done do
+      if request.method == 'GET'
+        @state = {}
+        @state[:state] = :plane
+        @state[:final] = false
+        @state[:igc_tmp_file_id] = params[:igc_tmp_file_id]
+  
+        @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
+  
+        @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
+        @igc_file.read_contents
+  
+        if @igc_file.takeoff_time < Time.now - 15.days
+          flash[:notice] = "Il volo ha una data di decollo (#{@igc_file.takeoff_time}) precedente al limite massimo di invio volo"
+          throw :done
+        end
+  
+        if @igc_file.glider_id
+          plane = Plane.find_by_registration(@igc_file.glider_id.strip.upcase)
+          @state[:plane_id] = plane ? plane.id : nil
+        end
+  
+      else
+        @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
+        @state[:state] = @state[:state].to_sym
+        @state[:final] = false
+  
+        case @state[:state]
+        when :plane
+  
+          @state[:plane_id] = params[:plane_id]
+  
+          if @state[:plane_id] != ''
+            plane = Plane.find(@state[:plane_id])
+            @state[:plane_type_id] = plane.plane_type.id
+  
+            if plane.plane_type.configurations.empty?
+              @state[:state] = :cid_flight_data
+            else
+              @state[:state] = :plane_configuration
+            end
+          else
+            @state[:state] = :new_plane
+          end
+  
+        when :new_plane
+          @state[:plane_type_id] = params[:plane_type_id]
+          @state[:plane_registration] = params[:plane_registration]
+  
+          plane_type = PlaneType.find(@state[:plane_type_id])
+  
+          if plane_type.configurations.empty?
+            @state[:state] = :cid_flight_data
+          else
+            @state[:state] = :plane_configuration
+          end
+  
+        when :plane_configuration
+          @state[:plane_configuration_id] = params[:plane_configuration_id]
+          @state[:state] = :cid_flight_data
+        when :cid_flight_data
+          @state[:cid_tag_id] = params[:cid_tag_id]
+          @state[:cid_task_eval] = params[:cid_task_eval]
+          @state[:cid_task_type] = params[:cid_task_type]
+          @state[:cid_task_completed] = params[:cid_task_completed]
+          @state[:cid_distance] = params[:cid_distance]
+  
+          @state[:state] = :flight_data
+  
+        when :flight_data
+          @state[:passenger] = params[:passenger]
+                               
+          @state[:notes] = params[:notes]
+  
+          Ygg::Core::Transaction.new 'Flight submission' do
+            @flight = Flight.new
+  
+            igc_tmp_file = IgcTmpFile.find(@state[:igc_tmp_file_id])
+  
+            igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
+            igc_file.read_contents {}
+            @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
+  
+  #          if authenticated_admin?
+  #            @flight.pilot = @state[:pilot_id]
+  #          else
+              @flight.pilot = auth_person.pilot
+  #          end
+  
+            if @state[:plane_id]
+              @flight.plane = Plane.find(@state[:plane_id])
+            else
+              @flight.plane = Plane.new(:plane_registration => @state[:plane_registration],
+                                        :plane_type => PlaneType.find(@state[:plane_type_id]))
+            end
+  
+            if @state[:plane_type_configuration_id]
+              @flight.plane_type_configuration = PlaneTypeConfiguration.find(@state[:plane_type_configuration_id])
+            end
+  
+            @flight.passenger = Ygg::Core::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
+                                           'last_name ILIKE ?', @state[:passenger] ] ).first
+            @flight.passenger_name = @state[:passenger]
+            @flight.notes_public = @state[:notes]
+            @flight.private = false
+  
+            @flight.flight_tags << FlightTag.new(
+              :flight => @flight,
+              :tag => Tag.find(@state[:cid_tag_id]),
+              :status => :pending,
+              :data => {
+                :distance => @state[:cid_distance],
+                :task_eval => @state[:cid_task_eval],
+                :task_type => @state[:cid_task_type],
+                :task_completed => @state[:cid_task_completed]
+              })
+  
+            @flight.save!
+  
+            File.rename(igc_tmp_file.filename, @flight.igc_file_path)
+            igc_tmp_file.destroy
+          end
+  
+          @state[:state] = :done
+        end
+      end
+    end
+
+    render :template => "flights/wizard/#{@state[:state]}"
+  end
+
   def new
     @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
 
@@ -116,32 +269,40 @@ class FlightsController < RestController
     end
   end
 
-  def new_pilot_changed
-    @flight = params[:flight_id] ? Flight.find(params[:flight_id]) : @flight = Flight.new
-
-    @flight.pilot = Pilot.find(params[:pilot_id])
-
-    prepare_form_tags
-
-    render :update do |page|
-      page.replace 'flight_plane_id',
-                        :partial => 'new_update_planes'
-      page.replace 'flight_plane_type_configuration_id',
-                        :partial => 'new_update_config'
-      page.replace 'approvals_table',
-                        :partial => 'new_update_approvals'
-    end
-  end
-
-  def new_plane_changed
-    @flight = params[:id] ? Flight.find(params[:id]) : @flight = Flight.new
-    @flight.plane = Plane .find(params[:plane_id])
-
-    render :update do |page|
-      page.replace 'flight_plane_type_configuration_id',
-                        :partial => 'new_update_config'
-    end
-  end
+#  def new_pilot_changed
+#    @flight = params[:flight_id] ? Flight.find(params[:flight_id]) : @flight = Flight.new
+#
+#    @flight.pilot = Pilot.find(params[:pilot_id])
+#
+#    prepare_form_tags
+#
+#    render :update do |page|
+#      page.replace 'flight_plane_id',
+#                        :partial => 'new_update_planes'
+#      page.replace 'flight_plane_type_configuration_id',
+#                        :partial => 'new_update_config'
+#      page.replace 'approvals_table',
+#                        :partial => 'new_update_approvals'
+#    end
+#  end
+#
+#  def new_plane_changed
+#    @flight = params[:id] ? Flight.find(params[:id]) : Flight.new
+#
+#    if params[:plane_id] != ''
+#      @flight.plane = Plane.find(params[:plane_id])
+#
+#      render :update do |page|
+#        page['flight_plane_type_configuration_id'].enable
+#        page.replace 'flight_plane_type_configuration_id',
+#                          :partial => 'new_update_config'
+#      end
+#    else
+#      render :update do |page|
+#        page['flight_plane_type_configuration_id'].disable
+#      end
+#    end
+#  end
 
   def show_map
     render :update do |page|
@@ -171,40 +332,6 @@ class FlightsController < RestController
 
   # POST /flights
   def create
-    params[:flight][:passenger] = Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
-                                                    'last_name ILIKE ?', params[:flight][:passenger_name] ] ).first
-    params[:flight][:distance] = params[:flight][:distance].to_f * 1000.0;
-
-    if params[:flight][:flight_tags_attributes]
-      params[:flight][:flight_tags_attributes].delete_if { |k,v| v[:status].empty? }
-    end
-
-    Flight.transaction do
-      @flight = Flight.new
-
-      igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file][:id])
-
-      igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
-      igc_file.read_contents {}
-      @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
-
-      @flight.update_attributes(params[:flight])
-
-      respond_to do |format|
-# FIXME disabled validations because of rails3 bug
-        if @flight.save(false)
-          File.rename(igc_tmp_file.filename, @flight.igc_file_path)
-          igc_tmp_file.destroy
-
-          flash[:notice] = 'Flight was successfully created.'
-          format.js
-          format.html { redirect_to(@flight) }
-        else
-          format.js
-          format.html { render :action => 'new' }
-        end
-      end
-    end
   end
 
   # PUT /flights/1

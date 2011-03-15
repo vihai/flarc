@@ -1,4 +1,5 @@
 <table class="standard">
+  <caption>Dati del file IGC</caption>
   <tr>
     <th>ID Volo</th>
     <td>
@@ -20,11 +21,11 @@
   </tr>
   <tr>
     <th>Decollo</th>
-    <td><%=h @flight.takeoff_time.strftime('%H:%M:%S') %></td>
+    <td><%=h @igc_file.takeoff_time.strftime('%H:%M:%S') %></td>
   </tr>
   <tr>
     <th>Atterraggio</th>
-    <td><%=h @flight.landing_time.strftime('%H:%M:%S') %></td>
+    <td><%=h @igc_file.landing_time.strftime('%H:%M:%S') %></td>
   </tr>
   <tr>
     <th>Pilota</th>

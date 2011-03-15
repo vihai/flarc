@@ -49,7 +49,13 @@ Flarc::Application.configure do
 
   config.fb_api_key = '83b6646aa51c340d9f3a9bb4b40e105b'
   config.fb_secret_key = 'abbbba5dccf459257fc90f5777cea9f0'
+
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Flarc] ",
+    :sender_address => %{"Flarc" <daniele@orlandi.com>},
+    :exception_recipients => %w{daniele@orlandi.com}
 end
+
 
 EXPIRES=false
 

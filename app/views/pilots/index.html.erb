@@ -3,11 +3,15 @@
     <caption>Piloti</caption>
     <tr>
       <th>Nome</th>
+      <th>Club</th>
     </tr>
     <% for x in @targets do %>
     <tr>
       <td class="name">
         <%= link_to(x.person.name, x) %>
+      </td>
+      <td class="club">
+        <%= x.club.name %>
       </td>
     </tr>
     <% end %>

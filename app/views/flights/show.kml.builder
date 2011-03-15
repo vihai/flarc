@@ -2,17 +2,17 @@ xml.instruct!
 xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
   
   xml.Document {
-    xml.name("Volo di #{@flight.pilot.person.name}")
+    xml.name("Volo di #{@target.pilot.person.name}")
     xml.description do |x|
       #FIXME ADD CDATA
-      x << "Aliante: #{link_to(@flight.plane.registration, plane_path(@flight.plane, :only_path => false))}<br/>"
-      x << "Decollo: #{l(@flight.takeoff_time, :format => :compact)}<br/>"
-      x << "Atterraggio: #{l(@flight.landing_time, :format => :compact)}<br/>"
-      x << "Durata: #{l(Time.at(@flight.landing_time-@flight.takeoff_time), :format => '%H:%M')}<br/>"
-      if (!@flight.passenger.nil?) then
-        x << "Passeggero: #{@flight.passenger.person.name}<br/>"
-      elsif (!@flight.passenger_name.nil?) then
-        x << "Passeggero: #{@flight.passenger_name}<br/>"
+      x << "Aliante: #{link_to(@target.plane.registration, plane_path(@target.plane, :only_path => false))}<br/>"
+      x << "Decollo: #{l(@target.takeoff_time, :format => :compact)}<br/>"
+      x << "Atterraggio: #{l(@target.landing_time, :format => :compact)}<br/>"
+      x << "Durata: #{l(Time.at(@target.landing_time-@target.takeoff_time), :format => '%H:%M')}<br/>"
+      if (!@target.passenger.nil?) then
+        x << "Passeggero: #{@target.passenger.person.name}<br/>"
+      elsif (!@target.passenger_name.nil?) then
+        x << "Passeggero: #{@target.passenger_name}<br/>"
       end
     end
     xml.open(1)
@@ -57,7 +57,7 @@ xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
         xml.tessellate(1)
         xml.altitudeMode("absolute")
         xml.coordinates do |x|
-          @flight.track.each do |point|
+          @target.track.each do |point|
              x << "#{point.lon.round(6)},#{point.lat.round(6)},#{point.gnss_alt}\n"
           end
         end
@@ -69,7 +69,7 @@ xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
       xml.visibility(1)
       xml.open(0)
 
-      @flight.photos.each do |photo|
+      @target.photos.each do |photo|
         xml.Placemark {
           xml.visibility(1)
           xml.description {
@@ -97,7 +97,7 @@ xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
       xml.open(0)
 
       AlpthermSource.all.each do |source|
-        entry = source.entries.first(:conditions => [ "taken_at::date = ?::date", @flight.takeoff_time ])
+        entry = source.entries.first(:conditions => [ "taken_at::date = ?::date", @target.takeoff_time ])
         next if entry.nil?
 
         xml.Placemark {

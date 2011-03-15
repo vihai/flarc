@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/rails/exception_notification
+  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
+  specs:
+    exception_notification (1.0.0)
+
+GIT
   remote: https://github.com/vihai/vihai-password.git
   revision: 638a8ead202beddc37375cb8fabbaa5c3418bfa9
   specs:
@@ -58,7 +64,7 @@ GEM
     mime-types (1.16)
     pg (0.10.1)
     polyglot (0.3.1)
-    rack (1.2.1)
+    rack (1.2.2)
     rack-mount (0.6.13)
       rack (>= 1.0.0)
     rack-test (0.5.7)
@@ -101,6 +107,7 @@ PLATFORMS
 
 DEPENDENCIES
   closure-compiler
+  exception_notification!
   geokit
   httpclient
   jammit

@@ -1,0 +1,26 @@
+<h2>Inserimento nuovo volo</h2>
+<div id="info_div">
+<% if @igc_tmp_file %>
+  <%= render :partial => 'info' %>
+<% end %>
+</div>
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :plane_id, 'Aliante' %></th>
+      <td>
+<%= select_tag :plane_id,
+                options_for_select([[ 'Nuovo', nil ]] +
+                  Plane.order('registration ASC').collect { |p|
+                      [ p.registration, p.id ] }, @state[:plane_id]), {}
+%>
+</td>
+    </tr>
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>

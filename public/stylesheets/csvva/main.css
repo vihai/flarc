@@ -67,6 +67,8 @@ div#menu
  width: 13em;
  left: 0;
  top: 4em;
+ bottom: 0;
+ padding-top: 4em;
  background-color: #eee;
 }
 

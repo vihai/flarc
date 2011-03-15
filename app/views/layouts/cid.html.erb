@@ -37,11 +37,11 @@
   <li>
     Classifiche
     <ul>
+      <li><%= link_to('Promozione', ranking_path('cid_2011_prom')) %></li>
       <li><%= link_to('Nazionale Club', ranking_path('cid_2011_naz_club')) %></li>
       <li><%= link_to('Nazionale 15 m', ranking_path('cid_2011_naz_15m')) %></li>
       <li><%= link_to('Nazionale Open', ranking_path('cid_2011_naz_open')) %></li>
       <li><%= link_to('Nazionale 13.5 m', ranking_path('cid_2011_naz_13m5')) %></li>
-      <li><%= link_to('Promozione', ranking_path('cid_2011_prom')) %></li>
     </ul>
   </li>
   <li>Elenchi
@@ -59,7 +59,7 @@
               page[:login_div].toggle 'fade', {}, 1000
             end %><br />
         <br />
-        <div id="login_div" style="display: none; float: left;">
+        <div id="login_div" style="display: none;">
           <%= form_tag ygg_asgard_session_authenticate_by_fqda_and_password_path,
                          { :id => 'login-form', :onSubmit => 'aaa(); return false;', :class => 'standard', :method => :post } do |f| -%>
             <table>
@@ -108,7 +108,7 @@ function aaa()
         </div>
       <ul>
       <li><%= link_to 'Profilo', auth_person.pilot %></li>
-      <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
+<!--      <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>-->
       <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
       <% if asgard_session && asgard_session.authenticated_admin? %>
         <% cnt = Flight.pending.count %>
