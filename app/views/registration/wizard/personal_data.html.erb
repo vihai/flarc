@@ -1,0 +1,24 @@
+<div id="registration_div">
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :first_name, 'Nome' %></th>
+      <td><%= text_field_tag :first_name %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag :last_name, 'Cognome' %></th>
+      <td><%= text_field_tag :last_name %></td>
+    </tr>
+    <tr>
+      <th><%= label_tag :phone, 'Telefono' %></th>
+      <td><%= text_field_tag :phone %></td>
+    </tr>
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>
+<div>

@@ -17,8 +17,7 @@ class Pilot < Ygg::PublicModel
 
   validates_presence_of :person
   validates_uniqueness_of :person_id
-  validates_presence_of :club
-
+#  validates_presence_of :club
 
   def steal_from_other_pilot(unlucky)
     self.flights << unlucky.flights

@@ -7,7 +7,7 @@ class RegistrationController < ApplicationController
   def wizard
     if request.method == 'GET'
       @state = {}
-      @state[:state] = :email
+      @state[:state] = :championship_data
       @state[:final] = false
     else
       @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
@@ -15,39 +15,6 @@ class RegistrationController < ApplicationController
       @state[:final] = false
 
       case @state[:state]
-      when :email
-
-        @state[:email] = params[:email]
-
-        @identity = Ygg::Core::Identity.find_by_qualified(params[:email])
-        if @identity
-          @state[:state] = :password
-        else
-          @state[:state] = :personal_data
-        end
-
-      when :password
-
-        @state[:password] = params[:password]
-
-#        begin
-          auth_token = Ygg::Core::HttpSession.attempt_authentication_by_fqda_and_password(
-                           @state[:email], @state[:password])
-#        rescue FQDAFormat => e
-#          msg = e.message
-#          reason = :fqda_format_invalid
-#        else
-
-        if auth_token
-          @state[:state] = :championship_data
-        else
-          flash[:notice] = "Password non valida"
-        end
-
-      when :personal_data
-        @state[:first_name] = params[:first_name]
-        @state[:last_name] = params[:last_name]
-        @state[:state] = :championship_data
       when :championship_data
         @state[:fai_card] = params[:fai_card]
         @state[:club_id] = params[:club_id]

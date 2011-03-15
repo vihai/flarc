@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     return LAYOUTS[request.host]
   end
 
+  def current_site
+    # Ugly hack to give a site name
+    select_proper_layout.to_sym
+  end
+
 #  protect_from_forgery
   
   attr_accessor :asgard_session

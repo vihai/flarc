@@ -1,0 +1,20 @@
+<div id="registration_div">
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :csvva_category, 'Categoria' %></th>
+      <td><%= select_tag :csvva_category, options_for_select({
+             'Junior' => :junior, 
+             'Expert' => :expert,
+             'Master' => :master,
+             'SuperMaster' => :supermaster }) %></td>
+    </tr>
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Fine' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>
+<div>
