@@ -1,0 +1,65 @@
+<h2>Inserimento nuovo volo</h2>
+<div id="info_div" style="display: inline-block; vertical-align: top">
+<% if @igc_tmp_file %>
+  <%= render :partial => 'info' %>
+<% end %>
+</div>
+
+<div id="map_container" class="map_container" style="width: 400px; height: 270px; display: inline-block; vertical-align: top; margin-top: 1em;">
+  <div id="map" class="map" style="width: 100%; height: 100%;"></div>
+</div>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+Element.observe(window, 'load', function() {
+
+  var map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 8,
+    center: google.maps.LatLng(0, 0),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+
+  var path = [
+    <% @igc_file.track.each do |point| %>
+      new google.maps.LatLng(<%= point.lat.round(4) %>, <%= point.lon.round(4) %>),
+    <% end %>
+  ];
+
+  var bounds = new google.maps.LatLngBounds();
+  for (var i = 0; i < path.length; i++) {
+    bounds.extend(path[i]);
+  }
+
+  poly = new google.maps.Polyline({
+    path: path,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  });
+
+  poly.setMap(map);
+
+  map.fitBounds(bounds);
+});
+</script>
+
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :plane_id, 'Aliante' %></th>
+      <td>
+<%= select_tag :plane_id,
+                options_for_select([[ 'Nuovo', nil ]] +
+                  Plane.order('registration ASC').collect { |p|
+                      [ p.registration, p.id ] }, @state[:plane_id]), {}
+%>
+</td>
+    </tr>
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>

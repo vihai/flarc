@@ -1,0 +1,26 @@
+<h2>Altri dati</h2>
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :passenger, 'Passeggero' %></th>
+      <td>
+        <%= text_field_tag :passenger, '', :id => 'passenger_input' %>
+        <div class="autocomplete" id="passenger_autocomplete"></div>
+<script type="text/javascript">
+var pass_ac = new Ajax.Autocompleter('passenger_input', 'passenger_autocomplete',
+                                     '/flights/autocomplete_passenger', {method:'get'})
+</script>
+      </td>
+    </tr>
+      <th><%= label_tag :notes, 'Note' %></th>
+      <td><%= text_area_tag :notes, '', :cols => 80, :rows => 10 %></td>
+    </tr>
+
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>
