@@ -108,7 +108,7 @@ function aaa()
         </div>
       <ul>
       <li><%= link_to 'Profilo', auth_person.pilot %></li>
-<!--      <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>-->
+      <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
       <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
       <% if asgard_session && asgard_session.authenticated_admin? %>
         <% cnt = Flight.pending.count %>

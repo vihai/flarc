@@ -3,10 +3,10 @@
   <%= hidden_field_tag :state, @state.to_json %>
   <table class="form">
     <tr>
-      <th><%= label_tag :cid_tag_id, 'Classifica' %></th>
+      <th><%= label_tag :cid_tag_id, 'Classe' %></th>
       <td>
         <%= select_tag :cid_tag_id, options_for_select(
-               [[ '' => '' ]] + @cid_available_tags.map { |x| [ x.name, x.id ] }), {} %>
+               [[ '' => '' ]] + @cid_available_tags.map { |x| [ x.name, x.id ] }, @state[:cid_tag_id]), {} %>
       </td>
     </tr>
     <tr>
@@ -14,7 +14,7 @@
       <td><%= select_tag :cid_task_eval, options_for_select({
                 '' => '',
                 'libero' => 'free',
-                'dichiarato' => 'declared' }) %>
+                'dichiarato' => 'declared' }, @state[:cid_task_eval]) %>
       </td>
     </tr>
     <tr>
@@ -25,7 +25,7 @@
                 'Triangolo semplice' => 'simple_triangle',
                 'Andata e ritorno' => 'round_trip',
                 'Triangolo FAI' => 'fai_triangle',
-                'Linea retta' => 'straight_line' }) %>
+                'Linea retta' => 'straight_line' }, @state[:cid_task_type]) %>
       </td>
     </tr>
     <tr>
@@ -34,12 +34,12 @@
                 '' => '',
                 'Sì' => true,
                 'No' => false,
-                }) %>
+                }, @state[:cid_task_completed]) %>
       </td>
     </tr>
     <tr>
       <th><%= label_tag :cid_distance, 'Distanza valida' %></th>
-      <td><%= text_field_tag :cid_distance, '', :size => 5 %> km</td>
+      <td><%= text_field_tag :cid_distance, @state[:cid_distance], :size => 5 %> km</td>
     </tr>
 
     <tr>

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require 'flickraw_vihai'
 
 class FlightsController < RestController
@@ -134,6 +136,7 @@ class FlightsController < RestController
   
         if @igc_file.takeoff_time < Time.now - 15.days
           flash[:notice] = "Il volo ha una data di decollo (#{@igc_file.takeoff_time}) precedente al limite massimo di invio volo"
+          @state[:state] = :permanent_error
           throw :done
         end
   
@@ -166,7 +169,16 @@ class FlightsController < RestController
           end
   
         when :new_plane
+          if params[:plane_type_id].empty?
+            flash[:notice] = "È necessario selezionare il tipo di aliante"
+            throw :done
+          end
           @state[:plane_type_id] = params[:plane_type_id]
+
+          if params[:plane_registration].empty?
+            flash[:notice] = "È necessario indicare le marche dell'aliante"
+            throw :done
+          end
           @state[:plane_registration] = params[:plane_registration]
   
           plane_type = PlaneType.find(@state[:plane_type_id])
@@ -178,13 +190,43 @@ class FlightsController < RestController
           end
   
         when :plane_configuration
+          if params[:plane_configuration_id].empty?
+            flash[:notice] = "È necessario indicare la configurazione dell'aliante"
+            throw :done
+          end
           @state[:plane_configuration_id] = params[:plane_configuration_id]
+
           @state[:state] = :cid_flight_data
+
         when :cid_flight_data
+          if params[:cid_tag_id].empty?
+            flash[:notice] = "È necessario selezionare una classe"
+            throw :done
+          end
           @state[:cid_tag_id] = params[:cid_tag_id]
+
+          if params[:cid_task_eval].empty?
+            flash[:notice] = "È necessario selezionare il tipo di valutazione del tema"
+            throw :done
+          end
           @state[:cid_task_eval] = params[:cid_task_eval]
+
+          if params[:cid_task_type].empty?
+            flash[:notice] = "È necessario selezionare il tipo di tema"
+            throw :done
+          end
           @state[:cid_task_type] = params[:cid_task_type]
+
+          if params[:cid_task_completed].empty?
+            flash[:notice] = "È necessario selezionare se il tema è stato o meno completato"
+            throw :done
+          end
           @state[:cid_task_completed] = params[:cid_task_completed]
+
+          if params[:cid_distance].empty? || !(params[:cid_distance] =~ /^[0-9]+$/)
+            flash[:notice] = "È necessario specificare una distanza valida"
+            throw :done
+          end
           @state[:cid_distance] = params[:cid_distance]
   
           @state[:state] = :flight_data
@@ -250,59 +292,6 @@ class FlightsController < RestController
 
     render :template => "flights/wizard/#{@state[:state]}"
   end
-
-  def new
-    @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
-
-    @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
-    @igc_file.read_contents
-
-    @flight = Flight.new(params['flight'])
-    @flight.update_from_igcfile(@igc_file, @igc_tmp_file.original_filename)
-
-    @flight.pilot ||= auth_person.pilot
-
-    prepare_form_tags
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
-#  def new_pilot_changed
-#    @flight = params[:flight_id] ? Flight.find(params[:flight_id]) : @flight = Flight.new
-#
-#    @flight.pilot = Pilot.find(params[:pilot_id])
-#
-#    prepare_form_tags
-#
-#    render :update do |page|
-#      page.replace 'flight_plane_id',
-#                        :partial => 'new_update_planes'
-#      page.replace 'flight_plane_type_configuration_id',
-#                        :partial => 'new_update_config'
-#      page.replace 'approvals_table',
-#                        :partial => 'new_update_approvals'
-#    end
-#  end
-#
-#  def new_plane_changed
-#    @flight = params[:id] ? Flight.find(params[:id]) : Flight.new
-#
-#    if params[:plane_id] != ''
-#      @flight.plane = Plane.find(params[:plane_id])
-#
-#      render :update do |page|
-#        page['flight_plane_type_configuration_id'].enable
-#        page.replace 'flight_plane_type_configuration_id',
-#                          :partial => 'new_update_config'
-#      end
-#    else
-#      render :update do |page|
-#        page['flight_plane_type_configuration_id'].disable
-#      end
-#    end
-#  end
 
   def show_map
     render :update do |page|
