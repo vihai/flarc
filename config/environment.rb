@@ -5,6 +5,7 @@ require File.expand_path('../application', __FILE__)
 Flarc::Application.initialize!
 
 # Exta-ugly hack to prevent unloading
+require './app/models/pilot'
 require '../yggdra/plugins/core_models/app/models/ygg/core/person'
 require '../yggdra/plugins/core_models/app/models/ygg/core/identity'
 

@@ -107,7 +107,7 @@
   <% end %>
   <br />
 <% end %>
-<% if authenticated? && asgard_session.auth_person.pilot == @target.pilot %>
+<% if auth_person && auth_person.pilot == @target.pilot %>
   <% if @target.photos.empty? %>
     <%= link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url) %>
   <% else %>
@@ -153,8 +153,6 @@ Element.observe(window, 'load', function() {
   poly.setMap(map);
 
   map.fitBounds(bounds);
-
-console.log("AAAAAAAAAAAAAAAAAAAA", google.maps);
 
   var logo = new google.maps.ScreenOverlay(
                   "<%= image_url("logo_acao_maps.png") %>",

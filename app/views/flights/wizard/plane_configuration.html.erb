@@ -1,0 +1,23 @@
+<h2>Selezione configurazione aliante</h2>
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :plane_configuration_id, 'Configurazione' %></th>
+      <td>
+<%= select_tag :plane_configuration_id,
+                options_for_select(
+                  PlaneTypeConfiguration.where(:plane_type_id => @state[:plane_type_id]).
+                                         order('name ASC').collect { |p|
+                      [ p.name, p.id ] }, @state[:plane_configuration_id]), {}
+%>
+</td>
+    </tr>
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Avanti >>' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>
+

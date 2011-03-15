@@ -7,7 +7,10 @@ class FlightTag < Ygg::BasicModel
 
   validates_presence_of :tag, :flight
 
+  serialize :data
+
   def eql?(other)
+    return false if !other.kind_of?(self.class)
     return self.tag_id == other.tag_id && self.flight_id == other.flight_id
   end
 

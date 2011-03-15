@@ -70,11 +70,11 @@ class IgcTmpFilesController < ApplicationController
 
     respond_to do |format|
       if @igc_tmp_file.save
-        format.html { redirect_to(new_flight_url(:igc_tmp_file_id => @igc_tmp_file.id)) }
+        format.html { redirect_to(wizard_flights_url(:igc_tmp_file_id => @igc_tmp_file.id)) }
         format.js_iframed {
           responds_to_parent do
             render :update do |page|
-              page.redirect_to(new_flight_url(:igc_tmp_file_id => @igc_tmp_file.id))
+              page.redirect_to(wizard_flights_url(:igc_tmp_file_id => @igc_tmp_file.id))
             end
           end
         }
@@ -83,7 +83,7 @@ class IgcTmpFilesController < ApplicationController
         format.js_iframed {
           responds_to_parent do
             render :update do |page|
-              page.redirect_to(new_flight_url(:igc_tmp_file_id => @igc_tmp_file.id))
+              page.redirect_to(wizard_flights_url(:igc_tmp_file_id => @igc_tmp_file.id))
             end
           end
         }
