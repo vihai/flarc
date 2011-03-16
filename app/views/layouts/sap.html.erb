@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
-  <title>Campionato Italiano di Distanza 2011</title>
+  <title>Stage Alta Performance 2011</title>
   <meta charset="UTF-8" />
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
-  <%= raw include_stylesheets :cid, :media => 'all' %>
-  <%= raw include_javascripts :cid %>
+  <%= raw include_stylesheets :sap, :media => 'all' %>
+  <%= raw include_javascripts :sap %>
   <%= csrf_meta_tag %>
 </head>
 <body>
 
 <div class="header">
   <div class="header_text">
-    Campionato Italiano di Distanza 2011
+    Stage Alta Performance 2011
   </div>
   <div class="header_right_text">
-    <% flights = Flight.joins(:flight_tags).joins(:tags).where('tags.symbol' => 'cid_2011') %>
+    <% flights = Flight.joins(:flight_tags).joins(:tags).where('tags.symbol' => 'sap_2011') %>
     <strong><%= flights.count %></strong> voli<br />
     <strong><%= fmt_distance_in_km(flights.sum(:distance).to_i)  %></strong>
   </div>
@@ -30,25 +30,8 @@
     Principale<br />
     <ul>
       <li><%= link_to('Home', root_path) %></li>
-      <li><%= link_to('Regolamento', static_path('cid/rules')) %></li>
-      <li><%= link_to('Contatti', static_path('cid/contacts')) %></li>
-    </ul>
-  </li>
-  <li>
-    Classifiche
-    <ul>
-      <li><%= link_to('Promozione', ranking_path('cid_2011_prom')) %></li>
-      <li><%= link_to('Nazionale Club', ranking_path('cid_2011_naz_club')) %></li>
-      <li><%= link_to('Nazionale 15 m', ranking_path('cid_2011_naz_15m')) %></li>
-      <li><%= link_to('Nazionale Open', ranking_path('cid_2011_naz_open')) %></li>
-      <li><%= link_to('Nazionale 13.5 m', ranking_path('cid_2011_naz_13m5')) %></li>
-    </ul>
-  </li>
-  <li>Elenchi
-    <ul>
       <li><%= link_to('Voli', calendar_flights_path(:year => Time.now.year)) %></li>
-      <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'cid_2011')) %></li>
-      <li><%= link_to('Alianti', planes_path) %></li>
+      <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'sap_2011')) %></li>
     </ul>
   </li>
   <li>
@@ -77,7 +60,7 @@
                 </td>
               </tr>
             </table>
-            <%= link_to 'Ho dimenticato la password', cid_registration_recover_password_path %>
+            <%= link_to 'Ho dimenticato la password', csvva_registration_recover_password_path, :method => 'post' %>
          <% end -%>
 <%= javascript_tag do %>
 function aaa()
@@ -109,8 +92,8 @@ function aaa()
       <ul>
       <li><%= link_to 'Profilo', auth_person.pilot %></li>
       <% if !auth_person.pilot ||
-            !auth_person.pilot.championships.include?(Championship.find_by_symbol(:cid_2011))  %>
-        <li><%= link_to 'Iscriviti al campionato', cid_registration_path %>
+            !auth_person.pilot.championships.include?(Championship.find_by_symbol(:sap_2011))  %>
+        <li><%= link_to 'Iscriviti', csvva_registration_path %>
       <% else %>
         <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
         <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>

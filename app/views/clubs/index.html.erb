@@ -1,0 +1,15 @@
+<% if !@targets.empty? then %>
+  <table class="standard clubs">
+    <caption>Club</caption>
+    <tr>
+      <th>Nome</th>
+    </tr>
+    <% for x in @targets do %>
+    <tr>
+      <td class="name">
+        <%= link_to(x.name, x) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

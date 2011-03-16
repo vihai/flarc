@@ -3,7 +3,7 @@ require 'pp'
 class StaticController < ApplicationController
 
   def index
-    redirect_to "/static/#{LAYOUTS[request.host]}/"
+    redirect_to "/static/#{current_site.to_s}/"
   end
 
   def show

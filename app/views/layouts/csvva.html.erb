@@ -145,7 +145,7 @@ function aaa()
       <ul>
       <li><%= link_to 'Profilo', auth_person.pilot %></li>
       <% if !auth_person.pilot ||
-            auth_person.pilot.championships.include?(Championship.find_by_symbol(:csvva_2011))  %>
+            !auth_person.pilot.championships.include?(Championship.find_by_symbol(:csvva_2011))  %>
         <li><%= link_to 'Iscriviti al campionato', csvva_registration_path %>
       <% else %>
         <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>

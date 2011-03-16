@@ -35,6 +35,9 @@ Flarc::Application.routes.draw do
     end
   end
 
+  aresources :clubs do
+  end
+
   aresources :plane_types do
   end
 
