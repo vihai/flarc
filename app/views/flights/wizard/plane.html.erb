@@ -46,6 +46,19 @@ Element.observe(window, 'load', function() {
 <% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
   <%= hidden_field_tag :state, @state.to_json %>
   <table class="form">
+    <% if asgard_session && asgard_session.authenticated_admin? %>
+    <tr>
+      <th><%= label_tag :pilot_id, 'Pilota' %></th>
+      <td>
+        <%= select_tag :pilot_id, options_for_select(
+                 Pilot.find(:all,
+                            :order => "core_people.last_name ASC, core_people.first_name ASC",
+                            :include => :person).collect { |p|
+                      [ p.person.name.to_s.downcase.split.each { |word| word.capitalize! }.join(' '), p.id ] })
+        %>
+      </td>
+    </tr>
+    <% end %>
     <tr>
       <th><%= label_tag :plane_id, 'Aliante' %></th>
       <td>

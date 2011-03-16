@@ -130,6 +130,7 @@ class FlightsController < RestController
         when :plane
   
           @state[:plane_id] = params[:plane_id]
+          @state[:pilot_id] = params[:pilot_id]
   
           if @state[:plane_id] != ''
             plane = Plane.find(@state[:plane_id])
@@ -186,11 +187,11 @@ class FlightsController < RestController
             igc_file.read_contents {}
             @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
   
-  #          if authenticated_admin?
-  #            @flight.pilot = @state[:pilot_id]
-  #          else
+            if asgard_session.authenticated_admin?
+              @flight.pilot = Pilot.find(@state[:pilot_id])
+            else
               @flight.pilot = auth_person.pilot
-  #          end
+            end
   
             if @state[:plane_id]
               @flight.plane = Plane.find(@state[:plane_id])
