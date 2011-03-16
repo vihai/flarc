@@ -54,7 +54,7 @@
   <li>
     <% if !asgard_session || !asgard_session.authenticated? %>
       <div class="menulogin">
-        <%= link_to('Registrati', cid_registration_path) %><br />
+        <%= link_to('Registrati', registration_path) %><br />
         <%= link_to_function('Login') do |page|
               page[:login_div].toggle 'fade', {}, 1000
             end %><br />
@@ -108,8 +108,14 @@ function aaa()
         </div>
       <ul>
       <li><%= link_to 'Profilo', auth_person.pilot %></li>
-      <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
-      <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
+      <% if !auth_person.pilot ||
+            auth_person.pilot.championships.include?(Championship.find_by_symbol(:cid_2011))  %>
+        <li><%= link_to 'Iscriviti al campionato', cid_registration_path %>
+      <% else %>
+        <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
+        <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
+      <% end %>
+
       <% if asgard_session && asgard_session.authenticated_admin? %>
         <% cnt = Flight.pending.count %>
         <% if cnt > 0 %>
@@ -143,7 +149,9 @@ function aaa()
 </div>
 
 <div id="body">
-<p style="color: orange" id="flash-message"><%= flash[:notice] %></p>
+<% flash.each do |css_class, message| %>
+<p class="<%= css_class %>"><span></span><%= message %></p>
+<% end %>
 
 <%= yield  %>
 </div>

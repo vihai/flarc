@@ -25,66 +25,24 @@ class RegistrationController < ApplicationController
 
         Ygg::Core::Transaction.new 'Registration wizard' do
 
-          pilot = nil
+          person = auth_person
 
-          if @state[:password]
-            # User is already registered
-            auth_token = Ygg::Core::HttpSession.attempt_authentication_by_fqda_and_password(
-                             @state[:email], @state[:password])
-
-            person = auth_token.identity.person
-
-            pilot_attrs = {
-                :club => Club.find(@state[:club_id]),
-                :fai_card => @state[:fai_card],
-            }
-
-            pilot = person.pilot || Pilot.new
-            person.pilot.attributes = pilot_attrs
-
-          else
-            password = Password.phonemic(8)
-
-            person = Ygg::Core::Person.new(
-                :first_name => @state[:first_name],
-                :middle_name => nil,
-                :last_name => @state[:last_name],
-                :identities => [
-                   Ygg::Core::Identity.new(
-                     :qualified => @state[:email],
-                     :is_admin => false,
-                     :credentials => [
-                       Ygg::Core::Credential::ObfuscatedPassword.new(:password => password)
-                     ]
-                   )
-                 ],
-                :tmp_telefono => @state[:phone]
-              )
-
-            pilot = Pilot.new(
-                :person => person,
-                :club => Club.find(@state[:club_id]),
-                :fai_card => @state[:fai_card],
-              )
-          end
+          pilot = person.pilot || Pilot.new(:person => person)
+          pilot.attributes = {
+            :club => Club.find_by_symbol(:acao)
+          }
 
           csvva = Championship.find_by_symbol(:csvva_2011)
 
           cp = pilot.championship_pilots.where(:championship_id => csvva.id).first ||
                  ChampionshipPilot.new(:pilot => pilot, :championship => csvva)
-          cp.csvva_category = @state[:csvva_category]
+          cp.csvva_pilot_level = @state[:csvva_category]
           cp.save!
 
-          if @state[:fb_user]
-            person.fb_uid = facebook_uid
-          end
-
-          person.save!
           pilot.save!
-
-          Cid::RegistrationNotifier.registration_complete(@state[:email], password).deliver
-          Cid::RegistrationNotifier.new_pilot_registered(pilot).deliver
         end
+
+        @state[:state] = :done
       end
     end
 

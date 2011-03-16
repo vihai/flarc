@@ -9,6 +9,8 @@ require './app/models/pilot'
 require '../yggdra/plugins/core_models/app/models/ygg/core/person'
 require '../yggdra/plugins/core_models/app/models/ygg/core/identity'
 
+::Pilot
+
 ::Ygg::Core::Person.class_eval do
   has_one :pilot,
           :class_name => '::Pilot'

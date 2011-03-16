@@ -17,7 +17,7 @@ class RegistrationController < ApplicationController
         when :email
  
           if params[:email].empty? && !(params[:email] =~ /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\z/)
-            flash[:notice] = "È necessario indicare un indirizzo e-mail valido"
+            flash.now[:error] = "È necessario indicare un indirizzo e-mail valido"
             throw :done
           end
           @state[:email] = params[:email]
@@ -44,18 +44,18 @@ class RegistrationController < ApplicationController
           if auth_token
             @state[:state] = :championship_data
           else
-            flash[:notice] = "Password non valida"
+            flash.now[:error] = "Password non valida"
           end
   
         when :personal_data
           if params[:first_name].empty?
-            flash[:notice] = "Il nome è obbligatorio"
+            flash.now[:error] = "Il nome è obbligatorio"
             throw :done
           end
           @state[:first_name] = params[:first_name]
   
           if params[:last_name].empty?
-            flash[:notice] = "Il cognome è obbligatorio"
+            flash.now[:error] = "Il cognome è obbligatorio"
             throw :done
           end
           @state[:last_name] = params[:last_name]
@@ -115,6 +115,9 @@ class RegistrationController < ApplicationController
                    :confidence => :medium,
                    :credential => credential,
                    :method => :fqda_and_password))
+
+          headers['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
+          cookies['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
 
           if current_site == :cid
             redirect_to cid_registration_path

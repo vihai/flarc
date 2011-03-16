@@ -102,26 +102,6 @@ class FlightsController < RestController
 
   def wizard
 
-    championship = Championship.find_by_symbol(:cid_2011)
-    cp =  auth_person.pilot.championship_pilots.find_by_championship_id(championship.id)
-
-    if cp
-      if cp.cid_category == 'prom'
-        @cid_available_tags = [
-          Tag.find_by_symbol('cid_2011_prom')
-        ]
-      else
-        @cid_available_tags = [
-          Tag.find_by_symbol('cid_2011_naz_club'),
-          Tag.find_by_symbol('cid_2011_naz_open'),
-          Tag.find_by_symbol('cid_2011_naz_15m'),
-          Tag.find_by_symbol('cid_2011_naz_13m5')
-        ]
-      end
-    else
-      raise "NOT SUBSCRIBED"
-    end
-
     catch :done do
       if request.method == 'GET'
         @state = {}
@@ -134,16 +114,12 @@ class FlightsController < RestController
         @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
         @igc_file.read_contents
   
-        if @igc_file.takeoff_time < Time.now - 15.days
-          flash[:notice] = "Il volo ha una data di decollo (#{@igc_file.takeoff_time}) precedente al limite massimo di invio volo"
-          @state[:state] = :permanent_error
-          throw :done
-        end
-  
         if @igc_file.glider_id
           plane = Plane.find_by_registration(@igc_file.glider_id.strip.upcase)
           @state[:plane_id] = plane ? plane.id : nil
         end
+
+## TODO CHECK flight duplicate
   
       else
         @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
@@ -160,7 +136,7 @@ class FlightsController < RestController
             @state[:plane_type_id] = plane.plane_type.id
   
             if plane.plane_type.configurations.empty?
-              @state[:state] = :cid_flight_data
+              @state[:state] = :flight_data
             else
               @state[:state] = :plane_configuration
             end
@@ -170,13 +146,13 @@ class FlightsController < RestController
   
         when :new_plane
           if params[:plane_type_id].empty?
-            flash[:notice] = "È necessario selezionare il tipo di aliante"
+            flash.now[:error] = "È necessario selezionare il tipo di aliante"
             throw :done
           end
           @state[:plane_type_id] = params[:plane_type_id]
 
           if params[:plane_registration].empty?
-            flash[:notice] = "È necessario indicare le marche dell'aliante"
+            flash.now[:error] = "È necessario indicare le marche dell'aliante"
             throw :done
           end
           @state[:plane_registration] = params[:plane_registration]
@@ -184,58 +160,23 @@ class FlightsController < RestController
           plane_type = PlaneType.find(@state[:plane_type_id])
   
           if plane_type.configurations.empty?
-            @state[:state] = :cid_flight_data
+            @state[:state] = :flight_data
           else
             @state[:state] = :plane_configuration
           end
   
         when :plane_configuration
           if params[:plane_configuration_id].empty?
-            flash[:notice] = "È necessario indicare la configurazione dell'aliante"
+            flash.now[:error] = "È necessario indicare la configurazione dell'aliante"
             throw :done
           end
           @state[:plane_configuration_id] = params[:plane_configuration_id]
 
-          @state[:state] = :cid_flight_data
-
-        when :cid_flight_data
-          if params[:cid_tag_id].empty?
-            flash[:notice] = "È necessario selezionare una classe"
-            throw :done
-          end
-          @state[:cid_tag_id] = params[:cid_tag_id]
-
-          if params[:cid_task_eval].empty?
-            flash[:notice] = "È necessario selezionare il tipo di valutazione del tema"
-            throw :done
-          end
-          @state[:cid_task_eval] = params[:cid_task_eval]
-
-          if params[:cid_task_type].empty?
-            flash[:notice] = "È necessario selezionare il tipo di tema"
-            throw :done
-          end
-          @state[:cid_task_type] = params[:cid_task_type]
-
-          if params[:cid_task_completed].empty?
-            flash[:notice] = "È necessario selezionare se il tema è stato o meno completato"
-            throw :done
-          end
-          @state[:cid_task_completed] = params[:cid_task_completed]
-
-          if params[:cid_distance].empty? || !(params[:cid_distance] =~ /^[0-9]+$/)
-            flash[:notice] = "È necessario specificare una distanza valida"
-            throw :done
-          end
-          @state[:cid_distance] = params[:cid_distance]
-  
-          @state[:state] = :flight_data
-  
         when :flight_data
           @state[:passenger] = params[:passenger]
                                
           @state[:notes] = params[:notes]
-  
+
           Ygg::Core::Transaction.new 'Flight submission' do
             @flight = Flight.new
   
@@ -268,17 +209,6 @@ class FlightsController < RestController
             @flight.notes_public = @state[:notes]
             @flight.private = false
   
-            @flight.flight_tags << FlightTag.new(
-              :flight => @flight,
-              :tag => Tag.find(@state[:cid_tag_id]),
-              :status => :pending,
-              :data => {
-                :distance => @state[:cid_distance],
-                :task_eval => @state[:cid_task_eval],
-                :task_type => @state[:cid_task_type],
-                :task_completed => @state[:cid_task_completed]
-              })
-  
             @flight.save!
   
             File.rename(igc_tmp_file.filename, @flight.igc_file_path)
@@ -286,6 +216,15 @@ class FlightsController < RestController
           end
   
           @state[:state] = :done
+
+          if current_site == :cid
+            redirect_to cid_flight_wizard_path(:flight_id => @flight.id)
+            return
+          elsif current_site == :csvva
+            redirect_to csvva_flight_wizard_path(:flight_id => @flight.id)
+            return
+          else
+          end
         end
       end
     end
@@ -335,7 +274,7 @@ class FlightsController < RestController
     update_successful = @flight.update_attributes(params[:flight])
 
     if update_successful
-      flash[:notice] = 'Flight was successfully updated.'
+      flash.now[:notice] = 'Flight was successfully updated.'
 
       if params[:publish_to_facebook]
         facebook_user.session.post 'facebook.stream.publish',

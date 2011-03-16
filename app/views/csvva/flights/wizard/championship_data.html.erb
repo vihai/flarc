@@ -1,0 +1,16 @@
+<h2>Iscrizione del volo al campionato CSVVA</h2>
+<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+  <%= hidden_field_tag :state, @state.to_json %>
+  <table class="form">
+    <tr>
+      <th><%= label_tag :csvva_distance, 'Distanza valida' %></th>
+      <td><%= text_field_tag :csvva_distance, @state[:csvva_distance], :size => 5 %> km</td>
+    </tr>
+
+    <tr>
+      <td colspan=2 class="submit">
+        <%= submit_tag 'Fine' %>
+      </td>
+    </tr>
+  </table>
+<% end -%>

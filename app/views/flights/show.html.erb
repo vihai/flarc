@@ -109,7 +109,9 @@
 <% end %>
 <% if auth_person && auth_person.pilot == @target.pilot %>
   <% if @target.photos.empty? %>
-    <%= link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url) %>
+    <%=
+#link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url)
+ %>
   <% else %>
     <%= link_to('Modifica fotografie', tag_photos_flight_url) %>
   <% end %>
@@ -153,84 +155,10 @@ Element.observe(window, 'load', function() {
   poly.setMap(map);
 
   map.fitBounds(bounds);
-
-  var logo = new google.maps.ScreenOverlay(
-                  "<%= image_url("logo_acao_maps.png") %>",
-                  new google.maps.ScreenPoint(15, 40, 'pixel', 'pixel'),
-                  new google.maps.ScreenPoint(0, 0, 'fraction', 'fraction'),
-                  new google.maps.ScreenSize(0,0));
 });
 
-
-//
-//  var base = new google.maps.Icon();
-//  base.iconSize=new google.maps.Size(32,32);
-//  base.shadowSize=new google.maps.Size(56,32);
-//  base.iconAnchor=new google.maps.Point(16,32);
-//  base.infoWindowAnchor=new google.maps.Point(16,0);
-//          
-//  var icon_alptherm = new google.maps.Icon(base,
-//       "http://maps.google.com/mapfiles/kml/pal4/icon30.png", null,
-//       "http://maps.google.com/mapfiles/kml/pal4/icon30s.png");
-//  var icon_photo = new google.maps.Icon(base,
-//       "http://maps.google.com/mapfiles/kml/pal4/icon46.png", null,
-//       "http://maps.google.com/mapfiles/kml/pal4/icon46s.png");
-//
-//  var track = new google.maps.Polyline.fromEncoded({
-//    color: "#FF0000",
-//    weight: 3,
-//    opacity: 0.6,
-//    points: "<%= @target.encoded_polyline %>",
-//    levels: "BBB",
-//    zoomFactor: 32,
-//    numLevels: 4
-//  });
-//
-//  var track_bounds = track.getBounds();
-//
-//  map = new google.maps.Map2(document.getElementById("map"));
-//  map.setCenter(track_bounds.getCenter(), map.getBoundsZoomLevel(track_bounds), G_PHYSICAL_MAP);
-//  map.setUIToDefault();
-//  map.enableContinuousZoom();
-//  map.enableGoogleBar();
-//  map.addOverlay(logo);
-//  map.addOverlay(track);
-//
-//  <% @target.photos.each do |photo| %>
-//   {
-//    var marker;
-//    marker = new google.maps.Marker(new google.maps.LatLng(<%=photo.lat %>, <%=photo.lon%>), icon_photo);
-//
-//    google.maps.Event.addListener(marker, "click", function() {
-//    
-//        this.openInfoWindowHtml('<div style="width: 240px; height: 240px; margin: 0; padding: 0"><%= link_to image_tag(photo.flickr_url('m')), photo.flickr_url('-'), :rel => "lightbox[gallery]", :title => photo.caption, :rev => photo.url %></div>', {maxWidth:640});
-//    });
-//
-//    map.addOverlay(marker);
-//   }
-//  <% end %>
-//
-//  <% AlpthermSource.all.each do |source| %>
-//    <% entry = source.entries.first(:conditions => [ 'taken_at::date = ?::date', @target.takeoff_time ]) %>
-//    <% next if entry.nil? %>
-//   {
-//    var marker;
-//    marker = new google.maps.Marker(new google.maps.LatLng(<%=source.lat %>, <%=source.lon%>), icon_alptherm);
-//
-//    google.maps.Event.addListener(marker, "click", function() {
-//        this.openInfoWindowHtml('<iframe style="width: 640px; height: 350px; margin: 0; padding: 0;" src="<%= alptherm_history_entry_path(entry) %>" />', {maxWidth:640});
-//    });
-//
-//    map.addOverlay(marker);
-//   }
-//  <% end %>
-//})
-//
-//Element.observe(window, 'unload', function() {
-//  GUnload();
-//})
+<% end %>
 <% end %>
 
-<% end %>
 </div>
 <div id="edit_div" style="display: none"></div>

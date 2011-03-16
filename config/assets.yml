@@ -26,9 +26,11 @@ javascripts:
 
 stylesheets:
   cid:
+    - public/stylesheets/common.css
     - public/stylesheets/cid/**/*.css
 
   csvva:
+    - public/stylesheets/common.css
     - public/stylesheets/csvva/**/*.css
 
   asgard:

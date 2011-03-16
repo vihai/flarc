@@ -55,12 +55,14 @@ Flarc::Application.routes.draw do
 
 
   namespace :csvva do
-    match  'registration' => 'registration#wizard', :as => :registration
+    match 'flights' => 'flights#wizard', :as => :flight_wizard
+    match 'registration' => 'registration#wizard', :as => :registration
     match 'registration/recover_password' => 'registration#recover_password'
     post 'registration/login_and_associate' => 'registration#login_and_associate'
   end
 
   namespace :cid do
+    match 'flights' => 'flights#wizard', :as => :flight_wizard
     match  'registration' => 'registration#wizard', :as => :registration
     match 'registration/recover_password' => 'registration#recover_password'
     post 'registration/login_and_associate' => 'registration#login_and_associate'
