@@ -9,8 +9,12 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 LAYOUTS = {
   'campionato.csvva.it' => 'csvva',
   'csvva.orlandi.com' => 'csvva',
+  'csvva-dev.orlandi.com' => 'csvva',
   'www.cidvv.it' => 'cid',
-  'cid.orlandi.com' => 'cid'
+  'cid.orlandi.com' => 'cid',
+  'cid-dev.orlandi.com' => 'cid',
+  'sap.orlandi.com' => 'sap',
+  'sap-dev.orlandi.com' => 'sap'
 }
 
 module Flarc
