@@ -38,18 +38,32 @@ class FlightsController < ApplicationController
           end
           @state[:csvva_distance] = params[:csvva_distance]
   
+          @state[:state] = :flight_data
+ 
+        when :flight_data
+          @state[:passenger] = params[:passenger]
+
+          @state[:notes] = params[:notes]
+
           @state[:state] = :done
-  
-          @flight = Flight.find(@state[:flight_id])
-          @flight.flight_tags << FlightTag.new(
-            :flight => @flight,
-            :tag => Tag.find_by_symbol(:csvva_2011),
-            :status => :pending,
-            :data => {
-              :distance => @state[:csvva_distance],
-            })
-          @flight.save!
-  
+
+          Ygg::Core::Transaction.new 'Flight submission' do
+            @flight = Flight.find(@state[:flight_id])
+            @flight.flight_tags << FlightTag.new(
+              :flight => @flight,
+              :tag => Tag.find_by_symbol(:csvva_2011),
+              :status => :pending,
+              :data => {
+                :distance => @state[:csvva_distance],
+              })
+
+            @flight.passenger = Ygg::Core::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
+                                           'last_name ILIKE ?', @state[:passenger] ] ).first
+            @flight.passenger_name = @state[:passenger]
+            @flight.notes_public = @state[:notes]
+
+            @flight.save!
+          end
         end
       end
     end
@@ -61,6 +75,18 @@ class FlightsController < ApplicationController
 
     render :template => "csvva/flights/wizard/#{@state[:state]}"
   end
+
+  def autocomplete_passenger
+
+    @items = Ygg::Core::Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
+                       params['passenger'].downcase + '%',
+                       params['passenger'].downcase + '%' ]).
+                         order('last_name ASC, first_name ASC').
+                         limit(10)
+
+    render :inline => "<%= auto_complete_result @items, 'name' %>"
+  end
+
 
 end
 

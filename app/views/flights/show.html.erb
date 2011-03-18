@@ -130,7 +130,7 @@
 </div>
 <%= javascript_tag do -%>
 
-Element.observe(window, 'load', function() {
+$(document).ready(function() {
 
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 8,

@@ -1,0 +1,53 @@
+
+div.header
+{
+ height: 74px;
+ background: #3695cd url(../../images/csvva/header.jpg) no-repeat left top;
+}
+
+div.header_text
+{
+ display: none;
+}
+
+div.header_right_text
+{
+ font-size: 150%;
+}
+
+div#menu
+{
+ position: absolute;
+ width: 163px;
+ top: 74px;
+ background: #97cce9 url(../../images/csvva/menu_sky.jpg) no-repeat left top;
+ font-weight: bold;
+}
+
+div#menu div.logo
+{
+ margin: 1em;
+ text-align: center;
+}
+
+div#menu ul
+{
+ list-style-type: none;
+ padding: 1em;
+ margin: 0;
+}
+
+div#menu ul > li
+{
+}
+
+div#menu ul > li:hover
+{
+ list-style-type: circle;
+}
+
+div#menu ul > li a:hover
+{
+ color: #700;
+ background-color:  transparent;
+}

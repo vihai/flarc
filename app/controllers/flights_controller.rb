@@ -41,17 +41,6 @@ class FlightsController < RestController
 
 
 
-  def autocomplete_passenger
-
-    @items = Ygg::Core::Person.where([ 'LOWER(first_name) LIKE ? OR LOWER(last_name) LIKE ?',
-                       params['passenger'].downcase + '%',
-                       params['passenger'].downcase + '%' ]).
-                         order('last_name ASC, first_name ASC').
-                         limit(10)
-
-    render :inline => "<%= auto_complete_result @items, 'name' %>"
-  end
-
   def autocomplete_plane
     @items = Plane.where([ 'LOWER(registration) LIKE ?', '%' + params['flight']['plane'].downcase + '%' ]).
                    order('registration ASC').
@@ -136,7 +125,7 @@ class FlightsController < RestController
             @state[:plane_type_id] = plane.plane_type.id
   
             if plane.plane_type.configurations.empty?
-              @state[:state] = :flight_data
+              @state[:state] = :done
             else
               @state[:state] = :plane_configuration
             end
@@ -160,7 +149,7 @@ class FlightsController < RestController
           plane_type = PlaneType.find(@state[:plane_type_id])
   
           if plane_type.configurations.empty?
-            @state[:state] = :flight_data
+            @state[:state] = :done
           else
             @state[:state] = :plane_configuration
           end
@@ -170,13 +159,11 @@ class FlightsController < RestController
             flash.now[:error] = "È necessario indicare la configurazione dell'aliante"
             throw :done
           end
+
           @state[:plane_configuration_id] = params[:plane_configuration_id]
+        end
 
-        when :flight_data
-          @state[:passenger] = params[:passenger]
-                               
-          @state[:notes] = params[:notes]
-
+        if @state[:state] = :done
           Ygg::Core::Transaction.new 'Flight submission' do
             @flight = Flight.new
   
@@ -186,11 +173,11 @@ class FlightsController < RestController
             igc_file.read_contents {}
             @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
   
-  #          if authenticated_admin?
-  #            @flight.pilot = @state[:pilot_id]
-  #          else
-              @flight.pilot = auth_person.pilot
-  #          end
+#            if authenticated_admin?
+#              @flight.pilot = @state[:pilot_id]
+#            else
+             @flight.pilot = auth_person.pilot
+#            end
   
             if @state[:plane_id]
               @flight.plane = Plane.find(@state[:plane_id])
@@ -203,10 +190,6 @@ class FlightsController < RestController
               @flight.plane_type_configuration = PlaneTypeConfiguration.find(@state[:plane_type_configuration_id])
             end
   
-            @flight.passenger = Ygg::Core::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
-                                           'last_name ILIKE ?', @state[:passenger] ] ).first
-            @flight.passenger_name = @state[:passenger]
-            @flight.notes_public = @state[:notes]
             @flight.private = false
   
             @flight.save!
@@ -215,8 +198,6 @@ class FlightsController < RestController
             igc_tmp_file.destroy
           end
   
-          @state[:state] = :done
-
           if current_site == :cid
             redirect_to cid_flight_wizard_path(:flight_id => @flight.id)
             return
@@ -226,6 +207,7 @@ class FlightsController < RestController
           else
           end
         end
+
       end
     end
 

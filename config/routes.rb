@@ -23,7 +23,6 @@ Flarc::Application.routes.draw do
       get :new_pilot_changed
       get :new_plane_changed
       get :new_plane_type_changed
-      get :autocomplete_passenger
       get :autocomplete_plane
     end
   end
@@ -59,6 +58,7 @@ Flarc::Application.routes.draw do
 
   namespace :csvva do
     match 'flights' => 'flights#wizard', :as => :flight_wizard
+    get 'flights/autocomplete_passenger' => 'flights#autocomplete_passenger', :as => :autocomplete_passenger
     match 'registration' => 'registration#wizard', :as => :registration
     match 'registration/recover_password' => 'registration#recover_password'
     post 'registration/login_and_associate' => 'registration#login_and_associate'

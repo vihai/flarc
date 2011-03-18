@@ -1,4 +1,8 @@
 <h2>Dati per il CID</h2>
+<p>
+  Per le istruzioni sulla compilazione di questo form fare riferimento
+  all'<%= link_to 'Allegato C', '/cid/Allegato C-invio voli.pdf' %> del regolamento.
+</p>
 <% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
   <%= hidden_field_tag :state, @state.to_json %>
   <table class="form">

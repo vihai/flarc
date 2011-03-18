@@ -42,3 +42,5 @@ gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
 gem 'vihai-password', '>= 1.2.0', :git => 'https://github.com/vihai/vihai-password.git'
 
 #gem 'facebooker', :git => 'git://github.com/joren/facebooker.git', :branch => 'rails3'
+
+gem 'jquery-rails', '>= 0.2.6'

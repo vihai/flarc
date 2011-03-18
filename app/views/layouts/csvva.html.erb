@@ -91,13 +91,11 @@
     <% if !asgard_session || !asgard_session.authenticated? %>
       <div class="menulogin">
         <%= link_to('Registrati', registration_path) %><br />
-        <%= link_to_function('Login') do |page|
-              page[:login_div].toggle 'fade', {}, 1000
-            end %><br />
+        <%= link_to_function 'Login', "jQuery('#login_div').toggle(300)" %><br />
         <br />
         <div id="login_div" style="display: none;">
           <%= form_tag ygg_asgard_session_authenticate_by_fqda_and_password_path,
-                         { :id => 'login-form', :onSubmit => 'aaa(); return false;', :class => 'standard', :method => :post } do |f| -%>
+                         { :id => 'login-form', :remote => true, :class => 'standard', :method => :post } do |f| -%>
             <table>
               <tr>
                 <th><%= label_tag :username, 'e-Mail' %></th>
@@ -115,16 +113,6 @@
             </table>
             <%= link_to 'Ho dimenticato la password', csvva_registration_recover_password_path, :method => 'post' %>
          <% end -%>
-<%= javascript_tag do %>
-function aaa()
-{
- $('login-form').request({
-  onComplete: function(){ window.location.reload(); }
- });
-
- return false;
-}
-<% end %>
          <iframe id="login_iframe" name="login_iframe" width="0" height="0" frameborder="0" style="display: none;"></iframe>
         </div>
 <!--        Login via Facebook:<br />
@@ -174,7 +162,7 @@ function aaa()
       <% if auth_method == :facebook %>
           <%= link_to_function 'Logout', 'FB.logout()' %>
       <% else %>
-          <%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true %>
+          <%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %>
       <% end %>
       </li>
       </ul>
@@ -191,5 +179,13 @@ function aaa()
 
 <%= yield  %>
 </div>
+
+<%= javascript_tag do %>
+jQuery(function($) {
+  $("#login-form").bind("ajax:complete", function(event, data, status, xhr) { window.location.reload(); });
+  $("#logout_link").bind("ajax:complete", function(event, data, status, xhr) { window.location.reload(); });
+});
+<% end %>
+
 </body>
 </html>
