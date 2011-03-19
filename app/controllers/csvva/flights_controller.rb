@@ -32,7 +32,7 @@ class FlightsController < ApplicationController
 #          throw :done
 #        end
 
-          if params[:csvva_distance].empty? || !(params[:csvva_distance] =~ /^[0-9]+$/)
+          if params[:csvva_distance].empty? || !(params[:csvva_distance] =~ /^[0-9,.]+$/
             flash.now[:error] = "È necessario specificare una distanza valida"
             throw :done
           end

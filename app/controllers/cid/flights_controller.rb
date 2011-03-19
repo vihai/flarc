@@ -56,7 +56,7 @@ class FlightsController < ApplicationController
           end
           @state[:cid_task_completed] = params[:cid_task_completed]
 
-          if params[:cid_distance].empty? || !(params[:cid_distance] =~ /^[0-9]+$/)
+          if params[:cid_distance].empty? || !(params[:cid_distance] =~ /^[0-9.,]+$/)
             flash.now[:error] = "È necessario specificare una distanza valida"
             throw :done
           end
