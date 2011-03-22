@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   layout :select_proper_layout
 
   def select_proper_layout
-    return LAYOUTS[request.host]
+    return LAYOUTS[request.host] || 'flarc'
   end
 
   def current_site

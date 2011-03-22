@@ -50,24 +50,19 @@ $(document).ready(function() {
     <tr>
       <th><%= label_tag :pilot_id, 'Pilota' %></th>
       <td>
-        <%= select_tag :pilot_id, options_for_select(
+        <%= select_tag :pilot_id, options_for_select(['', ''] +
                  Pilot.find(:all,
                             :order => "core_people.last_name ASC, core_people.first_name ASC",
                             :include => :person).collect { |p|
-                      [ p.person.name.to_s.downcase.split.each { |word| word.capitalize! }.join(' '), p.id ] })
+                      [ p.person.name.to_s.downcase.split.each { |word| word.capitalize! }.join(' '), p.id ] },
+                      @state[:pilot_id])
         %>
       </td>
     </tr>
     <% end %>
     <tr>
-      <th><%= label_tag :plane_id, 'Marche' %></th>
-      <td>
-<%= select_tag :plane_id,
-                options_for_select([[ 'Nuovo', nil ]] +
-                  Plane.order('registration ASC').collect { |p|
-                      [ p.registration, p.id ] }, @state[:plane_id]), {}
-%>
-</td>
+      <th><%= label_tag :plane_registration, 'Marche' %></th>
+      <td><%= text_field_tag :plane_registration, @state[:plane_registration] %></td>
     </tr>
     <tr>
       <td colspan=2 class="submit">

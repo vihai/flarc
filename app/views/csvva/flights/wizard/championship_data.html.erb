@@ -3,7 +3,7 @@
   <%= hidden_field_tag :state, @state.to_json %>
   <table class="form">
     <tr>
-      <th><%= label_tag :csvva_distance, 'Distanza valida' %></th>
+      <th><%= label_tag :csvva_distance, 'Distanza provvisoria' %></th>
       <td><%= text_field_tag :csvva_distance, @state[:csvva_distance], :size => 5 %> km</td>
     </tr>
 
@@ -13,4 +13,10 @@
       </td>
     </tr>
   </table>
+<p>
+ La distanza va calcolata con SeeYou ottimizzazione "FAI alianti" con max. 3 punti di virata.
+</p>
+<p>
+ Lasciare in bianco per farla calcolare dal nostro esimio segretario :)
+</p>
 <% end -%>

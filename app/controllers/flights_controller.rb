@@ -98,16 +98,6 @@ class FlightsController < RestController
         @state[:final] = false
         @state[:igc_tmp_file_id] = params[:igc_tmp_file_id]
   
-        @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
-  
-        @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
-        @igc_file.read_contents
-  
-        if @igc_file.glider_id
-          plane = Plane.find_by_registration(@igc_file.glider_id.strip.upcase)
-          @state[:plane_id] = plane ? plane.id : nil
-        end
-
 ## TODO CHECK flight duplicate
   
       else
@@ -117,14 +107,28 @@ class FlightsController < RestController
   
         case @state[:state]
         when :plane
+          if params[:plane_registration].empty? 
+            flash.now[:error] = "È necessario specificare la marche dell'aliante"
+            throw :done
+          end
+
+          params[:plane_registration].strip!
+          params[:plane_registration].upcase!
   
-          @state[:plane_id] = params[:plane_id]
+          if !(params[:plane_registration] =~ /^([A-Z]+-[A-Z0-9]+|N[0-9]+[A-Z][A-Z])$/)
+            flash.now[:error] = "Le marche hanno un formato non riconosciuto"
+            throw :done
+          end
+          @state[:plane_registration] = params[:plane_registration]
+
           @state[:pilot_id] = params[:pilot_id]
   
-          if @state[:plane_id] != ''
-            plane = Plane.find(@state[:plane_id])
+          plane = Plane.find_by_registration(@state[:plane_registration])
+
+          if plane
+            @state[:plane_id] = plane.id
             @state[:plane_type_id] = plane.plane_type.id
-  
+
             if plane.plane_type.configurations.empty?
               @state[:state] = :done
             else
@@ -133,7 +137,7 @@ class FlightsController < RestController
           else
             @state[:state] = :new_plane
           end
-  
+
         when :new_plane
           if params[:plane_type_id].empty?
             flash.now[:error] = "È necessario selezionare il tipo di aliante"
@@ -141,12 +145,6 @@ class FlightsController < RestController
           end
           @state[:plane_type_id] = params[:plane_type_id]
 
-          if params[:plane_registration].empty?
-            flash.now[:error] = "È necessario indicare le marche dell'aliante"
-            throw :done
-          end
-          @state[:plane_registration] = params[:plane_registration]
-  
           plane_type = PlaneType.find(@state[:plane_type_id])
   
           if plane_type.configurations.empty?
@@ -210,6 +208,24 @@ class FlightsController < RestController
         end
 
       end
+    end
+
+    # Prepare variables for the form
+    case @state[:state]
+    when :plane
+      @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
+  
+      @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
+      @igc_file.read_contents
+  
+      if @igc_file.glider_id
+        @state[:plane_registration] = @igc_file.glider_id.strip.upcase
+      end
+
+      person = Ygg::Core::Person.find_by_sql(["SELECT * FROM core_people" +
+                " ORDER BY similarity(LOWER(first_name || ' ' || last_name), ?) DESC LIMIT 1",
+                @igc_file.pilot_name.downcase ]).first
+      @state[:pilot_id] = person.pilot.id if person && person.pilot
     end
 
     render :template => "flights/wizard/#{@state[:state]}"

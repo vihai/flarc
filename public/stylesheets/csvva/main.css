@@ -15,6 +15,11 @@ div.header_right_text
  font-size: 150%;
 }
 
+div#body
+{
+ top: 74px;
+}
+
 div#menu
 {
  position: absolute;
