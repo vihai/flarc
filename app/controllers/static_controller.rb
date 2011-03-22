@@ -7,6 +7,10 @@ class StaticController < ApplicationController
   end
 
   def show
-    render :action => "static/#{params[:path]}"
+    begin
+      render :action => "static/#{params[:path]}"
+    rescue ActionView::MissingTemplate
+      render :template => "public/404", :layout => false, :status => 404
+    end
   end
 end
