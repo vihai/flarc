@@ -42,7 +42,7 @@ class RegistrationController < ApplicationController
   #        else
   
           if auth_token
-            @state[:state] = :championship_data
+            @state[:state] = :done
           else
             flash.now[:error] = "Password non valida"
           end
@@ -63,69 +63,74 @@ class RegistrationController < ApplicationController
           identity = nil
           credential = nil
 
-          Ygg::Core::Transaction.new 'Registration wizard' do
-  
-            pilot = nil
-  
-            if @state[:password]
-              # User is already registered
-              auth_token = Ygg::Core::HttpSession.attempt_authentication_by_fqda_and_password(
-                               @state[:email], @state[:password])
+          @state[:state] = :done
+        end
+      end
 
-              identity = auth_token.identity
-              credential = auth_token.credential
-              person = identity.person
-            else
-              password = Password.phonemic(8)
+      if @state[:state] == :done
 
-              credential = Ygg::Core::Credential::ObfuscatedPassword.new(:password => password)
-              identity = Ygg::Core::Identity.new(
-                           :qualified => @state[:email],
-                           :is_admin => false,
-                           :credentials => [ credential ]
-                         )
+        Ygg::Core::Transaction.new 'Registration wizard' do
   
-              person = Ygg::Core::Person.new(
-                  :first_name => @state[:first_name],
-                  :middle_name => nil,
-                  :last_name => @state[:last_name],
-                  :identities => [ identity ],
-                  :tmp_telefono => @state[:phone]
-                )
-            end
+          pilot = nil
   
-            if @state[:fb_user]
-              person.fb_uid = facebook_uid
-            end
-  
-            person.save!
+          if @state[:password]
+            # User is already registered
+            auth_token = Ygg::Core::HttpSession.attempt_authentication_by_fqda_and_password(
+                             @state[:email], @state[:password])
 
-            if current_site == :cid
-              Cid::RegistrationNotifier.registration_complete(@state[:email], password).deliver
-            elsif current_site == :csvva
-              Csvva::RegistrationNotifier.registration_complete(@state[:email], password).deliver
-            else
-              RegistrationNotifier.registration_complete(@state[:email], password).deliver
-            end
+            identity = auth_token.identity
+            credential = auth_token.credential
+            person = identity.person
+          else
+            password = Password.phonemic(8)
+
+            credential = Ygg::Core::Credential::ObfuscatedPassword.new(:password => password)
+            identity = Ygg::Core::Identity.new(
+                         :qualified => @state[:email],
+                         :is_admin => false,
+                         :credentials => [ credential ]
+                       )
+  
+            person = Ygg::Core::Person.new(
+                :first_name => @state[:first_name],
+                :middle_name => nil,
+                :last_name => @state[:last_name],
+                :identities => [ identity ],
+                :tmp_telefono => @state[:phone]
+              )
           end
-
-	  @asgard_session ||= Ygg::Core::HttpSession.create(request.env)
-          @asgard_session.authenticated!(Ygg::Core::AuthenticationToken.new(
-                   :identity => identity,
-                   :confidence => :medium,
-                   :credential => credential,
-                   :method => :fqda_and_password))
-
-          headers['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
-          cookies['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
+  
+          if @state[:fb_user]
+            person.fb_uid = facebook_uid
+          end
+  
+          person.save!
 
           if current_site == :cid
-            redirect_to cid_registration_path
-            return
+            Cid::RegistrationNotifier.registration_complete(@state[:email], password).deliver
           elsif current_site == :csvva
-            redirect_to csvva_registration_path
-            return
+            Csvva::RegistrationNotifier.registration_complete(@state[:email], password).deliver
+          else
+            RegistrationNotifier.registration_complete(@state[:email], password).deliver
           end
+        end
+
+        @asgard_session ||= Ygg::Core::HttpSession.create(request.env)
+        @asgard_session.authenticated!(Ygg::Core::AuthenticationToken.new(
+                 :identity => identity,
+                 :confidence => :medium,
+                 :credential => credential,
+                 :method => :fqda_and_password))
+
+        headers['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
+        cookies['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
+
+        if current_site == :cid
+          redirect_to cid_registration_path
+          return
+        elsif current_site == :csvva
+          redirect_to csvva_registration_path
+          return
         end
       end
     end
