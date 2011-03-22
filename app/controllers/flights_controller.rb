@@ -114,17 +114,17 @@ class FlightsController < RestController
 
           params[:plane_registration].strip!
           params[:plane_registration].upcase!
-  
-          if !(params[:plane_registration] =~ /^([A-Z]+-[A-Z0-9]+|N[0-9]+[A-Z][A-Z])$/)
+
+          # FIXME: Laos and Rwanda registrations have 3 and 4 chars prefixex
+          if !(params[:plane_registration] =~ /^([A-Z0-9]{1,2}-[A-Z0-9]+|N[0-9]+[A-Z][A-Z])$/)
             flash.now[:error] = "Le marche hanno un formato non riconosciuto"
             throw :done
           end
           @state[:plane_registration] = params[:plane_registration]
 
           @state[:pilot_id] = params[:pilot_id]
-  
+ 
           plane = Plane.find_by_registration(@state[:plane_registration])
-
           if plane
             @state[:plane_id] = plane.id
             @state[:plane_type_id] = plane.plane_type.id
@@ -160,9 +160,10 @@ class FlightsController < RestController
           end
 
           @state[:plane_configuration_id] = params[:plane_configuration_id]
+          @state[:state] = :done
         end
 
-        if @state[:state] = :done
+        if @state[:state] == :done
           Ygg::Core::Transaction.new 'Flight submission' do
             @flight = Flight.new
   
@@ -181,7 +182,7 @@ class FlightsController < RestController
             if @state[:plane_id]
               @flight.plane = Plane.find(@state[:plane_id])
             else
-              @flight.plane = Plane.new(:plane_registration => @state[:plane_registration],
+              @flight.plane = Plane.new(:registration => @state[:plane_registration],
                                         :plane_type => PlaneType.find(@state[:plane_type_id]))
             end
   
