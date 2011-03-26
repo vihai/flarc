@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def auth_person
-    asgard_session ? asgard_session.auth_identity.person : nil
+    asgard_session && asgard_session.authenticated? ? asgard_session.auth_identity.person : nil
   end
 
   def load_session
