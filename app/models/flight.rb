@@ -69,13 +69,15 @@ class Flight < Ygg::PublicModel
 
   def update_from_igcfile(igc_file, original_filename = nil)
 
-    person = Ygg::Core::Person.first(
-      :conditions => [ 'LOWER(first_name||last_name) = ? OR ' +
-                       'LOWER(last_name||first_name) = ?',
-                       igc_file.pilot_name.downcase.tr('^a-z',''),
-                       igc_file.pilot_name.downcase.tr('^a-z','') ])
+    if igc_file.pilot_name
+      person = Ygg::Core::Person.first(
+        :conditions => [ 'LOWER(first_name||last_name) = ? OR ' +
+                         'LOWER(last_name||first_name) = ?',
+                         igc_file.pilot_name.downcase.tr('^a-z',''),
+                         igc_file.pilot_name.downcase.tr('^a-z','') ])
 
-    self.pilot = Pilot.first(:conditions => ['person_id = ?', person.id ]) if person
+      self.pilot = Pilot.first(:conditions => ['person_id = ?', person.id ]) if person
+    end
 
     if (!self.plane && igc_file.glider_id)
       self.plane = Plane.find_by_registration(igc_file.glider_id.strip.upcase)
