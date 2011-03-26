@@ -73,7 +73,7 @@ class FlightsController < RestController
 
       format.gpx {
         if !@target.has_igc_file?
-          render :template => "public/404", :layout => false, :status => 404
+          render :nothing => true, :status => 404
           return
         end
         render :layout => false
@@ -81,7 +81,7 @@ class FlightsController < RestController
 
       format.kml {
         if !@target.has_igc_file?
-          render :template => "public/404", :layout => false, :status => 404
+          render :nothing => true, :status => 404
           return
         end
         render :layout => false
@@ -223,10 +223,12 @@ class FlightsController < RestController
         @state[:plane_registration] = @igc_file.glider_id.strip.upcase
       end
 
-      person = Ygg::Core::Person.find_by_sql(["SELECT * FROM core_people" +
-                " ORDER BY similarity(LOWER(first_name || ' ' || last_name), ?) DESC LIMIT 1",
-                @igc_file.pilot_name.downcase ]).first
-      @state[:pilot_id] = person.pilot.id if person && person.pilot
+      if @igc_file.pilot_name
+        person = Ygg::Core::Person.find_by_sql(["SELECT * FROM core_people" +
+                  " ORDER BY similarity(LOWER(first_name || ' ' || last_name), ?) DESC LIMIT 1",
+                  @igc_file.pilot_name.downcase ]).first
+        @state[:pilot_id] = person.pilot.id if person && person.pilot
+      end
     end
 
     render :template => "flights/wizard/#{@state[:state]}"

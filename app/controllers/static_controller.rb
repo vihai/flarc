@@ -10,7 +10,7 @@ class StaticController < ApplicationController
     begin
       render :action => "static/#{params[:path]}"
     rescue ActionView::MissingTemplate
-      render :template => "public/404", :layout => false, :status => 404
+      raise ActionController::UnknownAction
     end
   end
 end
