@@ -60,6 +60,8 @@ class RegistrationController < ApplicationController
             cp.save!
   
             pilot.save!
+
+            Cid::RegistrationNotifier.new_pilot_registered(pilot).deliver
           end
 
           @state[:state] = :done
