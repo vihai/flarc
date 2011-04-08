@@ -1,16 +1,16 @@
 
-div.header
+div#header
 {
  height: 74px;
  background: #3695cd url(../../images/csvva/header.jpg) no-repeat left top;
 }
 
-div.header_text
+div#header > div#text
 {
  display: none;
 }
 
-div.header_right_text
+div.header > div#right_text
 {
  font-size: 150%;
 }
@@ -55,4 +55,8 @@ div#menu ul > li a:hover
 {
  color: #700;
  background-color:  transparent;
+}
+
+div.csvva_tag
+{
 }

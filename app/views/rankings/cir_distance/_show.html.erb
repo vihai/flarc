@@ -40,8 +40,10 @@
         <%= link_to(r.pilot.person.name, r.pilot) %>
       </td>
       <td class="points"><%=h r.value.round %></td>
-      <td class="distance"><%=h fmt_distance_in_km(r.flight.distance) %></td>
-      <td class="handicap"><%=h r.flight.handicap %></td>
+      <td class="distance"><%=# h fmt_distance_in_km(r.flight.distance)
+ %></td>
+      <td class="handicap"><%=# h r.flight.handicap
+ %></td>
       <td class="view">
         <%= link_to(image_tag("view.png", :alt => "View", :title => "Apri la pagina del volo"), r.flight) %>
       </td>

@@ -99,21 +99,6 @@ class Flight < Ygg::PublicModel
     self.igc_fr_manuf = igc_file.id_from_logger.manufacturer
   end
 
-  def handicap
-    return (self.plane_type_configuration ?
-              self.plane_type_configuration.handicap :
-              self.plane.plane_type.handicap) ||
-            self.tmp_fca
-  end
-
-  def points
-    return nil if !distance
-
-    (self.handicap && self.handicap > 0) ?
-      ((self.distance / 1000.0) / self.handicap) :
-      0
-  end
-
   def duration
     return self.landing_time - self.takeoff_time
   end

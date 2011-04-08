@@ -1,10 +1,156 @@
+
+
+
+
+
+<style>
+  div#users-contain { width: 350px; margin: 20px 0; }
+  div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+  div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+  .ui-dialog .ui-state-error { padding: .3em; }
+  .validateTips { border: 1px solid transparent; padding: 0.3em; }
+</style>
+
+<div id="dialog-form" title="Edit flight" style="display: none">
+  <p class="validateTips">All form fields are required.</p>
+
+  <form>
+  <fieldset>
+    <label for="pilot">Pilot</label>
+    <input type="text" name="pilot" id="pilot" class="text ui-widget-content ui-corner-all" />
+
+  </fieldset>
+  </form>
+</div>
+
+
+<script>
+$(function() {
+
+  var pilot = $("#pilot" );
+
+  pilot.autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/pilots",
+          dataType: "json",
+          data: {
+            view: 'combo',
+            flt: 'combo',
+            sort: 'person.last_name,person.first_name',
+            search: request.term,
+            limit: 10
+          },
+          success: function(data) {
+            response( $.map(data, function(item) {
+              return {
+                label: item.person.name,
+                value: item.id
+              }
+            }));
+          }
+        });
+      },
+      minLength: 2,
+/*      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.label :
+          "Nothing selected, input was " + this.value);
+      },*/
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+
+  allFields = $( [] ).add( name ),
+  tips = $( ".validateTips" );
+
+  function updateTips( t ) {
+    tips
+      .text( t )
+      .addClass( "ui-state-highlight" );
+    setTimeout(function() {
+      tips.removeClass( "ui-state-highlight", 1500 );
+    }, 500 );
+  }
+
+  function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+      o.addClass( "ui-state-error" );
+      updateTips( "Length of " + n + " must be between " +
+        min + " and " + max + "." );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function checkRegexp( o, regexp, n ) {
+    if ( !( regexp.test( o.val() ) ) ) {
+      o.addClass( "ui-state-error" );
+      updateTips( n );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  
+  $( "#dialog-form" ).dialog({
+    autoOpen: false,
+    height: 500,
+    width: 500,
+    modal: true,
+    buttons: {
+      "Modify": function() {
+        var bValid = true;
+        allFields.removeClass( "ui-state-error" );
+
+        bValid = bValid && checkLength( name, "username", 3, 16 );
+
+        bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
+        // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+        bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
+        bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+        if ( bValid ) {
+          $( "#users tbody" ).append( "<tr>" +
+            "<td>" + name.val() + "</td>" + 
+            "<td>" + email.val() + "</td>" + 
+            "<td>" + password.val() + "</td>" +
+          "</tr>" ); 
+          $( this ).dialog( "close" );
+        }
+      },
+      Cancel: function() {
+        $( this ).dialog( "close" );
+      }
+    },
+    close: function() {
+      allFields.val( "" ).removeClass( "ui-state-error" );
+    }
+  });
+
+});
+</script>
+
+
+
+
+
+
+
 <div id="list_div" style="display: none"></div>
 <div id="info_div">
 <% if authenticated_admin? %>
   <div class="edit_box">
-  <%= link_to image_tag('action_edit.png', :alt => 'Edit...'),
-         edit_flight_path(@target), :method => :get,
-         :remote => true %>
+  <%= link_to_function image_tag('action_edit.png', :alt => 'Edit...'),
+            'jQuery("#dialog-form").dialog("open")' %>
+
   <%= link_to image_tag('action_delete.png', :alt => 'Delete...'),
          flight_path(@target),
          :method => :delete,
@@ -14,16 +160,13 @@
   </div>
 <% end %>
 
-<table>
-<tr>
-<td style="vertical-align: top">
-<table class="standard flight">
+<div class="box flight_info">
+<table class="standard flight_info">
   <tr>
     <th>Aliante</th>
     <td class="registration">
-        <%= link_to(@target.plane.registration, @target.plane) %> -
-        <%= link_to(@target.plane.plane_type.name, @target.plane.plane_type) %>
-        (handicap <%=h fmt_handicap(@target.handicap) %>)
+      <%= link_to(@target.plane.registration, @target.plane) %> -
+      <%= link_to(@target.plane.plane_type.name, @target.plane.plane_type) %>
     </td>
   </tr>
   <tr>
@@ -44,39 +187,6 @@
       <%=h fmt_duration(@target.duration) %>
     </td>
   </tr>
-  <% if @target.distance %>
-  <tr>
-    <th>Distanza</th>
-    <td class="distance">
-      <%=h fmt_distance_in_km(@target.distance) %>
-    </td>
-  </tr>
-  <% end %>
-  <% if @target.points %>
-  <tr>
-    <th>Punteggio</th>
-    <td class="points">
-      <%=h fmt_points(@target.points) %>
-    </td>
-  </tr>
-  <% end %>
-  <% if @target.speed %>
-  <tr>
-    <th>Velocità</th>
-    <td class="speed">
-      <%=h @target.speed %> km/h
-    </td>
-  </tr>
-  <% end %>
-  <tr>
-    <th>Tag</th>
-    <td class="tags">
-      <% @target.flight_tags.all.select { |x| x.status != '' }.each do |r| %>
-        <%= status_icon(r.status) %>
-        <%= r.tag.name %><br />
-      <% end %>
-    </td>
-  </tr>
 <% if @target.has_igc_file? %>
   <tr>
     <th>Scarica</th>
@@ -85,7 +195,7 @@
                       :alt => 'Logo SeeYou',
                       :title => 'Apri con SeeYou'),
                  flight_path(@target, :format => 'igc')) -%>
-      <%= link_to(image_tag('show_with_google_earth.jpg',
+      <%= link_to(image_tag('show_with_google_earth.png',
                       :alt => 'Logo Google Earth',
                       :title => 'Apri con Google Earth'),
                  flight_path(@target, :format => 'kml')) -%>
@@ -97,29 +207,13 @@
   </tr>
 <% end %>
 </table>
-</td>
-<td style="vertical-align: top">
-<div class="flight_photos_box">
-<% if !@target.photos.empty? %>
-  <% @target.photos.each do |photo| %>
-    <%= link_to image_tag(photo.flickr_url('s')), photo.flickr_url('-'),
-             :rel => 'lightbox[gallery]', :title => photo.caption, :rev => photo.url  %>
-  <% end %>
-  <br />
-<% end %>
-<% if auth_person && auth_person.pilot == @target.pilot %>
-  <% if @target.photos.empty? %>
-    <%=
-#link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url)
- %>
-  <% else %>
-    <%= link_to('Modifica fotografie', tag_photos_flight_url) %>
-  <% end %>
-<% end %>
 </div>
-</td>
-</tr>
-</table>
+
+<% @target.flight_tags.each do |r| %>
+  <% if r.tag.symbol.to_sym == :csvva_2011 %>
+    <%= render :partial => 'flights/csvva/tag', :object => r %>
+  <% end %>
+<% end %>
 
 <% if @target.encoded_polyline && @target.encoded_polyline.size > 0 %>
 
@@ -161,4 +255,3 @@ $(document).ready(function() {
 <% end %>
 
 </div>
-<div id="edit_div" style="display: none"></div>

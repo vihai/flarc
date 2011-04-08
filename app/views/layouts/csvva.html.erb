@@ -47,14 +47,14 @@
 //  };
 </script>
 
-<div class="header">
-  <div class="header_text">
+<div id="header">
+  <div id="text">
     Campionato di Distanza CSVVA 2011
   </div>
-  <div class="header_right_text">
-    <% flights = Flight.joins(:flight_tags).joins(:tags).where('tags.symbol' => 'csvva_2011') %>
-    <strong><%= flights.count %></strong> voli<br />
-    <strong><%= fmt_distance_in_km(flights.sum(:distance).to_i)  %></strong>
+  <div id="right_text">
+    <% tags = Tag.find_by_symbol(:csvva_2011).flight_tags %>
+    <strong><%= tags.count %></strong> voli<br />
+    <strong><%= fmt_distance_in_km(tags.sum(:distance).to_i)  %></strong>
   </div>
 </div>
 
@@ -82,7 +82,7 @@
   </li>
   <li>Elenchi
     <ul>
-      <li><%= link_to('Voli', calendar_flights_path(:year => Time.now.year)) %></li>
+      <li><%= link_to('Voli', calendar_flights_path(:year => Time.now.year, 'tags.symbol' => :csvva_2011)) %></li>
       <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'csvva_2011')) %></li>
       <li><%= link_to('Alianti', planes_path) %></li>
     </ul>

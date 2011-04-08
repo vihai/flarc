@@ -242,7 +242,7 @@ class FlightsController < RestController
   # GET /flights/1/edit
   def edit
 
-    prepare_form_tags
+#    prepare_form_tags
 
     respond_to do |format|
       format.js {

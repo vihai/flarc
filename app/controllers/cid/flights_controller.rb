@@ -60,12 +60,12 @@ class FlightsController < ApplicationController
             flash.now[:error] = "È necessario specificare una distanza valida"
             throw :done
           end
-          @state[:cid_distance] = params[:cid_distance]
+          @state[:cid_distance] = params[:cid_distance].to_f * 1000
   
           @state[:state] = :done
   
           @flight = Flight.find(@state[:flight_id])
-          @flight.flight_tags << FlightTag.new(
+          @flight.flight_tags << FlightTag::Cid2011.new(
             :flight => @flight,
             :tag => Tag.find(@state[:cid_tag_id]),
             :status => :pending,

@@ -37,9 +37,6 @@
           (<%= link_to(x.plane.plane_type.name, x.plane.plane_type) -%><%=h x.plane_type_configuration ? (' ' + x.plane_type_configuration.name) : '' -%>)
         </td>
       <% end %>
-      <td class="points">
-        <%= fmt_points(x.points) %>
-      </td>
       <td class="tags">
         <% x.flight_tags.each do |ft| %>
           <%= image_tag ft.tag.icon,

@@ -4,9 +4,10 @@ namespace :chores do
   task :rankings => :environment do
     chore('Rankings') do
 #      RankingBestThree.compute
-      RankingCsvva2010.compute
-      RankingTrofeo.compute
+#      RankingCsvva2010.compute
+#      RankingTrofeo.compute
 #      RankingCirSpeed.compute
+      RankingCsvva2011.compute
     end
   end
 

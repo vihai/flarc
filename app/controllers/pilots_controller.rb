@@ -3,8 +3,28 @@ class PilotsController < RestController
 
   rest_controller_for Pilot
 
-  attribute :championships do
-    included
+  view :combo do
+    empty!
+    attribute(:id) { show! }
+    attribute(:person) do
+      include!
+      empty!
+      attribute(:name) { show! }
+    end
+  end
+
+  filter :combo, lambda { |r|
+    apply_search_to_relation(r, [ 'person.first_name', 'person.last_name' ])
+  }
+
+#  attribute :championships do
+#    included
+#  end
+
+  def combo
+    ext_combo do |x|
+      "#{x.person.first_name} #{x.person.last_name}"
+    end
   end
 
   def stats_plane

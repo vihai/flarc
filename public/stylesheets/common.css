@@ -31,7 +31,7 @@ img
   border: none;
 }
 
-div.header
+div#header
 {
  position: absolute;
  top: 0;
@@ -42,7 +42,7 @@ div.header
  background-color: #ddd;
 }
 
-div.header_text
+div#header > div#text
 {
  position: absolute;
  top: 0px;
@@ -52,7 +52,7 @@ div.header_text
  font-weight: bold;
 }
 
-div.header_right_text
+div#header > div#right_text
 {
  position: absolute;
  top: 0px;
@@ -168,14 +168,18 @@ div.flight_photos_box
  border-radius: 8px;
 }
 
-table.standard
+div.box
 {
  background-color: #eee;
  margin-bottom: 1em; 
- padding: 5px;
  -webkit-border-radius: 8px;    /* for Safari */
  -moz-border-radius: 8px;       /* for Firefox */
  border-radius: 8px;
+}
+
+table.standard
+{
+ padding: 5px;
 } 
 table.standard > caption {  } 
 table.standard > tbody > tr { background-color: #ddd; }
@@ -225,7 +229,9 @@ table.approvals > tbody > tr > th
  font-weight: normal;
 } 
 
-table.flight { } 
+div.flight_info { display: inline-block; vertical-align: top; }
+
+table.flight_info { } 
 table.flights { } 
 table.flights > tbody > tr > td.rankings
 {
@@ -444,4 +450,35 @@ p.error {
 p.error span {
   margin-top: -6px;
   background: url(../../images/flash/error.png) no-repeat left top;
+}
+
+div.tag
+{
+ vertical-align: top;
+ display: inline-block;
+ background-color: #eee;
+ padding: 1em;
+ -webkit-border-radius: 8px;    /* for Safari */
+ -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
+
+border: solid 1px green;
+}
+
+div.tag > div.logo
+{
+ text-align: center;
+ display: inline-block;
+ vertical-align: top;
+}
+
+div.tag > div.container
+{
+ display: inline-block;
+ vertical-align: top;
+}
+
+div.tag > div.container > div.title
+{
+ font-weight: bold;
 }

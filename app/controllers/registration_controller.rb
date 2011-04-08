@@ -70,9 +70,9 @@ class RegistrationController < ApplicationController
       if @state[:state] == :done
 
         Ygg::Core::Transaction.new 'Registration wizard' do
-  
+
           pilot = nil
-  
+
           if @state[:password]
             # User is already registered
             auth_token = Ygg::Core::HttpSession.attempt_authentication_by_fqda_and_password(
@@ -81,6 +81,7 @@ class RegistrationController < ApplicationController
             identity = auth_token.identity
             credential = auth_token.credential
             person = identity.person
+            password = @state[:password]
           else
             password = Password.phonemic(8)
 
@@ -90,7 +91,7 @@ class RegistrationController < ApplicationController
                          :is_admin => false,
                          :credentials => [ credential ]
                        )
-  
+
             person = Ygg::Core::Person.new(
                 :first_name => @state[:first_name],
                 :middle_name => nil,
@@ -99,11 +100,11 @@ class RegistrationController < ApplicationController
                 :tmp_telefono => @state[:phone]
               )
           end
-  
+
           if @state[:fb_user]
             person.fb_uid = facebook_uid
           end
-  
+
           person.save!
 
           if current_site == :cid

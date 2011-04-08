@@ -12,11 +12,11 @@
 </head>
 <body>
 
-<div class="header">
-  <div class="header_text">
+<div id="header">
+  <div id="text">
     Campionato Italiano di Distanza 2011
   </div>
-  <div class="header_right_text">
+  <div id="right_text">
     <% flights = Flight.joins(:flight_tags).joins(:tags).where('tags.symbol' => 'cid_2011') %>
     <strong><%= flights.count %></strong> voli<br />
     <strong><%= fmt_distance_in_km(flights.sum(:distance).to_i)  %></strong>

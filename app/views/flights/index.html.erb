@@ -1,2 +1,7 @@
-<h1>Voli del <%=h [ params[:day], params[:month], params[:year] ].delete_if { |x| x.nil? }.join '/' %></h1>
+<% date_constraints = [ params[:day], params[:month], params[:year] ].delete_if { |x| x.nil? } %>
+
+<% if date_constraints %>
+  <h1>Voli del <%=h date_constraints.join '/' %></h1>
+<% end %>
+
 <%= render :partial => 'flights', :object => @targets, :locals => { :options => {} } %>

@@ -35,7 +35,8 @@ gem 'uuidtools'
 gem 'httpclient'
 gem 'geokit'
 gem 'runt'
-gem "exception_notification", :git => "git://github.com/rails/exception_notification", :require => 'exception_notifier'
+
+gem 'exception_notification', :git => 'git://github.com/rails/exception_notification', :require => 'exception_notifier'
 
 gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
 

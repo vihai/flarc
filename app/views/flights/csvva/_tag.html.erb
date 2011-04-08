@@ -1,0 +1,13 @@
+<div class="tag csvva_tag">
+  <div class="logo">
+    <%=image_tag('csvva/logo_16.png', :class => 'logo')%><br />
+    <%= status_icon(tag.status) %>
+  </div>
+  <div class="container">
+    <div class="title"><%= tag.tag.name %></div>
+    <div class="body">
+      Distanza: <%= fmt_distance_in_km(tag.distance.to_i) %><br />
+      Punti: <%= fmt_points(tag.points) %>
+    </div>
+  </div>
+</div>

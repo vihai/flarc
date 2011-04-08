@@ -36,10 +36,10 @@ class FlightsController < ApplicationController
             flash.now[:error] = "È necessario specificare una distanza valida"
             throw :done
           end
-          @state[:csvva_distance] = params[:csvva_distance]
-  
+          @state[:csvva_distance] = params[:csvva_distance].to_f * 1000
+
           @state[:state] = :flight_data
- 
+
         when :flight_data
           @state[:passenger] = params[:passenger]
 
@@ -49,13 +49,11 @@ class FlightsController < ApplicationController
 
           Ygg::Core::Transaction.new 'Flight submission' do
             @flight = Flight.find(@state[:flight_id])
-            @flight.flight_tags << FlightTag.new(
+            @flight.flight_tags << FlightTag::Csvva2011.new(
               :flight => @flight,
               :tag => Tag.find_by_symbol(:csvva_2011),
               :status => :pending,
-              :data => {
-                :distance => @state[:csvva_distance],
-              })
+              :distance => @state[:csvva_distance])
 
             @flight.passenger = Ygg::Core::Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || " +
                                            'last_name ILIKE ?', @state[:passenger] ] ).first

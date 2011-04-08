@@ -1,3 +1,21 @@
+ActionController.add_renderer :json do |json, opts|
+  unless json.respond_to?(:to_str)
+
+    if self.class.include?(ActiveRest::Controller)
+      opts.merge! :view => self.rest_view
+    end
+
+    json = ActiveSupport::JSON.encode(json, opts)
+  end
+
+  json = "#{opts[:callback]}(#{json})" unless opts[:callback].blank?
+
+  self.content_type ||= Mime::JSON
+  self.headers['X-Total-Resources-Count'] = opts[:total].to_s if opts[:total]
+
+  json
+end
+
 
 class RestController < ApplicationController
 
