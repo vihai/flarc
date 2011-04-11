@@ -29,7 +29,7 @@
     </td>
   </tr>
   <tr>
-    <th>Pagina WikiPedia</th>
+    <th>Link</th>
     <td class="link_wp">
       <%= link_to @target.link_wp, @target.link_wp %>
     </td>
@@ -54,6 +54,12 @@
     <th>Handicap</th>
     <td class="handicap">
       <%= fmt_handicap(@target.handicap) %>
+    </td>
+  </tr>
+  <tr>
+    <th>Handicap Club</th>
+    <td class="handicap">
+      <%= fmt_handicap(@target.club_handicap) %>
     </td>
   </tr>
 <% end %>

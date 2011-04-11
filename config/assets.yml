@@ -30,17 +30,17 @@ javascripts:
 
 stylesheets:
   cid:
-    - public/stylesheets/common.css
+    - public/stylesheets/*.css
     - public/stylesheets/cid/**/*.css
     - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
 
   csvva:
-    - public/stylesheets/common.css
+    - public/stylesheets/*.css
     - public/stylesheets/csvva/**/*.css
     - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
 
   sap:
-    - public/stylesheets/common.css
+    - public/stylesheets/*.css
     - public/stylesheets/sap/**/*.css
     - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
 

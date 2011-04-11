@@ -76,7 +76,7 @@
   </tr>
 </table>
 
-<% @flights = @target.flights.all(:order => 'takeoff_time DESC') %>
+<% @flights = @target.flights.order('takeoff_time DESC') %>
 <%= render :partial => 'flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
 
 </div>

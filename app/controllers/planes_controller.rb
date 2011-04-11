@@ -2,6 +2,14 @@ class PlanesController < RestController
 
   rest_controller_for Plane
 
+  view :combo do
+    empty!
+    attribute(:id) { show! }
+    attribute(:registration) { show! }
+  end
+
+  filter :combo, lambda { |r| apply_search_to_relation(r, [ 'registration' ]) }
+
   def stats_pilot
     respond_to do |format|
       format.html

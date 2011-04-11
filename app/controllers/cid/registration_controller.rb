@@ -19,7 +19,7 @@ class RegistrationController < ApplicationController
         @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
         @state[:state] = @state[:state].to_sym
         @state[:final] = false
-  
+
         case @state[:state]
         when :championship_data
           if params[:fai_card].empty? || !(params[:fai_card] =~ /^[0-9]+$/)
@@ -41,24 +41,24 @@ class RegistrationController < ApplicationController
           @state[:cid_category] = params[:cid_category]
 
           @state[:state] = :finish
-  
+
           Ygg::Core::Transaction.new 'Registration wizard' do
-  
+
             person = auth_person
-  
+
             pilot = person.pilot || Pilot.new(:person => person)
             pilot.attributes = {
               :club => Club.find(@state[:club_id]),
               :fai_card => @state[:fai_card],
             }
-  
+
             cid = Championship.find_by_symbol(:cid_2011)
-  
+
             cp = pilot.championship_pilots.where(:championship_id => cid.id).first ||
                    ChampionshipPilot.new(:pilot => pilot, :championship => cid)
             cp.cid_category = @state[:cid_category]
             cp.save!
-  
+
             pilot.save!
 
             Cid::RegistrationNotifier.new_pilot_registered(pilot).deliver

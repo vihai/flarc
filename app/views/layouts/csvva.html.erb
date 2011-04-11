@@ -83,7 +83,8 @@
   <li>Elenchi
     <ul>
       <li><%= link_to('Voli', calendar_flights_path(:year => Time.now.year, 'tags.symbol' => :csvva_2011)) %></li>
-      <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'csvva_2011')) %></li>
+      <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'csvva_2011',
+                                            :sort => 'person.last_name,person.first_name')) %></li>
       <li><%= link_to('Alianti', planes_path) %></li>
     </ul>
   </li>
@@ -107,7 +108,7 @@
               </tr>
               <tr>
                 <td colspan=2>
-          	<%= submit_tag 'Invia' %>
+                   <%= submit_tag 'Invia' %>
                 </td>
               </tr>
             </table>
@@ -186,6 +187,8 @@ jQuery(function($) {
   $("#logout_link").bind("ajax:complete", function(event, data, status, xhr) { window.location.reload(); });
 });
 <% end %>
+
+<div id="freeow" class="freeow freeow-bottom-right"></div>
 
 </body>
 </html>

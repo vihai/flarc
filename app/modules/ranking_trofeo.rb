@@ -3,54 +3,47 @@ class RankingTrofeo < Ranking
   def self.compute
 
     results = {}
-    Ranking.where(:driver => 'trofeo').each do |ranking|
 
-      tag = 'csvva_' + ranking.symbol.gsub(/csvva_tt_/, '')
+    ranking = Ranking.find_by_symbol(:csvva_tt_2011)
 
-      Flight.joins(:flight_tags).joins(:tags).
-             where('tags.symbol' => tag, 'flight_tags.status' => 'approved').each do |flight|
+    Flight.joins(:flight_tags).joins(:tags).
+           where('tags.symbol' => :csvva_2011, 'flight_tags.status' => 'approved').each do |flight|
 
-        results[ranking.id] ||= {}
-        results[ranking.id][flight.pilot.id] ||= {}
-        results[ranking.id][flight.pilot.id][:flights_count] ||= 0
-        results[ranking.id][flight.pilot.id][:flights_count] += 1
-      end
+      results[flight.pilot.id] ||= {}
+      results[flight.pilot.id][:flights_count] ||= 0
+      results[flight.pilot.id][:flights_count] += 1
     end
 
     # Pass 2: For each ranking update standings
-    results.each do |ranking_id,result|
+    Ranking.transaction do
 
-      Ranking.transaction do
+      ranking.generated_at = Time.now
+      ranking.save!
 
-        ranking = Ranking.find(ranking_id)
-        ranking.generated_at = Time.now
-        ranking.save!
+      results.each do |pilot_id,pilot|
 
-        result.each do |pilot_id,pilot|
+        standing = ranking.standings.find_by_pilot_id(pilot_id) ||
+                    RankingStanding.new(:ranking => ranking,
+                                        :pilot_id => pilot_id)
 
-          standing = ranking.standings.find_by_pilot_id(pilot_id) ||
-                      RankingStanding.new(:ranking => ranking,
-                                          :pilot_id => pilot_id)
+        standing.value = pilot[:flights_count] || 0
 
-          standing.value = pilot[:flights_count] || 0
+        ranking.standings << standing
+      end
 
-          ranking.standings << standing
+      # Pass 3: Update standing positions
+      pos = 0
+      prev_value = nil
+      ranking.standings.find(:all,
+                 :order => "value DESC, id ASC").each do |standing|
+
+        if (!prev_value || standing.value != prev_value)
+          pos += 1
+          prev_value = standing.value
         end
 
-        # Pass 3: Update standing positions
-        pos = 0
-        prev_value = nil
-        ranking.standings.find(:all,
-                   :order => "value DESC, id ASC").each do |standing|
-
-          if (!prev_value || standing.value != prev_value)
-            pos += 1
-            prev_value = standing.value
-          end
-
-          standing.position = pos;
-          standing.save!
-        end
+        standing.position = pos;
+        standing.save!
       end
     end
 

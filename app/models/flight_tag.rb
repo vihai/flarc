@@ -22,14 +22,57 @@ class FlightTag < Ygg::BasicModel
   end
 
   class Cid2011 < FlightTag
+    def handicap
+      return (self.flight.plane_type_configuration ?
+                self.flight.plane_type_configuration.handicap :
+                self.flight.plane.plane_type.handicap)
+    end
+
+    def club_handicap
+      return (self.flight.plane_type_configuration ?
+                self.flight.plane_type_configuration.club_handicap :
+                self.flight.plane.plane_type.club_handicap)
+    end
+
+    def points
+      return nil if !distance
+
+      if self.tag.symbol == :cid_2011_naz_club
+        hcap = club_handicap
+      else
+        hcap = handicap
+      end
+
+      return nil if !hcap
+
+      pts = (distance / 1000.0) / hcap
+
+      case self.data[:task_type]
+      when :round_trip ; pts = pts * 1.3
+      when :fai_triangle ; pts = pts * 1.4
+      when :straight_line ; pts = pts * 1.6
+      end
+
+      if data[:task_eval] == :declared
+        if data[:task_type] == :simple_triangle
+          pts = pts * 1.2
+        end
+
+        if data[:task_completed]
+          pts = pts * 1.1
+        end
+      end
+
+      pts
+    end
   end
 
   class Csvva2010 < FlightTag
     def handicap
-      return (self.plane_type_configuration ?
-                self.plane_type_configuration.handicap :
-                self.plane.plane_type.handicap) ||
-              self.tmp_fca
+      return (self.flight.plane_type_configuration ?
+                self.flight.plane_type_configuration.handicap :
+                self.flight.plane.plane_type.handicap) ||
+              self.flight.tmp_fca
     end
 
     def points

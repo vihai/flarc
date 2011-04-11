@@ -7,6 +7,7 @@ class CreatePlaneTypes < ActiveRecord::Migration
       t.integer :seats
       t.integer :motor
       t.float :handicap
+      t.float :club_handicap
       t.string :link_wp
     end
   end

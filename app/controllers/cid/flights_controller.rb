@@ -11,7 +11,7 @@ class FlightsController < ApplicationController
         @state[:state] = :championship_data
         @state[:final] = false
         @state[:flight_id] = params[:flight_id]
- 
+
         @flight = Flight.find(@state[:flight_id])
         if @flight.tags.include?(Tag.find_by_symbol('cid_2011'))
           flash[:error] = "Il volo è già stato inviato al CID"
@@ -22,7 +22,7 @@ class FlightsController < ApplicationController
         @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
         @state[:state] = @state[:state].to_sym
         @state[:final] = false
-  
+
         case @state[:state]
         when :championship_data
 #        if @igc_file.takeoff_time < Time.now - 15.days
@@ -61,22 +61,22 @@ class FlightsController < ApplicationController
             throw :done
           end
           @state[:cid_distance] = params[:cid_distance].to_f * 1000
-  
+
           @state[:state] = :done
-  
+
           @flight = Flight.find(@state[:flight_id])
           @flight.flight_tags << FlightTag::Cid2011.new(
             :flight => @flight,
             :tag => Tag.find(@state[:cid_tag_id]),
             :status => :pending,
+            :distance => @state[:cid_distance],
             :data => {
-              :distance => @state[:cid_distance],
-              :task_eval => @state[:cid_task_eval],
-              :task_type => @state[:cid_task_type],
-              :task_completed => @state[:cid_task_completed]
+              :task_eval => @state[:cid_task_eval].to_sym,
+              :task_type => @state[:cid_task_type].to_sym,
+              :task_completed => @state[:cid_task_completed] == 'true'
             })
           @flight.save!
-  
+
         end
       end
     end

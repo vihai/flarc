@@ -6,6 +6,19 @@ class FlightsController < RestController
 
   rest_controller_for Flight
 
+  view :edit do
+    attribute :pilot do
+      include!
+      attribute :person do
+        include!
+      end
+    end
+
+    attribute :plane do
+      include!
+    end
+  end
+
   def flight_search_conditions
     conditions = {}
 
@@ -257,53 +270,6 @@ class FlightsController < RestController
 
       }
       format.html
-    end
-  end
-
-  # POST /flights
-  def create
-  end
-
-  # PUT /flights/1
-  def update
-    params[:flight][:passenger] = Person.where([ "first_name || ' ' || COALESCE(middle_name || ' ','') || last_name ILIKE ?", params[:flight][:passenger_name] ] ).first
-    params[:flight][:distance] = params[:flight][:distance].to_f * 1000.0;
-
-    params[:flight][:flight_tags_attributes].each { |k,v|
-       v[:_destroy] = v[:status].empty?
-    }
-
-    update_successful = @flight.update_attributes(params[:flight])
-
-    if update_successful
-      flash.now[:notice] = 'Flight was successfully updated.'
-
-      if params[:publish_to_facebook]
-        facebook_user.session.post 'facebook.stream.publish',
-              :message => "#{facebook_user.name} ha fatto un volo di #{(@flight.distance/1000.0).round} km."
-      end
-
-      respond_to do |format|
-        format.html { redirect_to(flight_url(@flight, :ignore_cache => rand(1000000))) }
-      end
-    else
-      respond_to do |format|
-        format.html { render :action => 'edit' }
-      end
-    end
-  end
-
-  # DELETE /flights/1
-  def destroy
-    @flight.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(flights_url) }
-      format.js  {
-        render :update do |page|
-          page.redirect_to(flights_url)
-        end
-      }
     end
   end
 

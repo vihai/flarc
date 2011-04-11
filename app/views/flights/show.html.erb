@@ -3,147 +3,6 @@
 
 
 
-<style>
-  div#users-contain { width: 350px; margin: 20px 0; }
-  div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-  div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-  .ui-dialog .ui-state-error { padding: .3em; }
-  .validateTips { border: 1px solid transparent; padding: 0.3em; }
-</style>
-
-<div id="dialog-form" title="Edit flight" style="display: none">
-  <p class="validateTips">All form fields are required.</p>
-
-  <form>
-  <fieldset>
-    <label for="pilot">Pilot</label>
-    <input type="text" name="pilot" id="pilot" class="text ui-widget-content ui-corner-all" />
-
-  </fieldset>
-  </form>
-</div>
-
-
-<script>
-$(function() {
-
-  var pilot = $("#pilot" );
-
-  pilot.autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: "/pilots",
-          dataType: "json",
-          data: {
-            view: 'combo',
-            flt: 'combo',
-            sort: 'person.last_name,person.first_name',
-            search: request.term,
-            limit: 10
-          },
-          success: function(data) {
-            response( $.map(data, function(item) {
-              return {
-                label: item.person.name,
-                value: item.id
-              }
-            }));
-          }
-        });
-      },
-      minLength: 2,
-/*      select: function( event, ui ) {
-        log( ui.item ?
-          "Selected: " + ui.item.label :
-          "Nothing selected, input was " + this.value);
-      },*/
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-    });
-
-
-  allFields = $( [] ).add( name ),
-  tips = $( ".validateTips" );
-
-  function updateTips( t ) {
-    tips
-      .text( t )
-      .addClass( "ui-state-highlight" );
-    setTimeout(function() {
-      tips.removeClass( "ui-state-highlight", 1500 );
-    }, 500 );
-  }
-
-  function checkLength( o, n, min, max ) {
-    if ( o.val().length > max || o.val().length < min ) {
-      o.addClass( "ui-state-error" );
-      updateTips( "Length of " + n + " must be between " +
-        min + " and " + max + "." );
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  function checkRegexp( o, regexp, n ) {
-    if ( !( regexp.test( o.val() ) ) ) {
-      o.addClass( "ui-state-error" );
-      updateTips( n );
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  
-  $( "#dialog-form" ).dialog({
-    autoOpen: false,
-    height: 500,
-    width: 500,
-    modal: true,
-    buttons: {
-      "Modify": function() {
-        var bValid = true;
-        allFields.removeClass( "ui-state-error" );
-
-        bValid = bValid && checkLength( name, "username", 3, 16 );
-
-        bValid = bValid && checkRegexp( name, /^[a-z]([0-9a-z_])+$/i, "Username may consist of a-z, 0-9, underscores, begin with a letter." );
-        // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
-        bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
-        bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
-
-        if ( bValid ) {
-          $( "#users tbody" ).append( "<tr>" +
-            "<td>" + name.val() + "</td>" + 
-            "<td>" + email.val() + "</td>" + 
-            "<td>" + password.val() + "</td>" +
-          "</tr>" ); 
-          $( this ).dialog( "close" );
-        }
-      },
-      Cancel: function() {
-        $( this ).dialog( "close" );
-      }
-    },
-    close: function() {
-      allFields.val( "" ).removeClass( "ui-state-error" );
-    }
-  });
-
-});
-</script>
-
-
-
-
-
-
-
 <div id="list_div" style="display: none"></div>
 <div id="info_div">
 <% if authenticated_admin? %>
@@ -212,6 +71,8 @@ $(function() {
 <% @target.flight_tags.each do |r| %>
   <% if r.tag.symbol.to_sym == :csvva_2011 %>
     <%= render :partial => 'flights/csvva/tag', :object => r %>
+  <% elsif r.is_a?(FlightTag::Cid2011) %>
+    <%= render :partial => 'flights/cid/tag', :object => r %>
   <% end %>
 <% end %>
 
@@ -225,7 +86,6 @@ $(function() {
 <%= javascript_tag do -%>
 
 $(document).ready(function() {
-
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 8,
     center: google.maps.LatLng(0, 0),
@@ -255,3 +115,301 @@ $(document).ready(function() {
 <% end %>
 
 </div>
+
+
+<style>
+  div#users-contain { width: 350px; margin: 20px 0; }
+  div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+  div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+  .ui-dialog .ui-state-error { padding: .3em; }
+  .validateTips { border: 1px solid transparent; padding: 0.3em; }
+</style>
+
+<div id="dialog-form" title="Edit flight" style="display: none">
+  <p class="validateTips">All form fields are required.</p>
+
+  <form class="ui-widget">
+  <fieldset class="ui-widget-content">
+    <label for="pilot">Pilot</label>
+    <input type="text" name="pilot" id="pilot" />
+    <input type="text" name="pilot_id" id="pilot_id" /><br />
+
+    <label for="plane">Aliante</label>
+    <input type="text" name="plane" id="plane" />
+    <input type="text" name="plane_id" id="plane_id" />
+
+    <fieldset id="csvva_fieldset" class="ui-widget-content">
+      <legend>CSVVA:
+        <span id="csvva_statuses" class="flight_tag_statuses">
+          <input type="radio" name="csvva_status" value="null" id="csvva_status_null" />
+          <label for="csvva_status_null"></label>
+          <input type="radio" name="csvva_status" value="pending" id="csvva_status_pending" />
+          <label for="csvva_status_pending"></label>
+          <input type="radio" name="csvva_status" value="approved" id="csvva_status_approved" />
+          <label for="csvva_status_approved"></label>
+        </span>
+      </legend>
+      <div id="csvva_fieldset_contents" style="display: none">
+        <label for="csvva_distance">Distanza</label>
+        <input type="text" name="csvva_distance" id="csvva_distance" />
+      </div>
+    </fieldset>
+
+    <fieldset id="cid_fieldset" class="ui-widget-content">
+      <legend>CID:
+        <span id="cid_statuses" class="flight_tag_statuses">
+          <input type="radio" name="cid_status" value="null" id="cid_status_null" />
+          <label for="cid_status_null"></label>
+          <input type="radio" name="cid_status" value="pending" id="cid_status_pending" />
+          <label for="cid_status_pending"></label>
+          <input type="radio" name="cid_status" value="approved" id="cid_status_approved" />
+          <label for="cid_status_approved"></label>
+        </span>
+      </legend>
+
+      <div id="cid_fieldset_contents" style="display: none">
+        <label for="cid_distance">Distanza</label>
+        <input type="text" name="cid_distance" id="cid_distance" /><br />
+
+        <label for="cid_task_eval">Tema</label>
+        <select id="cid_task_eval">
+          <option value=""></option>
+          <option value="free">Libero</option>
+          <option value="declared">Dichiarato</option>
+        </select><br />
+
+        <label for="cid_task_type">Tipo</label>
+        <select id="cid_task_type">
+          <option value=""></option>
+          <option value="butterfly">Farfalla</option>
+          <option value="simple_triangle">Triangolo semplice</option>
+          <option value="round_trip">Andata e ritorno</option>
+          <option value="fai_triangle">Triangolo FAI</option>
+          <option value="straight_line">Linea retta</option>
+        </select><br />
+
+        <label for="cid_task_completed">Completato</label>
+        <select id="cid_task_completed">
+          <option value=""></option>
+          <option value="true">Sì</option>
+          <option value="false">No</option>
+        </select>
+     </div>
+    </fieldset>
+
+  </fieldset>
+  </form>
+</div>
+
+
+<script>
+$(function() {
+
+
+  $("#csvva_statuses").buttonset();
+  $("#csvva_status_null").button({ icons: { primary: 'ui-icon-close' }, text: false });
+  $("#csvva_status_pending").button({ icons: { primary: 'icon-pending' }, text: false });
+  $("#csvva_status_approved").button({ icons: { primary: 'icon-approved' }, text: false });
+  $("[name=csvva_status]").button().change(function(e) {
+    $('#csvva_fieldset_contents').toggle(e.target.value != 'null');
+    });
+
+  $("#cid_statuses").buttonset();
+  $("[name=cid_status]").button().change(function(e) {
+    $('#cid_fieldset_contents').toggle(e.target.value != 'null');
+    });
+  $("#cid_status_null").button({ icons: { primary: 'ui-icon-close' }, text: false });
+  $("#cid_status_pending").button({ icons: { primary: 'icon-pending' }, text: false });
+  $("#cid_status_approved").button({ icons: { primary: 'icon-approved' }, text: false });
+
+  $('#pilot').autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/pilots",
+          dataType: "json",
+          data: {
+            view: 'combo',
+            flt: 'combo',
+            sort: 'person.last_name,person.first_name',
+            search: request.term,
+            limit: 10
+          },
+          success: function(data) {
+            response( $.map(data, function(item) {
+              return {
+                label: item.person.name,
+                value: item.person.name,
+                id: item.id
+              }
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function(event, ui) {
+        $('#pilot_id').val(ui.item.id);
+        $('#csvva_fieldset').val(ui.item.id);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+  $('#plane').autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/planes",
+          dataType: "json",
+          data: {
+            view: 'combo',
+            flt: 'combo',
+            sort: 'registration',
+            search: request.term,
+            limit: 10
+          },
+          success: function(data) {
+            response( $.map(data, function(item) {
+              return {
+                label: item.registration,
+                value: item.registration,
+                id: item.id
+              }
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function(event, ui) {
+        $('#plane_id').val(ui.item.id);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+  allFields = $( [] ).add( name ),
+  tips = $( ".validateTips" );
+
+  function updateTips( t ) {
+    tips
+      .text( t )
+      .addClass( "ui-state-highlight" );
+    setTimeout(function() {
+      tips.removeClass( "ui-state-highlight", 1500 );
+    }, 500 );
+  }
+
+  function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+      o.addClass( "ui-state-error" );
+      updateTips( "Length of " + n + " must be between " +
+        min + " and " + max + "." );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  $("#dialog-form").dialog({
+    autoOpen: false,
+    height: 500,
+    width: 500,
+    modal: true,
+    buttons: {
+      'Salva': function() {
+
+//        resource = $('#dialog-form').data('resource');
+        resource = {};
+        resource.plane_id = $('#plane_id').val();
+        resource.pilot_id = $('#pilot_id').val();
+
+        $.ajax({
+          url: '/flights/' + $('#dialog-form').data('resource_id'),
+          dataType: 'json',
+          type: 'PUT',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify(resource),
+          success: function(data) {
+            $("#dialog-form").dialog("close");
+            $("#freeow").freeow("Okay!", "Volo modificato", { classes: ['smokey', 'pushpin'] });
+          },
+          failure: function(data) {
+            alert("Error saving object");
+          }
+        });
+      },
+      'Annulla': function() {
+        $(this).dialog("close");
+      }
+    },
+    open: function() {
+      $.ajax({
+        url: '/flights/' + $('#dialog-form').data('resource_id'),
+        dataType: 'json',
+        data: {
+          view: 'edit',
+        },
+        success: function(resource) {
+
+          $('#dialog-form').data('resource', resource);
+
+          $('#pilot').val(resource.pilot.person.name);
+          $('#pilot_id').val(resource.pilot.id);
+
+          $('#plane').val(resource.plane.registration);
+          $('#plane_id').val(resource.plane.id);
+
+          tags = {};
+
+          $.each(resource.flight_tags, function(index, value) {
+            tags[value._type] = value;
+          });
+
+          csvva = tags['FlightTag::Csvva2011']
+          if (csvva) {
+            $('#csvva_fieldset_contents').show();
+            $('#csvva_status').val(csvva.status);
+            $('#csvva_distance').val(csvva.distance / 1000);
+          } else
+            $('#csvva_fieldset_contents').hide();
+
+          cid = tags['FlightTag::Cid2011']
+          if (cid) {
+            $('#cid_fieldset_contents').show();
+            $(':cid_status').setValue(cid.status);
+            $('#cid_distance').val(cid.distance / 1000);
+            $('#cid_task_eval').val(cid.resource.task_eval);
+            $('#cid_task_type').val(cid.resource.task_type);
+            $('#cid_task_completed').val(cid.resource.task_completed);
+          } else
+            $('#cid_fieldset_contents').hide();
+        },
+        failure: function(resource) {
+          alert('Errore lettura oggetto');
+        }
+      });
+    },
+    close: function() {
+      allFields.val( "" ).removeClass( "ui-state-error" );
+    }
+  });
+
+  $('#dialog-form').data('resource_id', <%= @target.id %>);
+});
+
+
+
+</script>
+
+
+
+
+
+
+

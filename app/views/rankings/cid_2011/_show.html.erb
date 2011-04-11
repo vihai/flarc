@@ -12,9 +12,6 @@
       <th>Volo 1</th>
       <th>Volo 2</th>
       <th>Volo 3</th>
-      <th>Volo 4</th>
-      <th>Volo 5</th>
-      <th>Volo 6</th>
     </tr>
     <% cnt = 0 %>
     <% ranking.sorted_standings.each do |r| %>
@@ -45,7 +42,7 @@
         <%= link_to(r.pilot.person.name, r.pilot) %>
       </td>
       <td class="points"><%= fmt_points(r.value) %></td>
-      <% for i in 0..5 do %>
+      <% for i in 0..2 do %>
         <td class="points small">
            <% flight = r.data[:flights_best][i] %>
            <%= link_to(fmt_points(flight.points), flight_path(flight.id)) if flight %>
@@ -54,7 +51,7 @@
     </tr>
     <% if limit && cnt >= limit then %>
       <tr>
-        <td colspan=9><%= link_to("Classifica completa...", ranking) %></td>
+        <td colspan=6><%= link_to("Classifica completa...", ranking) %></td>
       </tr>
       <% break %>
     <% end %>

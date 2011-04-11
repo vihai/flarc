@@ -1,0 +1,27 @@
+<div class="tag csvva_tag">
+  <div class="logo">
+    <%=image_tag('cid/logo_16.png', :class => 'logo')%><br />
+    <%= status_icon(tag.status) %>
+  </div>
+  <div class="container">
+    <div class="title"><%= tag.tag.name %></div>
+    <div class="body">
+      <% if tag.data[:task_eval] == :free %>
+        Tema libero
+      <% else %>
+        Tema dichiarato e <%= tag.data[:task_completed] ? '' : 'non ' %> completato
+      <% end %><br />
+      Tipo: <%=
+        case tag.data[:task_type]
+        when :butterfly ; 'Farfalla'
+        when :simple_triangle ; 'Triangolo semplice'
+        when :round_trip ; 'Andata e ritorno'
+        when :fai_triangle ; 'Triangolo FAI'
+        when :straight_line ; 'Linea retta'
+        end
+      %><br />
+      Distanza: <%= fmt_distance_in_km(tag.distance.to_i) %><br />
+      Punti: <%= fmt_points(tag.points) %>
+    </div>
+  </div>
+</div>

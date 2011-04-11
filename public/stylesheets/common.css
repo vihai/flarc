@@ -306,6 +306,16 @@ table.flight_calendar > tbody > tr > td.today
  border: solid 3px red;
 }
 
+span.flight_tag_statuses
+{
+ position: absolute;
+ right: 0px;
+}
+
+.icon-pending { background-image: url('../images/flight_status_pending.png') !important; }
+.icon-approved { background-image: url('../images/flight_status_approved.png') !important; }
+
+
 div.edit_box
 {
  background-color: #fdd;
@@ -420,7 +430,7 @@ p.error span {
 
 p.success {
   background: url(../../images/flash/success-bg.jpg) repeat-x left top;
-  color: #41612f; 
+  color: #41612f;
 }
 p.success span {
   background: url(../../images/flash/success.png) no-repeat left top;
@@ -428,7 +438,7 @@ p.success span {
 
 p.notice {
   background: url(../../images/flash/notice-bg.jpg) repeat-x left top;
-  color: #41612f; 
+  color: #41612f;
 }
 p.notice span {
   background: url(../../images/flash/notice.png) no-repeat left top;

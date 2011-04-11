@@ -3,13 +3,31 @@
     <th>Name</th>
     <th>Seats</th>
     <th>Handicap</th>
+    <th>Handicap Club</th>
   </tr>
 
 <% for plane_type in @targets %>
   <tr>
     <td><%= link_to plane_type.name, plane_type %></td>
-    <td><%=h plane_type.seats %></td>
-    <td><%=h fmt_handicap(plane_type.handicap) %></td>
+    <td><%= plane_type.seats %></td>
+    <td>
+      <% if plane_type.configurations.empty? then %>
+        <%= fmt_handicap(plane_type.handicap) %>
+      <% else %>
+        <% for config in plane_type.configurations %>
+          <%= config.name %>: <%= fmt_handicap(config.handicap) %><br />
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% if plane_type.configurations.empty? then %>
+        <%= fmt_handicap(plane_type.club_handicap) %>
+      <% else %>
+        <% for config in plane_type.configurations %>
+          <%= config.name %>: <%= fmt_handicap(config.club_handicap) %><br />
+        <% end %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
