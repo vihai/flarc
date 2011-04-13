@@ -4,7 +4,7 @@
     <%= status_icon(cf.status) %>
   </div>
   <div class="container">
-    <div class="title"><%= cf.championship.name %></div>
+    <div class="title"><%= cf.championship.name %> <%= fmt_cid_ranking_to_name(cf.cid_ranking) %></div>
     <div class="body">
       <% if cf.data[:task_eval] == :free %>
         Tema libero

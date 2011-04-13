@@ -7,10 +7,10 @@
   <%= hidden_field_tag :state, @state.to_json %>
   <table class="form">
     <tr>
-      <th><%= label_tag :cid_tag_id, 'Classe' %></th>
+      <th><%= label_tag :cid_ranking, 'Classe' %></th>
       <td>
-        <%= select_tag :cid_tag_id, options_for_select(
-               [[ '' => '' ]] + @cid_available_rankings.map { |x| [ x.name, x.id ] }, @state[:cid_ranking]), {} %>
+        <%= select_tag :cid_ranking, options_for_select(
+               [[ '' , '' ]] + @cid_available_rankings.map { |k,v| [ k, v ] }, @state[:cid_ranking]), {} %>
       </td>
     </tr>
     <tr>

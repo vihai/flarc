@@ -56,80 +56,29 @@
     <% if !asgard_session || !asgard_session.authenticated? %>
       <div class="menulogin">
         <%= link_to('Registrati', registration_path) %><br />
-        <%= link_to_function 'Login', "jQuery('#login_div').toggle(300)" %><br />
-        <br />
-        <div id="login_div" style="display: none;">
-          <%= form_tag ygg_asgard_session_authenticate_by_fqda_and_password_path,
-                         { :id => 'login-form', :remote => true, :class => 'standard', :method => :post } do |f| -%>
-            <table>
-              <tr>
-                <th><%= label_tag :username, 'e-Mail' %></th>
-                <td><%= text_field_tag :username %></td>
-              </tr>
-              <tr>
-                <th><%= label_tag :password, 'Password' %></th>
-                <td><%= password_field_tag :password %></td>
-              </tr>
-              <tr>
-                <td colspan=2>
-                <%= submit_tag 'Invia' %>
-                </td>
-              </tr>
-            </table>
-            <%= link_to 'Ho dimenticato la password', cid_registration_recover_password_path %>
-         <% end -%>
-         <iframe id="login_iframe" name="login_iframe" width="0" height="0" frameborder="0" style="display: none;"></iframe>
-        </div>
-<!--        Login via Facebook:<br />
-        <fb:login-button perms="email,publish_stream"></fb:login-button><br />-->
+        <%= link_to_function 'Login', "jQuery('#login-dialog').dialog('open')" %><br />
       </div>
     <% else %>
-      <div class="userdata">
+      <div class="userdata userdata_<%= asgard_session.authenticated_admin? ? 'admin' : (asgard_session.authenticated? ? 'authenticated' : '') %>">
 
         <div>
-      <% if auth_method == :facebook %>
-          <div style="float: left; margin-right: 0.5em">
-            <fb:profile-pic uid="<%= facebook_uid %>" size="square" facebook-logo="true" ></fb:profile-pic>
-          </div>
-      <% end %>
           <strong><%= auth_person.name %></strong>
           <br style="clear: both" />
         </div>
       <ul>
-      <li><%= link_to 'Profilo', auth_person.pilot %></li>
+        <li><%= link_to 'Pagina personale', static_path('user_home') %></li>
       <% if !auth_person.pilot ||
             !auth_person.pilot.championships.include?(Championship.find_by_symbol(:cid_2011))  %>
-        <li><%= link_to 'Iscriviti al campionato', cid_registration_path %>
+        <li><%= link_to 'Iscrizione', cid_registration_path %>
       <% else %>
         <li><%= link_to('Invia il tuo volo', new_igc_tmp_file_path()) %></li>
         <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
       <% end %>
 
       <% if asgard_session && asgard_session.authenticated_admin? %>
-        <% cnt = Flight.pending.count %>
-        <% if cnt > 0 %>
-          <li>
-          <strong>
-          <%= link_to "#{cnt} voli pendenti", flights_path(:pending => 1) %>
-          </strong>
-          </li>
-        <% end %>
-
-        <% if IgcTmpFile.count > 0 %>
-          <li>
-          <strong>
-          <%= link_to "#{IgcTmpFile.count} file IGC da assegnare", igc_tmp_files_path() %>
-          </strong>
-          </li>
-        <% end %>
+        <li><%= link_to 'Amministrazione', static_path('administration_home') %></li>
       <% end %>
-      <li>
-      <% if auth_method == :facebook %>
-          <%= link_to_function 'Logout', 'FB.logout()' %>
-      <% else %>
-          <%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %>
-      <% end %>
-      </li>
+        <li><%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %></li>
       </ul>
       </div>
     <% end %>
@@ -145,12 +94,129 @@
 <%= yield  %>
 </div>
 
-<%= javascript_tag do %>
-jQuery(function($) {
-  $("#login-form").bind("ajax:complete", function(event, data, status, xhr) { window.location.reload(); });
-  $("#logout_link").bind("ajax:complete", function(event, data, status, xhr) { window.location.reload(); });
+<div id="password-recovery-dialog" title="Recupero Password" style="display: none">
+  <div id="password-recovery-dialog-alert" class="freeow freeow-center" style="position: absolute"></div>
+  <form class="ui-widget">
+    <table>
+      <tr>
+        <th><label for="fqda">e-Mail</label></th>
+        <td><input type="text" name="fqda" id="fqda"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+
+  $("#password-recovery-dialog").dialog({
+    autoOpen: false,
+    width: 500,
+    height: 200,
+    modal: true,
+    buttons: {
+      'Ok': function() {
+        $.ajax({
+          url: '<%= csvva_registration_recover_password_path %>',
+          dataType: 'json',
+          type: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify({ fqda: $('#fqda').val() }),
+          success: function(data) {
+            if (data.success) {
+              $('#password-recovery-dialog').dialog('close');
+              $("#freeow").freeow("Password inviata", "La password ti è stata inviata per e-Mail");
+            } else {
+              $("#password-recovery-dialog-alert").freeow("Errore", data.error);
+            }
+          },
+        });
+      },
+      'Annulla': function() {
+        $(this).dialog("close");
+      }
+    },
+  });
 });
-<% end %>
+//]]>
+</script>
+
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+jQuery(function($) {
+  $("#logout_link").bind("ajax:complete", function(event, data, status, xhr) { window.location = '/'; });
+});
+//]]>
+</script>
+
+
+<div id="login-dialog" title="Login" style="display: none">
+  <div id="login-dialog-alert" class="freeow freeow-center" style="position: absolute"></div>
+  <form id="login-dialog-form" class="ui-widget" target="login_iframe">
+    <table>
+      <tr>
+        <th><label for="username">e-Mail</label></th>
+        <td><input type="text" name="username" id="username"></td>
+      </tr>
+      <tr>
+        <th><label for="password">Password</label></th>
+        <td><input type="password" name="password" id="password"></td>
+      </tr>
+    </table>
+    <input type="submit" name="login-dialog-submit" id="login-dialog-submit" style="display: none"  />
+  </form>
+  <%= link_to_function 'Ho dimenticato la password', "jQuery('#password-recovery-dialog').dialog('open')" %><br />
+  <iframe id="login_iframe" name="login_iframe" width="0" height="0" frameborder="0" style="display: none;"></iframe>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+$(function() {
+
+  $("#login-dialog").dialog({
+    autoOpen: false,
+    width: 500,
+    height: 200,
+    modal: true,
+    buttons: {
+      'Ok': function() {
+        $.ajax({
+          url: '<%= ygg_asgard_session_authenticate_by_fqda_and_password_path %>',
+          dataType: 'json',
+          type: 'POST',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify({ username: $('#username').val(), password: $('#password').val() }),
+          success: function(data) {
+            if (data.authenticated) {
+              $("#login-dialog").hide("slow");
+              $("#login-dialog-submit").click();
+              window.location = '<%= static_path('user_home') %>';
+            } else
+              $("#login-dialog-alert").freeow("Errore", "Username o password errati");
+          },
+          error: function(data) {
+            $("#login-dialog-alert").freeow("Errore", "Errore di comunicazione");
+          }
+        });
+      },
+      'Annulla': function() {
+        $(this).dialog("close");
+      }
+    },
+    open: function() {
+    },
+    close: function() {
+      allFields.val( "" ).removeClass( "ui-state-error" );
+    }
+  });
+});
+//]]>
+</script>
+
+<div id="freeow" class="freeow freeow-bottom-right"></div>
 
 </body>
 </html>

@@ -89,9 +89,16 @@ class FlightsController < ApplicationController
 
       if cp
         if cp.cid_category == 'prom'
-          @cid_available_rankings = [ :prom ]
+          @cid_available_rankings = {
+                 'Promozione' => :prom,
+          }
         else
-          @cid_available_rankings = [ :naz_club, :naz_open, :naz_15m, :naz_13m5 ]
+          @cid_available_rankings = {
+                 'Nazionale Club' => :naz_club,
+                 'Nazionale Open' => :naz_open,
+                 'Nazionale 15 m' => :naz_15m,
+                 'Nazionale 13.5 m' => :naz_13m5
+          }
         end
       else
         raise "NOT SUBSCRIBED"

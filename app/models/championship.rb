@@ -10,6 +10,8 @@ class Championship < Ygg::PublicModel
            :dependent => :destroy,
            :embedded => true
 
+  has_many :flights, :through => :championship_flights
+
   class Flight < Ygg::BasicModel
 
     set_table_name 'championship_flights'

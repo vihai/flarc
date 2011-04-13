@@ -25,7 +25,8 @@
         <span class="edit_ch"><%= fmt_handicap(plane_type.club_handicap) %></span>
       <% else %>
         <% for config in plane_type.configurations %>
-          <%= config.name %>: <%= fmt_handicap(config.club_handicap) %><br />
+          <%= config.name %>:
+          <span id="tc_<%= config.id %>" class="edit_tch"><%= fmt_handicap(config.club_handicap) %></span><br />
         <% end %>
       <% end %>
     </td>

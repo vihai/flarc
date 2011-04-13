@@ -7,7 +7,7 @@ class RankingCsvva2011 < Ranking
 
     results = {}
 
-    cship = Championship.find_by_symbol(:cid_2011)
+    cship = Championship.find_by_symbol(:csvva_2011)
 
     cship.championship_flights.each do |cf|
       next if !cf.points

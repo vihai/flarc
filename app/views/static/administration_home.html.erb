@@ -1,23 +1,11 @@
-<% Championship.each do |cship| %>
+<% Championship.where('now() BETWEEN valid_from AND valid_to').order('created_at DESC').all.each do |cship| %>
   <h1><%= cship.name %></h1>
-  <p><%= cship.flights.count %>
+  <p>
+    Voli: <%= cship.flights.count %><br />
+    <% pending = cship.flights.joins(:championship_flights).where('championship_flights.status=\'pending\'') %>
+    <% if pending.all.count > 0 %>
+      <h2>Voli da verificare</h2>
+      <%= render :partial => 'flights/flights', :object => pending %>
+    <% end %>
+  </p>
 <% end %>
-
-
-<% cnt = Flight.pending.count %>
-<% if cnt > 0 %>
-  <li>
-  <strong>
-  <%= link_to "#{cnt} voli pendenti", flights_path(:pending => 1) %>
-  </strong>
-  </li>
-<% end %>
-
-<% if IgcTmpFile.count > 0 %>
-  <li>
-  <strong>
-  <%= link_to "#{IgcTmpFile.count} file IGC da assegnare", igc_tmp_files_path() %>
-  </strong>
-  </li>
-<% end %>
-

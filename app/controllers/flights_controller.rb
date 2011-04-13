@@ -46,22 +46,6 @@ class FlightsController < RestController
   end
 
 
-
-
-
-
-
-
-
-
-  def autocomplete_plane
-    @items = Plane.where([ 'LOWER(registration) LIKE ?', '%' + params['flight']['plane'].downcase + '%' ]).
-                   order('registration ASC').
-                   limit(10)
-
-    render :inline => "<%= auto_complete_result @items, 'registration' %>"
-  end
-
   def calendar
 #    expires_in 1.hour, :public => true if EXPIRES
 
@@ -199,8 +183,8 @@ class FlightsController < RestController
                                         :plane_type => PlaneType.find(@state[:plane_type_id]))
             end
 
-            if @state[:plane_type_configuration_id]
-              @flight.plane_type_configuration = PlaneTypeConfiguration.find(@state[:plane_type_configuration_id])
+            if @state[:plane_configuration_id]
+              @flight.plane_type_configuration = PlaneTypeConfiguration.find(@state[:plane_configuration_id])
             end
 
             @flight.private = false

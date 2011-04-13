@@ -12,41 +12,6 @@
 </head>
 <body>
 
-<div id="fb-root">
-  <%= javascript_include_tag 'http://connect.facebook.net/en_US/all.js' %>
-</div>
-<script>
-
-
-//  window.fbAsyncInit = function() {
-//    FB.init({appId: '<%="#{Flarc::Application.config.fb_api_key}"%>', status: true, cookie: true, xfbml: true});
-//
-//    FB.Event.subscribe('auth.sessionChange', function(response) {
-//      if (response.session) {
-//        // A user has logged in, and a new cookie has been saved
-//        //alert("sessionChange + session");
-//        window.location = '<%="#{ENV['FACEBOOK_AUTHENTICATE_LOCATION']}"%>';
-//      } else {
-//        // alert("sessionChange - session");
-//        // The user has logged out, and the cookie has been cleared
-//      }
-//    });
-//
-//    FB.Event.subscribe('auth.statusChange', function(response) {
-//    });
-//
-//    FB.Event.subscribe('auth.login', function(response) {
-//        // alert("login");
-//    });
-//
-//    FB.Event.subscribe('auth.logout', function(response) {
-//        //alert("logout");
-//        window.reload();
-//    });
-//
-//  };
-</script>
-
 <div id="header">
   <div id="text">
     Campionato di Distanza CSVVA 2011
@@ -93,23 +58,16 @@
       <div class="menulogin">
         <%= link_to('Registrati', registration_path) %><br />
         <%= link_to_function 'Login', "jQuery('#login-dialog').dialog('open')" %><br />
-<!--        Login via Facebook:<br />
-        <fb:login-button perms="email,publish_stream"></fb:login-button><br />-->
       </div>
     <% else %>
       <div class="userdata userdata_<%= asgard_session.authenticated_admin? ? 'admin' : (asgard_session.authenticated? ? 'authenticated' : '') %>">
 
         <div>
-      <% if auth_method == :facebook %>
-          <div style="float: left; margin-right: 0.5em">
-            <fb:profile-pic uid="<%= facebook_uid %>" size="square" facebook-logo="true" ></fb:profile-pic>
-          </div>
-      <% end %>
           <strong><%= auth_person.name %></strong>
           <br style="clear: both" />
         </div>
       <ul>
-      <li><%= link_to 'Pagina personale', static_path('user_home') %></li>
+        <li><%= link_to 'Pagina personale', static_path('user_home') %></li>
       <% if !auth_person.pilot ||
             !auth_person.pilot.championships.include?(Championship.find_by_symbol(:csvva_2011))  %>
         <li><%= link_to 'Iscrizione', csvva_registration_path %>
@@ -121,13 +79,7 @@
       <% if asgard_session && asgard_session.authenticated_admin? %>
         <li><%= link_to 'Amministrazione', static_path('administration_home') %></li>
       <% end %>
-      <li>
-      <% if auth_method == :facebook %>
-          <%= link_to_function 'Logout', 'FB.logout()' %>
-      <% else %>
-          <%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %>
-      <% end %>
-      </li>
+        <li><%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %></li>
       </ul>
       </div>
     <% end %>

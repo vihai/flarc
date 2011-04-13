@@ -45,11 +45,13 @@ div#header
 div#header > div#text
 {
  position: absolute;
+ padding: 0.3em;
  top: 0px;
  left: 0px;
  width: 100%;
- font-size: 300%;
+ font-size: 200%;
  font-weight: bold;
+ text-shadow: white 0.1em 0.1em 0.1em;
 }
 
 div#header > div#right_text
@@ -67,6 +69,7 @@ div#menu
  padding: 0;
  width: 13em;
  left: 0;
+ top: 4em;
  bottom: 0;
  padding-top: 1em;
  background-color: #eee;
