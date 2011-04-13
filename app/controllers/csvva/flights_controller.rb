@@ -11,9 +11,9 @@ class FlightsController < ApplicationController
         @state[:state] = :championship_data
         @state[:final] = false
         @state[:flight_id] = params[:flight_id]
- 
+
         @flight = Flight.find(@state[:flight_id])
-        if @flight.tags.include?(Tag.find_by_symbol('csvva_2011'))
+        if @flight.championships.include?(Championship.find_by_symbol(:csvva_2011))
           flash[:error] = "Il volo è già stato inviato al campionato CSVVA"
           throw :done
         end
@@ -49,9 +49,8 @@ class FlightsController < ApplicationController
 
           Ygg::Core::Transaction.new 'Flight submission' do
             @flight = Flight.find(@state[:flight_id])
-            @flight.flight_tags << FlightTag::Csvva2011.new(
-              :flight => @flight,
-              :tag => Tag.find_by_symbol(:csvva_2011),
+            @flight.championship_flights << Championship::Flight::Csvva2011.new(
+              :championship => Championship.find_by_symbol(:csvva_2011),
               :status => :pending,
               :distance => @state[:csvva_distance])
 

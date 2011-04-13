@@ -7,21 +7,22 @@
   </tr>
 
 <% for plane_type in @targets %>
-  <tr>
+  <tr id="pt_<%= plane_type.id %>">
     <td><%= link_to plane_type.name, plane_type %></td>
     <td><%= plane_type.seats %></td>
     <td>
       <% if plane_type.configurations.empty? then %>
-        <%= fmt_handicap(plane_type.handicap) %>
+        <span class="edit_h"><%= fmt_handicap(plane_type.handicap) %></span>
       <% else %>
         <% for config in plane_type.configurations %>
-          <%= config.name %>: <%= fmt_handicap(config.handicap) %><br />
+           <%= config.name %>:
+           <span id="tc_<%= config.id %>" class="edit_th"><%= fmt_handicap(config.handicap) %></span><br />
         <% end %>
       <% end %>
     </td>
     <td>
       <% if plane_type.configurations.empty? then %>
-        <%= fmt_handicap(plane_type.club_handicap) %>
+        <span class="edit_ch"><%= fmt_handicap(plane_type.club_handicap) %></span>
       <% else %>
         <% for config in plane_type.configurations %>
           <%= config.name %>: <%= fmt_handicap(config.club_handicap) %><br />
@@ -31,3 +32,83 @@
   </tr>
 <% end %>
 </table>
+
+<% if authenticated_admin? %>
+<script type="text/javascript">
+//<![CDATA[
+ $(document).ready(function() {
+   $('.edit_h').editable(function(value, settings) {
+     $(this).effect("pulsate", { times: 3 }, 1000);
+     $.ajax({
+       url: "<%= plane_types_path %>/" + $(this).parent().parent().attr('id').substring(3),
+       type: "PUT",
+       contentType: 'application/json; charset=utf-8',
+       dataType : "json",
+       data: JSON.stringify({ handicap: parseFloat(value) }),
+       error: function() { alert("Errore") },
+       });
+
+       return value;
+
+     }, {
+     tooltip: 'Click to edit...',
+     callback: function(value, settings) { $(this).effect("highlight", { color: 'green' }, 300); }
+   });
+
+   $('.edit_ch').editable(function(value, settings) {
+     $(this).effect("pulsate", { times: 3 }, 1000);
+     $.ajax({
+       url: "<%= plane_types_path %>/" + $(this).parent().parent().attr('id').substring(3),
+       type: "PUT",
+       contentType: 'application/json; charset=utf-8',
+       dataType : "json",
+       data: JSON.stringify({ club_handicap: parseFloat(value) }),
+       error: function() { alert("Errore") },
+       });
+
+       return value;
+
+     }, {
+     tooltip: 'Click to edit...',
+     callback: function(value, settings) { $(this).effect("highlight", { color: 'green' }, 300); }
+   });
+
+   $('.edit_th').editable(function(value, settings) {
+     $(this).effect("pulsate", { times: 3 }, 1000);
+     $.ajax({
+       url: "<%= plane_types_path %>/" + $(this).parent().parent().attr('id').substring(3),
+       type: "PUT",
+       contentType: 'application/json; charset=utf-8',
+       dataType : "json",
+       data: JSON.stringify({ configurations_attributes: [ { id: $(this).attr('id').substring(3), handicap: parseFloat(value) } ] }),
+       error: function() { alert("Errore") },
+       });
+
+       return value;
+
+     }, {
+     tooltip: 'Click to edit...',
+     callback: function(value, settings) { $(this).effect("highlight", { color: 'green' }, 300); }
+   });
+
+   $('.edit_tch').editable(function(value, settings) {
+     $(this).effect("pulsate", { times: 3 }, 1000);
+     $.ajax({
+       url: "<%= plane_types_path %>/" + $(this).parent().parent().attr('id').substring(3),
+       type: "PUT",
+       contentType: 'application/json; charset=utf-8',
+       dataType : "json",
+       data: JSON.stringify({ configurations_attributes: [ { id: $(this).attr('id').substring(3), club_handicap: parseFloat(value) } ] }),
+       error: function() { alert("Errore") },
+       });
+
+       return value;
+
+     }, {
+     tooltip: 'Click to edit...',
+     callback: function(value, settings) { $(this).effect("highlight", { color: 'green' }, 300); }
+   });
+ });
+//]]>
+</script>
+<% end %>

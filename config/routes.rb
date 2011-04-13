@@ -16,7 +16,7 @@ Flarc::Application.routes.draw do
       get :photos, :tag_photos, :tag_photos_ajax, :show_map
       post :do_tag_photos
     end
-  
+
     collection do
       match :wizard
       get :calendar

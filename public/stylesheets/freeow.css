@@ -42,6 +42,11 @@ member of the options object when calling freeow().
     bottom: 10px;
     right: 10px; 
 }
+.freeow-center {
+    left: 50%;
+    margin-left: -150px;
+    top: 20%;
+}
 
 /* Message */
 .freeow > div {

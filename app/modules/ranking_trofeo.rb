@@ -6,12 +6,12 @@ class RankingTrofeo < Ranking
 
     ranking = Ranking.find_by_symbol(:csvva_tt_2011)
 
-    Flight.joins(:flight_tags).joins(:tags).
-           where('tags.symbol' => :csvva_2011, 'flight_tags.status' => 'approved').each do |flight|
+    cship = Championship.find_by_symbol(:csvva_2011)
 
-      results[flight.pilot.id] ||= {}
-      results[flight.pilot.id][:flights_count] ||= 0
-      results[flight.pilot.id][:flights_count] += 1
+    cship.championship_flights.where(:status => :approved) do |cf|
+      results[cf.flight.pilot.id] ||= {}
+      results[cf.flight.pilot.id][:flights_count] ||= 0
+      results[cf.flight.pilot.id][:flights_count] += 1
     end
 
     # Pass 2: For each ranking update standings

@@ -63,11 +63,12 @@ div#header > div#right_text
 div#menu
 {
  position: absolute;
+ margin: 0;
+ padding: 0;
  width: 13em;
  left: 0;
- top: 4em;
  bottom: 0;
- padding-top: 4em;
+ padding-top: 1em;
  background-color: #eee;
 }
 
@@ -80,12 +81,14 @@ div#menu div.logo
 div#menu ul
 {
  list-style-type: none;
- padding: 1em;
  margin: 0;
+ padding: 0;
+ padding-left: 1em;
 }
 
-div#menu ul > li
+div#menu > ul > li
 {
+ padding-bottom: 0.7em;
 }
 
 div#menu ul > li a:hover
@@ -95,8 +98,7 @@ div#menu ul > li a:hover
 
 div#menu div.userdata
 {
- margin: 0em -0.8em 0em -0.8em;
- background-color: #cfc;
+ margin: 0em -0.5em 0em -0.5em;
  border: solid 3px #aca;
  padding: 0.5em;
  -webkit-border-radius: 8px;    /* for Safari */
@@ -104,6 +106,15 @@ div#menu div.userdata
  border-radius: 8px;
 }
 
+div#menu div.userdata_authenticated
+{
+ background-color: #cfc;
+}
+
+div#menu div.userdata_admin
+{
+ background-color: #f22;
+}
 
 div#body
 {
@@ -306,7 +317,7 @@ table.flight_calendar > tbody > tr > td.today
  border: solid 3px red;
 }
 
-span.flight_tag_statuses
+span.cf_statuses
 {
  position: absolute;
  right: 0px;
@@ -399,12 +410,12 @@ div#photo_geotagging_select_div
  border-radius: 8px;
 }
 
-img.tag_icon_pending
+img.cf_status_icon_pending
 {
  opacity: 0.5;
 }
 
-img.tag_icon_invalid
+img.cf_status_icon_invalid
 {
  background-color: #f77;
 }
@@ -462,7 +473,7 @@ p.error span {
   background: url(../../images/flash/error.png) no-repeat left top;
 }
 
-div.tag
+div.cf
 {
  vertical-align: top;
  display: inline-block;
@@ -475,20 +486,52 @@ div.tag
 border: solid 1px green;
 }
 
-div.tag > div.logo
+div.cf > div.logo
 {
  text-align: center;
  display: inline-block;
  vertical-align: top;
 }
 
-div.tag > div.container
+div.cf > div.container
 {
  display: inline-block;
  vertical-align: top;
 }
 
-div.tag > div.container > div.title
+div.cf > div.container > div.title
+{
+ font-weight: bold;
+}
+
+
+div.cp
+{
+ vertical-align: top;
+ display: inline-block;
+ background-color: #eee;
+ padding: 1em;
+ -webkit-border-radius: 8px;    /* for Safari */
+ -moz-border-radius: 8px;       /* for Firefox */
+ border-radius: 8px;
+
+border: solid 1px green;
+}
+
+div.cp > div.logo
+{
+ text-align: center;
+ display: inline-block;
+ vertical-align: top;
+}
+
+div.cp > div.container
+{
+ display: inline-block;
+ vertical-align: top;
+}
+
+div.cp > div.container > div.title
 {
  font-weight: bold;
 }

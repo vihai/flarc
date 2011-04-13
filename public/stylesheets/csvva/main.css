@@ -26,7 +26,8 @@ div#menu
  width: 163px;
  top: 74px;
  background: #97cce9 url(../../images/csvva/menu_sky.jpg) no-repeat left top;
- font-weight: bold;
+ text-shadow: black 0.1em 0.1em 0.2em;
+ font-size: 90%;
 }
 
 div#menu div.logo
@@ -38,17 +39,21 @@ div#menu div.logo
 div#menu ul
 {
  list-style-type: none;
- padding: 1em;
  margin: 0;
 }
 
-div#menu ul > li
+div#menu > ul > li
 {
+ color: yellow;
 }
 
 div#menu ul > li:hover
 {
- list-style-type: circle;
+}
+
+div#menu ul > li a
+{
+ color: white;
 }
 
 div#menu ul > li a:hover

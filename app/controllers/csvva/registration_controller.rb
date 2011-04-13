@@ -60,7 +60,7 @@ class RegistrationController < ApplicationController
       if !identity
         respond_to do |format|
           format.html { render :template => 'csvva/registration/recover_password_identity_not_found' }
-          format.js { render(:update) { |page| page.alert 'Indirizzo e-mail non trovato' } }
+          format.json { render :json => { :success => false, :error => 'Indirizzo e-mail non trovato' } }
         end
 
         return
@@ -78,7 +78,7 @@ class RegistrationController < ApplicationController
 
       respond_to do |format|
         format.html { render :template => 'csvva/registration/recover_password_done' }
-        format.js { render(:update) { |page| page.alert 'La password è stata inviata via e-mail' } }
+        format.json { render :json => { :success => true } }
       end
     end
   end

@@ -23,11 +23,15 @@ class Flight < Ygg::PublicModel
            :through => :flight_tags,
            :uniq => true
 
-#  has_many :ranking_flights
-#  has_many :rankings,
-#           :through => :ranking_flights,
-#           :uniq => true
-#
+  has_many :championship_flights,
+           :class_name => '::Championship::Flight',
+           :dependent => :destroy,
+           :embedded => true
+  accepts_nested_attributes_for :championship_flights, :allow_destroy => true
+
+  has_many :championships,
+           :through => :championship_flights,
+           :uniq => true
 
 #  validates_presence_of :pilot, :plane, :takeoff_time, :landing_time, :distance
 #  validates_numericality_of :distance
@@ -114,5 +118,6 @@ class Flight < Ygg::PublicModel
 
     return self.encoded_polyline_cache
   end
+
 end
 

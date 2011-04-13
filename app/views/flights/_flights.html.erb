@@ -36,11 +36,11 @@
         </td>
       <% end %>
       <td class="tags">
-        <% x.flight_tags.each do |ft| %>
-          <%= image_tag ft.tag.icon,
-                        :alt => "Icona #{ft.tag.name}",
-                        :title => "#{ft.tag.name} (#{ft.status})",
-                        :class => "tag_icon_#{ft.status}" %>
+        <% x.championship_flights.each do |cf| %>
+          <%= image_tag cf.championship.icon,
+                        :alt => "Icona #{cf.championship.name}",
+                        :title => "#{cf.championship.name} (#{cf.status})",
+                        :class => "cf_status_icon_#{cf.status}" %>
         <% end %>
       </td>
     </tr>

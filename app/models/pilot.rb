@@ -10,10 +10,15 @@ class Pilot < Ygg::PublicModel
 
   has_many :ranking_standings
 
-  has_many :championship_pilots
+  has_many :championship_pilots,
+           :class_name => '::Championship::Pilot',
+           :dependent => :destroy,
+           :embedded => true
   accepts_nested_attributes_for :championship_pilots, :allow_destroy => true
 
-  has_many :championships, :through => :championship_pilots, :uniq => true
+  has_many :championships,
+           :through => :championship_pilots,
+           :uniq => true
 
   validates_presence_of :person
   validates_uniqueness_of :person_id

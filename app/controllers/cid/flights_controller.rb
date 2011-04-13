@@ -13,7 +13,7 @@ class FlightsController < ApplicationController
         @state[:flight_id] = params[:flight_id]
 
         @flight = Flight.find(@state[:flight_id])
-        if @flight.tags.include?(Tag.find_by_symbol('cid_2011'))
+        if @flight.championships.include?(Championship.find_by_symbol(:cid_2011))
           flash[:error] = "Il volo è già stato inviato al CID"
           throw :done
         end
@@ -32,11 +32,11 @@ class FlightsController < ApplicationController
 #          throw :done
 #        end
 
-          if params[:cid_tag_id].empty?
+          if params[:cid_ranking].empty?
             flash.now[:error] = "È necessario selezionare una classe"
             throw :done
           end
-          @state[:cid_tag_id] = params[:cid_tag_id]
+          @state[:cid_ranking] = params[:cid_ranking]
 
           if params[:cid_task_eval].empty?
             flash.now[:error] = "È necessario selezionare il tipo di valutazione del tema"
@@ -65,10 +65,10 @@ class FlightsController < ApplicationController
           @state[:state] = :done
 
           @flight = Flight.find(@state[:flight_id])
-          @flight.flight_tags << FlightTag::Cid2011.new(
-            :flight => @flight,
-            :tag => Tag.find(@state[:cid_tag_id]),
+          @flight.championship_flights << Championship::Flight::Cid2011.new(
+            :championship => Championship.find_by_symbol(:cid_2011),
             :status => :pending,
+            :cid_ranking => @state[:cid_ranking],
             :distance => @state[:cid_distance],
             :data => {
               :task_eval => @state[:cid_task_eval].to_sym,
@@ -89,16 +89,9 @@ class FlightsController < ApplicationController
 
       if cp
         if cp.cid_category == 'prom'
-          @cid_available_tags = [
-            Tag.find_by_symbol('cid_2011_prom')
-          ]
+          @cid_available_rankings = [ :prom ]
         else
-          @cid_available_tags = [
-            Tag.find_by_symbol('cid_2011_naz_club'),
-            Tag.find_by_symbol('cid_2011_naz_open'),
-            Tag.find_by_symbol('cid_2011_naz_15m'),
-            Tag.find_by_symbol('cid_2011_naz_13m5')
-          ]
+          @cid_available_rankings = [ :naz_club, :naz_open, :naz_15m, :naz_13m5 ]
         end
       else
         raise "NOT SUBSCRIBED"

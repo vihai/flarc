@@ -1,0 +1,23 @@
+<% Championship.each do |cship| %>
+  <h1><%= cship.name %></h1>
+  <p><%= cship.flights.count %>
+<% end %>
+
+
+<% cnt = Flight.pending.count %>
+<% if cnt > 0 %>
+  <li>
+  <strong>
+  <%= link_to "#{cnt} voli pendenti", flights_path(:pending => 1) %>
+  </strong>
+  </li>
+<% end %>
+
+<% if IgcTmpFile.count > 0 %>
+  <li>
+  <strong>
+  <%= link_to "#{IgcTmpFile.count} file IGC da assegnare", igc_tmp_files_path() %>
+  </strong>
+  </li>
+<% end %>
+

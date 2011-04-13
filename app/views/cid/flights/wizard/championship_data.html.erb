@@ -10,7 +10,7 @@
       <th><%= label_tag :cid_tag_id, 'Classe' %></th>
       <td>
         <%= select_tag :cid_tag_id, options_for_select(
-               [[ '' => '' ]] + @cid_available_tags.map { |x| [ x.name, x.id ] }, @state[:cid_tag_id]), {} %>
+               [[ '' => '' ]] + @cid_available_rankings.map { |x| [ x.name, x.id ] }, @state[:cid_ranking]), {} %>
       </td>
     </tr>
     <tr>

@@ -1,8 +1,3 @@
-
-
-
-
-
 <div id="list_div" style="display: none"></div>
 <div id="info_div">
 <% if authenticated_admin? %>
@@ -68,11 +63,11 @@
 </table>
 </div>
 
-<% @target.flight_tags.each do |r| %>
-  <% if r.tag.symbol.to_sym == :csvva_2011 %>
-    <%= render :partial => 'flights/csvva/tag', :object => r %>
-  <% elsif r.is_a?(FlightTag::Cid2011) %>
-    <%= render :partial => 'flights/cid/tag', :object => r %>
+<% @target.championship_flights.each do |cf| %>
+  <% if cf.championship.symbol.to_sym == :csvva_2011 %>
+    <%= render :partial => 'flights/csvva/cf', :object => cf %>
+  <% elsif cf.is_a?(Championship::Flight::Cid2011) %>
+    <%= render :partial => 'flights/cid/cf', :object => cf %>
   <% end %>
 <% end %>
 
@@ -83,8 +78,9 @@
 <div id="map_container" class="map_container" style="width: 100%; height: 500px;">
   <div id="map" class="map" style="width: 100%; height: 100%;"></div>
 </div>
-<%= javascript_tag do -%>
 
+<script type="text/javascript">
+//<![CDATA[
 $(document).ready(function() {
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 8,
@@ -112,11 +108,13 @@ $(document).ready(function() {
 });
 
 <% end %>
-<% end %>
+
+//]]>
+</script>
 
 </div>
 
-
+<% if authenticated_admin? %>
 <style>
   div#users-contain { width: 350px; margin: 20px 0; }
   div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
@@ -140,7 +138,7 @@ $(document).ready(function() {
 
     <fieldset id="csvva_fieldset" class="ui-widget-content">
       <legend>CSVVA:
-        <span id="csvva_statuses" class="flight_tag_statuses">
+        <span id="csvva_statuses" class="cf_statuses">
           <input type="radio" name="csvva_status" value="null" id="csvva_status_null" />
           <label for="csvva_status_null"></label>
           <input type="radio" name="csvva_status" value="pending" id="csvva_status_pending" />
@@ -157,7 +155,7 @@ $(document).ready(function() {
 
     <fieldset id="cid_fieldset" class="ui-widget-content">
       <legend>CID:
-        <span id="cid_statuses" class="flight_tag_statuses">
+        <span id="cid_statuses" class="cf_statuses">
           <input type="radio" name="cid_status" value="null" id="cid_status_null" />
           <label for="cid_status_null"></label>
           <input type="radio" name="cid_status" value="pending" id="cid_status_pending" />
@@ -202,10 +200,10 @@ $(document).ready(function() {
 </div>
 
 
-<script>
+<script type="text/javascript">
+//<![CDATA[
+
 $(function() {
-
-
   $("#csvva_statuses").buttonset();
   $("#csvva_status_null").button({ icons: { primary: 'ui-icon-close' }, text: false });
   $("#csvva_status_pending").button({ icons: { primary: 'icon-pending' }, text: false });
@@ -365,13 +363,13 @@ $(function() {
           $('#plane').val(resource.plane.registration);
           $('#plane_id').val(resource.plane.id);
 
-          tags = {};
+          cships = {};
 
-          $.each(resource.flight_tags, function(index, value) {
-            tags[value._type] = value;
+          $.each(resource.championship_flights, function(index, value) {
+            cships[value._type] = value;
           });
 
-          csvva = tags['FlightTag::Csvva2011']
+          csvva = cships['Championship::Flight::Csvva2011']
           if (csvva) {
             $('#csvva_fieldset_contents').show();
             $('#csvva_status').val(csvva.status);
@@ -379,7 +377,7 @@ $(function() {
           } else
             $('#csvva_fieldset_contents').hide();
 
-          cid = tags['FlightTag::Cid2011']
+          cid = cship['Championship::Flight::Cid2011']
           if (cid) {
             $('#cid_fieldset_contents').show();
             $(':cid_status').setValue(cid.status);
@@ -403,13 +401,6 @@ $(function() {
   $('#dialog-form').data('resource_id', <%= @target.id %>);
 });
 
-
-
+//]]>
 </script>
-
-
-
-
-
-
-
+<% end %>

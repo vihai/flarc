@@ -17,9 +17,9 @@
     Campionato Italiano di Distanza 2011
   </div>
   <div id="right_text">
-    <% flights = Flight.joins(:flight_tags).joins(:tags).where('tags.symbol' => 'cid_2011') %>
-    <strong><%= flights.count %></strong> voli<br />
-    <strong><%= fmt_distance_in_km(flights.sum(:distance).to_i)  %></strong>
+    <% cfs = Championship.find_by_symbol(:cid_2011).championship_flights %>
+    <strong><%= cfs.count %></strong> voli<br />
+    <strong><%= fmt_distance_in_km(cfs.sum(:distance).to_i)  %></strong>
   </div>
 </div>
 
@@ -72,7 +72,7 @@
               </tr>
               <tr>
                 <td colspan=2>
-          	<%= submit_tag 'Invia' %>
+                <%= submit_tag 'Invia' %>
                 </td>
               </tr>
             </table>

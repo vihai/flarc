@@ -110,14 +110,14 @@ class FlightsController < RestController
         @state[:state] = :plane
         @state[:final] = false
         @state[:igc_tmp_file_id] = params[:igc_tmp_file_id]
-  
+
 ## TODO CHECK flight duplicate
-  
+
       else
         @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
         @state[:state] = @state[:state].to_sym
         @state[:final] = false
-  
+
         case @state[:state]
         when :plane
           if params[:plane_registration].empty? 
@@ -136,7 +136,7 @@ class FlightsController < RestController
           @state[:plane_registration] = params[:plane_registration]
 
           @state[:pilot_id] = params[:pilot_id]
- 
+
           plane = Plane.find_by_registration(@state[:plane_registration])
           if plane
             @state[:plane_id] = plane.id
@@ -159,13 +159,13 @@ class FlightsController < RestController
           @state[:plane_type_id] = params[:plane_type_id]
 
           plane_type = PlaneType.find(@state[:plane_type_id])
-  
+
           if plane_type.configurations.empty?
             @state[:state] = :done
           else
             @state[:state] = :plane_configuration
           end
-  
+
         when :plane_configuration
           if params[:plane_configuration_id].empty?
             flash.now[:error] = "È necessario indicare la configurazione dell'aliante"
@@ -179,38 +179,38 @@ class FlightsController < RestController
         if @state[:state] == :done
           Ygg::Core::Transaction.new 'Flight submission' do
             @flight = Flight.new
-  
+
             igc_tmp_file = IgcTmpFile.find(@state[:igc_tmp_file_id])
-  
+
             igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
             igc_file.read_contents {}
             @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
-  
+
             if asgard_session.authenticated_admin?
               @flight.pilot = Pilot.find(@state[:pilot_id])
             else
               @flight.pilot = auth_person.pilot
             end
-  
+
             if @state[:plane_id]
               @flight.plane = Plane.find(@state[:plane_id])
             else
               @flight.plane = Plane.new(:registration => @state[:plane_registration],
                                         :plane_type => PlaneType.find(@state[:plane_type_id]))
             end
-  
+
             if @state[:plane_type_configuration_id]
               @flight.plane_type_configuration = PlaneTypeConfiguration.find(@state[:plane_type_configuration_id])
             end
-  
+
             @flight.private = false
-  
+
             @flight.save!
-  
+
             File.rename(igc_tmp_file.filename, @flight.igc_file_path)
             igc_tmp_file.destroy
           end
-  
+
           if current_site == :cid
             redirect_to cid_flight_wizard_path(:flight_id => @flight.id)
             return
@@ -228,10 +228,10 @@ class FlightsController < RestController
     case @state[:state]
     when :plane
       @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
-  
+
       @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
       @igc_file.read_contents
-  
+
       if @igc_file.glider_id
         @state[:plane_registration] = @igc_file.glider_id.strip.upcase
       end
