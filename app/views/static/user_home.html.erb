@@ -9,13 +9,10 @@
     <% csvva_2011 = false %>
     <% cid_2011 = false %>
     <% auth_person.pilot.championship_pilots.each do |cp| %>
-      <% if cp.championship.symbol == 'cid_2011' %>
-        <% csvva_2011 = true %>
-        <%= render :partial => 'championships/csvva/cp', :object => cp %>
-      <% elsif cp.championship.symbol == 'csvva_2011' %>
-        <% cid_2011 = true %>
-        <%= render :partial => 'championships/cid/cp', :object => cp %>
-      <% end %>
+      <%= render :partial => "championships/pilot/#{cp.class.name.split('::').last.underscore}", :object => cp %>
+
+      <% cid_2011 = true if cp.championship.symbol == 'cid_2011' %>
+      <% csvva_2011 = true if cp.championship.symbol == 'csvva_2011' %>
     <% end %>
   <% end %>
   <ul>

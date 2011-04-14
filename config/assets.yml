@@ -25,12 +25,14 @@ stylesheets:
   cid:
     - public/stylesheets/*.css
     - public/stylesheets/cid/**/*.css
-    - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
+    - public/stylesheets/custom-theme/jquery-ui-1.8.11.custom.css
+#    - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
 
   csvva:
     - public/stylesheets/*.css
     - public/stylesheets/csvva/**/*.css
-    - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
+    - public/stylesheets/custom-theme/jquery-ui-1.8.11.custom.css
+#    - public/stylesheets/ui-lightness/jquery-ui-1.8.11.custom.css
 
   asgard:
     - public/ext/resources/css/ext-all-notheme.css

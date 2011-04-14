@@ -319,15 +319,8 @@ table.flight_calendar > tbody > tr > td.today
  border: solid 3px red;
 }
 
-span.cf_statuses
-{
- position: absolute;
- right: 0px;
-}
-
 .icon-pending { background-image: url('../images/flight_status_pending.png') !important; }
 .icon-approved { background-image: url('../images/flight_status_approved.png') !important; }
-
 
 div.edit_box
 {

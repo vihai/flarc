@@ -140,11 +140,25 @@ class Championship < Ygg::PublicModel
   class Pilot < Ygg::BasicModel
     set_table_name 'championship_pilots'
 
+    self.inheritance_column = :sti_type
+
     belongs_to :pilot,
                :class_name => '::Pilot'
     belongs_to :championship,
                :class_name => '::Championship'
 
     validates_presence_of :pilot, :championship
+
+    class Cid2011 < Pilot
+    end
+
+    class Csvva2011 < Pilot
+    end
+
+    class Csvva2010 < Pilot
+    end
+
+    class Csvva2009 < Pilot
+    end
   end
 end

@@ -1,18 +1,18 @@
-<div class="cf csvva_cf">
+<div class="cf cid_cf">
   <div class="logo">
     <%=image_tag('cid/logo_16.png', :class => 'logo')%><br />
-    <%= status_icon(cf.status) %>
+    <%= status_icon(cid2011.status) %>
   </div>
   <div class="container">
-    <div class="title"><%= cf.championship.name %> <%= fmt_cid_ranking_to_name(cf.cid_ranking) %></div>
+    <div class="title"><%= cid2011.championship.name %> <%= fmt_cid_ranking_to_name(cid2011.cid_ranking) %></div>
     <div class="body">
-      <% if cf.data[:task_eval] == :free %>
+      <% if cid2011.data[:task_eval] == :free %>
         Tema libero
       <% else %>
-        Tema dichiarato e <%= cf.data[:task_completed] ? '' : 'non ' %> completato
+        Tema dichiarato e <%= cid2011.data[:task_completed] ? '' : 'non ' %> completato
       <% end %><br />
       Tipo: <%=
-        case cf.data[:task_type]
+        case cid2011.data[:task_type]
         when :butterfly ; 'Farfalla'
         when :simple_triangle ; 'Triangolo semplice'
         when :round_trip ; 'Andata e ritorno'
@@ -20,8 +20,8 @@
         when :straight_line ; 'Linea retta'
         end
       %><br />
-      Distanza: <%= fmt_distance_in_km(cf.distance.to_i) %><br />
-      Punti: <%= fmt_points(cf.points) %>
+      Distanza: <%= fmt_distance_in_km(cid2011.distance.to_i) %><br />
+      Punti: <%= fmt_points(cid2011.points) %>
     </div>
   </div>
 </div>

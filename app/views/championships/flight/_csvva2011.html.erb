@@ -1,0 +1,13 @@
+<div class="cf csvva_cf">
+  <div class="logo">
+    <%=image_tag('csvva/logo_16.png', :class => 'logo')%><br />
+    <%= status_icon(csvva2011.status) %>
+  </div>
+  <div class="container">
+    <div class="title"><%= csvva2011.championship.name %></div>
+    <div class="body">
+      Distanza: <%= fmt_distance_in_km(csvva2011.distance.to_i) %><br />
+      Punti: <%= fmt_points(csvva2011.points) %>
+    </div>
+  </div>
+</div>

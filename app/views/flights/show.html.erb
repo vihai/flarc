@@ -65,11 +65,7 @@
 </div>
 
 <% @target.championship_flights.each do |cf| %>
-  <% if cf.championship.symbol.to_sym == :csvva_2011 %>
-    <%= render :partial => 'flights/csvva/cf', :object => cf %>
-  <% elsif cf.is_a?(Championship::Flight::Cid2011) %>
-    <%= render :partial => 'flights/cid/cf', :object => cf %>
-  <% end %>
+  <%= render :partial => "championships/flight/#{cf.class.name.split('::').last.underscore}", :object => cf %>
 <% end %>
 
 <% if @target.encoded_polyline && @target.encoded_polyline.size > 0 %>
@@ -107,26 +103,14 @@ $(document).ready(function() {
 
   map.fitBounds(bounds);
 });
-
-<% end %>
-
 //]]>
 </script>
+<% end %>
 
 </div>
 
 <% if authenticated_admin? %>
-<style>
-  div#users-contain { width: 350px; margin: 20px 0; }
-  div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-  div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-  .ui-dialog .ui-state-error { padding: .3em; }
-  .validateTips { border: 1px solid transparent; padding: 0.3em; }
-</style>
-
 <div id="dialog-form" title="Edit flight" style="display: none">
-  <p class="validateTips">All form fields are required.</p>
-
   <form class="ui-widget">
   <fieldset class="ui-widget-content">
     <label for="pilot">Pilot</label>
@@ -142,7 +126,7 @@ $(document).ready(function() {
     </select>
 
     <fieldset id="csvva_fieldset" class="ui-widget-content">
-      <legend>CSVVA:
+      <legend>
         <span id="csvva_statuses" class="cf_statuses">
           <input type="radio" name="csvva_status" value="null" id="csvva_status_null" />
           <label for="csvva_status_null"></label>
@@ -151,6 +135,7 @@ $(document).ready(function() {
           <input type="radio" name="csvva_status" value="approved" id="csvva_status_approved" />
           <label for="csvva_status_approved"></label>
         </span>
+        CSVVA:
       </legend>
       <input type="hidden" name="csvva_id" id="csvva_id" />
       <div id="csvva_fieldset_contents" style="display: none">
@@ -160,7 +145,7 @@ $(document).ready(function() {
     </fieldset>
 
     <fieldset id="cid_fieldset" class="ui-widget-content">
-      <legend>CID:
+      <legend>
         <span id="cid_statuses" class="cf_statuses">
           <input type="radio" name="cid_status" value="null" id="cid_status_null" />
           <label for="cid_status_null"></label>
@@ -169,6 +154,7 @@ $(document).ready(function() {
           <input type="radio" name="cid_status" value="approved" id="cid_status_approved" />
           <label for="cid_status_approved"></label>
         </span>
+        CID:
       </legend>
 
       <input type="hidden" name="cid_id" id="cid_id" />
@@ -360,22 +346,27 @@ $(function() {
             cships[value._type] = value;
           });
 
+          $('input:radio[name=csvva_status]').removeAttr('checked');
           csvva = cships['Championship::Flight::Csvva2011'];
           if (csvva) {
             $('#csvva_fieldset_contents').show();
             $('#csvva_id').val(csvva.id);
-            $('#csvva_status').val(csvva.status);
+            $('#csvva_status_' + csvva.status).checked = true;
+            $('input:radio[name=csvva_status]').filter('[value=' + csvva.status + ']').attr('checked', true);
             $('#csvva_distance').val(csvva.distance / 1000);
           } else {
             $('#csvva_fieldset_contents').hide();
             $('#csvva_id').val('');
+            $('input:radio[name=csvva_status]').filter('[value=null]').attr('checked', true);
           }
+          $('input:radio[name=csvva_status]').button('refresh');
 
+          $('input:radio[name=cid_status]').removeAttr('checked');
           cid = cships['Championship::Flight::Cid2011'];
           if (cid) {
             $('#cid_fieldset_contents').show();
             $('#cid_id').val(cid.id);
-            $('#cid_status').val(cid.status);
+            $('input:radio[name=cid_status]').filter('[value=' + cid.status + ']').attr('checked', true);
             $('#cid_distance').val(cid.distance / 1000);
             $('#cid_ranking').val(cid.cid_ranking);
             $('#cid_task_eval').val(cid.data.task_eval);
@@ -384,7 +375,9 @@ $(function() {
           } else {
             $('#cid_fieldset_contents').hide();
             $('#cid_id').val('');
+            $('input:radio[name=cid_status]').filter('[value=null]').attr('checked', true);
           }
+          $('input:radio[name=cid_status]').button('refresh');
         },
         error: function(resource) {
           alert('Errore lettura oggetto');
@@ -403,9 +396,11 @@ $(function() {
 
         resource.plane_type_configuration_id = $('#plane_type_configuration_id').val();
 
-        cid = {}
+        resource.championship_flights_attributes = [];
+
+        cid = {};
         status = $('input:radio[name=cid_status]:checked').val();
-        if (status != 'null') {
+        if (status && status != 'null') {
           if ($('#cid_id').val())
             cid.id = $('#cid_id').val();
 
@@ -418,13 +413,16 @@ $(function() {
           cid.data.task_eval = $('#cid_task_eval').val();
           cid.data.task_type = $('#cid_task_type').val();
           cid.data.task_completed = $('#cid_task_completed').val() == 'true';
-        } else {
+          resource.championship_flights_attributes.push(cid);
+        } else if ($('#cid_id').val()) {
+          cid.id = $('#cid_id').val();
           cid._destroy = true;
+          resource.championship_flights_attributes.push(cid);
         }
 
-        csvva = {}
+        csvva = {};
         status = $('input:radio[name=csvva_status]:checked').val();
-        if (status != 'null') {
+        if (status && status != 'null') {
           if ($('#csvva_id').val())
             csvva.id = $('#csvva_id').val();
 
@@ -432,12 +430,13 @@ $(function() {
           csvva.championship_id = $('#dialog-form').data('csvva_cship_id');
           csvva.status = status;
           csvva.distance  = $('#csvva_distance').val() * 1000;
+          resource.championship_flights_attributes.push(csvva);
         } else if ($('#csvva_id').val()) {
           csvva.id = $('#csvva_id').val();
           csvva._destroy = true;
+          resource.championship_flights_attributes.push(csvva);
         }
 
-        resource.championship_flights_attributes = [ cid, csvva ];
 
         $.ajax({
           url: '/flights/' + $('#dialog-form').data('resource_id'),

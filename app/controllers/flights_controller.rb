@@ -187,7 +187,7 @@ class FlightsController < RestController
             end
 
             if @state[:plane_configuration_id]
-              @flight.plane_type_configuration = PlaneTypeConfiguration.find(@state[:plane_configuration_id])
+              @flight.plane_type_configuration = PlaneType::Configuration.find(@state[:plane_configuration_id])
             end
 
             @flight.private = false

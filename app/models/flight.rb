@@ -8,7 +8,8 @@ class Flight < Ygg::PublicModel
   belongs_to :plane,
              :class_name => 'Plane'
 
-  belongs_to :plane_type_configuration
+  belongs_to :plane_type_configuration,
+             :class_name => '::PlaneType::Configuration'
 
   has_many :photos,
            :class_name => 'FlightPhoto',
