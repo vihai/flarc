@@ -1,6 +1,7 @@
 <% if asgard_session && asgard_session.authenticated? %>
   <h1>Benvenuto <%= auth_person.first_name %></h1>
 
+<% if auth_person.pilot %>
   <% if auth_person.pilot.championships.empty? %>
     <h2>Non sei iscritto a nessun campionato</h2>
   <% else %>
@@ -33,4 +34,5 @@
   <% if flights.count > 10 %>
     <%= link_to 'Lista completa dei voli...', flights_path(:pilot_id => auth_person.pilot.id) %>
   <% end %>
+<% end %>
 <% end %>

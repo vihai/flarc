@@ -29,6 +29,15 @@ class Championship < Ygg::PublicModel
     serialize :data
 
     class Cid2011 < Flight
+      before_save do
+        nd = {}
+        self.data ||= {}
+        self.data.each { |k,v| nd[k.to_sym] = v }
+        self.data = nd
+        self.data[:task_eval] = self.data[:task_eval].to_sym
+        self.data[:task_type] = self.data[:task_type].to_sym
+      end
+
       def handicap
         return (self.flight.plane_type_configuration ?
                   self.flight.plane_type_configuration.handicap :

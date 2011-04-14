@@ -16,6 +16,9 @@ class FlightsController < RestController
 
     attribute :plane do
       include!
+      attribute :plane_type do
+        include!
+      end
     end
   end
 

@@ -37,7 +37,7 @@ div#header
  top: 0;
  left: 0;
  margin: 0;
- width: 100%;
+ right: 0;
  height: 4em;
  background-color: #ddd;
 }
@@ -48,7 +48,6 @@ div#header > div#text
  padding: 0.3em;
  top: 0px;
  left: 0px;
- width: 100%;
  font-size: 200%;
  font-weight: bold;
  text-shadow: white 0.1em 0.1em 0.1em;

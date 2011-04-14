@@ -14,15 +14,6 @@ class Flight < Ygg::PublicModel
            :class_name => 'FlightPhoto',
            :dependent => :destroy
 
-  has_many :flight_tags,
-           :dependent => :destroy,
-           :embedded => true
-  accepts_nested_attributes_for :flight_tags, :allow_destroy => true
-
-  has_many :tags,
-           :through => :flight_tags,
-           :uniq => true
-
   has_many :championship_flights,
            :class_name => '::Championship::Flight',
            :dependent => :destroy,

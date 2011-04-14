@@ -6,6 +6,7 @@ class PlanesController < RestController
     empty!
     attribute(:id) { show! }
     attribute(:registration) { show! }
+    attribute(:plane_type_id) { show! }
   end
 
   filter :combo, lambda { |r| apply_search_to_relation(r, [ 'registration' ]) }

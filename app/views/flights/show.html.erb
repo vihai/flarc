@@ -21,6 +21,7 @@
     <td class="registration">
       <%= link_to(@target.plane.registration, @target.plane) %> -
       <%= link_to(@target.plane.plane_type.name, @target.plane.plane_type) %>
+      <%= @target.plane_type_configuration ? @target.plane_type_configuration.name : '' %>
     </td>
   </tr>
   <tr>
@@ -136,6 +137,10 @@ $(document).ready(function() {
     <input type="text" name="plane" id="plane" />
     <input type="text" name="plane_id" id="plane_id" />
 
+    <label for="plane">Configurazione</label>
+    <select name="plane_type_configuration_id" id="plane_type_configuration_id">
+    </select>
+
     <fieldset id="csvva_fieldset" class="ui-widget-content">
       <legend>CSVVA:
         <span id="csvva_statuses" class="cf_statuses">
@@ -147,6 +152,7 @@ $(document).ready(function() {
           <label for="csvva_status_approved"></label>
         </span>
       </legend>
+      <input type="hidden" name="csvva_id" id="csvva_id" />
       <div id="csvva_fieldset_contents" style="display: none">
         <label for="csvva_distance">Distanza</label>
         <input type="text" name="csvva_distance" id="csvva_distance" />
@@ -165,9 +171,21 @@ $(document).ready(function() {
         </span>
       </legend>
 
+      <input type="hidden" name="cid_id" id="cid_id" />
+
       <div id="cid_fieldset_contents" style="display: none">
         <label for="cid_distance">Distanza</label>
         <input type="text" name="cid_distance" id="cid_distance" /><br />
+
+        <label for="cid_ranking">Classifica</label>
+        <select id="cid_ranking">
+          <option value=""></option>
+          <option value="prom">Promozione</option>
+          <option value="naz_open">Nazionale Open</option>
+          <option value="naz_15m">Nazionale 15 m</option>
+          <option value="naz_13m5">Nazionale 13.5 m</option>
+          <option value="naz_club">Nazionale Club</option>
+        </select><br />
 
         <label for="cid_task_eval">Tema</label>
         <select id="cid_task_eval">
@@ -273,7 +291,8 @@ $(function() {
               return {
                 label: item.registration,
                 value: item.registration,
-                id: item.id
+                id: item.id,
+                type_id: item.plane_type_id
               }
             }));
           }
@@ -282,6 +301,21 @@ $(function() {
       minLength: 2,
       select: function(event, ui) {
         $('#plane_id').val(ui.item.id);
+        $.ajax({
+          url: '/plane_types/' + ui.item.type_id,
+          dataType: 'json',
+          data: {
+            sort: 'name'
+          },
+          success: function(data) {
+            $('option', $('#plane_type_configuration_id')).remove();
+            $.each(data.configurations, function(key, val) {
+              $('#plane_type_configuration_id').attr('options')[key] =
+                new Option(val.name, val.id,
+                           val.id == $('#dialog-form').data('resource').plane_type_configuration_id);
+            });
+          }
+        });
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -291,61 +325,11 @@ $(function() {
       }
     });
 
-  allFields = $( [] ).add( name ),
-  tips = $( ".validateTips" );
-
-  function updateTips( t ) {
-    tips
-      .text( t )
-      .addClass( "ui-state-highlight" );
-    setTimeout(function() {
-      tips.removeClass( "ui-state-highlight", 1500 );
-    }, 500 );
-  }
-
-  function checkLength( o, n, min, max ) {
-    if ( o.val().length > max || o.val().length < min ) {
-      o.addClass( "ui-state-error" );
-      updateTips( "Length of " + n + " must be between " +
-        min + " and " + max + "." );
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   $("#dialog-form").dialog({
     autoOpen: false,
     height: 500,
     width: 500,
     modal: true,
-    buttons: {
-      'Salva': function() {
-
-//        resource = $('#dialog-form').data('resource');
-        resource = {};
-        resource.plane_id = $('#plane_id').val();
-        resource.pilot_id = $('#pilot_id').val();
-
-        $.ajax({
-          url: '/flights/' + $('#dialog-form').data('resource_id'),
-          dataType: 'json',
-          type: 'PUT',
-          contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify(resource),
-          success: function(data) {
-            $("#dialog-form").dialog("close");
-            $("#freeow").freeow("Okay!", "Volo modificato", { classes: ['smokey', 'pushpin'] });
-          },
-          failure: function(data) {
-            alert("Error saving object");
-          }
-        });
-      },
-      'Annulla': function() {
-        $(this).dialog("close");
-      }
-    },
     open: function() {
       $.ajax({
         url: '/flights/' + $('#dialog-form').data('resource_id'),
@@ -363,42 +347,123 @@ $(function() {
           $('#plane').val(resource.plane.registration);
           $('#plane_id').val(resource.plane.id);
 
+          $('option', $('#plane_type_configuration_id')).remove();
+          $.each(resource.plane.plane_type.configurations, function(key, val) {
+            $('#plane_type_configuration_id').attr('options')[key] =
+              new Option(val.name, val.id,
+                         val.id == $('#dialog-form').data('resource').plane_type_configuration_id);
+          });
+
           cships = {};
 
           $.each(resource.championship_flights, function(index, value) {
             cships[value._type] = value;
           });
 
-          csvva = cships['Championship::Flight::Csvva2011']
+          csvva = cships['Championship::Flight::Csvva2011'];
           if (csvva) {
             $('#csvva_fieldset_contents').show();
+            $('#csvva_id').val(csvva.id);
             $('#csvva_status').val(csvva.status);
             $('#csvva_distance').val(csvva.distance / 1000);
-          } else
+          } else {
             $('#csvva_fieldset_contents').hide();
+            $('#csvva_id').val('');
+          }
 
-          cid = cship['Championship::Flight::Cid2011']
+          cid = cships['Championship::Flight::Cid2011'];
           if (cid) {
             $('#cid_fieldset_contents').show();
-            $(':cid_status').setValue(cid.status);
+            $('#cid_id').val(cid.id);
+            $('#cid_status').val(cid.status);
             $('#cid_distance').val(cid.distance / 1000);
-            $('#cid_task_eval').val(cid.resource.task_eval);
-            $('#cid_task_type').val(cid.resource.task_type);
-            $('#cid_task_completed').val(cid.resource.task_completed);
-          } else
+            $('#cid_ranking').val(cid.cid_ranking);
+            $('#cid_task_eval').val(cid.data.task_eval);
+            $('#cid_task_type').val(cid.data.task_type);
+            $('#cid_task_completed').val(cid.data.task_completed ? 'true' : 'false');
+          } else {
             $('#cid_fieldset_contents').hide();
+            $('#cid_id').val('');
+          }
         },
-        failure: function(resource) {
+        error: function(resource) {
           alert('Errore lettura oggetto');
         }
       });
     },
     close: function() {
-      allFields.val( "" ).removeClass( "ui-state-error" );
-    }
+    },
+    buttons: {
+      'Salva': function() {
+
+//        resource = $('#dialog-form').data('resource');
+        resource = {};
+        resource.plane_id = $('#plane_id').val();
+        resource.pilot_id = $('#pilot_id').val();
+
+        resource.plane_type_configuration_id = $('#plane_type_configuration_id').val();
+
+        cid = {}
+        status = $('input:radio[name=cid_status]:checked').val();
+        if (status != 'null') {
+          if ($('#cid_id').val())
+            cid.id = $('#cid_id').val();
+
+          cid._type = 'Championship::Flight::Cid2011';
+          cid.championship_id = $('#dialog-form').data('cid_cship_id');
+          cid.status = status;
+          cid.distance  = $('#cid_distance').val() * 1000;
+          cid.cid_ranking = $('#cid_ranking').val();
+          cid.data = {};
+          cid.data.task_eval = $('#cid_task_eval').val();
+          cid.data.task_type = $('#cid_task_type').val();
+          cid.data.task_completed = $('#cid_task_completed').val() == 'true';
+        } else {
+          cid._destroy = true;
+        }
+
+        csvva = {}
+        status = $('input:radio[name=csvva_status]:checked').val();
+        if (status != 'null') {
+          if ($('#csvva_id').val())
+            csvva.id = $('#csvva_id').val();
+
+          csvva._type = 'Championship::Flight::Csvva2011';
+          csvva.championship_id = $('#dialog-form').data('csvva_cship_id');
+          csvva.status = status;
+          csvva.distance  = $('#csvva_distance').val() * 1000;
+        } else if ($('#csvva_id').val()) {
+          csvva.id = $('#csvva_id').val();
+          csvva._destroy = true;
+        }
+
+        resource.championship_flights_attributes = [ cid, csvva ];
+
+        $.ajax({
+          url: '/flights/' + $('#dialog-form').data('resource_id'),
+          dataType: 'json',
+          type: 'PUT',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify(resource),
+          success: function(data) {
+//            $('#freeow').freeow('Okay!', 'Volo modificato', { classes: ['smokey', 'pushpin'] });
+//            $('#dialog-form').dialog('close');
+            window.location.reload();
+          },
+          error: function(data) {
+            alert('Error saving object');
+          }
+        });
+      },
+      'Annulla': function() {
+        $(this).dialog('close');
+      }
+    },
   });
 
   $('#dialog-form').data('resource_id', <%= @target.id %>);
+  $('#dialog-form').data('cid_cship_id', <%= Championship.find_by_symbol(:cid_2011).id %>);
+  $('#dialog-form').data('csvva_cship_id', <%= Championship.find_by_symbol(:csvva_2011).id %>);
 });
 
 //]]>

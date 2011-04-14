@@ -18,8 +18,6 @@ class RankingCsvva2011 < Ranking
 
       raise "Flight #{flight.id} Pilot '#{pilot.person.name}' not enrolled in championship" if !championship_pilot
 
-puts "AAAAAAAAAAAAAAAAAAAAAAAAA #{championship_pilot.id} #{championship_pilot.csvva_pilot_level}"
-
       r = results[championship_pilot.csvva_pilot_level.to_sym] ||= {}
       r[pilot.id] ||= {}
 

@@ -35,7 +35,7 @@ class RegistrationController < ApplicationController
           csvva = Championship.find_by_symbol(:csvva_2011)
 
           cp = pilot.championship_pilots.where(:championship_id => csvva.id).first ||
-                 ChampionshipPilot.new(:pilot => pilot, :championship => csvva)
+                 Championship::Pilot.new(:pilot => pilot, :championship => csvva)
           cp.csvva_pilot_level = @state[:csvva_category]
           cp.save!
 

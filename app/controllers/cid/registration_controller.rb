@@ -55,7 +55,7 @@ class RegistrationController < ApplicationController
             cid = Championship.find_by_symbol(:cid_2011)
 
             cp = pilot.championship_pilots.where(:championship_id => cid.id).first ||
-                   ChampionshipPilot.new(:pilot => pilot, :championship => cid)
+                   Championship::Pilot.new(:pilot => pilot, :championship => cid)
             cp.cid_category = @state[:cid_category]
             cp.save!
 
