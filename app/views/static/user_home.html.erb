@@ -10,17 +10,16 @@
     <% cid_2011 = false %>
     <% auth_person.pilot.championship_pilots.each do |cp| %>
       <%= render :partial => "championships/pilot/#{cp.class.name.split('::').last.underscore}", :object => cp %>
-
       <% cid_2011 = true if cp.championship.symbol == 'cid_2011' %>
       <% csvva_2011 = true if cp.championship.symbol == 'csvva_2011' %>
     <% end %>
   <% end %>
   <ul>
   <% if !cid_2011 %>
-    <% link_to 'Iscriviti al Campionato Italiano di Distanza 2011!...', cid_registration_path %>
+    <li><%= link_to 'Iscriviti al Campionato Italiano di Distanza 2011!...', cid_registration_path %></li>
   <% end %>
   <% if !csvva_2011 && auth_person.pilot.club.symbol == 'acao' %>
-    <% link_to 'Iscriviti al campionato CSVVA 2011!...', csvva_registration_path %>
+    <li><%= link_to 'Iscriviti al campionato CSVVA 2011!...', csvva_registration_path %></li>
   <% end %>
   </ul>
   <h2>I tuoi voli:</h2>

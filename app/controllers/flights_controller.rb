@@ -218,6 +218,7 @@ class FlightsController < RestController
 
       @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
       @igc_file.read_contents
+      # FIXME TODO AAAAAAAAAAAAAAAA handle decoding errors gracefully
 
       if @igc_file.glider_id
         @state[:plane_registration] = @igc_file.glider_id.strip.upcase
