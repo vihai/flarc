@@ -2,7 +2,7 @@
   <h1><%= cship.name %></h1>
   <p>
     Voli: <%= cship.flights.count %><br />
-    <% pending = cship.flights.joins(:championship_flights).where('championship_flights.status=\'pending\'') %>
+    <% pending = cship.flights.joins(:championship_flights).where('championship_flights.status=\'pending\'').order(:takeoff_time) %>
     <% if pending.all.count > 0 %>
       <h2>Voli da verificare</h2>
       <%= render :partial => 'flights/flights', :object => pending %>
