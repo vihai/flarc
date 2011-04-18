@@ -26,6 +26,7 @@ class RankingsController < ApplicationController
       @ranking = Ranking.find(params[:id])
     else
       @ranking = Ranking.find_by_symbol(params[:id])
+      raise ActiveRecord::RecordNotFound if !@ranking
     end
   end
 end
