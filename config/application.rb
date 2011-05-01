@@ -55,17 +55,3 @@ module Flarc
 end
 
 require 'g_maps'
-
-## Patch ActiveRecord to accept STI type in association builders
-#require 'active_record/reflection'
-#class ActiveRecord::Reflection::AssociationReflection
-#  def build_association(*opts)
-#    if (h = opts.first).is_a?(Hash) and (type = h.symbolize_keys[:_type])
-#      type.constantize.new(*opts)
-#    elsif klass.abstract_class?
-#      raise "#{klass.to_s} is an abstract class and can not be directly instantiated"
-#    else
-#      klass.new(*opts)
-#    end
-#  end
-#end
