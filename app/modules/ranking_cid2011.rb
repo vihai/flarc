@@ -55,12 +55,18 @@ class RankingCid2011 < Ranking
         standing.value = pilot[:flights_best].collect { |x| x.points }.sum
 
         ranking.standings << standing
+        standing.touch
       end
 
       pos = 0
       ranking.standings.all(:order => "value DESC, id ASC").each do |standing|
-        pos += 1
 
+        if standing.updated_at < Time.now - 30.minutes
+          standing.destroy
+          next
+        end
+
+        pos += 1
         standing.position = pos;
         standing.save!
       end
