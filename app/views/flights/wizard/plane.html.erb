@@ -54,7 +54,7 @@ $(document).ready(function() {
                  Pilot.find(:all,
                             :order => "core_people.last_name ASC, core_people.first_name ASC",
                             :include => :person).collect { |p|
-                      [ p.person.name.to_s.downcase.split.each { |word| word.capitalize! }.join(' '), p.id ] },
+                      [ p.person.name.to_s_reversed.downcase.split.each { |word| word.capitalize! }.join(' '), p.id ] },
                       @state[:pilot_id])
         %>
       </td>
