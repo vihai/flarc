@@ -112,19 +112,31 @@ $(document).ready(function() {
 <% if authenticated_admin? %>
 <div id="dialog-form" title="Edit flight" style="display: none">
   <form class="ui-widget">
-  <fieldset class="ui-widget-content">
-    <label for="pilot">Pilot</label>
-    <input type="text" name="pilot" id="pilot" />
-    <input type="text" name="pilot_id" id="pilot_id" /><br />
+  <div style="position: absolute; left: 0px; width: 450px">
+    <fieldset class="ui-widget-content">
+      <label for="pilot">Pilot</label>
+      <input type="text" name="pilot" id="pilot" />
+      <input type="hidden" name="pilot_id" id="pilot_id" /><br />
 
-    <label for="plane">Aliante</label>
-    <input type="text" name="plane" id="plane" />
-    <input type="text" name="plane_id" id="plane_id" />
+      <label for="plane">Aliante</label>
+      <input type="text" name="plane" id="plane" />
+      <input type="hidden" name="plane_id" id="plane_id" />
 
-    <label for="plane">Configurazione</label>
-    <select name="plane_type_configuration_id" id="plane_type_configuration_id">
-    </select>
+      <label for="plane">Configurazione</label>
+      <select name="plane_type_configuration_id" id="plane_type_configuration_id">
+      </select>
+    </fieldset>
 
+    Note interne:<br />
+    <textarea id="notes_private" name="notes_private" rows="6" cols="70" style="font-size: 70%"></textarea>
+    <br />
+
+    Note dall'utente:<br />
+    <textarea id="notes_public" name="notes_public" rows="6" cols="70" style="font-size: 70%"></textarea>
+  </div>
+
+  <div style="position: absolute; left: 450px; width: 450px;">
+    Campionati:<br />
     <fieldset id="csvva_fieldset" class="ui-widget-content">
       <legend>
         <span id="csvva_statuses" class="cf_statuses">
@@ -198,8 +210,7 @@ $(document).ready(function() {
         </select>
      </div>
     </fieldset>
-
-  </fieldset>
+  </div>
   </form>
 </div>
 
@@ -314,7 +325,7 @@ $(function() {
   $("#dialog-form").dialog({
     autoOpen: false,
     height: 500,
-    width: 500,
+    width: 900,
     modal: true,
     open: function() {
       $.ajax({
@@ -332,6 +343,9 @@ $(function() {
 
           $('#plane').val(resource.plane.registration);
           $('#plane_id').val(resource.plane.id);
+
+          $('#notes_public').val(resource.notes_public);
+          $('#notes_private').val(resource.notes_private);
 
           $('option', $('#plane_type_configuration_id')).remove();
           $.each(resource.plane.plane_type.configurations, function(key, val) {
@@ -393,6 +407,9 @@ $(function() {
         resource = {};
         resource.plane_id = $('#plane_id').val();
         resource.pilot_id = $('#pilot_id').val();
+
+        resource.notes_public = $('#notes_public').val();
+        resource.notes_private = $('#notes_private').val();
 
         resource.plane_type_configuration_id = $('#plane_type_configuration_id').val();
 
