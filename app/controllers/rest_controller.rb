@@ -23,4 +23,15 @@ class RestController < ApplicationController
 
   respond_to :html, :json, :xml
 
+  rest_transaction_handler :xact_handler
+
+  def xact_handler
+    Ygg::Core.transaction("Web interface operation", {
+                           :identity => asgard_session.auth_identity,
+                           :http_session_id => asgard_session.id
+                          }) do |transaction|
+      yield
+    end
+  end
+
 end
