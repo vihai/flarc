@@ -1,0 +1,290 @@
+<div id="dialog-form" title="Edit flight" style="display: none">
+  <form class="ui-widget">
+  <div style="position: absolute; left: 0px; width: 450px">
+    <fieldset class="ui-widget-content">
+      <label for="plane">Aliante</label>
+      <input type="text" name="plane" id="plane" />
+      <input type="hidden" name="plane_id" id="plane_id" />
+
+      <label for="plane">Configurazione</label>
+      <select name="plane_type_configuration_id" id="plane_type_configuration_id">
+      </select>
+    </fieldset>
+
+    Note<br />
+    <textarea id="notes_public" name="notes_public" rows="6" cols="70" style="font-size: 70%"></textarea>
+  </div>
+
+  <div style="position: absolute; left: 450px; width: 450px;">
+    Campionati:<br />
+    <fieldset id="csvva_fieldset" class="ui-widget-content">
+      <legend>
+        <input type="checkbox" name="csvva_member" value="null" id="csvva_member" />
+        <label for="csvva_member">CSVVA:</label>
+      </legend>
+      <input type="hidden" name="csvva_id" id="csvva_id" />
+      <div id="csvva_fieldset_contents" style="display: none">
+        <label for="csvva_distance">Distanza</label>
+        <input type="text" name="csvva_distance" id="csvva_distance" />
+      </div>
+    </fieldset>
+
+    <fieldset id="cid_fieldset" class="ui-widget-content">
+      <legend>
+        <input type="checkbox" name="cid_member" value="null" id="cid_member" />
+        <label for="cid_member">CID:</label>
+      </legend>
+
+      <input type="hidden" name="cid_id" id="cid_id" />
+
+      <div id="cid_fieldset_contents" style="display: none">
+        <label for="cid_distance">Distanza</label>
+        <input type="text" name="cid_distance" id="cid_distance" /><br />
+
+        <label for="cid_ranking">Classifica</label>
+        <select id="cid_ranking">
+          <option value=""></option>
+          <option value="prom">Promozione</option>
+          <option value="naz_open">Nazionale Open</option>
+          <option value="naz_15m">Nazionale 15 m</option>
+          <option value="naz_13m5">Nazionale 13.5 m</option>
+          <option value="naz_club">Nazionale Club</option>
+        </select><br />
+
+        <label for="cid_task_eval">Tema</label>
+        <select id="cid_task_eval">
+          <option value=""></option>
+          <option value="free">Libero</option>
+          <option value="declared">Dichiarato</option>
+        </select><br />
+
+        <label for="cid_task_type">Tipo</label>
+        <select id="cid_task_type">
+          <option value=""></option>
+          <option value="butterfly">Farfalla</option>
+          <option value="simple_triangle">Triangolo semplice</option>
+          <option value="round_trip">Andata e ritorno</option>
+          <option value="fai_triangle">Triangolo FAI</option>
+          <option value="straight_line">Linea retta</option>
+        </select><br />
+
+        <label for="cid_task_completed">Completato</label>
+        <select id="cid_task_completed">
+          <option value=""></option>
+          <option value="true">Sì</option>
+          <option value="false">No</option>
+        </select>
+     </div>
+    </fieldset>
+  </div>
+  </form>
+</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(function() {
+  $('#plane').autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/planes",
+          dataType: "json",
+          data: {
+            view: 'combo',
+            flt: 'combo',
+            sort: 'registration',
+            search: request.term,
+            limit: 10
+          },
+          success: function(data) {
+            response( $.map(data, function(item) {
+              return {
+                label: item.registration,
+                value: item.registration,
+                id: item.id,
+                type_id: item.plane_type_id
+              }
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function(event, ui) {
+        $('#plane_id').val(ui.item.id);
+        $.ajax({
+          url: '/plane_types/' + ui.item.type_id,
+          dataType: 'json',
+          data: {
+            sort: 'name'
+          },
+          success: function(data) {
+            $('option', $('#plane_type_configuration_id')).remove();
+            $.each(data.configurations, function(key, val) {
+              $('#plane_type_configuration_id').attr('options')[key] =
+                new Option(val.name, val.id,
+                           val.id == $('#dialog-form').data('resource').plane_type_configuration_id);
+            });
+          }
+        });
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+  $("#dialog-form").dialog({
+    autoOpen: false,
+    height: 500,
+    width: 900,
+    modal: true,
+    open: function() {
+      $.ajax({
+        url: '/flights/' + $('#dialog-form').data('resource_id'),
+        dataType: 'json',
+        data: {
+          view: 'edit',
+        },
+        success: function(resource) {
+
+          $('#dialog-form').data('resource', resource);
+
+          $('#plane').val(resource.plane.registration);
+          $('#plane_id').val(resource.plane.id);
+
+          $('#notes_public').val(resource.notes_public);
+
+          $('option', $('#plane_type_configuration_id')).remove();
+          $.each(resource.plane.plane_type.configurations, function(key, val) {
+            $('#plane_type_configuration_id').attr('options')[key] =
+              new Option(val.name, val.id,
+                         val.id == $('#dialog-form').data('resource').plane_type_configuration_id);
+          });
+
+          cships = {};
+
+          $.each(resource.championship_flights, function(index, value) {
+            cships[value._type] = value;
+          });
+
+          csvva = cships['Championship::Flight::Csvva2011'];
+          if (csvva) {
+            $('#csvva_fieldset_contents').show();
+            $('#csvva_id').val(csvva.id);
+            $('#csvva_member').attr('checked','checked');
+            $('#csvva_distance').val(csvva.distance / 1000);
+          } else {
+            $('#csvva_fieldset_contents').hide();
+            $('#csvva_id').val('');
+            $('#csvva_member').removeAttr('checked');
+          }
+
+          cid = cships['Championship::Flight::Cid2011'];
+          if (cid) {
+            $('#cid_fieldset_contents').show();
+            $('#cid_member').attr('checked','checked');
+            $('#cid_id').val(cid.id);
+            $('#cid_distance').val(cid.distance / 1000);
+            $('#cid_ranking').val(cid.cid_ranking);
+            $('#cid_task_eval').val(cid.data.task_eval);
+            $('#cid_task_type').val(cid.data.task_type);
+            $('#cid_task_completed').val(cid.data.task_completed ? 'true' : 'false');
+          } else {
+            $('#cid_fieldset_contents').hide();
+            $('#cid_member').removeAttr('checked');
+            $('#cid_id').val('');
+          }
+        },
+        error: function(resource) {
+          alert('Errore lettura oggetto');
+        }
+      });
+    },
+    close: function() {
+    },
+    buttons: {
+      'Salva': function() {
+
+//        resource = $('#dialog-form').data('resource');
+        resource = {};
+        resource.plane_id = $('#plane_id').val();
+
+        resource.notes_public = $('#notes_public').val();
+        resource.notes_private = $('#notes_private').val();
+
+        resource.plane_type_configuration_id = $('#plane_type_configuration_id').val();
+
+        resource.championship_flights_attributes = [];
+
+        cid = {};
+        status = $('input:radio[name=cid_status]:checked').val();
+        if (status && status != 'null') {
+          if ($('#cid_id').val())
+            cid.id = $('#cid_id').val();
+
+          cid._type = 'Championship::Flight::Cid2011';
+          cid.championship_id = $('#dialog-form').data('cid_cship_id');
+          cid.status = status;
+          cid.distance  = $('#cid_distance').val() * 1000;
+          cid.cid_ranking = $('#cid_ranking').val();
+          cid.data = {};
+          cid.data.task_eval = $('#cid_task_eval').val();
+          cid.data.task_type = $('#cid_task_type').val();
+          cid.data.task_completed = $('#cid_task_completed').val() == 'true';
+          resource.championship_flights_attributes.push(cid);
+        } else if ($('#cid_id').val()) {
+          cid.id = $('#cid_id').val();
+          cid._destroy = true;
+          resource.championship_flights_attributes.push(cid);
+        }
+
+        csvva = {};
+        status = $('input:radio[name=csvva_status]:checked').val();
+        if (status && status != 'null') {
+          if ($('#csvva_id').val())
+            csvva.id = $('#csvva_id').val();
+
+          csvva._type = 'Championship::Flight::Csvva2011';
+          csvva.championship_id = $('#dialog-form').data('csvva_cship_id');
+          csvva.status = status;
+          csvva.distance  = $('#csvva_distance').val() * 1000;
+          resource.championship_flights_attributes.push(csvva);
+        } else if ($('#csvva_id').val()) {
+          csvva.id = $('#csvva_id').val();
+          csvva._destroy = true;
+          resource.championship_flights_attributes.push(csvva);
+        }
+
+
+        $.ajax({
+          url: '/flights/' + $('#dialog-form').data('resource_id'),
+          dataType: 'json',
+          type: 'PUT',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify(resource),
+          success: function(data) {
+//            $('#freeow').freeow('Okay!', 'Volo modificato', { classes: ['smokey', 'pushpin'] });
+//            $('#dialog-form').dialog('close');
+            window.location.reload();
+          },
+          error: function(data) {
+            alert('Error saving object');
+          }
+        });
+      },
+      'Annulla': function() {
+        $(this).dialog('close');
+      }
+    },
+  });
+
+  $('#dialog-form').data('resource_id', <%= @target.id %>);
+  $('#dialog-form').data('cid_cship_id', <%= Championship.find_by_symbol(:cid_2011).id %>);
+  $('#dialog-form').data('csvva_cship_id', <%= Championship.find_by_symbol(:csvva_2011).id %>);
+});
+
+//]]>
+</script>
