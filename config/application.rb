@@ -17,6 +17,8 @@ LAYOUTS = {
   'sap-dev.orlandi.com' => 'sap'
 }
 
+require './lib/json_exceptions'
+
 module Flarc
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -51,6 +53,8 @@ module Flarc
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.middleware.swap ActionDispatch::ShowExceptions, ::JsonExceptions, Flarc::Application.config.consider_all_requests_local
   end
 end
 
