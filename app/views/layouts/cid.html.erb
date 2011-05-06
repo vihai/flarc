@@ -91,56 +91,6 @@
 <%= yield  %>
 </div>
 
-<div id="password-recovery-dialog" title="Recupero Password" style="display: none">
-  <div id="password-recovery-dialog-alert" class="freeow freeow-center" style="position: absolute"></div>
-  <form class="ui-widget">
-    <table>
-      <tr>
-        <th><label for="fqda">e-Mail</label></th>
-        <td><input type="text" name="fqda" id="fqda"></td>
-      </tr>
-    </table>
-  </form>
-</div>
-<script type="text/javascript">
-//<![CDATA[
-$(function() {
-
-  $("#password-recovery-dialog").dialog({
-    autoOpen: false,
-    width: 500,
-    height: 200,
-    modal: true,
-    buttons: {
-      'Ok': function() {
-        $.ajax({
-          url: '<%= csvva_registration_recover_password_path %>',
-          dataType: 'json',
-          type: 'POST',
-          contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify({ fqda: $('#fqda').val() }),
-          success: function(data) {
-            if (data.success) {
-              $('#password-recovery-dialog').dialog('close');
-              $("#freeow").freeow("Password inviata", "La password ti è stata inviata per e-Mail");
-            } else {
-              $("#password-recovery-dialog-alert").freeow("Errore", data.error);
-            }
-          },
-        });
-      },
-      'Annulla': function() {
-        $(this).dialog("close");
-      }
-    },
-  });
-});
-//]]>
-</script>
-
-
-
-
 <script type="text/javascript">
 //<![CDATA[
 jQuery(function($) {
@@ -149,69 +99,7 @@ jQuery(function($) {
 //]]>
 </script>
 
-
-<div id="login-dialog" title="Login" style="display: none">
-  <div id="login-dialog-alert" class="freeow freeow-center" style="position: absolute"></div>
-  <form id="login-dialog-form" class="ui-widget" target="login_iframe">
-    <table>
-      <tr>
-        <th><label for="username">e-Mail</label></th>
-        <td><input type="text" name="username" id="username"></td>
-      </tr>
-      <tr>
-        <th><label for="password">Password</label></th>
-        <td><input type="password" name="password" id="password"></td>
-      </tr>
-    </table>
-    <input type="submit" name="login-dialog-submit" id="login-dialog-submit" style="display: none"  />
-  </form>
-  <%= link_to_function 'Ho dimenticato la password', "jQuery('#password-recovery-dialog').dialog('open')" %><br />
-  <iframe id="login_iframe" name="login_iframe" style="display: none;"></iframe>
-</div>
-
-<script type="text/javascript">
-//<![CDATA[
-$(function() {
-
-  $("#login-dialog").dialog({
-    autoOpen: false,
-    width: 500,
-    height: 200,
-    modal: true,
-    buttons: {
-      'Ok': function() {
-        $.ajax({
-          url: '<%= ygg_asgard_session_authenticate_by_fqda_and_password_path %>',
-          dataType: 'json',
-          type: 'POST',
-          contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify({ username: $('#username').val(), password: $('#password').val() }),
-          success: function(data) {
-            if (data.authenticated) {
-              $("#login-dialog").hide("slow");
-              $("#login-dialog-submit").click();
-              window.location = '<%= static_path('user_home') %>';
-            } else
-              $("#login-dialog-alert").freeow("Errore", "Username o password errati");
-          },
-          error: function(data) {
-            $("#login-dialog-alert").freeow("Errore", "Errore di comunicazione");
-          }
-        });
-      },
-      'Annulla': function() {
-        $(this).dialog("close");
-      }
-    },
-    open: function() {
-    },
-    close: function() {
-      allFields.val( "" ).removeClass( "ui-state-error" );
-    }
-  });
-});
-//]]>
-</script>
+<%= render :partial => '/layouts/login' %>
 
 <div id="freeow" class="freeow freeow-bottom-right"></div>
 

@@ -6,15 +6,17 @@ javascripts:
     - public/javascripts/jquery-1.5.1.min.js
     - public/javascripts/jquery-ui-1.8.11.custom.min.js
     - public/javascripts/jquery.jeditable.js
+    - public/javascripts/jquery.spinner.js
     - public/javascripts/rails.js
-    - public/javascripts/application.js
+    - public/javascripts/flarc/**/*.js
 
   csvva:
     - public/javascripts/jquery-1.5.1.min.js
     - public/javascripts/jquery-ui-1.8.11.custom.min.js
     - public/javascripts/jquery.jeditable.js
+    - public/javascripts/jquery.spinner.js
     - public/javascripts/rails.js
-    - public/javascripts/application.js
+    - public/javascripts/flarc/**/*.js
 
 
   asgard:
