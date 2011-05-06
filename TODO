@@ -4,18 +4,3 @@
 
 - Disegnare la task e renderla un overlay opzionale
 - Cache risposte flickr
-
-
-
-
-
-
-
-
-
-- Mettere form di upload in /static/user_home
-  - Link "invia il tuo volo" => user_home?new_flight=1
-
-- Togliere prom se il pilota è nazionale e viceversa
-
-- Rimuovere pilot_id se l'utente non è admin

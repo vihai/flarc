@@ -119,6 +119,7 @@ class FlightsController < RestController
           :notes_public => fres[:notes_public]
         }
 
+        # Override pilot if not an admin
         if !asgard_session.authenticated_admin?
           @flight.pilot = auth_person.pilot
         end
@@ -128,15 +129,21 @@ class FlightsController < RestController
 
           case cf[:_type]
           when 'Championship::Flight::Cid2011'
+            cp = pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2011)).first
+            if cp.cid_category.to_sym == :prom
+              ranking = :prom
+            else
+              ranking cf[:cid_ranking].to_sym
+            end
+
             @flight.championship_flights << (a=Championship::Flight::Cid2011.new(
               :championship => Championship.find_by_symbol(:cid_2011),
               :flight => @flight, # Workaround for validations
               :status => :pending,
-              :cid_ranking => cf[:cid_ranking].to_sym,
+              :cid_ranking => ranking,
               :distance => cf[:distance],
               :task_eval => cf[:task_eval].to_sym,
               :task_type => cf[:task_type].to_sym,
-              :task_completed => cf[:task_completed] == 'true'
               ))
 
           when 'Championship::Flight::Csvva2011'

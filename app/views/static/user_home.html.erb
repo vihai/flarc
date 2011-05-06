@@ -30,5 +30,6 @@
   <% if flights.count > 10 %>
     <%= link_to 'Lista completa dei voli...', flights_path(:pilot_id => auth_person.pilot.id) %>
   <% end %>
+  <%= render :partial => '/flights/wizard', :locals => { :autoopen => !!params['new_flight'] } %>
 <% end %>
 <% end %>

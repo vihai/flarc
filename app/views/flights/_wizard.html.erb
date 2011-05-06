@@ -2,6 +2,11 @@
   <div id="upload_dialog_map"></div>
   <iframe id="upload_dialog_iframe" name="upload_dialog_iframe"></iframe>
 
+  <p>
+    Per le istruzioni sulla compilazione di questo form fare riferimento
+    all'<%= link_to 'Allegato C', '/cid/Allegato C-invio voli.pdf' %> del regolamento.
+  </p>
+
   <form action="<%= igc_tmp_files_path %>" method="post" enctype="multipart/form-data"
         style="width: 500px;" id="igc_file_upload_form" target="upload_dialog_iframe">
   <fieldset>
@@ -21,9 +26,12 @@
   <div id="post_upload_div" style="display: none">
     <fieldset>
       <legend>Dati del volo</legend>
+
+      <% if authenticated_admin? %>
       <label for="plane">Pilota</label>
       <input type="text" name="pilot" id="pilot" size="40" />
       <input type="hidden" name="pilot_id" id="pilot_id" /><br />
+      <% end %>
 
       <label for="plane">Marche aliante</label>
       <input type="text" name="plane" id="plane" size="10" onkeyup="this.value=this.value.toUpperCase()" style="text-transform: uppercase;" />
@@ -66,21 +74,23 @@
         <label for="cid_distance">Distanza</label>
         <input type="text" name="cid_distance" id="cid_distance" /><br />
 
-        <label for="cid_ranking">Classifica</label>
-        <select id="cid_ranking">
-          <option value=""></option>
-          <option value="prom">Promozione</option>
-          <option value="naz_open">Nazionale Open</option>
-          <option value="naz_15m">Nazionale 15 m</option>
-          <option value="naz_13m5">Nazionale 13.5 m</option>
-          <option value="naz_club">Nazionale Club</option>
-        </select><br />
+        <div id="cid_ranking_div">
+          <label for="cid_ranking">Classifica</label>
+          <select id="cid_ranking">
+            <option value=""></option>
+            <option value="naz_open">Nazionale Open</option>
+            <option value="naz_15m">Nazionale 15 m</option>
+            <option value="naz_13m5">Nazionale 13.5 m</option>
+            <option value="naz_club">Nazionale Club</option>
+          </select>
+        </div>
 
         <label for="cid_task_eval">Tema</label>
         <select id="cid_task_eval">
           <option value=""></option>
           <option value="free">Libero</option>
-          <option value="declared">Dichiarato</option>
+          <option value="not_completed">Dichiarato ma non completato</option>
+          <option value="completed">Dichiarato e completato</option>
         </select><br />
 
         <label for="cid_task_type">Tipo</label>
@@ -92,13 +102,6 @@
           <option value="fai_triangle">Triangolo FAI</option>
           <option value="straight_line">Linea retta</option>
         </select><br />
-
-        <label for="cid_task_completed">Completato</label>
-        <select id="cid_task_completed">
-          <option value=""></option>
-          <option value="true">Sì</option>
-          <option value="false">No</option>
-        </select>
      </div>
 
     </fieldset>
@@ -212,8 +215,10 @@ function pilot_changed(pilot)
 
   cid = cships['Championship::Pilot::Cid2011'];
   if (cid) {
-    $('#cid_fieldset').fadeIn();
+console.log("AAAAAAAAAAAAAAAAAAAAA", cid);
+    $('#cid_ranking_div').toggle(cid.cid_category == 'prom');
     $('#cid_member').attr('checked','checked');
+    $('#cid_fieldset').fadeIn();
   } else {
     $('#cid_fieldset').fadeOut();
     $('#cid_member').removeAttr('checked');
@@ -410,7 +415,7 @@ $(function() {
   });
 
   $('#dialog-form').dialog({
-    autoOpen: true,
+    autoOpen: <%= autoopen %>,
     height: 700,
     width: 900,
     modal: true,

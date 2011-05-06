@@ -77,7 +77,8 @@
         <select id="cid_task_eval">
           <option value=""></option>
           <option value="free">Libero</option>
-          <option value="declared">Dichiarato</option>
+          <option value="not_completed">Dichiarato e non completato</option>
+          <option value="completed">Dichiarato e completato</option>
         </select><br />
 
         <label for="cid_task_type">Tipo</label>
@@ -89,13 +90,6 @@
           <option value="fai_triangle">Triangolo FAI</option>
           <option value="straight_line">Linea retta</option>
         </select><br />
-
-        <label for="cid_task_completed">Completato</label>
-        <select id="cid_task_completed">
-          <option value=""></option>
-          <option value="true">Sì</option>
-          <option value="false">No</option>
-        </select>
      </div>
     </fieldset>
   </div>
@@ -261,7 +255,6 @@ $(function() {
             $('#cid_ranking').val(cid.cid_ranking);
             $('#cid_task_eval').val(cid.data.task_eval);
             $('#cid_task_type').val(cid.data.task_type);
-            $('#cid_task_completed').val(cid.data.task_completed ? 'true' : 'false');
           } else {
             $('#cid_fieldset_contents').hide();
             $('#cid_id').val('');
@@ -305,7 +298,6 @@ $(function() {
           cid.data = {};
           cid.data.task_eval = $('#cid_task_eval').val();
           cid.data.task_type = $('#cid_task_type').val();
-          cid.data.task_completed = $('#cid_task_completed').val() == 'true';
           resource.championship_flights_attributes.push(cid);
         } else if ($('#cid_id').val()) {
           cid.id = $('#cid_id').val();

@@ -36,16 +36,12 @@ class Championship < Ygg::PublicModel
       validates_inclusion_of :cid_ranking, :in => [ :prom, :naz_open, :naz_15m, :naz_13m5, :naz_club ]
       validates_presence_of :cid_ranking
 
-      validates_inclusion_of :task_eval, :in => [ :free, :declared ]
+      validates_inclusion_of :task_eval, :in => [ :free, :not_completed, :completed ]
       validates_presence_of :task_eval
 
       validates_inclusion_of :task_type, :in => [ :butterfly, :simple_triangle, :round_trip,
                                                   :fai_triangle, :straight_line]
       validates_presence_of :task_type
-
-      validates_inclusion_of :task_completed, :in => [ true, false ]
-# Fails because false is #blank?
-#      validates_presence_of :task_completed
 
       validates_presence_of :distance
       validates_numericality_of :distance
@@ -66,7 +62,7 @@ class Championship < Ygg::PublicModel
         data = nd
         data[:task_eval] = task_eval.to_sym
         data[:task_type] = task_type.to_sym
-        data[:task_completed] = task_completed
+#        data[:task_completed] = task_completed
       end
 
       def handicap
@@ -101,14 +97,13 @@ class Championship < Ygg::PublicModel
         when :straight_line ; pts = pts * 1.6
         end
 
-        if task_eval == :declared
+        case task_eval
+        when :not_completed
           if task_type == :simple_triangle
             pts = pts * 1.2
           end
-
-          if task_completed
-            pts = pts * 1.1
-          end
+        when :completed
+          pts = pts * 1.1
         end
 
         pts
