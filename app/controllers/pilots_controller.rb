@@ -19,6 +19,25 @@ class PilotsController < RestController
     end
   end
 
+  view :combo_nf do
+    empty!
+    attribute(:id) { show! }
+    attribute(:person) do
+      include!
+      empty!
+      attribute(:name) { show! }
+    end
+    attribute(:championship_pilots) do
+       show!
+       attribute(:championship) do
+         include!
+         empty!
+         attribute(:name) { show! }
+       end
+       attribute(:cid_category) { show! }
+    end
+  end
+
   filter :combo, lambda { |r|
     apply_search_to_relation(r, [ 'person.first_name', 'person.last_name' ])
   }

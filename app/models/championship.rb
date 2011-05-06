@@ -29,13 +29,44 @@ class Championship < Ygg::PublicModel
     serialize :data
 
     class Cid2011 < Flight
+      attr_accessor :task_eval
+      attr_accessor :task_type
+      attr_accessor :task_completed
+
+      validates_inclusion_of :cid_ranking, :in => [ :prom, :naz_open, :naz_15m, :naz_13m5, :naz_club ]
+      validates_presence_of :cid_ranking
+
+      validates_inclusion_of :task_eval, :in => [ :free, :declared ]
+      validates_presence_of :task_eval
+
+      validates_inclusion_of :task_type, :in => [ :butterfly, :simple_triangle, :round_trip,
+                                                  :fai_triangle, :straight_line]
+      validates_presence_of :task_type
+
+      validates_inclusion_of :task_completed, :in => [ true, false ]
+# Fails because false is #blank?
+#      validates_presence_of :task_completed
+
+      validates_presence_of :distance
+      validates_numericality_of :distance
+
+      after_initialize do
+        if !new_record?
+          self.data ||= {}
+          self.task_eval = self.data[:task_eval]
+          self.task_type = self.data[:task_type]
+          self.task_completed = self.data[:task_completed]
+        end
+      end
+
       before_save do
         nd = {}
-        self.data ||= {}
-        self.data.each { |k,v| nd[k.to_sym] = v }
-        self.data = nd
-        self.data[:task_eval] = self.data[:task_eval].to_sym
-        self.data[:task_type] = self.data[:task_type].to_sym
+        data ||= {}
+        data.each { |k,v| nd[k.to_sym] = v }
+        data = nd
+        data[:task_eval] = task_eval.to_sym
+        data[:task_type] = task_type.to_sym
+        data[:task_completed] = task_completed
       end
 
       def handicap
@@ -64,18 +95,18 @@ class Championship < Ygg::PublicModel
 
         pts = (distance / 1000.0) / hcap
 
-        case self.data[:task_type]
+        case self.task_type
         when :round_trip ; pts = pts * 1.3
         when :fai_triangle ; pts = pts * 1.4
         when :straight_line ; pts = pts * 1.6
         end
 
-        if data[:task_eval] == :declared
-          if data[:task_type] == :simple_triangle
+        if task_eval == :declared
+          if task_type == :simple_triangle
             pts = pts * 1.2
           end
 
-          if data[:task_completed]
+          if task_completed
             pts = pts * 1.1
           end
         end
@@ -85,6 +116,9 @@ class Championship < Ygg::PublicModel
     end
 
     class Csvva2011 < Flight
+      validates_presence_of :distance
+      validates_numericality_of :distance
+
       def handicap
         return (self.flight.plane_type_configuration ?
                   self.flight.plane_type_configuration.handicap :
@@ -102,6 +136,9 @@ class Championship < Ygg::PublicModel
     end
 
     class Csvva2010 < Flight
+      validates_presence_of :distance
+      validates_numericality_of :distance
+
       def handicap
         return (self.flight.plane_type_configuration ?
                   self.flight.plane_type_configuration.handicap :
@@ -119,6 +156,9 @@ class Championship < Ygg::PublicModel
     end
 
     class Csvva2009 < Flight
+      validates_presence_of :distance
+      validates_numericality_of :distance
+
       def handicap
         return (self.flight.plane_type_configuration ?
                   self.flight.plane_type_configuration.handicap :

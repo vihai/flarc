@@ -44,10 +44,8 @@ class FlightsController < RestController
 
   def find_targets
     @targets_relation = model.scoped.where(flight_search_conditions)
-
     super
   end
-
 
   def calendar
 #    expires_in 1.hour, :public => true if EXPIRES
@@ -90,174 +88,82 @@ class FlightsController < RestController
   end
 
   def wizard
+    if request.method == 'POST'
+      @req = ActiveSupport::JSON.decode(request.body)
+      @req.symbolize_keys!
 
-    catch :done do
-      if request.method == 'GET'
-        @state = {}
-        @state[:state] = :plane
-        @state[:final] = false
-        @state[:igc_tmp_file_id] = params[:igc_tmp_file_id]
+      Ygg::Core::Transaction.new 'Flight submission' do
+        fres = @req[:flight]
+        fres.symbolize_keys!
 
-## TODO CHECK flight duplicate
-
-      else
-        @state = ActiveSupport::JSON.decode(params[:state]).symbolize_keys!
-        @state[:state] = @state[:state].to_sym
-        @state[:final] = false
-
-        case @state[:state]
-        when :plane
-          if params[:plane_registration].empty? 
-            flash.now[:error] = "È necessario specificare la marche dell'aliante"
-            throw :done
-          end
-
-          params[:plane_registration].strip!
-          params[:plane_registration].upcase!
-
-          # FIXME: Laos and Rwanda registrations have 3 and 4 chars prefixex
-          if !(params[:plane_registration] =~ /^([A-Z0-9]{1,2}-[A-Z0-9]+|N[0-9]+[A-Z][A-Z])$/)
-            flash.now[:error] = "Le marche hanno un formato non riconosciuto"
-            throw :done
-          end
-          @state[:plane_registration] = params[:plane_registration]
-
-          @state[:pilot_id] = params[:pilot_id]
-
-          plane = Plane.find_by_registration(@state[:plane_registration])
-          if plane
-            @state[:plane_id] = plane.id
-            @state[:plane_type_id] = plane.plane_type.id
-
-            if plane.plane_type.configurations.empty?
-              @state[:state] = :done
-            else
-              @state[:state] = :plane_configuration
-            end
-          else
-            @state[:state] = :new_plane
-          end
-
-        when :new_plane
-          if params[:plane_type_id].empty?
-            flash.now[:error] = "È necessario selezionare il tipo di aliante"
-            throw :done
-          end
-          @state[:plane_type_id] = params[:plane_type_id]
-
-          plane_type = PlaneType.find(@state[:plane_type_id])
-
-          if plane_type.configurations.empty?
-            @state[:state] = :done
-          else
-            @state[:state] = :plane_configuration
-          end
-
-        when :plane_configuration
-          if params[:plane_configuration_id].empty?
-            flash.now[:error] = "È necessario indicare la configurazione dell'aliante"
-            throw :done
-          end
-
-          @state[:plane_configuration_id] = params[:plane_configuration_id]
-          @state[:state] = :done
+        pres = @req[:plane]
+        if pres
+          pres.symbolize_keys!
+          plane = Plane.new(:registration => pres[:registration],
+                            :plane_type => PlaneType.find(pres[:plane_type_id]))
+          fres[:plane_id] = plane.id
         end
 
-        if @state[:state] == :done
-          Ygg::Core::Transaction.new 'Flight submission' do
-            @flight = Flight.new
+        igc_tmp_file = IgcTmpFile.find(@req[:igc_tmp_file_id])
 
-            igc_tmp_file = IgcTmpFile.find(@state[:igc_tmp_file_id])
+        igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
+        igc_file.read_contents {}
 
-            igc_file = IgcFile.open(igc_tmp_file.filename, 'rb')
-            igc_file.read_contents {}
-            @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
+        @flight = Flight.new
+        @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
+        @flight.attributes = {
+          :pilot_id => fres[:pilot_id],
+          :plane_id => fres[:plane_id],
+          :plane_type_configuration_id => fres[:plane_configuration_id],
+          :private => false,
+          :notes_public => fres[:notes_public]
+        }
 
-            if asgard_session.authenticated_admin?
-              @flight.pilot = Pilot.find(@state[:pilot_id])
-            else
-              @flight.pilot = auth_person.pilot
-            end
+        if !asgard_session.authenticated_admin?
+          @flight.pilot = auth_person.pilot
+        end
 
-            if @state[:plane_id]
-              @flight.plane = Plane.find(@state[:plane_id])
-            else
-              @flight.plane = Plane.new(:registration => @state[:plane_registration],
-                                        :plane_type => PlaneType.find(@state[:plane_type_id]))
-            end
+        fres[:championship_flights].each do |cf|
+          cf.symbolize_keys!
 
-            if @state[:plane_configuration_id]
-              @flight.plane_type_configuration = PlaneType::Configuration.find(@state[:plane_configuration_id])
-            end
+          case cf[:_type]
+          when 'Championship::Flight::Cid2011'
+            @flight.championship_flights << (a=Championship::Flight::Cid2011.new(
+              :championship => Championship.find_by_symbol(:cid_2011),
+              :flight => @flight, # Workaround for validations
+              :status => :pending,
+              :cid_ranking => cf[:cid_ranking].to_sym,
+              :distance => cf[:distance],
+              :task_eval => cf[:task_eval].to_sym,
+              :task_type => cf[:task_type].to_sym,
+              :task_completed => cf[:task_completed] == 'true'
+              ))
 
-            @flight.private = false
-
-            @flight.save!
-
-            File.rename(igc_tmp_file.filename, @flight.igc_file_path)
-            igc_tmp_file.destroy
-          end
-
-          if current_site == :cid
-            redirect_to cid_flight_wizard_path(:flight_id => @flight.id)
-            return
-          elsif current_site == :csvva
-            redirect_to csvva_flight_wizard_path(:flight_id => @flight.id)
-            return
-          else
+          when 'Championship::Flight::Csvva2011'
+            @flight.championship_flights << Championship::Flight::Csvva2011.new(
+              :championship => Championship.find_by_symbol(:csvva_2011),
+              :flight => @flight, # Workaround for validations
+              :status => :pending,
+              :distance => cf[:distance],
+              )
           end
         end
 
-      end
-    end
-
-    # Prepare variables for the form
-    case @state[:state]
-    when :plane
-      @igc_tmp_file = IgcTmpFile.find(params[:igc_tmp_file_id])
-
-      @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
-      @igc_file.read_contents
-      # FIXME TODO AAAAAAAAAAAAAAAA handle decoding errors gracefully
-
-      if @igc_file.glider_id
-        @state[:plane_registration] = @igc_file.glider_id.strip.upcase
-      end
-
-      if @igc_file.pilot_name
-        person = Ygg::Core::Person.find_by_sql(["SELECT * FROM core_people" +
-                  " ORDER BY similarity(LOWER(first_name || ' ' || last_name), ?) DESC LIMIT 1",
-                  @igc_file.pilot_name.downcase ]).first
-        @state[:pilot_id] = person.pilot.id if person && person.pilot
-      end
-    end
-
-    render :template => "flights/wizard/#{@state[:state]}"
-  end
-
-  def show_map
-    render :update do |page|
-    end
-  end
-
-  # GET /flights/1/edit
-  def edit
-
-#    prepare_form_tags
-
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          page.replace_html 'edit_div' ,
-                            :partial => 'form', :object => @flight
-          page.visual_effect :fade, 'info_div',
-                             :duration => 0.5, :queue => 'end'
-          page.visual_effect :appear, 'edit_div',
-                             :duration => 0.5, :queue => 'end'
+        if !@flight.valid?
+          raise UnprocessableEntity.new('Dati invalidi',
+                  :per_field_msgs => @flight.errors.inject({}) { |h, (k, v)| h[k] = v; h },
+                  :retry_possible => false)
         end
 
-      }
-      format.html
+        @flight.save!
+
+        File.rename(igc_tmp_file.filename, @flight.igc_file_path)
+        igc_tmp_file.destroy
+      end
+
+      respond_to do |format|
+        format.json { render :json => { :id => @flight.id } }
+      end
     end
   end
 
@@ -396,10 +302,8 @@ class FlightsController < RestController
     end
   end
 
-
-
   protected
-  
+
   def serve_igc_file(flight)
     if !flight.has_igc_file?
       render :nothing => true, :status => 404
@@ -412,12 +316,6 @@ class FlightsController < RestController
           :filename => flight.igc_filename,
           :type => Mime::IGC,
           :disposition => 'inline'
-  end
-
-  def prepare_form_tags
-    @flight_tags = @flight.flight_tags |
-                       Tag.joins(:depends_on_championship => :pilots).where('pilots.id' => @flight.pilot.id).all.
-                       collect { |x| FlightTag.new(:flight => @flight, :tag => x, :status => nil) }
   end
 end
 

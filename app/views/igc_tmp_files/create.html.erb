@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Campionato Italiano di Distanza 2011</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <style>
+  body { margin: 0; padding: 0; font-size: 70%; }
+  table.standard { padding: 5px; }
+  table.standard > caption {  }
+  table.standard > tbody > tr { background-color: #ddd; }
+  table.standard > tbody > tr > th { padding: 0.1em 0.5em 0.1em 0.5em; text-align: left; }
+  table.standard > tbody > tr > td { padding: 0.1em 0.5em 0.1em 0.5em; }
+  table.standard > tbody > tr > td.name { text-align: left; }
+  table.standard > tbody > tr > td.count { text-align: right; }
+  </style>
+</head>
+<body>
+
+<script language="javascript" type="text/javascript">
+
+<%
+  pv = ActiveRest::View.new(:show) do
+    attribute(:person) do
+      include!
+    end
+
+    attribute(:championship_pilots) do
+      attribute(:championship) do
+        include!
+        attribute(:championship_flights) { hide! }
+      end
+    end
+  end
+
+  lv = ActiveRest::View.new(:show) do
+    attribute(:plane_type) do
+      include!
+      attribute(:configurations) do
+        include!
+      end
+    end
+  end
+
+  pilot = @pilot ? pv.process(@pilot).to_json : 'null'
+  plane = @plane ? lv.process(@plane).to_json : 'null'
+%>
+
+ var data = {
+   encpath: '<%=escape_javascript @igc_tmp_file.encoded_polyline %>',
+   pilot: <%=raw pilot %>,
+   plane: <%=raw plane %>,
+ };
+
+ window.top.window.upload_completed(<%= @igc_tmp_file.id %>, data);
+</script>
+
+<table class="standard">
+  <tr>
+    <th>ID Volo</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.id_from_logger %>
+    </td>
+  </tr>
+  <tr>
+    <th>Logger</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.fr_manufacturer %>
+      <%=h @igc_tmp_file.igc_file.fr_model %>
+      (hw<%=h @igc_tmp_file.igc_file.hardware %>
+       sw<%=h @igc_tmp_file.igc_file.firmware %>)
+    </td>
+  </tr>
+  <tr>
+    <th>Data</th>
+    <td><%=h @igc_tmp_file.igc_file.date.strftime('%d-%m-%Y') %></td>
+  </tr>
+  <tr>
+    <th>Decollo</th>
+    <td><%=h @igc_tmp_file.igc_file.takeoff_time.strftime('%H:%M:%S') %></td>
+  </tr>
+  <tr>
+    <th>Atterraggio</th>
+    <td><%=h @igc_tmp_file.igc_file.landing_time.strftime('%H:%M:%S') %></td>
+  </tr>
+  <tr>
+    <th>Pilota</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.pilot_name %>
+      (<%=h @igc_tmp_file.igc_file.pilot_role %>)
+    </td>
+  </tr>
+  <tr>
+    <th>Aliante</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.glider_type %> -
+      <%=h @igc_tmp_file.igc_file.glider_id %>
+      (<%=h @igc_tmp_file.igc_file.competition_id %>)
+    </td>
+  </tr>
+  <tr>
+    <th>Classe</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.competition_class %>
+    </td>
+  </tr>
+  <tr>
+    <th>GPS</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.gps_type %>
+     </td>
+  </tr>
+  <tr>
+    <th>Sensore di pressione</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.pressure_sensor_type %>
+     </td>
+  </tr>
+  <tr>
+    <th>Datum</th>
+    <td>
+      <%=h @igc_tmp_file.igc_file.datum_name %>
+    </td>
+  </tr>
+  <% if @igc_tmp_file %>
+  <tr>
+    <th>Download</th>
+    <td>
+      <%= link_to(image_tag('igc.png'),
+                  igc_tmp_file_path(@igc_tmp_file, :format => 'igc'),
+                  :alt => 'IGC icon',
+                  :title => 'Apri il file IGC con seeyou') %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+</body>

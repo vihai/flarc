@@ -11,83 +11,55 @@ class IgcTmpFilesController < ApplicationController
   end
 
   def show
-    @track = []
-    @igc_file = IgcFile.open(@igc_tmp_file.filename, 'rb')
-
-    prevpoint = nil
-    @igc_file.read_contents
-    @track = @igc_file.track.decimate(0.01)
-
-#    @encoded_polyline = GMapPolylineEncoder.new(:dp_threshold => 0.001).encode(
-#                                @track.collect { |x| [x.lat, x.lon] })[:points]
-
     respond_to do |format|
       format.html
-      format.igc { serve }
-    end
-  end
-
-  def new
-    @flight = IgcTmpFile.new
-
-    respond_to do |format|
-      format.js {
-        render :update do |page|
-          page.replace_html 'upload_div' ,
-                            :partial => 'upload_form'
-          page.visual_effect :fade, 'list_div',
-                             :duration => 0.5, :queue => 'end'
-          page.visual_effect :appear, 'upload_div',
-                             :duration => 0.5, :queue => 'end'
-        end
-
-      }
-      format.html
-    end
-  end
-
-  def edit
-    respond_to do |format|
-      format.html
-      format.js {
-        render :update do |page|
-          page.replace_html 'igc_tmp_file_edit_form_div' , :partial => 'form', :object => @igc_tmp_file
-          page.visual_effect :fade, 'igc_tmp_file_info_div', :duration => 0.5, :queue => 'end'
-          page.visual_effect :appear, 'igc_tmp_file_edit_form_div', :duration => 0.5, :queue => 'end'
-        end
-
-      }
+      format.igc { serve_igc_file }
     end
   end
 
   def create
-    @igc_tmp_file = IgcTmpFile.new(params[:igc_tmp_file])
-    @igc_tmp_file.pilot = auth_person.pilot
+    @igc_tmp_file = IgcTmpFile.new(:file => params[:file], :pilot => auth_person.pilot)
 
-    if params[:iframed]
-      request.format = :js_iframed
-    end
+    IgcTmpFile.transaction do
 
     respond_to do |format|
       if @igc_tmp_file.save
-        format.html { redirect_to(wizard_flights_url(:igc_tmp_file_id => @igc_tmp_file.id)) }
-        format.js_iframed {
-          responds_to_parent do
-            render :update do |page|
-              page.redirect_to(wizard_flights_url(:igc_tmp_file_id => @igc_tmp_file.id))
-            end
-          end
-        }
+
+        begin
+          igcf = @igc_tmp_file.igc_file
+          igcf.read_contents
+        rescue IgcFile::InvalidFileFormat => e
+          @msg = "File IGC non valido o corrotto: #{e.to_s}"
+          render :template => 'igc_tmp_files/failed_ajax_upload', :layout => false
+          return
+        end
+
+        if igcf.pilot_name
+          sc = ActiveRecord::Base.send(:sanitize_sql_array,
+                 ['similarity(LOWER(first_name || \' \' || last_name), ?) DESC',
+                  igcf.pilot_name.downcase])
+
+          person = Ygg::Core::Person.joins(:pilot).order(sc).limit(1).first
+          @pilot = person.pilot
+        end
+
+        if igcf.glider_id
+          sc = ActiveRecord::Base.send(:sanitize_sql_array,
+                 [ 'similarity(registration, ?) DESC',
+                   igcf.glider_id.strip.upcase ])
+
+          plane = Plane.order(sc).limit(1).first
+          @plane = plane
+        end
+
+        format.html { render :layout => false }
       else
-        format.html { render :action => 'new' }
-        format.js_iframed {
-          responds_to_parent do
-            render :update do |page|
-              page.redirect_to(wizard_flights_url(:igc_tmp_file_id => @igc_tmp_file.id))
-            end
-          end
+        format.html {
+          @msg = 'File IGC non valido'
+          render :template => 'igc_tmp_files/failed_ajax_upload', :layout => false
         }
       end
+    end
     end
   end
 
@@ -116,12 +88,12 @@ class IgcTmpFilesController < ApplicationController
   end
 
   protected
-  
+
   def find_object
     @igc_tmp_file = IgcTmpFile.find(params[:id])
   end
 
-  def serve
+  def serve_igc_file
     headers['Content-Description'] = 'Flight file in IGC format'
     headers['Last-Modified'] = File.mtime(@igc_tmp_file.filename).httpdate
     send_file @igc_tmp_file.filename,

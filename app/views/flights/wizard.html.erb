@@ -1,0 +1,5 @@
+<% if authenticated? %>
+  <%= render :partial => 'wizard' %>
+<% else %>
+È nesessario fare il login per inserire un volo
+<% end %>

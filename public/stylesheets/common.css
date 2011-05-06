@@ -530,3 +530,32 @@ div.cp > div.container > div.title
 {
  font-weight: bold;
 }
+
+div#upload_dialog_map
+{
+ position: absolute;
+ right: 10px;
+ top: 10px;
+ width: 355px;
+ height: 200px;
+}
+
+iframe#upload_dialog_iframe
+{
+ position: absolute;
+ right: 10px;
+ top: 220px;
+ width: 355px;
+ height: 300px;
+ border: none;
+ background-color: #eee;
+}
+
+span.ac_p_reg
+{
+ display: inline-block;
+ font-size: 150%;
+ font-weight: bold;
+ font-family: monospace;
+ width: 5em;
+}

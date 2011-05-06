@@ -8,7 +8,5 @@ class Ranking < Ygg::PublicModel
            :order => 'value DESC, id ASC',
            :conditions => 'value IS NOT NULL'
 
-  belongs_to :group, :class_name => 'RankingGroup'
-
   belongs_to :championships
 end

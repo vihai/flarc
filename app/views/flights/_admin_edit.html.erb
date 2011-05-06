@@ -151,12 +151,6 @@ $(function() {
         $('#pilot_id').val(ui.item.id);
         $('#csvva_fieldset').val(ui.item.id);
       },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
     });
 
   $('#plane').autocomplete({
@@ -202,12 +196,6 @@ $(function() {
           }
         });
       },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
     });
 
   $("#dialog-form").dialog({

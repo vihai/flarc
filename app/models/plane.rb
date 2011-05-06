@@ -7,6 +7,7 @@ class Plane < Ygg::PublicModel
 
   validates_presence_of :registration
   validates_length_of :registration, :in => 6..10
+  validates_format_of :registration, :with => /^([A-Z0-9]{1,2}-[A-Z0-9]+|N[0-9]+[A-Z][A-Z])$/
 
   validates_presence_of :plane_type
 

@@ -1,12 +1,14 @@
 class Flight < Ygg::PublicModel
   belongs_to :pilot,
              :class_name => 'Pilot'
+  validates_presence_of :pilot
 
   belongs_to :passenger,
              :class_name => 'Ygg::Core::Person'
 
   belongs_to :plane,
              :class_name => 'Plane'
+  validates_presence_of :plane_id
 
   belongs_to :plane_type_configuration,
              :class_name => '::PlaneType::Configuration'
@@ -50,18 +52,23 @@ class Flight < Ygg::PublicModel
   end
 
   def track
-    if !@track
-      @track = FlightTrack.new
+    return @track if @track
 
-      begin
-        file = IgcFile.open(self.igc_file_path)
+    # Trigger reading of igc file
+    igc_file
 
-        file.read_contents { |x| @track << x }
-      rescue
-      end
-    end
+    @track
+  end
 
-    return @track
+  def igc_file
+    return @igc_file if @igc_file
+
+    @track = []
+    @igc_file = IgcFile.open(self.igc_file_path)
+
+    @igc_file.read_contents { |x| @track << x }
+
+    @igc_file
   end
 
   def update_from_igcfile(igc_file, original_filename = nil)

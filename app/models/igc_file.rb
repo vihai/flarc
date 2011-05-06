@@ -73,17 +73,15 @@ class IgcFile < File
   attr_reader :takeoff_time
   attr_reader :landing_time
 
-  attr_reader :track
-
   class FlightIDFromLogger
     attr_accessor :manufacturer, :unique_id, :extension
-  
+
     def initialize(manufacturer, unique_id, extension = nil)
       @manufacturer = manufacturer
       @unique_id = unique_id
       @extension = extension
     end
-  
+
     def to_s
       @manufacturer.to_s + @unique_id.to_s + @extension.to_s
     end
@@ -167,7 +165,7 @@ class IgcFile < File
         when 'RFW'
           @firmware = line[21..-1]
           @firmware_source = src
-     
+
         when 'RHW'
           @hardware = line[21..-1]
           @hardware_source = src
@@ -207,7 +205,7 @@ class IgcFile < File
         # Satellite constellation
       when 'B'
         # Fix
- 
+
         break if options[:headers_only]
 
         s = line[1..-1]
@@ -251,7 +249,7 @@ class IgcFile < File
 	# Ugly and raw takeoff/landing detection
 
         if (!prev1.nil?)
-          distance = newpoint.distance(prev1) 
+          distance = newpoint.distance(prev1)
           speed = distance / (newpoint.logged_at - prev1.logged_at)
 
 #$stdout.puts "P T#{newpoint.logged_at} A#{newpoint.gnss_alt} D#{distance} T#{newpoint.logged_at - prev1.logged_at} S#{speed * 3.6}\n"
@@ -304,9 +302,15 @@ class IgcFile < File
       when '_'
         # Ignore
       else
-        raise InvalidFileFormat.new("Unknown record #{line[0..0]}")
+        raise InvalidFileFormat.new("Unknown record #{line[0..0].inspect} at line #{self.lineno}")
       end
     end
+  end
+
+  def track
+    return @track if @track
+    read_contents
+    @track
   end
 
 protected

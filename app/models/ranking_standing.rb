@@ -10,5 +10,4 @@ class RankingStanding < Ygg::BasicModel
            :class_name => "RankingHistoryEntry"
 
   serialize :data
-#  serialize :data, Hash
 end
