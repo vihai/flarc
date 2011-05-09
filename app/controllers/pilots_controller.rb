@@ -48,7 +48,9 @@ class PilotsController < RestController
     end
   end
 
-  def stats_plane
+  def stats_by_plane
+    find_target
+
     respond_to do |format|
     format.html
       format.svg {
@@ -56,7 +58,7 @@ class PilotsController < RestController
         graph.title = 'Voli per aliante'
         graph.renderer = Scruffy::Renderers::Pie.new
 
-        stats = Hash[@pilot.flights.all(:select => 'planes.registration,count(*) AS cnt',
+        stats = Hash[@target.flights.all(:select => 'planes.registration,count(*) AS cnt',
                                     :joins => 'JOIN planes ON flights.plane_id=planes.id',
                                     :group => 'planes.registration').map { |x| [ x.registration, x.cnt.to_i ] }]
 

@@ -1,25 +1,9 @@
-<div id="plane_info_div">
-
-<% if authenticated_admin? %>
-  <div class="edit_box">
-  <%= link_to image_tag(
-         "action_edit.png", :alt => "Edit..."),
-         :url => { :action => "edit" }, :method => :get,
-         :remote => true %>
-  <%= link_to image_tag(
-         "action_delete.png", :alt => "Delete..."),
-         :method => "DELETE",
-         :confirm => "Sei sicurisssimo?",
-         :remote => true %>
-                    <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/planes'; }" }) %>
-  </div>
-<% end %>
-
-<%= content_tag(:object, "",
-                :type => "image/svg+xml",
+<div class="body_contents">
+<%= content_tag(:object, '',
+                :type => 'image/svg+xml',
                 :data => stats_by_pilot_plane_path(:format => :svg),
-                :width => "300px", :height => "200px",
-                :style => "float: right;") %>
+                :width => '300px', :height => '200px',
+                :style => 'float: right;') %>
 
 <table class="standard plane">
   <tr>
@@ -56,5 +40,19 @@
 
 <% @flights = @target.flights.all(:order => "takeoff_time DESC") %>
 <%= render :partial => 'flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
+</div>
 
-<div id="plane_edit_form_div" style="display: none"></div>
+<% if authenticated_admin? %>
+  <div class="edit_box">
+  <%= link_to image_tag(
+         "action_edit.png", :alt => "Edit..."),
+         :url => { :action => "edit" }, :method => :get,
+         :remote => true %>
+  <%= link_to image_tag(
+         "action_delete.png", :alt => "Delete..."),
+         :method => "DELETE",
+         :confirm => "Sei sicurisssimo?",
+         :remote => true %>
+                    <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/planes'; }" }) %>
+  </div>
+<% end %>

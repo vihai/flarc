@@ -1,0 +1,45 @@
+<% options ||= {} %>
+<% if !flights.empty? then %>
+  <table class="standard flights">
+    <tr>
+      <th></th>
+      <th>Pilota</th>
+      <th>Decollo</th>
+      <th>Durata</th>
+      <th>Aliante</th>
+      <th>Distanza</th>
+      <th>Punti</th>
+      <th>Stato</th>
+    </tr>
+    <% flights.each do |x| %>
+    <% cf = x.championship_flight(:csvva_2011) %>
+    <tr>
+      <td class="view">
+        <%= link_to(image_tag('view.png', :alt => 'View', :title => 'Apri la pagina del volo'), x) %>
+      </td>
+      <td class="pilot">
+        <%= link_to(x.pilot.person.name, x.pilot) %>
+      </td>
+      <td class="takoff">
+        <%= link_to(l(x.takeoff_time, :format => :compact), x) %>
+      </td>
+      <td class="duration">
+        <%=h fmt_duration(x.duration) %>
+      </td>
+      <td class="glider">
+        <%= link_to(x.plane.registration, x.plane) %>
+        (<%= link_to(x.plane.plane_type.name, x.plane.plane_type) -%><%=h x.plane_type_configuration ? (' ' + x.plane_type_configuration.name) : '' -%>)
+      </td>
+      <td class="distance">
+        <%= fmt_distance_in_km(cf.distance) %>
+      </td>
+      <td class="points">
+        <%= fmt_points(cf.points) %>
+      </td>
+      <td class="status">
+        <%= status_icon(cf.status) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>

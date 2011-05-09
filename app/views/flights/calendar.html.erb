@@ -1,12 +1,4 @@
-<div id="list_div">
-<% if authenticated_admin? %>
-  <div class="edit_box">
-  <%= link_to new_flight_path, :method => :get, :remote => true do
-        image_tag('action_new.png', :alt => 'New...')
-      end %>
-  </div>
-<% end %>
-
+<div class="body_contents">
 <% if @dates.empty? %>
 <h1>Nessun volo trovato</h1>
 <% end %>
@@ -58,6 +50,3 @@
   <% end %>
 <% end %>
 </div>
-<div id="info_div" style="display: none"></div>
-<div id="send_div" style="display: none"></div>
-<div id="edit_div" style="display: none"></div>

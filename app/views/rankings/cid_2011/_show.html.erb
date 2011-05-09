@@ -18,7 +18,7 @@
     <tr>
       <td class="number">
         <%= cnt+=1 %>
-        <% weeksnap = r.history_entries.where("snapshot_time < now() - '1 week'::interval AND "+
+        <% weeksnap = r.history_entries.where("snapshot_time < now() - '1 week'::interval AND " +
                                               "EXTRACT(DOW FROM snapshot_time)=2").order('snapshot_time DESC').first %>
         <% if weeksnap then %>
           <% if weeksnap.position > r.position then %>

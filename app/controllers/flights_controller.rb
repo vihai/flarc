@@ -99,8 +99,8 @@ class FlightsController < RestController
         pres = @req[:plane]
         if pres
           pres.symbolize_keys!
-          plane = Plane.new(:registration => pres[:registration],
-                            :plane_type => PlaneType.find(pres[:plane_type_id]))
+          plane = Plane.create(:registration => pres[:registration],
+                               :plane_type => PlaneType.find(pres[:plane_type_id]))
           fres[:plane_id] = plane.id
         end
 
@@ -114,7 +114,7 @@ class FlightsController < RestController
         @flight.attributes = {
           :pilot_id => fres[:pilot_id],
           :plane_id => fres[:plane_id],
-          :plane_type_configuration_id => fres[:plane_configuration_id],
+          :plane_type_configuration_id => fres[:plane_type_configuration_id],
           :private => false,
           :notes_public => fres[:notes_public]
         }
@@ -129,11 +129,11 @@ class FlightsController < RestController
 
           case cf[:_type]
           when 'Championship::Flight::Cid2011'
-            cp = pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2011)).first
+            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2011)).first
             if cp.cid_category.to_sym == :prom
               ranking = :prom
             else
-              ranking cf[:cid_ranking].to_sym
+              ranking = cf[:cid_ranking].to_sym
             end
 
             @flight.championship_flights << (a=Championship::Flight::Cid2011.new(

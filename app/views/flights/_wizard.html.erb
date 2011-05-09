@@ -2,11 +2,6 @@
   <div id="upload_dialog_map"></div>
   <iframe id="upload_dialog_iframe" name="upload_dialog_iframe"></iframe>
 
-  <p>
-    Per le istruzioni sulla compilazione di questo form fare riferimento
-    all'<%= link_to 'Allegato C', '/cid/Allegato C-invio voli.pdf' %> del regolamento.
-  </p>
-
   <form action="<%= igc_tmp_files_path %>" method="post" enctype="multipart/form-data"
         style="width: 500px;" id="igc_file_upload_form" target="upload_dialog_iframe">
   <fieldset>
@@ -21,6 +16,10 @@
 
   <div id="pre_upload_div">
     <img src="/images/upload_pict.jpg" />
+    <p>
+      Per le istruzioni sulla compilazione di questo form fare riferimento
+      all'<%= link_to 'Allegato C', '/cid/Allegato C-invio voli.pdf' %> del regolamento.
+    </p>
   </div>
 
   <div id="post_upload_div" style="display: none">
@@ -28,10 +27,10 @@
       <legend>Dati del volo</legend>
 
       <% if authenticated_admin? %>
-      <label for="plane">Pilota</label>
+      <label for="pilot">Pilota</label>
       <input type="text" name="pilot" id="pilot" size="40" />
-      <input type="hidden" name="pilot_id" id="pilot_id" /><br />
       <% end %>
+      <input type="hidden" name="pilot_id" id="pilot_id" /><br />
 
       <label for="plane">Marche aliante</label>
       <input type="text" name="plane" id="plane" size="10" onkeyup="this.value=this.value.toUpperCase()" style="text-transform: uppercase;" />
@@ -58,7 +57,7 @@
       <input type="hidden" name="csvva_id" id="csvva_id" />
       <div id="csvva_fieldset_contents">
         <label for="csvva_distance">Distanza</label>
-        <input type="text" name="csvva_distance" id="csvva_distance" />
+        <input type="text" name="csvva_distance" id="csvva_distance" size="6" /> km
       </div>
     </fieldset>
 
@@ -71,8 +70,6 @@
       <input type="hidden" name="cid_id" id="cid_id" />
 
       <div id="cid_fieldset_contents">
-        <label for="cid_distance">Distanza</label>
-        <input type="text" name="cid_distance" id="cid_distance" /><br />
 
         <div id="cid_ranking_div">
           <label for="cid_ranking">Classifica</label>
@@ -85,24 +82,48 @@
           </select>
         </div>
 
-        <label for="cid_task_eval">Tema</label>
-        <select id="cid_task_eval">
-          <option value=""></option>
-          <option value="free">Libero</option>
-          <option value="not_completed">Dichiarato ma non completato</option>
-          <option value="completed">Dichiarato e completato</option>
-        </select><br />
+        <table id="cid_calcs">
+        <tr>
+          <td><label for="cid_distance">Distanza</label></td>
+          <td><input type="text" name="cid_distance" id="cid_distance" size="6" /> km</td>
+          <td id="cid_distance_points" class="points"></td>
+        </tr>
 
-        <label for="cid_task_type">Tipo</label>
-        <select id="cid_task_type">
-          <option value=""></option>
-          <option value="butterfly">Farfalla</option>
-          <option value="simple_triangle">Triangolo semplice</option>
-          <option value="round_trip">Andata e ritorno</option>
-          <option value="fai_triangle">Triangolo FAI</option>
-          <option value="straight_line">Linea retta</option>
-        </select><br />
-     </div>
+        <tr>
+          <td><label for="cid_task_type">Tipo</label></td>
+          <td>
+            <select id="cid_task_type">
+              <option value=""></option>
+              <option value="butterfly">Farfalla</option>
+              <option value="simple_triangle">Triangolo semplice</option>
+              <option value="round_trip">Andata e ritorno</option>
+              <option value="fai_triangle">Triangolo FAI</option>
+              <option value="straight_line">Linea retta</option>
+            </select>
+          </td>
+          <td id="cid_task_type_points" class="points"></td>
+        </tr>
+
+        <tr>
+          <td><label for="cid_task_eval">Tema</label></td>
+          <td>
+            <select id="cid_task_eval">
+              <option value=""></option>
+              <option value="free">Libero</option>
+              <option value="not_completed">Dichiarato ma non completato</option>
+              <option value="completed">Dichiarato e completato</option>
+            </select>
+          </td>
+          <td id="cid_task_eval_points" class="points"></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td id="cid_total_points" class="points total_points"></td>
+        </tr>
+        </table>
+      </div>
 
     </fieldset>
 
@@ -131,13 +152,6 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>
 <script type="text/javascript">
 //<![CDATA[
-
-var field_names = {
-  'championship_flights.cid_ranking': 'Classifica CID',
-  'championship_flights.task_eval': 'Valutazione Tema CID',
-  'championship_flights.task_type': 'Tipo di tema CID',
-  'championship_flights.task_completed': 'Tema CID completato',
-};
 
 function upload_started()
 {
@@ -205,31 +219,34 @@ function pilot_changed(pilot)
 
   csvva = cships['Championship::Pilot::Csvva2011'];
   if (csvva) {
+    $('#csvva_member').prop('checked', true);
     $('#csvva_fieldset').fadeIn();
-    $('#csvva_member').attr('checked','checked');
   } else {
+    $('#csvva_member').prop('checked', false);
     $('#csvva_fieldset').fadeOut();
-    $('#csvva_member').removeAttr('checked');
   }
-  $('#csvva_member').button('refresh');
 
   cid = cships['Championship::Pilot::Cid2011'];
   if (cid) {
-console.log("AAAAAAAAAAAAAAAAAAAAA", cid);
-    $('#cid_ranking_div').toggle(cid.cid_category == 'prom');
-    $('#cid_member').attr('checked','checked');
+    $('#cid_ranking_div').toggle(cid.cid_category != 'prom');
+    $('#cid_member').prop('checked', true);
     $('#cid_fieldset').fadeIn();
   } else {
+    $('#cid_member').prop('checked', false);
     $('#cid_fieldset').fadeOut();
-    $('#cid_member').removeAttr('checked');
   }
-  $('#cid_member').button('refresh');
 }
+
+var current_plane = null;
+var new_plane_type = null;
 
 function plane_changed(plane)
 {
+ current_plane = plane;
+
   if (!plane) {
     $('#plane_type_div').fadeIn();
+    $('#plane_id').val('');
     return;
   }
 
@@ -242,6 +259,8 @@ function plane_changed(plane)
 
 function plane_type_changed(plane_type)
 {
+ new_plane_type = plane_type;
+
   if (!plane_type) {
     $('#plane_type').val('');
     $('#plane_type_id').val('');
@@ -260,12 +279,73 @@ function update_configurations(configurations)
     $('#plane_type_configuration_div').fadeIn();
     $('option', $('#plane_type_configuration_id')).remove();
     $.each(configurations, function(key, val) {
-      $('#plane_type_configuration_id').attr('options')[key] =
-        new Option(val.name, val.id, false);
+      $('#plane_type_configuration_id').append($('<option></option>').attr('value', val.id).text(val.name));
     });
   } else {
     $('#plane_type_configuration_div').fadeOut();
   }
+}
+
+function update_cid_calcs()
+{
+  $('#cid_calcs .points').html('');
+
+  var plane_type = null;
+
+  if (current_plane)
+    plane_type = current_plane.plane_type;
+  else if (new_plane_type)
+    plane_type = new_plane_type;
+  else
+    $('#cid_distance_points').html('');
+
+  var config;
+  $.each(plane_type.configurations, function(index, value) {
+    if (value.id == $('#plane_type_configuration_id').val()) {
+      config = value;
+      return false;
+    }
+  });
+
+  dist = parseFloat($('#cid_distance').val().replace(/,/, '.'));
+  if (!dist)
+    return;
+
+  var handicap;
+  if ($('#cid_ranking').val() == 'naz_club')
+    handicap = config ? config.club_handicap : current_plane.plane_type.club_handicap;
+  else
+    handicap = config ? config.handicap : current_plane.plane_type.handicap;
+
+  if (!handicap) {
+    $('#cid_distance_points').html('Handicap non disponibile');
+    return;
+  }
+
+  var pts = dist / handicap;
+  $('#cid_distance_points').html(dist + ' / ' + handicap + ' = ' + Math.round(pts));
+
+  var mult = 1;
+  switch($('#cid_task_type').val()) {
+  case 'round_trip': mult = 1.3; break;
+  case 'fai_triangle': mult = 1.4; break;
+  case 'straight_line': mult = 1.6; break;
+  case 'simple_triangle':
+    if ($('#cid_task_eval').val() != 'free')
+      mult = 1.2;
+  }
+
+  $('#cid_task_type_points').html(Math.round(pts) + ' * ' + mult + ' = ' + Math.round(pts * mult));
+  pts = pts * mult;
+
+  mult = 1;
+  if ($('#cid_task_eval').val() == 'completed')
+    mult = 1.1;
+
+  $('#cid_task_eval_points').html(Math.round(pts) + ' * ' + mult + ' = ' + Math.round(pts * mult));
+  pts = pts * mult;
+
+  $('#cid_total_points').html(Math.round(pts));
 }
 
 $(function() {
@@ -290,6 +370,12 @@ $(function() {
     else
       $('#csvva_fieldset_contents').fadeOut();
   });
+
+  $('#cid_distance').change(function() { update_cid_calcs(); });
+  $('#cid_task_type').change(function() { update_cid_calcs(); });
+  $('#cid_task_eval').change(function() { update_cid_calcs(); });
+  $('#cid_ranking').change(function() { update_cid_calcs(); });
+  $('#plane_type_configuration_id').change(function() { update_cid_calcs(); });
 
   $('#pilot').autocomplete({
     source: function(request, response) {
@@ -437,10 +523,10 @@ $(function() {
           req.plane.plane_type_id = $('#plane_type_id').val();
         }
 
-        if ($('#cid_member').attr('checked')) {
+        if ($('#cid_member').prop('checked')) {
           var cid = {};
           cid._type = 'Championship::Flight::Cid2011';
-          cid.distance  = $('#cid_distance').val() * 1000;
+          cid.distance  = parseFloat($('#cid_distance').val().replace(/,/, '.')) * 1000;
           cid.cid_ranking = $('#cid_ranking').val();
           cid.task_eval = $('#cid_task_eval').val();
           cid.task_type = $('#cid_task_type').val();
@@ -448,10 +534,10 @@ $(function() {
           req.flight.championship_flights.push(cid)
         }
 
-        if ($('#csvva_member').attr('checked')) {
+        if ($('#csvva_member').prop('checked')) {
           var csvva = {};
           csvva._type = 'Championship::Flight::Csvva2011';
-          csvva.distance  = $('#csvva_distance').val() * 1000;
+          csvva.distance  = parseFloat($('#csvva_distance').val().replace(/,/, '.')) * 1000;
           req.flight.championship_flights.push(csvva);
         }
 
@@ -471,6 +557,14 @@ $(function() {
 
             var ex = $.parseJSON(data.responseText);
             var msg = '';
+
+            var field_names = {
+              'championship_flights.cid_ranking': 'Classifica CID',
+              'championship_flights.task_eval': 'Valutazione Tema CID',
+              'championship_flights.task_type': 'Tipo di tema CID',
+              'championship_flights.task_completed': 'Tema CID completato',
+              'championship_flights.distance': 'Distanza',
+            };
 
             $.each(ex.per_field_msgs, function(k, v) {
                msg += '<li>Il campo <strong>' + field_names[k] + '</strong> ' + v + '</li>';

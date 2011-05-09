@@ -1,3 +1,4 @@
+<div class="body_contents">
 <%= render :partial => "rankings/csvva_2011/show",
            :locals => {
              :ranking => Ranking.find_by_symbol("csvva_junior_2011"),
@@ -14,3 +15,4 @@
            :locals => {
              :ranking => Ranking.find_by_symbol("csvva_supermaster_2011"),
              :limit => 3 } %>
+</div>

@@ -1,3 +1,4 @@
+<div class="body_contents">
 <% if asgard_session && asgard_session.authenticated? %>
   <h1>Benvenuto <%= auth_person.first_name %></h1>
 
@@ -33,3 +34,4 @@
   <%= render :partial => '/flights/wizard', :locals => { :autoopen => !!params['new_flight'] } %>
 <% end %>
 <% end %>
+</div>

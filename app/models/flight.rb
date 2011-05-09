@@ -27,6 +27,10 @@ class Flight < Ygg::PublicModel
            :through => :championship_flights,
            :uniq => true
 
+  def championship_flight(symbol)
+    championship_flights.joins(:championship).where('championships.symbol' => symbol).first
+  end
+
 #  validates_presence_of :pilot, :plane, :takeoff_time, :landing_time, :distance
 #  validates_numericality_of :distance
 
@@ -64,11 +68,15 @@ class Flight < Ygg::PublicModel
     return @igc_file if @igc_file
 
     @track = []
-    @igc_file = IgcFile.open(self.igc_file_path)
 
-    @igc_file.read_contents { |x| @track << x }
-
-    @igc_file
+    begin
+      @igc_file = IgcFile.open(self.igc_file_path)
+    rescue Errno::ENOENT
+      nil
+    else
+      @igc_file.read_contents { |x| @track << x }
+      @igc_file
+    end
   end
 
   def update_from_igcfile(igc_file, original_filename = nil)

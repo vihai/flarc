@@ -1,31 +1,14 @@
-<% if authenticated_admin? then %>
-  <div class="edit_box">
-  <%= link_to_function image_tag('action_edit.png', :alt => 'Edit...'),
-            'jQuery("#dialog-form").dialog("open")' %>
-  <%=# link_to image_tag('action_delete.png', :alt => 'Delete...'),
-#         pilot_path,
-#         :method => 'DELETE',
-#         :confirm => 'Sei sicurisssimo?',
-#         :remote => true
- %>
-                    <%# :complete => visual_effect(:fade, 'body', { :duration => 1, :after_finish => 'function() { window.location='/planes'; }' }) %>
-  </div>
-<% end %>
-
+<div class="body_contents">
 <%= content_tag(:object, '',
                 :type => 'image/svg+xml',
-                :data => stats_by_plane_pilot_url(:format => :svg),
+                :data => stats_by_plane_pilot_path(:format => :svg),
                 :width => '300px', :height => '200px',
                 :style => 'float: right;') %>
 
+<h1><%= @target.person.name %></h1>
+
 <table class="standard pilot">
   <caption>Pilota</caption>
-  <tr>
-    <th>Nome</th>
-    <td class="name">
-       <%= @target.person.name %>
-    </td>
-  </tr>
   <% if authenticated_admin? %>
     <% if @target.person.residence_location %>
   <tr>
@@ -67,195 +50,19 @@
 <% @flights = @target.flights.order('takeoff_time DESC') %>
 <%= render :partial => 'flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
 
-<% if authenticated_admin? %>
-<div id="dialog-form" title="Edit pilot" style="display: none">
-  <form class="ui-widget">
-  <fieldset class="ui-widget-content">
-    <label for="first_name">Nome</label>
-    <input type="text" name="first_name" id="first_name" /><br />
-
-    <label for="last_name">Cognome</label>
-    <input type="text" name="last_name" id="last_name" /><br />
-
-    <label for="club_id">Club</label>
-    <select name="club_id" id="club_id">
-      <% Club.order(:name).each do |club| %>
-        <option value="<%= club.id %>"><%= club.name %></option>
-      <% end %>
-    </select><br />
-
-    <fieldset id="csvva_fieldset" class="ui-widget-content">
-      <legend>
-        <input type="checkbox" name="csvva_member" value="null" id="csvva_member" />
-        <label for="csvva_member">CSVVA:</label>
-      </legend>
-      <input type="hidden" name="csvva_id" id="csvva_id" />
-      <div id="csvva_fieldset_contents" style="display: none">
-        <label for="csvva_pilot_level">Livello pilota</label>
-        <select id="csvva_pilot_level">
-          <option value="junior">Junior</option>
-          <option value="expert">Expert</option>
-          <option value="master">Master</option>
-          <option value="supermaster">SuperMaster</option>
-        </select>
-      </div>
-    </fieldset>
-
-    <fieldset id="cid_fieldset" class="ui-widget-content">
-      <legend>
-        <div class="ui-checkbox">
-          <input type="checkbox" name="cid_member" value="null" id="cid_member" />
-          <label for="cid_member">CID:</label>
-        </div>
-      </legend>
-      <input type="hidden" name="cid_id" id="cid_id" />
-      <div id="cid_fieldset_contents" style="display: none">
-        <label for="cid_category">Categoria</label>
-        <select id="cid_category">
-          <option value="prom">Promozione</option>
-          <option value="naz">Nazionale</option>
-        </select>
-     </div>
-    </fieldset>
-
-  </fieldset>
-  </form>
 </div>
 
-
-<script type="text/javascript">
-//<![CDATA[
-
-$(function() {
-  $("#dialog-form").dialog({
-    autoOpen: false,
-    height: 500,
-    width: 500,
-    modal: true,
-    open: function() {
-      $.ajax({
-        url: '/pilots/' + $('#dialog-form').data('resource_id'),
-        dataType: 'json',
-        data: {
-          view: 'edit',
-        },
-        success: function(resource) {
-
-          $('#dialog-form').data('resource', resource);
-
-          $('#first_name').val(resource.person.first_name);
-          $('#last_name').val(resource.person.last_name);
-          $('#club_id').val(resource.club_id);
-
-          cships = {};
-          $.each(resource.championship_pilots, function(index, value) {
-            cships[value._type] = value;
-          });
-
-          csvva = cships['Championship::Pilot::Csvva2011'];
-          if (csvva) {
-            $('#csvva_fieldset_contents').show();
-            $('#csvva_id').val(csvva.id);
-            $('#csvva_member').attr('checked','checked');
-            $('#csvva_pilot_level').val(csvva.csvva_pilot_level);
-          } else {
-            $('#csvva_fieldset_contents').hide();
-            $('#csvva_id').val('');
-            $('#csvva_member').removeAttr('checked');
-          }
-
-          cid = cships['Championship::Pilot::Cid2011'];
-          if (cid) {
-            $('#cid_fieldset_contents').show();
-            $('#cid_id').val(cid.id);
-            $('#cid_member').attr('checked','checked');
-            $('#cid_category').val(cid.cid_category);
-          } else {
-            $('#cid_fieldset_contents').hide();
-            $('#cid_id').val('');
-            $('#cid_member').removeAttr('checked');
-          }
-        },
-        error: function(resource) {
-          alert('Errore lettura oggetto');
-        }
-      });
-    },
-    close: function() {
-    },
-    buttons: {
-      'Salva': function() {
-
-//        resource = $('#dialog-form').data('resource');
-        resource = {};
-        resource.club_id = $('#club_id').val();
-
-        resource.championship_pilots_attributes = [];
-
-        cid = {}
-        if ($('#cid_member').is(':checked')) {
-          if ($('#cid_id').val())
-            cid.id = $('#cid_id').val();
-
-          cid._type = 'Championship::Pilot::Cid2011';
-          cid.championship_id = $('#dialog-form').data('cid_cship_id');
-          cid.cid_category = $('#cid_category').val();
-          resource.championship_pilots_attributes.push(cid);
-        } else if ($('#cid_id').val()) {
-          cid.id = $('#cid_id').val();
-          cid._destroy = true;
-          resource.championship_pilots_attributes.push(cid);
-        }
-
-        csvva = {}
-        if ($('#csvva_member').is(':checked')) {
-          if ($('#csvva_id').val())
-            csvva.id = $('#csvva_id').val();
-
-          csvva._type = 'Championship::Pilot::Csvva2011';
-          csvva.championship_id = $('#dialog-form').data('csvva_cship_id');
-          csvva.csvva_pilot_level  = $('#csvva_pilot_level').val();
-          resource.championship_pilots_attributes.push(csvva);
-        } else if ($('#csvva_id').val()) {
-          csvva.id = $('#csvva_id').val();
-          csvva._destroy = true;
-          resource.championship_pilots_attributes.push(csvva);
-        }
-
-        $.ajax({
-          url: '/pilots/' + $('#dialog-form').data('resource_id'),
-          dataType: 'json',
-          type: 'PUT',
-          contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify(resource),
-          success: function(data) {
-            window.location.reload();
-          },
-          error: function(data) {
-            alert('Error saving object');
-          }
-        });
-      },
-      'Annulla': function() {
-        $(this).dialog('close');
-      }
-    },
-  });
-
-  $('#cid_member').change(function(e) {
-    $('#cid_fieldset_contents').toggle($(this).is(':checked'));
-  });
-
-  $('#csvva_member').change(function(e) {
-    $('#csvva_fieldset_contents').toggle($(this).is(':checked'));
-  });
-
-
-  $('#dialog-form').data('resource_id', <%= @target.id %>);
-  $('#dialog-form').data('cid_cship_id', <%= Championship.find_by_symbol(:cid_2011).id %>);
-  $('#dialog-form').data('csvva_cship_id', <%= Championship.find_by_symbol(:csvva_2011).id %>);
-});
-
-//]]>
-</script>
+<% if authenticated_admin? %>
+  <div class="edit_box">
+  <%= link_to_function image_tag('action_edit.png', :alt => 'Edit...'),
+            'jQuery("#dialog-form").dialog("open")' %>
+  <%=# link_to image_tag('action_delete.png', :alt => 'Delete...'),
+#         pilot_path,
+#         :method => 'DELETE',
+#         :confirm => 'Sei sicurisssimo?',
+#         :remote => true
+ %>
+                    <%# :complete => visual_effect(:fade, 'body', { :duration => 1, :after_finish => 'function() { window.location='/planes'; }' }) %>
+  </div>
+  <%= render :partial => 'admin_edit' %>
 <% end %>

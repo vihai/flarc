@@ -1,17 +1,4 @@
-<% if authenticated_admin? then %>
-  <div class="edit_box">
-  <%= link_to image_tag(
-         "action_edit.png", :alt => "Edit..."),
-         :url => { :action => "edit" }, :method => :get, :remote => true %>
-  <%= link_to image_tag(
-         "action_delete.png", :alt => "Delete..."),
-         :method => "DELETE",
-         :confirm => "Sei sicurisssimo?",
-         :remote => true %>
-                    <%# :complete => visual_effect(:fade, "body", { :duration => 1, :after_finish => "function() { window.location='/plane_types'; }" }) %>
-  </div>
-<% end %>
-
+<div class="body_contents">
 <table class="standard plane_type">
   <caption><%=h @target.name %></caption>
   <tr>
@@ -62,3 +49,22 @@
   </tr>
 <% end %>
 </table>
+</div>
+
+<% if authenticated_admin? then %>
+  <div class="edit_box">
+  <%=
+# link_to image_tag(
+#         "action_edit.png", :alt => "Edit..."),
+#         :url => { :action => "edit" }, :method => :get, :remote => true
+ %>
+  <%=
+# link_to image_tag(
+#         "action_delete.png", :alt => "Delete..."),
+#         :method => "DELETE",
+#         :confirm => "Sei sicurisssimo?",
+#         :remote => true
+ %>
+  </div>
+<% end %>
+

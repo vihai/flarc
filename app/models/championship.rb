@@ -31,7 +31,6 @@ class Championship < Ygg::PublicModel
     class Cid2011 < Flight
       attr_accessor :task_eval
       attr_accessor :task_type
-      attr_accessor :task_completed
 
       validates_inclusion_of :cid_ranking, :in => [ :prom, :naz_open, :naz_15m, :naz_13m5, :naz_club ]
       validates_presence_of :cid_ranking
@@ -51,18 +50,23 @@ class Championship < Ygg::PublicModel
           self.data ||= {}
           self.task_eval = self.data[:task_eval]
           self.task_type = self.data[:task_type]
-          self.task_completed = self.data[:task_completed]
+          self.cid_ranking = self.cid_ranking.to_sym
         end
+      end
+
+      before_validation do
+        self.task_type = self.task_type.to_sym
+        self.task_eval = self.task_eval.to_sym
+        self.cid_ranking = self.cid_ranking.to_sym
       end
 
       before_save do
         nd = {}
-        data ||= {}
-        data.each { |k,v| nd[k.to_sym] = v }
-        data = nd
-        data[:task_eval] = task_eval.to_sym
-        data[:task_type] = task_type.to_sym
-#        data[:task_completed] = task_completed
+        self.data ||= {}
+        self.data.each { |k,v| nd[k.to_sym] = v }
+        self.data = nd
+        self.data[:task_eval] = self.task_eval.to_sym
+        self.data[:task_type] = self.task_type.to_sym
       end
 
       def handicap
@@ -95,14 +99,13 @@ class Championship < Ygg::PublicModel
         when :round_trip ; pts = pts * 1.3
         when :fai_triangle ; pts = pts * 1.4
         when :straight_line ; pts = pts * 1.6
-        end
-
-        case task_eval
-        when :not_completed
-          if task_type == :simple_triangle
+        when :simple_triangle
+          if task_eval != :free
             pts = pts * 1.2
           end
-        when :completed
+        end
+
+        if task_eval == :completed
           pts = pts * 1.1
         end
 

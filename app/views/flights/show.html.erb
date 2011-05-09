@@ -1,18 +1,5 @@
-<div id="list_div" style="display: none"></div>
-<div id="info_div">
-<% if authenticated_admin? %>
-  <div class="edit_box">
-  <%= link_to_function image_tag('action_edit.png', :alt => 'Edit...'),
-            'jQuery("#dialog-form").dialog("open")' %>
-
-  <%= link_to image_tag('action_delete.png', :alt => 'Delete...'),
-         flight_path(@target),
-         :method => :delete,
-         :confirm => 'Sei sicurisssimo?',
-         :remote => true
- %>
-  </div>
-<% end %>
+<div class="flight_info_cut_body">
+<div class="body_contents">
 
 <div class="box flight_info">
 <table class="standard flight_info">
@@ -62,17 +49,31 @@
   </tr>
 <% end %>
 </table>
+
+<div class="flight_notes">
+  Note:
+  <div class="contents"><%= @target.notes_public %></div>
+</div>
+
+<div class="flight_notes">
+  Note DG:
+  <div class="contents"><%= @target.notes_private %></div>
+</div>
+
 </div>
 
 <% @target.championship_flights.each do |cf| %>
   <%= render :partial => "championships/flight/#{cf.class.name.split('::').last.underscore}", :object => cf %>
 <% end %>
 
+</div>
+</div>
+
 <% if @target.encoded_polyline && @target.encoded_polyline.size > 0 %>
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>
 
-<div id="map_container" class="map_container" style="width: 100%; height: 500px;">
+<div id="map_container" class="map_container" style="position: absolute; right: 0; bottom: 0; top: 0; left: 352px; height: 100%">
   <div id="map" class="map" style="width: 100%; height: 100%;"></div>
 </div>
 
@@ -107,10 +108,24 @@ $(document).ready(function() {
 </script>
 <% end %>
 
-</div>
-
 <% if authenticated_admin? %>
   <%= render :partial => 'admin_edit' %>
-<% elsif authenticated? %>
+<% elsif authenticated? && @target.pilot_id == asgard_session.auth_person.pilot.id %>
   <%= render :partial => 'user_edit' %>
 <% end %>
+
+<% if authenticated_admin? %>
+  <div class="edit_box">
+  <%= link_to_function image_tag('action_edit.png', :alt => 'Edit...'),
+            'jQuery("#dialog-form").dialog("open")' %>
+
+  <%=
+# link_to image_tag('action_delete.png', :alt => 'Delete...'),
+#         flight_path(@target),
+#         :method => :delete,
+#         :confirm => 'Sei sicurisssimo?',
+#         :remote => true
+ %>
+  </div>
+<% end %>
+

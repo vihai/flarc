@@ -1,3 +1,4 @@
+<div class="body_contents">
 <% if !@targets.empty? then %>
   <table class="standard pilots">
     <caption>Piloti</caption>
@@ -7,6 +8,11 @@
     </tr>
     <% for x in @targets do %>
     <tr>
+<% if authenticated_admin? %>
+      <td class="id">
+        <%= x.person.id %>
+      </td>
+<% end %>
       <td class="name">
         <%= link_to(x.person.name, x) %>
       </td>
@@ -17,3 +23,4 @@
     <% end %>
   </table>
 <% end %>
+</div>

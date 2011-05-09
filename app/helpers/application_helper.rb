@@ -24,13 +24,16 @@ module ApplicationHelper
     case status
     when 'pending'
       return image_tag('flight_status_pending.png',
-                       :alt => 'Pending')
+                       :alt => 'Pendente',
+                       :title => 'Pendente')
     when 'invalid'
       return image_tag('flight_status_invalid.png',
-                       :alt => 'Invalid')
+                       :alt => 'Invalido',
+                       :title => 'Invalido')
     when 'approved'
       return image_tag('flight_status_approved.png',
-                       :alt => 'Approved')
+                       :alt => 'Approvato',
+                       :title => 'Approvato')
     end
   end
 

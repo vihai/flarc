@@ -53,11 +53,11 @@ $(function() {
     <table>
       <tr>
         <th><label for="username">e-Mail</label></th>
-        <td><input type="text" name="username" id="username"></td>
+        <td><input type="text" name="username" id="username" size="35"></td>
       </tr>
       <tr>
         <th><label for="password">Password</label></th>
-        <td><input type="password" name="password" id="password"></td>
+        <td><input type="password" name="password" id="password" size="20"></td>
       </tr>
     </table>
     <input type="submit" name="login-dialog-submit" id="login-dialog-submit" style="display: none"  />
@@ -78,8 +78,8 @@ $(function() {
 
   $("#login-dialog").dialog({
     autoOpen: false,
-    width: 500,
-    height: 200,
+    width: 350,
+    height: 180,
     modal: true,
     buttons: {
       'Ok': function() {

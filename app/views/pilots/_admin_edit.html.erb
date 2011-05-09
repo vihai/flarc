@@ -1,0 +1,220 @@
+<div id="dialog-form" title="Edit pilot" style="display: none">
+  <form>
+    <fieldset class="ui-widget-content">
+      <label for="first_name">Nome</label>
+      <input type="text" name="first_name" id="first_name" /><br />
+
+      <label for="last_name">Cognome</label>
+      <input type="text" name="last_name" id="last_name" /><br />
+
+      <label for="club_id">Club</label>
+      <select name="club_id" id="club_id">
+        <% Club.order(:name).each do |club| %>
+          <option value="<%= club.id %>"><%= club.name %></option>
+        <% end %>
+      </select><br />
+
+      <label for="fai_card">Tessera FAI</label>
+      <input type="text" name="fai_card" id="fai_card" size="12" /><br />
+    </fieldset>
+
+    <fieldset id="csvva_fieldset" class="ui-widget-content">
+      <legend>
+        <input type="checkbox" name="csvva_member" value="null" id="csvva_member" />
+        <label for="csvva_member">CSVVA:</label>
+      </legend>
+      <input type="hidden" name="csvva_id" id="csvva_id" />
+      <div id="csvva_fieldset_contents" style="display: none">
+        <label for="csvva_pilot_level">Livello pilota</label>
+        <select id="csvva_pilot_level">
+          <option value="junior">Junior</option>
+          <option value="expert">Expert</option>
+          <option value="master">Master</option>
+          <option value="supermaster">SuperMaster</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset id="cid_fieldset" class="ui-widget-content">
+      <legend>
+        <div class="ui-checkbox">
+          <input type="checkbox" name="cid_member" value="null" id="cid_member" />
+          <label for="cid_member">CID:</label>
+        </div>
+      </legend>
+      <input type="hidden" name="cid_id" id="cid_id" />
+      <div id="cid_fieldset_contents" style="display: none">
+        <label for="cid_category">Categoria</label>
+        <select id="cid_category">
+          <option value="prom">Promozione</option>
+          <option value="naz">Nazionale</option>
+        </select>
+     </div>
+    </fieldset>
+  </form>
+</div>
+
+<div id="save_failed_dialog" title="Errore" style="display: none">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+  <div></div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(function() {
+  $("#dialog-form").dialog({
+    autoOpen: false,
+    height: 500,
+    width: 500,
+    modal: true,
+    open: function() {
+      $('#dialog-form').spinner({ position: 'center', hide: true });
+
+      $.ajax({
+        url: '/pilots/' + $('#dialog-form').data('resource_id'),
+        dataType: 'json',
+        data: {
+          view: 'edit',
+        },
+        success: function(resource) {
+          $('#dialog-form').data('resource', resource);
+
+          $('#first_name').val(resource.person.first_name);
+          $('#last_name').val(resource.person.last_name);
+          $('#club_id').val(resource.club_id);
+          $('#fai_card').val(resource.fai_card);
+
+          cships = {};
+          $.each(resource.championship_pilots, function(index, value) {
+            cships[value._type] = value;
+          });
+
+          csvva = cships['Championship::Pilot::Csvva2011'];
+          if (csvva) {
+            $('#csvva_fieldset_contents').show();
+            $('#csvva_id').val(csvva.id);
+            $('#csvva_member').prop('checked', true);
+            $('#csvva_pilot_level').val(csvva.csvva_pilot_level);
+          } else {
+            $('#csvva_fieldset_contents').hide();
+            $('#csvva_id').val('');
+            $('#csvva_member').prop('checked', false);
+          }
+
+          cid = cships['Championship::Pilot::Cid2011'];
+          if (cid) {
+            $('#cid_fieldset_contents').show();
+            $('#cid_id').val(cid.id);
+            $('#cid_member').prop('checked', true);
+            $('#cid_category').val(cid.cid_category);
+          } else {
+            $('#cid_fieldset_contents').hide();
+            $('#cid_id').val('');
+            $('#cid_member').prop('checked', false);
+          }
+
+          $('#dialog-form').spinner('remove');
+        },
+        error: function(resource) {
+          $('#dialog-form').spinner('remove');
+          alert('Errore lettura oggetto');
+        }
+      });
+    },
+    close: function() {
+    },
+    buttons: {
+      'Salva': function() {
+        $('.ui-dialog-buttonpane').spinner({ position: 'center', hide: true });
+
+        resource = {};
+        resource.club_id = $('#club_id').val();
+        resource.fai_card = $('#fai_card').val();
+
+        resource.championship_pilots_attributes = [];
+
+        cid = {}
+        if ($('#cid_member').prop('checked')) {
+          if ($('#cid_id').val())
+            cid.id = $('#cid_id').val();
+
+          cid._type = 'Championship::Pilot::Cid2011';
+          cid.championship_id = $('#dialog-form').data('cid_cship_id');
+          cid.cid_category = $('#cid_category').val();
+          resource.championship_pilots_attributes.push(cid);
+        } else if ($('#cid_id').val()) {
+          cid.id = $('#cid_id').val();
+          cid._destroy = true;
+          resource.championship_pilots_attributes.push(cid);
+        }
+
+        csvva = {}
+        if ($('#csvva_member').prop('checked')) {
+          if ($('#csvva_id').val())
+            csvva.id = $('#csvva_id').val();
+
+          csvva._type = 'Championship::Pilot::Csvva2011';
+          csvva.championship_id = $('#dialog-form').data('csvva_cship_id');
+          csvva.csvva_pilot_level  = $('#csvva_pilot_level').val();
+          resource.championship_pilots_attributes.push(csvva);
+        } else if ($('#csvva_id').val()) {
+          csvva.id = $('#csvva_id').val();
+          csvva._destroy = true;
+          resource.championship_pilots_attributes.push(csvva);
+        }
+
+        $.ajax({
+          url: '/pilots/' + $('#dialog-form').data('resource_id'),
+          dataType: 'json',
+          type: 'PUT',
+          contentType: 'application/json; charset=utf-8',
+          data: JSON.stringify(resource),
+          success: function(data) {
+            window.location.reload();
+          },
+          error: function(data) {
+            $('.ui-dialog-buttonpane').spinner('remove');
+            var ex = $.parseJSON(data.responseText);
+            var msg = '';
+
+            $.each(ex.per_field_msgs, function(k, v) {
+               msg += '<li>Il campo <strong>' + k + '</strong> ' + v + '</li>';
+            });
+
+            $('#save_failed_dialog div:first').attr('title', ex.short_msg);
+            $('#save_failed_dialog div:first').html('<ul>' + msg + '</ul>');
+            $('#save_failed_dialog').dialog('open');
+          }
+        });
+      },
+      'Annulla': function() {
+        $(this).dialog('close');
+      }
+    },
+  });
+
+  $('#cid_member').change(function(e) {
+    $('#cid_fieldset_contents').toggle($(this).prop('checked'));
+  });
+
+  $('#csvva_member').change(function(e) {
+    $('#csvva_fieldset_contents').toggle($(this).prop('checked'));
+  });
+
+  $('#dialog-form').data('resource_id', <%= @target.id %>);
+  $('#dialog-form').data('cid_cship_id', <%= Championship.find_by_symbol(:cid_2011).id %>);
+  $('#dialog-form').data('csvva_cship_id', <%= Championship.find_by_symbol(:csvva_2011).id %>);
+
+  $('#save_failed_dialog').dialog({
+    autoOpen: false,
+    height: 300,
+    width: 500,
+    modal: true,
+    buttons: { 'Ok': function() { $(this).dialog('close'); } },
+  });
+
+});
+
+//]]>
+</script>

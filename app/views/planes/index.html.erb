@@ -1,14 +1,4 @@
-<div id="list_div">
-
-<% if authenticated_admin? %>
-  <div class="edit_box">
-  <%= link_to image_tag(
-         "action_new.png", :alt => "New..."),
-         new_plane_path, :method => :get,
-         :remote => true %>
-  </div>
-<% end %>
-
+<div class="body_contents">
 <% if !@targets.empty? then %>
   <table class="standard planes">
     <caption>Alianti</caption>
@@ -25,4 +15,3 @@
   </table>
 <% end %>
 </div>
-<div id="edit_form_div" style="display: none"></div>
