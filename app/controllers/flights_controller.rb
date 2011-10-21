@@ -112,8 +112,8 @@ class FlightsController < RestController
         @flight = Flight.new
         @flight.update_from_igcfile(igc_file, igc_tmp_file.original_filename)
         @flight.attributes = {
-          :pilot_id => fres[:pilot_id],
-          :plane_id => fres[:plane_id],
+          :pilot => Pilot.find(fres[:pilot_id]),
+          :plane => Plane.find(fres[:plane_id]),
           :plane_type_configuration_id => fres[:plane_type_configuration_id],
           :private => false,
           :notes_public => fres[:notes_public]
@@ -130,7 +130,9 @@ class FlightsController < RestController
           case cf[:_type]
           when 'Championship::Flight::Cid2011'
             cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2011)).first
-            if cp.cid_category.to_sym == :prom
+            if !cp.cid_category
+              ranking = nil
+            elsif cp.cid_category.to_sym == :prom
               ranking = :prom
             else
               ranking = cf[:cid_ranking].to_sym

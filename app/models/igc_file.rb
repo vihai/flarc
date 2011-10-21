@@ -87,6 +87,12 @@ class IgcFile < File
     end
   end
 
+  def self.open(name, mode = nil, opts = nil)
+    opts ||= {}
+    mode ||= 'r'
+    super name, mode, { :external_encoding => Encoding::ISO_8859_15, :internal_encoding => Encoding::UTF_8 }.merge(opts)
+  end
+
   def read_contents(options = {})
     sequence = 0
     prev1 = prev2 = prev3 = nil

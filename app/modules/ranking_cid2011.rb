@@ -24,10 +24,14 @@ class RankingCid2011 < Ranking
       results[cf.cid_ranking.to_sym][pilot.id][:total_points] ||= 0
       results[cf.cid_ranking.to_sym][pilot.id][:total_points] += cf.points || 0
 
-      results[cf.cid_ranking.to_sym][pilot.id][:flights] ||= Array.new
-      fl_data = OpenStruct.new(flight.attributes)
-      fl_data.points = cf.points
-      results[cf.cid_ranking.to_sym][pilot.id][:flights] << fl_data
+      results[cf.cid_ranking.to_sym][pilot.id][:flights] ||= []
+      results[cf.cid_ranking.to_sym][pilot.id][:flights] <<
+        OpenStruct.new(:id => flight.id,
+                       :pilot_id => flight.pilot_id,
+                       :plane_id => flight.plane_id,
+                       :private => flight.private,
+                       :points => cf.points,
+                       :status => cf.status)
     end
 
     # Pass 2: Compute points

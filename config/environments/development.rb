@@ -22,6 +22,14 @@ Flarc::Application.configure do
 
   config.fb_api_key = 'da3f8d09387745455f27e2851d19d0ec'
   config.fb_secret_key = '28ce347b359a77f891ad66ffe2780ac8'
+
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+      rescue LoadError
+    end
+  end
 end
 
 EXPIRES=false

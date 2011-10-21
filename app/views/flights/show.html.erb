@@ -110,14 +110,18 @@ $(document).ready(function() {
 
 <% if authenticated_admin? %>
   <%= render :partial => 'admin_edit' %>
-<% elsif authenticated? && @target.pilot_id == asgard_session.auth_person.pilot.id %>
+  <% edit_box_enabled = true %>
+<% elsif authenticated? && @target.pilot_id == auth_person.pilot.id %>
   <%= render :partial => 'user_edit' %>
+  <% edit_box_enabled = true %>
+<% else %>
+  <% edit_box_enabled = false %>
 <% end %>
 
-<% if authenticated_admin? %>
+<% if edit_box_enabled %>
   <div class="edit_box">
   <%= link_to_function image_tag('action_edit.png', :alt => 'Edit...'),
-            'jQuery("#dialog-form").dialog("open")' %>
+            'jQuery("#edit_flight_dialog").dialog("open")' %>
 
   <%=
 # link_to image_tag('action_delete.png', :alt => 'Delete...'),

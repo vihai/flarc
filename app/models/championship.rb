@@ -118,10 +118,9 @@ class Championship < Ygg::PublicModel
       validates_numericality_of :distance
 
       def handicap
-        return (self.flight.plane_type_configuration ?
-                  self.flight.plane_type_configuration.handicap :
-                  self.flight.plane.plane_type.handicap) ||
-                self.flight.tmp_fca
+        return self.flight.plane_type_configuration ?
+                 self.flight.plane_type_configuration.handicap :
+                 self.flight.plane.plane_type.handicap
       end
 
       def points
@@ -138,10 +137,9 @@ class Championship < Ygg::PublicModel
       validates_numericality_of :distance
 
       def handicap
-        return (self.flight.plane_type_configuration ?
-                  self.flight.plane_type_configuration.handicap :
-                  self.flight.plane.plane_type.handicap) ||
-                self.flight.tmp_fca
+        return self.flight.plane_type_configuration ?
+                 self.flight.plane_type_configuration.handicap :
+                 self.flight.plane.plane_type.handicap
       end
 
       def points
@@ -158,10 +156,9 @@ class Championship < Ygg::PublicModel
       validates_numericality_of :distance
 
       def handicap
-        return (self.flight.plane_type_configuration ?
-                  self.flight.plane_type_configuration.handicap :
-                  self.flight.plane.plane_type.handicap) ||
-                self.flight.tmp_fca
+        return self.flight.plane_type_configuration ?
+                 self.flight.plane_type_configuration.handicap :
+                 self.flight.plane.plane_type.handicap
       end
 
       def points

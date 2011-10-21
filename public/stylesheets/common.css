@@ -225,6 +225,7 @@ table.ranking > caption > span.generated_at
 
 table.ranking { }
 table.ranking > tbody > tr > td.number { text-align: right; }
+table.ranking > tbody > tr > td.pending a { color: #eef; }
 
 
 table.cir_spd_ranking > tbody > tr > td

@@ -8,11 +8,6 @@
     </tr>
     <% for x in @targets do %>
     <tr>
-<% if authenticated_admin? %>
-      <td class="id">
-        <%= x.person.id %>
-      </td>
-<% end %>
       <td class="name">
         <%= link_to(x.person.name, x) %>
       </td>

@@ -24,10 +24,14 @@ class RankingCsvva2011 < Ranking
       r[pilot.id][:total_points] ||= 0
       r[pilot.id][:total_points] += cf.points || 0
 
-      r[pilot.id][:flights] ||= Array.new
-      fl_data = OpenStruct.new(flight.attributes)
-      fl_data.points = cf.points
-      r[pilot.id][:flights] << fl_data
+      r[pilot.id][:flights] ||= []
+      r[pilot.id][:flights] <<
+        OpenStruct.new(:id => flight.id,
+                       :pilot_id => flight.pilot_id,
+                       :plane_id => flight.plane_id,
+                       :private => flight.private,
+                       :points => cf.points,
+                       :status => cf.status)
     end
 
     # Pass 2: Compute points

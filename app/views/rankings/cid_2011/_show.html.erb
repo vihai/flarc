@@ -43,10 +43,12 @@
       </td>
       <td class="points"><%= fmt_points(r.value) %></td>
       <% for i in 0..2 do %>
-        <td class="points small">
-           <% flight = r.data[:flights_best][i] %>
-           <%= link_to(fmt_points(flight.points), flight_path(flight.id)) if flight %>
+        <% flight = r.data[:flights_best][i] %>
+        <% if flight %>
+        <td class="points small <%=flight.status %>">
+           <%= link_to(fmt_points(flight.points), flight_path(flight.id)) %>
         </td>
+        <% end %>
       <% end %>
     </tr>
     <% if limit && cnt >= limit then %>

@@ -1,7 +1,7 @@
 # Edit this Gemfile to bundle your application's dependencies.
 source 'http://gemcutter.org'
 
-gem 'rails', '>= 3.0.5'
+gem 'rails', '~> 3.0.5'
 
 ## Bundle edge rails:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -27,7 +27,7 @@ gem 'pg'
 gem 'closure-compiler'
 gem 'yui-compressor'
 gem 'jammit'
-gem 'wirble'
+gem 'pry'
 gem 'thin'
 gem 'ym4r'
 gem 'scruffy'

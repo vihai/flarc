@@ -1,4 +1,4 @@
-<div id="dialog-form" title="Edit flight" style="display: none">
+<div id="edit_flight_dialog" title="Edit flight" style="display: none">
   <form class="ui-widget">
   <div style="position: absolute; left: 0px; width: 350px">
     <fieldset class="ui-widget-content">
@@ -305,28 +305,28 @@ $(function() {
         .appendTo(ul);
   };
 
-  $("#dialog-form").dialog({
+  $("#edit_flight_dialog").dialog({
     autoOpen: false,
     height: 400,
     width: 800,
     modal: true,
     open: function() {
-      $('#dialog-form').spinner({ position: 'center', hide: true });
+      $('#edit_flight_dialog').spinner({ position: 'center', hide: true });
 
       $.ajax({
-        url: '/flights/' + $('#dialog-form').data('resource_id'),
+        url: '/flights/' + $('#edit_flight_dialog').data('resource_id'),
         dataType: 'json',
         data: {
           view: 'edit',
         },
         success: function(resource) {
-          $('#dialog-form').data('resource', resource);
+          $('#edit_flight_dialog').data('resource', resource);
 
           pilot_changed(resource.pilot);
           plane_changed(resource.plane);
 
+          $('#plane_type_configuration_id').val(resource.plane_type_configuration_id);
           $('#notes_public').val(resource.notes_public);
-          $('#notes_private').val(resource.notes_private);
 
           cships = {};
 
@@ -334,24 +334,31 @@ $(function() {
             cships[value._type] = value;
           });
 
-          $('input:radio[name=csvva_status]').removeAttr('checked');
           csvva = cships['Championship::Flight::Csvva2011'];
           if (csvva) {
+            if (csvva.status == 'approved') {
+              $('#csvva_fieldset_contents input').prop('disabled', true);
+            }
+
             $('#csvva_fieldset_contents').show();
             $('#csvva_id').val(csvva.id);
-            $('input:radio[name=csvva_status]').filter('[value=' + csvva.status + ']').prop('checked', 'checked').button('refresh');
+            $('#csvva_member').prop('checked', true).button('refresh');
             $('#csvva_distance').val(csvva.distance / 1000);
           } else {
             $('#csvva_fieldset_contents').hide();
             $('#csvva_id').val('');
-            $('input:radio[name=csvva_status]').filter('[value=null]').prop('checked', 'checked').button('refresh');
+            $('#csvva_member').prop('checked', false).button('refresh');
           }
 
           cid = cships['Championship::Flight::Cid2011'];
           if (cid) {
+            if (cid.status == 'approved') {
+              $('#cid_fieldset_contents input').prop('disabled', true);
+            }
+
             $('#cid_fieldset_contents').show();
             $('#cid_id').val(cid.id);
-            $('input:radio[name=cid_status]').filter('[value=' + cid.status + ']').prop('checked', 'checked').button('refresh');
+            $('#cid_member').prop('checked', true).button('refresh');
             $('#cid_distance').val(cid.distance / 1000);
             $('#cid_ranking').val(cid.cid_ranking);
             $('#cid_task_eval').val(cid.data.task_eval);
@@ -359,15 +366,15 @@ $(function() {
           } else {
             $('#cid_fieldset_contents').hide();
             $('#cid_id').val('');
-            $('input:radio[name=cid_status]').filter('[value=null]').prop('checked', 'checked').button('refresh');
+            $('#cid_member').prop('checked', false).button('refresh');
           }
 
           update_cid_calcs();
 
-          $('#dialog-form').spinner('remove');
+          $('#edit_flight_dialog').spinner('remove');
         },
         error: function(resource) {
-          $('#dialog-form').spinner('remove');
+          $('#edit_flight_dialog').spinner('remove');
           alert('Errore lettura oggetto');
         }
       });
@@ -379,58 +386,56 @@ $(function() {
 
         $('.ui-dialog-buttonpane').spinner({ position: 'center', hide: true });
 
-//        resource = $('#dialog-form').data('resource');
+//        resource = $('#edit_flight_dialog').data('resource');
         resource = {};
         resource.plane_id = $('#plane_id').val();
-        resource.pilot_id = $('#pilot_id').val();
 
         resource.notes_public = $('#notes_public').val();
-        resource.notes_private = $('#notes_private').val();
 
         resource.plane_type_configuration_id = $('#plane_type_configuration_id').val();
 
         resource.championship_flights_attributes = [];
 
-        cid = {};
-        status = $('input:radio[name=cid_status]:checked').val();
-        if (status && status != 'null') {
+        if ($('#cid_member').prop('checked')) {
+          var cid = {};
           if ($('#cid_id').val())
             cid.id = $('#cid_id').val();
 
           cid._type = 'Championship::Flight::Cid2011';
-          cid.championship_id = $('#dialog-form').data('cid_cship_id');
-          cid.status = status;
+          cid.championship_id = $('#edit_flight_dialog').data('cid_cship_id');
+          cid.status = 'pending';
           cid.distance  = parseFloat($('#cid_distance').val().replace(/,/, '.')) * 1000;
           cid.cid_ranking = $('#cid_ranking').val();
           cid.task_eval = $('#cid_task_eval').val();
           cid.task_type = $('#cid_task_type').val();
           resource.championship_flights_attributes.push(cid);
         } else if ($('#cid_id').val()) {
+          var cid = {};
           cid.id = $('#cid_id').val();
           cid._destroy = true;
           resource.championship_flights_attributes.push(cid);
         }
 
-        csvva = {};
-        status = $('input:radio[name=csvva_status]:checked').val();
-        if (status && status != 'null') {
+        if ($('#csvva_member').prop('checked')) {
+          var csvva = {};
+
           if ($('#csvva_id').val())
             csvva.id = $('#csvva_id').val();
 
           csvva._type = 'Championship::Flight::Csvva2011';
-          csvva.championship_id = $('#dialog-form').data('csvva_cship_id');
-          csvva.status = status;
+          csvva.championship_id = $('#edit_flight_dialog').data('csvva_cship_id');
+          csvva.status = 'pending';
           csvva.distance  = parseFloat($('#csvva_distance').val().replace(/,/, '.')) * 1000;
           resource.championship_flights_attributes.push(csvva);
         } else if ($('#csvva_id').val()) {
+          var csvva = {};
           csvva.id = $('#csvva_id').val();
           csvva._destroy = true;
           resource.championship_flights_attributes.push(csvva);
         }
 
-
         $.ajax({
-          url: '/flights/' + $('#dialog-form').data('resource_id'),
+          url: '/flights/' + $('#edit_flight_dialog').data('resource_id'),
           dataType: 'json',
           type: 'PUT',
           contentType: 'application/json; charset=utf-8',
@@ -467,9 +472,9 @@ $(function() {
     },
   });
 
-  $('#dialog-form').data('resource_id', <%= @target.id %>);
-  $('#dialog-form').data('cid_cship_id', <%= Championship.find_by_symbol(:cid_2011).id %>);
-  $('#dialog-form').data('csvva_cship_id', <%= Championship.find_by_symbol(:csvva_2011).id %>);
+  $('#edit_flight_dialog').data('resource_id', <%= @target.id %>);
+  $('#edit_flight_dialog').data('cid_cship_id', <%= Championship.find_by_symbol(:cid_2011).id %>);
+  $('#edit_flight_dialog').data('csvva_cship_id', <%= Championship.find_by_symbol(:csvva_2011).id %>);
 
   $('#save_failed_dialog').dialog({
     autoOpen: false,

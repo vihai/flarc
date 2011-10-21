@@ -54,6 +54,14 @@ Flarc::Application.configure do
     :email_prefix => "[Flarc] ",
     :sender_address => %{"Flarc" <daniele@orlandi.com>},
     :exception_recipients => %w{daniele@orlandi.com}
+
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+      rescue LoadError
+    end
+  end
 end
 
 
