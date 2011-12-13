@@ -43,7 +43,7 @@ class RankingCirSpeed < Ranking
           next if !results_ranking[flight.id]
 
           standing = ranking.standings.find_by_flight_id(flight.id) ||
-                      RankingStanding.new(:ranking => ranking, :flight => flight)
+                      Ranking::Standing.new(:ranking => ranking, :flight => flight)
           standing.value = (results_ranking[flight.id][:speed] / results_ranking[:max_speed]) * 1000
           standing.pilot = flight.pilot # Pilot may change due to corrections in the DB
 

@@ -52,7 +52,7 @@ class RankingCid2011 < Ranking
       ranking_results.each do |pilot_id,pilot|
 
         standing = ranking.standings.find_by_pilot_id(pilot_id) ||
-                    RankingStanding.new(:ranking => ranking,
+                    Ranking::Standing.new(:ranking => ranking,
                                         :pilot_id => pilot_id)
 
         standing.data = { :flights_best => pilot[:flights_best] }

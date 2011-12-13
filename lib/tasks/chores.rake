@@ -9,6 +9,7 @@ namespace :chores do
 #      RankingCirSpeed.compute
       RankingCsvva2011.compute
       RankingCid2011.compute
+      RankingCid2011Club.compute
     end
   end
 
@@ -18,8 +19,20 @@ namespace :chores do
       Ranking.transaction do
         Ranking.all.each do |ranking|
           ranking.standings.each do |standing|
-            histentry = RankingHistoryEntry.new(
-                          :ranking_standing => standing,
+            histentry = Ranking::Standing::HistoryEntry.new(
+                          :standing => standing,
+                          :snapshot_time => Time.now,
+                          :position => standing.position,
+                          :value => standing.value,
+                          :data => standing.data)
+
+            standing.history_entries << histentry
+            standing.save!
+          end
+
+          ranking.club_standings.each do |standing|
+            histentry = Ranking::ClubStanding::HistoryEntry.new(
+                          :club_standing => standing,
                           :snapshot_time => Time.now,
                           :position => standing.position,
                           :value => standing.value,
