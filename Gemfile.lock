@@ -5,6 +5,15 @@ GIT
     exception_notification (1.0.0)
 
 GIT
+  remote: https://github.com/pry/pry
+  revision: 8721e71ff0308988865ef8bc9a01314b13f62e8d
+  specs:
+    pry (0.9.8pre3)
+      coderay (~> 1.0.5)
+      method_source (~> 0.7)
+      slop (>= 2.4.1, < 3)
+
+GIT
   remote: https://github.com/vihai/assert2.git
   revision: 940d4c7deed4212eb4b1fd3d967746c4875ebf60
   specs:
@@ -34,6 +43,11 @@ PATH
   specs:
     core_models (1.0.0)
       yggdra_plugins
+
+PATH
+  remote: ../yggdra/plugins/hel
+  specs:
+    hel (1.0.0)
 
 PATH
   remote: ../yggdra/plugins/yggdra_plugins
@@ -72,7 +86,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.0.rc1)
     builder (3.0.0)
-    coderay (0.9.8)
+    coderay (1.0.5)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     factory_girl (2.3.2)
@@ -82,6 +96,9 @@ GEM
       railties (>= 3.0.0)
     ffi (1.0.11)
     geokit (1.6.0)
+    geokit-rails3 (0.1.5)
+      geokit (~> 1.5)
+      rails (~> 3.0)
     hike (1.2.1)
     httpclient (2.2.4)
     i18n (0.6.0)
@@ -91,17 +108,17 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    method_source (0.6.7)
-      ruby_parser (>= 2.3.1)
+    method_source (0.7.0)
     mime-types (1.17.2)
     multi_json (1.0.4)
     pg (0.12.2)
     polyglot (0.3.3)
-    pry (0.9.7.4)
-      coderay (~> 0.9.8)
-      method_source (~> 0.6.7)
-      ruby_parser (>= 2.3.1)
-      slop (~> 2.1.0)
+    pry-doc (0.3.0)
+      pry (>= 0.9.0)
+      yard (>= 0.6.4)
+    pry-rails (0.1.0)
+      pry
+      pry-doc
     rack (1.4.0)
     rack-cache (1.1)
       rack (>= 0.4)
@@ -141,11 +158,8 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.8.0)
-    ruby_parser (2.3.1)
-      sexp_processor (~> 3.0)
     scruffy (0.2.6)
-    sexp_processor (3.0.10)
-    slop (2.1.0)
+    slop (2.4.2)
     sprockets (2.1.2)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -161,6 +175,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
     uuidtools (2.1.2)
+    yard (0.7.4)
     ym4r (0.6.1)
 
 PLATFORMS
@@ -173,9 +188,12 @@ DEPENDENCIES
   exception_notification!
   factory_girl_rails (>= 1.1.beta1)
   geokit
+  geokit-rails3
+  hel!
   httpclient
   pg
-  pry
+  pry!
+  pry-rails
   rails (~> 3.2.0.rc2)
   rspec (>= 2.0.0)
   rspec-rails (>= 2.0.0)
