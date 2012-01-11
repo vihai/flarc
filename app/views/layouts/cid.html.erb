@@ -3,8 +3,8 @@
 <head lang="en">
   <title>Campionato Italiano di Distanza 2011</title>
   <meta charset="UTF-8" />
-  <%= stylesheet_link_tag :cid, :media => 'all' %>
-  <%= javascript_include_tag :cid %>
+  <%= stylesheet_link_tag 'cid/main.css', :media => 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -51,13 +51,13 @@
     </ul>
   </li>
   <li>
-    <% if !asgard_session || !asgard_session.authenticated? %>
+    <% if !hel_session || !hel_session.authenticated? %>
       <div class="menulogin">
         <%= link_to('Registrati', registration_path) %><br />
         <%= link_to_function 'Login', "jQuery('#login-dialog').dialog('open')" %><br />
       </div>
     <% else %>
-      <div class="userdata userdata_<%= asgard_session.authenticated_admin? ? 'admin' : (asgard_session.authenticated? ? 'authenticated' : '') %>">
+      <div class="userdata userdata_<%= hel_session.authenticated_admin? ? 'admin' : (hel_session.authenticated? ? 'authenticated' : '') %>">
 
         <div>
           <strong><%= auth_person.name %></strong>
@@ -73,10 +73,10 @@
         <li><%= link_to 'I tuoi voli', flights_path(:pilot_id => auth_person.pilot.id) %></li>
       <% end %>
 
-      <% if asgard_session && asgard_session.authenticated_admin? %>
+      <% if hel_session && hel_session.authenticated_admin? %>
         <li><%= link_to 'Amministrazione', static_path('administration_home') %></li>
       <% end %>
-        <li><%= link_to 'Logout', ygg_asgard_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %></li>
+        <li><%= link_to 'Logout', ygg_hel_session_logout_path, :method => 'post', :remote => true, :id => 'logout_link' %></li>
       </ul>
       </div>
     <% end %>

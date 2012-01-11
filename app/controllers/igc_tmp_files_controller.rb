@@ -34,7 +34,7 @@ class IgcTmpFilesController < ApplicationController
           return
         end
 
-        if asgard_session.authenticated_admin? && igcf.pilot_name
+        if hel_session.authenticated_admin? && igcf.pilot_name
           sc = ActiveRecord::Base.send(:sanitize_sql_array,
                  ['similarity(LOWER(first_name || \' \' || last_name), ?) DESC',
                   igcf.pilot_name.downcase])

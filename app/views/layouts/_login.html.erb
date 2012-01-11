@@ -86,7 +86,7 @@ $(function() {
         $('.ui-dialog-buttonpane').spinner({ position: 'center', hide: true });
 
         $.ajax({
-          url: '<%= ygg_asgard_session_authenticate_by_fqda_and_password_path %>',
+          url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
           dataType: 'json',
           type: 'POST',
           contentType: 'application/json; charset=utf-8',

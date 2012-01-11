@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
 
-  helper_method :facebook_uid, :asgard_session, :auth_method, :auth_person
+  helper_method :facebook_uid, :hel_session, :auth_method, :auth_person
 
   before_filter :load_session
 
@@ -24,30 +24,30 @@ class ApplicationController < ActionController::Base
 
 #  protect_from_forgery
   
-  attr_accessor :asgard_session
+  attr_accessor :hel_session
 
   def auth_method
-    asgard_session ? asgard_session.auth_method : nil
+    hel_session ? hel_session.auth_method : nil
   end
 
   def auth_person
-    asgard_session && asgard_session.authenticated? ? asgard_session.auth_identity.person : nil
+    hel_session && hel_session.authenticated? ? hel_session.auth_identity.person : nil
   end
 
   def load_session
-    @asgard_session = Ygg::Core::HttpSession.find_by_uuid(request.headers['X-Ygg-Session-Id'])
-    @asgard_session ||= Ygg::Core::HttpSession.find_by_uuid(request.cookies['X-Ygg-Session-Id'])
+    @hel_session = Ygg::Core::HttpSession.find_by_uuid(request.headers['X-Ygg-Session-Id'])
+    @hel_session ||= Ygg::Core::HttpSession.find_by_uuid(request.cookies['X-Ygg-Session-Id'])
 
-    if @asgard_session
+    if @hel_session
       fb_cookie = cookies["fbs_#{Flarc::Application.config.fb_api_key}"]
       @facebook_session = fb_cookie ? CGI.parse(fb_cookie).symbolize_keys! : nil
 
-      if @facebook_session && !@asgard_session.authenticated?
+      if @facebook_session && !@hel_session.authenticated?
         if person = Person.find_by_fb_uid(facebook_uid)
-          @asgard_session.authenticated!(:facebook, person, nil)
+          @hel_session.authenticated!(:facebook, person, nil)
         end
-      elsif @asgard_session.authenticated? && @asgard_session.auth_method == :facebook && !@facebook_session
-        @asgard_session.close(:not_authenticated_anymore)
+      elsif @hel_session.authenticated? && @hel_session.auth_method == :facebook && !@facebook_session
+        @hel_session.close(:not_authenticated_anymore)
       end
     end
       

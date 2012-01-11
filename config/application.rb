@@ -13,6 +13,8 @@ LAYOUTS = {
   'campionato.csvva.it' => 'csvva',
   'csvva.orlandi.com' => 'csvva',
   'csvva-dev.orlandi.com' => 'csvva',
+  'flarc.orlandi.com' => 'csvva',
+  'flarc-dev.orlandi.com' => 'csvva',
   'www.cidvv.it' => 'cid',
   'cid.orlandi.com' => 'cid',
   'cid-dev.orlandi.com' => 'cid',
@@ -71,5 +73,8 @@ module Flarc
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.assets.paths << File.join(Rails.root, 'app', 'assets', 'js')
+    config.assets.paths << File.join(Rails.root, 'app', 'assets', 'css')
   end
 end

@@ -5,7 +5,7 @@ module Csvva
 class RegistrationController < ApplicationController
 
   def wizard
-    if !asgard_session || !asgard_session.authenticated?
+    if !hel_session || !hel_session.authenticated?
       render :template => "csvva/registration/wizard/permanent_error"
       return
     end

@@ -1,8 +1,12 @@
+/*
+*= require ../common
+*= require_self
+*/
 
 div#header
 {
  height: 74px;
- background: #3695cd url(../../images/csvva/header.jpg) no-repeat left top;
+ background: #3695cd image-url('csvva/header.jpg') no-repeat left top;
 }
 
 div#header > div#text
@@ -26,7 +30,7 @@ div#menu
  position: absolute;
  width: 163px;
  top: 74px;
- background: #97cce9 url(../../images/csvva/menu_sky.jpg) no-repeat left top;
+ background: #97cce9 image-url('csvva/menu_sky.jpg') no-repeat left top;
  text-shadow: black 0.1em 0.1em 0.2em;
  font-size: 90%;
 }

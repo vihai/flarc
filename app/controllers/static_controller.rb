@@ -8,7 +8,7 @@ class StaticController < ApplicationController
 
   def show
     begin
-      render :action => "static/#{params[:path]}"
+      render :action => params[:path]
     rescue ActionView::MissingTemplate
       raise ActionController::UnknownAction
     end

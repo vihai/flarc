@@ -120,7 +120,7 @@ class FlightsController < RestController
         }
 
         # Override pilot if not an admin
-        if !asgard_session.authenticated_admin?
+        if !hel_session.authenticated_admin?
           @flight.pilot = auth_person.pilot
         end
 

@@ -116,15 +116,15 @@ class RegistrationController < ApplicationController
           end
         end
 
-        @asgard_session ||= Ygg::Core::HttpSession.create(request.env)
-        @asgard_session.authenticated!(Ygg::Core::AuthenticationToken.new(
+        @hel_session ||= Ygg::Core::HttpSession.create(request.env)
+        @hel_session.authenticated!(Ygg::Core::AuthenticationToken.new(
                  :identity => identity,
                  :confidence => :medium,
                  :credential => credential,
                  :method => :fqda_and_password))
 
-        headers['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
-        cookies['X-Ygg-Session-Id'] = @asgard_session.uuid.to_s
+        headers['X-Ygg-Session-Id'] = @hel_session.uuid.to_s
+        cookies['X-Ygg-Session-Id'] = @hel_session.uuid.to_s
 
         if current_site == :cid
           redirect_to cid_registration_path

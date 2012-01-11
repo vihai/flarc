@@ -1,11 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   def authenticated?
-    asgard_session && asgard_session.authenticated?
+    hel_session && hel_session.authenticated?
   end
 
   def authenticated_admin?
-    asgard_session && asgard_session.authenticated_admin?
+    hel_session && hel_session.authenticated_admin?
   end
 
   def fmt_points(pts)
