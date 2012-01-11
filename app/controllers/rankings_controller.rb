@@ -5,10 +5,8 @@ class RankingsController < ApplicationController
   def index
 #    expires_in 1.hour, :public => true
 
-    @rankings = Ranking.find(:all, :conditions => "official",
-                                          :order => "priority ASC, name ASC")
-    @rankings_unofficial = Ranking.find(:all, :conditions => "NOT official",
-                                          :order => "priority ASC, name ASC")
+    @rankings = Ranking.where(:official => true).order('priority ASC, name ASC').all
+    @rankings_unofficial = Ranking.where(:official => false).order('priority ASC, name ASC').all
   end
 
   def show

@@ -1,4 +1,6 @@
 class Flight < Ygg::PublicModel
+  set_table_name 'flights'
+
   belongs_to :pilot,
              :class_name => 'Pilot'
   validates_presence_of :pilot

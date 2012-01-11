@@ -1,4 +1,6 @@
 class PlaneType < Ygg::BasicModel
+  set_table_name 'plane_types'
+
   has_many :planes
 
   has_many :configurations,

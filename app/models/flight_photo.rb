@@ -1,4 +1,6 @@
 class FlightPhoto < Ygg::BasicModel
+  set_table_name 'flight_photos'
+
   belongs_to :flight
 
   def flickr_url(size = 's')

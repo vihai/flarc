@@ -1,4 +1,6 @@
 class Plane < Ygg::PublicModel
+  set_table_name 'planes'
+
   belongs_to :plane_type,
              :class_name => 'PlaneType'
 

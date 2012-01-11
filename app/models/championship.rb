@@ -1,4 +1,6 @@
 class Championship < Ygg::PublicModel
+  set_table_name 'championships'
+
   has_many :championship_pilots,
            :class_name => '::Championship::Pilot'
   has_many :pilots, :through => :championship_pilots

@@ -1,5 +1,4 @@
 class IgcFile < File
-
   class InvalidFileFormat < StandardError
   end
 

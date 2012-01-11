@@ -1,4 +1,5 @@
 class IgcTmpFile < ActiveRecord::Base
+  set_table_name 'igc_tmp_files'
 
   belongs_to :pilot,
              :class_name => '::Pilot'

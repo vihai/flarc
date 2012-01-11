@@ -1,4 +1,6 @@
 class Ranking < Ygg::PublicModel
+  set_table_name 'rankings'
+
   has_many :pilots,
            :through => :standings
 

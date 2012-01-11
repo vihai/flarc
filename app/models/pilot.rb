@@ -1,4 +1,6 @@
 class Pilot < Ygg::PublicModel
+  set_table_name 'pilots'
+
   belongs_to :person,
              :class_name => 'Ygg::Core::Person'
 

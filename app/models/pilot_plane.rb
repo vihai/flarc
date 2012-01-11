@@ -1,4 +1,6 @@
 class PilotPlane < Ygg::BasicModel
+  set_table_name 'pilot_planes'
+
   belongs_to :pilot,
              :class_name => 'Pilot'
 
