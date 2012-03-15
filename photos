@@ -1,0 +1,20 @@
+<td style="vertical-align: top">
+<div class="flight_photos_box">
+<% if !@target.photos.empty? %>
+  <% @target.photos.each do |photo| %>
+    <%= link_to image_tag(photo.flickr_url('s')), photo.flickr_url('-'),
+             :rel => 'lightbox[gallery]', :title => photo.caption, :rev => photo.url  %>
+  <% end %>
+  <br />
+<% end %>
+<% if auth_person && auth_person.pilot == @target.pilot %>
+  <% if @target.photos.empty? %>
+    <%=
+#link_to('Hai caricato qualche foto del volo su Flickr?', tag_photos_flight_url)
+ %>
+  <% else %>
+    <%= link_to('Modifica fotografie', tag_photos_flight_url) %>
+  <% end %>
+<% end %>
+</div>
+</td>
