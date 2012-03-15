@@ -1,21 +1,26 @@
-ActionController.add_renderer :json do |json, opts|
-  unless json.respond_to?(:to_str)
 
-    if self.class.include?(ActiveRest::Controller)
-      opts.merge! :view => self.rest_view
+require 'action_controller/metal/renderers'
+
+module ActionController::Renderers
+  add :json do |obj, options|
+    if self.class.include?(ActiveRest::Controller) && obj.respond_to?(:output)
+      options[:with_perms] = true if is_true?(params[:_with_perms])
+      json = obj.output(:rest, { :view => self.rest_view, :format => :json }.merge(options))
+
+    elsif self.class.include?(ActiveRest::Controller) && obj.respond_to?(:ar_serializable_hash)
+      options[:with_perms] = true if is_true?(params[:_with_perms])
+      json = ActiveSupport::JSON.encode(obj.ar_serializable_hash(
+               :rest, { :view => self.rest_view }.merge(options)))
+    else
+      json = obj.to_json(options) unless obj.kind_of?(String)
+      json = "#{options[:callback]}(#{json})" unless options[:callback].blank?
     end
 
-    json = ActiveSupport::JSON.encode(json, opts)
+    self.content_type ||= Mime::JSON
+    self.headers['X-Total-Resources-Count'] = options[:total].to_s if options[:total]
+    json
   end
-
-  json = "#{opts[:callback]}(#{json})" unless opts[:callback].blank?
-
-  self.content_type ||= Mime::JSON
-  self.headers['X-Total-Resources-Count'] = opts[:total].to_s if opts[:total]
-
-  json
 end
-
 
 class RestController < ApplicationController
 
@@ -23,13 +28,10 @@ class RestController < ApplicationController
 
   respond_to :html, :json, :xml
 
-  rest_transaction_handler :xact_handler
+  self.rest_transaction_handler = :xact_handler
 
   def xact_handler
-    Ygg::Core.transaction("Web interface operation", {
-                           :identity => hel_session.auth_identity,
-                           :http_session_id => hel_session.id
-                          }) do |transaction|
+    Ygg::Core.transaction("Web interface operation", :ctrl => self) do |transaction|
       yield
     end
   end
