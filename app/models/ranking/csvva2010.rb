@@ -1,6 +1,8 @@
-class RankingCsvva2010 < Ranking
+class Ranking
 
-  def RankingCsvva2010.compute
+class Csvva2010 < Ranking
+
+  def self.compute
 
     ActiveRecord::Base.transaction do
     # Pass 1: Obtain all flights and organize them by ranking
@@ -72,5 +74,7 @@ class RankingCsvva2010 < Ranking
 
     return nil
   end
+
+end
 
 end

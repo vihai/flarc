@@ -1,5 +1,6 @@
 class Ranking < Ygg::PublicModel
-  set_table_name 'rankings'
+  self.table_name = :rankings
+  self.inheritance_column = :sti_type
 
   has_many :pilots,
            :through => :standings
@@ -20,17 +21,18 @@ class Ranking < Ygg::PublicModel
            :order => 'value DESC, id ASC',
            :conditions => 'value IS NOT NULL'
 
-  belongs_to :championships
+  belongs_to :championship,
+             :class_name => 'Championship'
 
   class Group < Ygg::BasicModel
-    set_table_name 'ranking_groups'
+    self.table_name = :ranking_groups
 
     has_many :rankins,
              :class_name => 'Ranking'
   end
 
   class Member < Ygg::BasicModel
-    set_table_name 'ranking_members'
+    self.table_name = :ranking_members
 
     belongs_to :ranking,
                :class_name => 'Ranking'
@@ -45,7 +47,7 @@ class Ranking < Ygg::PublicModel
   end
 
   class Standing < Ygg::BasicModel
-    set_table_name 'ranking_standings'
+    self.table_name = :ranking_standings
 
     belongs_to :ranking,
                :class_name => 'Ranking'
@@ -62,7 +64,7 @@ class Ranking < Ygg::PublicModel
     serialize :data
 
     class HistoryEntry < Ygg::BasicModel
-      set_table_name 'ranking_standing_history_entries'
+      self.table_name = :ranking_standing_history_entries
 
       belongs_to :standing,
                  :class_name => 'Ranking::Standing'
@@ -72,7 +74,7 @@ class Ranking < Ygg::PublicModel
   end
 
   class ClubStanding < Ygg::BasicModel
-    set_table_name 'ranking_club_standings'
+    self.table_name = 'ranking_club_standings'
 
     belongs_to :ranking,
                :class_name => 'Ranking'
@@ -86,7 +88,7 @@ class Ranking < Ygg::PublicModel
     serialize :data
 
     class HistoryEntry < Ygg::BasicModel
-      set_table_name 'ranking_club_standing_history_entries'
+      self.table_name = 'ranking_club_standing_history_entries'
 
       belongs_to :club_standing,
                  :class_name => 'Ranking::ClubStanding'

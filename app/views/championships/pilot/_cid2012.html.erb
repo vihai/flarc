@@ -1,0 +1,11 @@
+<div class="cp">
+  <div class="logo">
+    <%= link_to image_tag('cid/logo_16.png', :class => 'logo'), cid2012.championship %><br />
+  </div>
+  <div class="container">
+    <div class="title"><%= cid2012.championship.name %></div>
+    <div class="body">
+      Categoria: <%= cid2012.cid_category == 'prom' ? 'Promozione' : 'Nazionale' %>
+    </div>
+  </div>
+</div>

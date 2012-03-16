@@ -1,6 +1,8 @@
-class RankingBestThree < Ranking
+class Ranking
 
-  def RankingBestThree.compute
+class BestThree < Ranking
+
+  def self.compute
     results = Hash.new()
 
     # Pass 1: Obtain all flights and organize them by ranking
@@ -73,5 +75,7 @@ class RankingBestThree < Ranking
 
     return nil
   end
+
+end
 
 end

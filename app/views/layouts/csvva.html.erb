@@ -46,7 +46,7 @@
       <li><%= link_to('Voli', calendar_flights_path(:year => Time.now.year, 'championships.symbol' => :csvva_2011)) %></li>
       <li><%= link_to('Piloti', pilots_path('championships.symbol' => 'csvva_2011',
                                             :sort => 'person.last_name,person.first_name')) %></li>
-      <li><%= link_to('Alianti', planes_path) %></li>
+      <li><%= link_to('Alianti', planes_path(:sort => 'registration')) %></li>
     </ul>
   </li>
   <li>

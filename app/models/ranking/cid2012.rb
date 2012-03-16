@@ -1,13 +1,15 @@
-class RankingCsvva2011 < Ranking
+class Ranking
 
-  def RankingCsvva2011.compute
+class Cid2012 < Ranking
+
+  def self.compute
 
     ActiveRecord::Base.transaction do
     # Pass 1: Obtain all flights and organize them by ranking
 
     results = {}
 
-    cship = Championship.find_by_symbol(:csvva_2011)
+    cship = Championship.find_by_symbol(:cid_2012)
 
     cship.championship_flights.each do |cf|
       next if !cf.points
@@ -16,16 +18,16 @@ class RankingCsvva2011 < Ranking
       pilot = flight.pilot
       championship_pilot = pilot.championship_pilots.find_by_championship_id(cship.id)
 
-      raise "Flight #{flight.id} Pilot '#{pilot.person.name}' not enrolled in championship" if !championship_pilot
+      raise "Pilot '#{pilot.person.name}' not enrolled in championship" if !championship_pilot
 
-      r = results[championship_pilot.csvva_pilot_level.to_sym] ||= {}
-      r[pilot.id] ||= {}
+      results[cf.cid_ranking.to_sym] ||= {}
+      results[cf.cid_ranking.to_sym][pilot.id] ||= {}
 
-      r[pilot.id][:total_points] ||= 0
-      r[pilot.id][:total_points] += cf.points || 0
+      results[cf.cid_ranking.to_sym][pilot.id][:total_points] ||= 0
+      results[cf.cid_ranking.to_sym][pilot.id][:total_points] += cf.points || 0
 
-      r[pilot.id][:flights] ||= []
-      r[pilot.id][:flights] <<
+      results[cf.cid_ranking.to_sym][pilot.id][:flights] ||= []
+      results[cf.cid_ranking.to_sym][pilot.id][:flights] <<
         OpenStruct.new(:id => flight.id,
                        :pilot_id => flight.pilot_id,
                        :plane_id => flight.plane_id,
@@ -35,17 +37,17 @@ class RankingCsvva2011 < Ranking
     end
 
     # Pass 2: Compute points
-    results.each do |ranking_sym,result|
-      result.each do |pilot_id,pilot|
+    results.each do |ranking_sym,ranking_results|
+      ranking_results.each do |pilot_id,pilot|
         pilot[:flights].sort! { |a,b| b.points <=> a.points }
-        pilot[:flights_best] = (pilot[:flights].sort { |a,b| b.points <=> b.points })[0..5]
+        pilot[:flights_best] = (pilot[:flights].sort { |a,b| b.points <=> b.points })[0..2]
       end
     end
 
     # Pass 3: Update standings
     results.each do |ranking_sym,ranking_results|
 
-      ranking = Ranking.find_by_symbol("csvva_#{ranking_sym}_2011")
+      ranking = Ranking.find_by_symbol("cid_2012_#{ranking_sym}")
       ranking.generated_at = Time.now
       ranking.save!
 
@@ -74,12 +76,13 @@ class RankingCsvva2011 < Ranking
         standing.position = pos;
         standing.save!
       end
-#      end
     end
 
     end #transaction
 
     return nil
   end
+
+end
 
 end

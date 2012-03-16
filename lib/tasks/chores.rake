@@ -5,11 +5,11 @@ namespace :chores do
     chore('Rankings') do
 #      RankingBestThree.compute
 #      RankingCsvva2010.compute
-      RankingTrofeo.compute
+#      RankingTrofeo.compute
 #      RankingCirSpeed.compute
-      RankingCsvva2011.compute
-      RankingCid2011.compute
-      RankingCid2011Club.compute
+#      RankingCsvva2011.compute
+      Ranking::Cid2012.compute
+      Ranking::Cid2012Club.compute
     end
   end
 

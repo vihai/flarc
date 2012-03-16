@@ -12,7 +12,7 @@
 </p>
 <% if !@photos.empty? %>
 <div class="tag_photos_form">
-  <% form_tag(:action => :do_tag_photos) do %>
+  <%= form_tag(:action => :do_tag_photos) do %>
   <p>
     Se la macchina fotografica ha l'orologio mal impostato, puoi correggerlo inserendo il
     numero di minuti qui:<br />

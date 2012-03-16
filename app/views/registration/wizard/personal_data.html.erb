@@ -1,5 +1,5 @@
 <div id="registration_div">
-<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+<%= form_tag '', { :class => 'standard', :method => :post } do |f| -%>
   <%= hidden_field_tag :state, @state.to_json %>
   <table class="form">
     <tr>
@@ -21,4 +21,4 @@
     </tr>
   </table>
 <% end -%>
-<div>
+</div>

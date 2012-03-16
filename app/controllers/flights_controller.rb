@@ -128,8 +128,8 @@ class FlightsController < RestController
           cf.symbolize_keys!
 
           case cf[:_type]
-          when 'Championship::Flight::Cid2011'
-            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2011)).first
+          when 'Championship::Flight::Cid2012'
+            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2012)).first
             if !cp.cid_category
               ranking = nil
             elsif cp.cid_category.to_sym == :prom
@@ -138,8 +138,8 @@ class FlightsController < RestController
               ranking = cf[:cid_ranking].to_sym
             end
 
-            @flight.championship_flights << (a=Championship::Flight::Cid2011.new(
-              :championship => Championship.find_by_symbol(:cid_2011),
+            @flight.championship_flights << (a=Championship::Flight::Cid2012.new(
+              :championship => Championship.find_by_symbol(:cid_2012),
               :flight => @flight, # Workaround for validations
               :status => :pending,
               :cid_ranking => ranking,
@@ -148,9 +148,9 @@ class FlightsController < RestController
               :task_type => cf[:task_type].to_sym,
               ))
 
-          when 'Championship::Flight::Csvva2011'
-            @flight.championship_flights << Championship::Flight::Csvva2011.new(
-              :championship => Championship.find_by_symbol(:csvva_2011),
+          when 'Championship::Flight::Csvva2012'
+            @flight.championship_flights << Championship::Flight::Csvva2012.new(
+              :championship => Championship.find_by_symbol(:csvva_2012),
               :flight => @flight, # Workaround for validations
               :status => :pending,
               :distance => cf[:distance],

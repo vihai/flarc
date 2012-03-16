@@ -16,7 +16,7 @@
 <p>
   Oppure crea un nuovo account:
 </p>
-<% form_tag '', { :class => 'standard', :method => :post } do |f| -%>
+<%= form_tag '', { :class => 'standard', :method => :post } do |f| -%>
   <table>
     <tr>
       <th><%= label_tag :first_name, 'Nome' %></th>
@@ -53,4 +53,4 @@
     </tr>
   </table>
 <% end -%>
-<div>
+</div>

@@ -18,7 +18,7 @@ gem 'geokit-rails3'
 
 gem 'exception_notification'
 
-gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
+#gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
 
 gem 'ynetaddr', '>= 1.0.0'
 gem 'vihai-password', '>= 1.2.0'
@@ -38,6 +38,7 @@ gem 'core_models', :path => '/opt/yggdra/plugins/core_models'
 gem 'core_hel', :path => '/opt/yggdra/plugins/core_hel'
 
 gem 'jquery-rails'
+gem 'less-rails-bootstrap', :git => 'git@github.com:wmhobbes/less-rails-bootstrap.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

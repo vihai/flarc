@@ -1,4 +1,6 @@
-class RankingTrofeo < Ranking
+class Ranking
+
+class Trofeo < Ranking
 
   def self.compute
 
@@ -54,5 +56,7 @@ class RankingTrofeo < Ranking
 
     return nil
   end
+
+end
 
 end

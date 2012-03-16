@@ -1,0 +1,30 @@
+<div class="cf cf_wide cid_cf">
+  <div class="logo">
+    <%=image_tag('cid/logo_16.png', :class => 'logo')%><br />
+    <%= status_icon(cid2012.status) %>
+  </div>
+  <div class="container">
+    <div class="title"><%= cid2012.championship.name %> <%= fmt_cid_ranking_to_name(cid2012.cid_ranking) %></div>
+    <div class="body">
+      <% case cid2012.task_eval %>
+      <% when :free %>
+        Tema libero
+      <% when :not_completed %>
+        Tema dichiarato e non completato
+      <% when :completed %>
+        Tema dichiarato e completato
+      <% end %><br />
+      Tipo: <%=
+        case cid2012.task_type
+        when :butterfly ; 'Farfalla'
+        when :simple_triangle ; 'Triangolo semplice'
+        when :round_trip ; 'Andata e ritorno'
+        when :fai_triangle ; 'Triangolo FAI'
+        when :straight_line ; 'Linea retta'
+        end
+      %><br />
+      Distanza: <%= fmt_distance_in_km(cid2012.distance.to_i) %><br />
+      Punti: <%= fmt_points(cid2012.points) %>
+    </div>
+  </div>
+</div>

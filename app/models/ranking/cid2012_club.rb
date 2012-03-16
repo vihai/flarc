@@ -1,4 +1,6 @@
-class RankingCid2011Club < Ranking
+class Ranking
+
+class Cid2012Club < Ranking
 
   def self.compute
 
@@ -7,7 +9,7 @@ class RankingCid2011Club < Ranking
 
     results = {}
 
-    cship = Championship.find_by_symbol(:cid_2011)
+    cship = Championship.find_by_symbol(:cid_2012)
 
     cship.championship_flights.each do |cf|
       next if !cf.points
@@ -24,10 +26,9 @@ class RankingCid2011Club < Ranking
       results[club.id][:total_points] += cf.points || 0
     end
 
-puts "AAAAAAAAAAAAA #{results.inspect}"
     # Pass 2: Update standings
 
-    ranking = Ranking.find_by_symbol("cid_2011_club")
+    ranking = Ranking.find_by_symbol("cid_2012_club")
     ranking.generated_at = Time.now
     ranking.save!
 
@@ -60,5 +61,7 @@ puts "AAAAAAAAAAAAA #{results.inspect}"
 
     return nil
   end
+
+end
 
 end

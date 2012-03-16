@@ -1,4 +1,6 @@
-class RankingCirDist < Ranking
+class Ranking
+
+class CirSpeed < Ranking
 
   def self.compute
     results = Hash.new()
@@ -6,11 +8,11 @@ class RankingCirDist < Ranking
     flights = Flight.all(:select => "flights.*, rankings.id AS ranking_id",
                          :joins => "JOIN ranking_flights ON flights.id=ranking_flights.flight_id " +
                                    "JOIN rankings ON ranking_flights.ranking_id=rankings.id",
-                         :conditions => "driver='cir_distance' AND status='approved'")
+                         :conditions => "driver='cir_speed' AND status='approved'")
 
     flights.each do |flight|
-      if flight.distance.nil?
-        puts "Flight #{flight.id} missing distance" 
+      if flight.speed.nil?
+        puts "Flight #{flight.id} missing speed" 
         next
       end
 
@@ -19,18 +21,18 @@ class RankingCirDist < Ranking
         next
       end
 
-      dist = flight.distance / flight.handicap
+      speed = flight.speed / flight.handicap
 
       results[flight.ranking_id] ||= Hash.new
       results[flight.ranking_id][flight.id] ||= Hash.new
-      results[flight.ranking_id][flight.id][:dist] = dist
+      results[flight.ranking_id][flight.id][:speed] = speed 
 
-      if !results[flight.ranking_id][:max_dist] || dist > results[flight.ranking_id][:max_dist]
-        results[flight.ranking_id][:max_dist] = dist
+      if !results[flight.ranking_id][:max_speed] || speed > results[flight.ranking_id][:max_speed]
+        results[flight.ranking_id][:max_speed] = speed 
       end
     end
 
-    results.each do |ranking_id,result|
+    results.each do |ranking_id,results_ranking|
 
       Ranking.transaction do
 
@@ -40,11 +42,11 @@ class RankingCirDist < Ranking
 
         ranking.flights.each do |flight|
 
-          next if !result[flight.id]
+          next if !results_ranking[flight.id]
 
           standing = ranking.standings.find_by_flight_id(flight.id) ||
                       Ranking::Standing.new(:ranking => ranking, :flight => flight)
-          standing.value = (result[flight.id][:dist] / result[:max_dist]) * 1000
+          standing.value = (results_ranking[flight.id][:speed] / results_ranking[:max_speed]) * 1000
           standing.pilot = flight.pilot # Pilot may change due to corrections in the DB
 
           ranking.standings << standing
@@ -63,5 +65,7 @@ class RankingCirDist < Ranking
 
     return nil
   end
+
+end
 
 end
