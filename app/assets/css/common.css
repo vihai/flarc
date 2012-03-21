@@ -200,12 +200,12 @@ table.standard
 {
  padding: 5px;
 }
-table.standard > caption {  } 
+table.standard > caption {  }
 table.standard > tbody > tr { background-color: #ddd; }
 table.standard > tbody > tr > th { padding: 0.1em 0.5em 0.1em 0.5em; text-align: left; }
 table.standard > tbody > tr > td { padding: 0.1em 0.5em 0.1em 0.5em; }
-table.standard > tbody > tr > td.name { text-align: left; } 
-table.standard > tbody > tr > td.count { text-align: right; } 
+table.standard > tbody > tr > td.name { text-align: left; }
+table.standard > tbody > tr > td.count { text-align: right; }
 
 table.ranking
 {
@@ -334,19 +334,6 @@ table.flight_calendar > tbody > tr > td.today
 .icon-pending { background-image: url('../images/flight_status_pending.png') !important; }
 .icon-approved { background-image: url('../images/flight_status_approved.png') !important; }
 
-div.edit_box
-{
- position: absolute;
- right: 1em;
- top: 1em;
- background-color: #fdd;
- border: solid 3px #ecc;
- padding: 1em;
- -webkit-border-radius: 8px;    /* for Safari */
- -moz-border-radius: 8px;       /* for Firefox */
- border-radius: 8px;
-}
-
 .msg .x-box-mc {
     font-size:14px;
 }
@@ -428,59 +415,6 @@ img.cf_status_icon_invalid
  background-color: #f77;
 }
 
-p.success,
-p.notice,
-p.warning,
-p.error {
-  font-size: 18px;
-  padding: 15px 10px;
-  margin-bottom: 10px;
-}
-
-p.success span,
-p.notice span,
-p.warning span,
-p.error span {
-  float: left;
-  width: 42px;
-  height: 32px;
-  margin-top: -5px;
-}
-
-p.success {
-  background: url(../../images/flash/success-bg.jpg) repeat-x left top;
-  color: #41612f;
-}
-p.success span {
-  background: url(../../images/flash/success.png) no-repeat left top;
-}
-
-p.notice {
-  background: url(../../images/flash/notice-bg.jpg) repeat-x left top;
-  color: #41612f;
-}
-p.notice span {
-  background: url(../../images/flash/notice.png) no-repeat left top;
-}
-
-p.warning {
-  background: url(../../images/flash/warning-bg.jpg) repeat-x left -10px;
-  color: #a26a1a;
-}
-p.warning span {
-  margin-top: -6px;
-  background: url(../../images/flash/warning.png) no-repeat left top;
-}
-
-p.error {
-  background: url(../../images/flash/error-bg.jpg) repeat-x left -10px;
-  color: #af0100;
-}
-p.error span {
-  margin-top: -6px;
-  background: url(../../images/flash/error.png) no-repeat left top;
-}
-
 div.cf
 {
  vertical-align: top;
@@ -551,22 +485,15 @@ div.cp > div.container > div.title
 
 div#upload_dialog_map
 {
- position: absolute;
- right: 10px;
- top: 10px;
- width: 355px;
- height: 200px;
+ height: 30%;
+ min-height: 500px;
 }
 
 iframe#upload_dialog_iframe
 {
- position: absolute;
- right: 10px;
- top: 220px;
- width: 355px;
+ width: 100%;
  height: 300px;
  border: none;
- background-color: #eee;
 }
 
 span.ac_p_reg
@@ -578,7 +505,8 @@ span.ac_p_reg
  width: 5em;
 }
 
-td.points { text-align: right; }
+table#cid_calcs { width: 60em; }
+td.points { text-align: right; min-width: 10em; }
 td.total_points { font-weight: bold; }
 
 div.flight_notes {}
@@ -587,4 +515,9 @@ div.flight_notes > div.contents
   font-size: 80%;
   min-height: 2em;
   background-color: #ddd;
+}
+
+div#porcocane
+{
+ margin: 1em;
 }

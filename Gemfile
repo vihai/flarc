@@ -18,7 +18,12 @@ gem 'geokit-rails3'
 
 gem 'exception_notification'
 
-#gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
+gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
+
+gem 'curb', '>= 0.7.17'
+
+gem 'jquery-rails'
+gem 'less-rails-bootstrap', :git => 'https://github.com/wmhobbes/less-rails-bootstrap.git'
 
 gem 'ynetaddr', '>= 1.0.0'
 gem 'vihai-password', '>= 1.2.0'
@@ -26,19 +31,15 @@ gem 'vihai-password', '>= 1.2.0'
 gem 'active_rest', '>= 4.1.0'
 #gem 'active_rest', '>= 4.1.0', :path => '../submodules/active_rest'
 
-#gem 'facebooker', :git => 'git://github.com/joren/facebooker.git', :branch => 'rails3'
-
-gem 'curb', '>= 0.7.17'
-
 gem 'yggdra_plugins', :path => '/opt/yggdra/plugins/yggdra_plugins'
 
-gem 'hel', :path => '/opt/yggdra/plugins/hel'
-
 gem 'core_models', :path => '/opt/yggdra/plugins/core_models'
+
+gem 'hel', :path => '/opt/yggdra/plugins/hel'
 gem 'core_hel', :path => '/opt/yggdra/plugins/core_hel'
 
-gem 'jquery-rails'
-gem 'less-rails-bootstrap', :git => 'git@github.com:wmhobbes/less-rails-bootstrap.git'
+gem 'asgard', :path => '/opt/yggdra/plugins/asgard'
+gem 'core_asgard', :path => '/opt/yggdra/plugins/core_asgard'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,0 +1,66 @@
+<% limit ||= nil %>
+<% if !ranking.sorted_standings.empty? then %>
+  <table class="standard ranking">
+    <caption style="background-color: #<%= ranking.color %>">
+      Classifica <%= ranking.name %><br />
+      <span class="generated_at">(aggiornata al <%= l(ranking.generated_at, :format => :short) %>)</span>
+    </caption>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Punteggio</th>
+      <th>Volo 1</th>
+      <th>Volo 2</th>
+      <th>Volo 3</th>
+    </tr>
+    <% cnt = 0 %>
+    <% ranking.sorted_standings.each do |r| %>
+    <tr>
+      <td class="number">
+        <%= cnt+=1 %>
+        <% weeksnap = r.history_entries.where("snapshot_time < now() - '1 week'::interval AND " +
+                                              "EXTRACT(DOW FROM snapshot_time)=2").order('snapshot_time DESC').first %>
+        <% if weeksnap then %>
+          <% if weeksnap.position > r.position then %>
+            <%= image_tag("arrow-up.png", :alt => "Up",
+                   :title => "Era alla posizione ##{weeksnap.position}" +
+                             " il #{l weeksnap.snapshot_time, :format => :dateonly} "+
+                             " con #{weeksnap.value.to_i} punti" ) %>
+          <% elsif weeksnap.position < r.position then %>
+            <%= image_tag("arrow-down.png", :alt => "Down",
+                   :title => "Era alla posizione ##{weeksnap.position}" +
+                             " il #{l weeksnap.snapshot_time, :format => :dateonly}" +
+                             " con #{weeksnap.value.to_i} punti" ) %>
+          <% else %>
+            <%= image_tag("ranking-no-change.png", :alt => "No change") %>
+          <% end %>
+        <% else %>
+          <%= image_tag("ranking-new.png", :alt => "No change") %>
+        <% end %>
+      </td>
+      <td class="name">
+        <%= link_to(r.pilot.person.name, r.pilot) %>
+      </td>
+      <td class="points"><%= fmt_points(r.value) %></td>
+      <% for i in 0..2 do %>
+        <% flight = r.data[:flights_best][i] %>
+        <% if flight %>
+        <td class="points small <%=flight.status %>">
+           <%= link_to(fmt_points(flight.points), flarc_flight_path(flight.id)) %>
+        </td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% if limit && cnt >= limit then %>
+      <tr>
+        <td colspan=6><%= link_to("Classifica completa...", ranking) %></td>
+      </tr>
+      <% break %>
+    <% end %>
+    <% end %>
+  </table>
+<% else %>
+<p>Nessun pilota attualmente nella classifica <%= ranking.name %></p>
+<% end %>
+
+

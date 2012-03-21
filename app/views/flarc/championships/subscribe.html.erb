@@ -1,0 +1,85 @@
+<div id="registration_div">
+  <form id="cid-subscription-form" class="form-horizontal">
+    <fieldset>
+      <legend>Iscrizione al CID 2012</legend>
+      <div class="control-group">
+        <label class="control-label" for="fai_card">Tessera FAI</label>
+        <div class="controls">
+          <input type="text" name="fai_card" size="20" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="club_id">Club</label>
+        <div class="controls">
+          <%= select_tag :club_id,
+                options_for_select(
+                  [[ '' => '' ]] +
+                  Club.find(:all, :order => 'clubs.name ASC').collect { |c| [ c.name, c.id ] }) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="cid_category">Categoria</label>
+        <div class="controls">
+          <%= select_tag :cid_category,
+                options_for_select({ '' => '', 'Nazionale' => :naz, 'Promozione' => :prom }) %>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Iscrivimi!</button>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+$(function() {
+  $('#cid-subscription-form .btn-primary').click(function() {
+    $('#cid-subscription-form .btn-primary').spinner({ position: 'center', hide: true });
+    $('#cid-subscription-form .form-actions .alert').remove();
+
+    var req = {
+      fai_card: $('#cid-subscription-form input[name=fai_card]').val(),
+      club_id: $('#cid-subscription-form select[name=club_id]').val(),
+      cid_category: $('#cid-subscription-form select[name=cid_category]').val()
+    };
+
+    $.ajax({
+  //    url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
+      url: '',
+      dataType: 'json',
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(req),
+      success: function(data) {
+        $('#cid-subscription-form .btn-primary').spinner('remove');
+
+        if (!data.success) {
+          $('#cid-subscription-form .form-actions').append(
+            '<div class="alert alert-error">' + data.error + '</div>');
+        } else {
+          $('#cid-subscription-form fieldset input').attr('disabled', 'disabled');
+          $('#cid-subscription-form fieldset select').attr('disabled', 'disabled');
+          $('#cid-subscription-form .form-actions button').remove();
+
+          $('#cid-subscription-form .form-actions').append(
+            '<div class="alert alert-success">Iscrizione effettuata con successo!</div>');
+        }
+      },
+      error: function(data) {
+        $('#cid-subscription-form .btn-primary').spinner('remove');
+        $('#cid-subscription-form .form-actions').append(
+          '<div class="alert alert-error">Errore di comunicazione</div>');
+      }
+    });
+
+    return false;
+  });
+});
+
+//]]>
+</script>
+

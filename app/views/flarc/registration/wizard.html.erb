@@ -1,0 +1,150 @@
+<div id="registration_div">
+<form id="registration-form" class="form-horizontal">
+  <fieldset>
+    <legend>Registrazione</legend>
+    <div class="step1">
+      <div class="control-group">
+        <label class="control-label" for="email">e-Mail</label>
+        <div class="controls">
+          <input type="text" name="email" class="input-xlarge">
+          <p class="help-block">Inserisci il tuo indirizzo e-mail valido e funzionante.</p>
+       </div>
+      </div>
+    </div>
+    <div class="step2" style="display: none">
+      <div class="control-group">
+        <label class="control-label" for="first_name">Nome</label>
+        <div class="controls">
+          <input type="text" name="first_name" class="input-xlarge">
+       </div>
+        <label class="control-label" for="last_name">Cognome</label>
+        <div class="controls">
+          <input type="text" name="last_name" class="input-xlarge">
+       </div>
+        <label class="control-label" for="phone">Numero di telefono</label>
+        <div class="controls">
+          <input type="text" name="phone" class="input-xlarge">
+       </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Avanti...</button>
+  </div>
+</form>
+</div>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+function wizardHandleEmail(wizard)
+{
+  $('#registration-form .btn-primary').spinner({ position: 'center', hide: true });
+  $('#registration-form .form-actions .alert').remove();
+
+  var email = $('#registration-form input[name=email]').val();
+
+  $.ajax({
+//    url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
+    url: '/registration/check_email',
+    dataType: 'json',
+    type: 'POST',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify({
+      email: email,
+    }),
+    success: function(data) {
+      $('#registration-form .btn-primary').spinner('remove');
+
+      if (!data.valid) {
+        $('#registration-form .form-actions').append(
+          '<div class="alert alert-error">L\'indirizzo email non è valido</div>');
+      } else if (data.found) {
+        $('#registration-form .form-actions').append(
+          '<div class="alert alert-error">L\'indirizzo email ' + email + ' risulta già registrato, se non ricordi ' +
+          'le tue credenziali puoi recuperare la password cliccando su ' +
+          '<%= link_to('recupero password', '#', 'data-dismiss' => 'modal',
+                      'data-toggle' => 'modal', 'data-target' => '#password-recovery-dialog') %>' +
+          '</div>');
+      } else {
+        $('#registration-form fieldset div.step1 input').attr('disabled', 'disabled');
+        $('#registration-form fieldset div.step2').show();
+
+        wizard.state = 'personal_data';
+      }
+    },
+    error: function(data) {
+      $('#registration-form .btn-primary').spinner('remove');
+      $('#registration-form .form-actions').append(
+        '<div class="alert alert-error">Errore di comunicazione</div>');
+    }
+  });
+}
+
+function wizardHandlePersonalData(wizard)
+{
+  $('#registration-form .btn-primary').spinner({ position: 'center', hide: true });
+  $('#registration-form .form-actions .alert').remove();
+
+  var email = $('#registration-form input[name=email]').val();
+  var first_name = $('#registration-form input[name=first_name]').val();
+  var last_name = $('#registration-form input[name=last_name]').val();
+  var phone = $('#registration-form input[name=phone]').val();
+
+  $.ajax({
+//    url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
+    url: '/registration',
+    dataType: 'json',
+    type: 'POST',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify({
+      email: email,
+      first_name: first_name,
+      last_name: last_name,
+      phone: phone
+    }),
+    success: function(data) {
+      $('#registration-form .btn-primary').spinner('remove');
+
+      $('#registration-form .form-actions').append(
+        '<div class="alert alert-success">Grazie, la registrazione è avvenuta con successo. Ti è stata inviata ' +
+        ' un\'e-mail con un link di attivazione. Appena la ricevi clicca sul link e il tuo account sarà attivato</div>');
+
+      $('#registration-form fieldset div.step2 input').attr('disabled', 'disabled');
+      $('#registration-form .form-actions button').attr('disabled', 'disabled');
+
+      wizard.state = 'done';
+    },
+    error: function(data) {
+      $('#registration-form .btn-primary').spinner('remove');
+      $('#registration-form .form-actions').append(
+        '<div class="alert alert-error">Errore di comunicazione</div>');
+    }
+  });
+}
+
+$(function() {
+
+  var wizard = { state: 'email' };
+  $('#registration-form').data('wizard', wizard);
+
+  $('#registration-form .btn-primary').click(function() {
+    switch(wizard.state) {
+    case 'email':
+      wizardHandleEmail(wizard);
+    break;
+
+    case 'personal_data':
+      wizardHandlePersonalData(wizard);
+    break;
+    }
+
+    return false;
+  });
+});
+
+//]]>
+</script>
+

@@ -1,120 +1,137 @@
 
-<div id="password-recovery-dialog" title="Recupero Password" style="display: none">
-  <div id="password-recovery-dialog-alert" class="freeow freeow-center" style="position: absolute"></div>
-  <form class="ui-widget">
-    <table>
-      <tr>
-        <th><label for="fqda">e-Mail</label></th>
-        <td><input type="text" name="fqda" id="fqda"></td>
-      </tr>
-    </table>
-  </form>
+
+
+<div id="login-dialog" class="modal fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Login</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="username">e-Mail</label>
+          <div class="controls">
+            <input type="text" name="username" id="username" class="input-xlarge" size="35">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="password">Password</label>
+          <div class="controls">
+            <input type="password" name="password" id="password" class="input-xlarge" size="20"><br />
+            <%= link_to('Ho dimenticato la password', '#', 'data-dismiss' => 'modal',
+                        'data-toggle' => 'modal', 'data-target' => '#password-recovery-dialog') %><br />
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Login</a>
+  </div>
 </div>
 
-<script type="text/javascript">
-//<![CDATA[
-$(function() {
 
-  $("#password-recovery-dialog").dialog({
-    autoOpen: false,
-    width: 500,
-    height: 200,
-    modal: true,
-    buttons: {
-      'Ok': function() {
-        $.ajax({
-          url: '<%= csvva_registration_recover_password_path %>',
-          dataType: 'json',
-          type: 'POST',
-          contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify({ fqda: $('#fqda').val() }),
-          success: function(data) {
-            if (data.success) {
-              $('#password-recovery-dialog').dialog('close');
-              $("#freeow").freeow("Password inviata", "La password ti è stata inviata per e-Mail");
-            } else {
-              $("#password-recovery-dialog-alert").freeow("Errore", data.error);
-            }
-          },
-        });
-      },
-      'Annulla': function() {
-        $(this).dialog("close");
-      }
-    },
-  });
-});
-//]]>
-</script>
-
-<div id="login-dialog" title="Login" style="display: none">
-  <div id="login-dialog-error" title="Error" style="display: none"></div>
-  <form id="login-dialog-form" class="ui-widget" target="login_iframe" onSubmit="return false;">
-    <table>
-      <tr>
-        <th><label for="username">e-Mail</label></th>
-        <td><input type="text" name="username" id="username" size="35"></td>
-      </tr>
-      <tr>
-        <th><label for="password">Password</label></th>
-        <td><input type="password" name="password" id="password" size="20"></td>
-      </tr>
-    </table>
-    <input type="submit" name="login-dialog-submit" id="login-dialog-submit" style="display: none"  />
-  </form>
-  <%= link_to_function 'Ho dimenticato la password', "jQuery('#password-recovery-dialog').dialog('open')" %><br />
-  <iframe id="login_iframe" name="login_iframe" style="display: none;"></iframe>
+<div id="password-recovery-dialog" class="modal fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Recupero password</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="fqda">e-Mail</label>
+          <div class="controls">
+            <input type="text" name="fqda" id="fqda" class="input-xlarge" size="35">
+            <p>Inserisci il tuo indirizzo e-mail, ti verrà inviato un messaggio con le tue credenziali.</p>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Recupera</a>
+  </div>
 </div>
 
 <script type="text/javascript">
 //<![CDATA[
 
 $(function() {
-  $('#login-dialog-error').dialog({
-    autoOpen: false,
-    modal: true,
-    buttons: { Ok: function() { $(this).dialog( "close" ); } },
-  });
+  $('#login-dialog .btn-primary').click(function() {
+    $('#login-dialog .btn-primary').spinner({ position: 'center', hide: true });
 
-  $("#login-dialog").dialog({
-    autoOpen: false,
-    width: 350,
-    height: 180,
-    modal: true,
-    buttons: {
-      'Ok': function() {
-        $('.ui-dialog-buttonpane').spinner({ position: 'center', hide: true });
+    $('#login-dialog .modal-footer div').remove('.alert');
 
-        $.ajax({
-          url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
-          dataType: 'json',
-          type: 'POST',
-          contentType: 'application/json; charset=utf-8',
-          data: JSON.stringify({ username: $('#username').val(), password: $('#password').val() }),
-          success: function(data) {
-            $('.ui-dialog-buttonpane').spinner('remove');
+    $.ajax({
+      url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
+      dataType: 'json',
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({
+        username: $('#login-dialog input[name=username]').val(),
+        password: $('#login-dialog input[name=password]').val()
+      }),
+      success: function(data) {
+        $('#login-dialog .btn-primary').spinner('remove');
 
-            if (data.authenticated) {
-              $('#login-dialog-submit').click();
-              $('#login-dialog').dialog('close');
-              window.location = '<%= static_path('user_home') %>';
-            } else {
-              $('#login-dialog-error').html('Username o password errati');
-              $('#login-dialog-error').dialog('open');
-            }
-          },
-          error: function(data) {
-            $('.ui-dialog-buttonpane').spinner('remove');
-            $('#login-dialog-error').html('Errore di comunicazione');
-            $('#login-dialog-error').dialog('open');
-          }
-        });
+        if (data.authenticated) {
+//          $('#login-dialog-submit').click();
+          $('#login-dialog').modal('hide');
+          window.location = '<%= flarc_user_path %>';
+        } else {
+          $('#login-dialog .modal-footer').append('<div class="alert alert-error">Username o password errati</div>');
+        }
       },
-      'Annulla': function() {
-        $(this).dialog("close");
+      error: function(data) {
+        $('#login-dialog .btn-primary').spinner('remove');
+        $('#login-dialog .modal-footer').append('<div class="alert alert-error">Errore di comunicazione</div>');
       }
-    },
+    });
+
+    return false;
   });
 });
+
+
+
+$(function() {
+  $('#password-recovery-dialog .btn-primary').click(function() {
+    $('#password-recovery-dialog .btn-primary').spinner({ position: 'center', hide: true });
+    $('#password-recovery-dialog .modal-footer div').remove('.alert');
+
+    $.ajax({
+      url: '<%= flarc_registration_recover_password_path %>',
+      dataType: 'json',
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify({ fqda: $('#password-recovery-dialog input[name=fqda]').val() }),
+      success: function(data) {
+        $('#password-recovery-dialog .btn-primary').spinner('remove');
+
+        if (data.success) {
+          $("#password-recovery-dialog .modal-body").html(
+            '<div class="alert alert-success">La password ti è stata inviata per e-Mail</div>');
+          $('#password-recovery-dialog .btn-primary').remove();
+        } else {
+          $('#password-recovery-dialog .modal-footer').append(
+            '<div class="alert alert-error">' + data.error + '</div>');
+        }
+      },
+      error: function(data) {
+        $('#password-recovery-dialog .btn-primary').spinner('remove');
+        $('#password-recovery-dialog .modal-footer').append(
+          '<div class="alert alert-error">Errore di comunicazione</div>');
+      }
+    });
+
+    return false;
+  });
+});
+
 //]]>
 </script>
+

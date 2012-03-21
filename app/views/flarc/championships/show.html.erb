@@ -1,0 +1,20 @@
+<div class="body_contents">
+<table class="standard championship">
+  <tr>
+    <th>Nome</th>
+    <td class="name">
+      <%=h @target.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>Classifiche</th>
+    <td class="rankings">
+      <% @target.rankings.each do |ranking| %>
+        <%=
+# link_to ranking.name, ranking
+ %><br />
+      <% end %>
+    </td>
+  </tr>
+</table>
+</div>

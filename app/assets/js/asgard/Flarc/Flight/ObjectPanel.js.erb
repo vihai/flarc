@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2008-2011, Daniele Orlandi
+ *
+ * Author:: Daniele Orlandi <daniele@orlandi.com>
+ *
+ * License:: You can redistribute it and/or modify it under the terms of the LICENSE file.
+ *
+ */
+
+Ext.define('Asgard.Flarc.Flight.ObjectPanel', {
+  extend: 'Asgard.ObjectPanelBase',
+  title: 'ObjectPanel.js.erb...',
+  requires: [
+    'Asgard.Flarc.Css',
+    'Asgard.Flarc.Flight.Form'
+  ],
+
+  model: 'Ygg.Flarc.Flight',
+//  imageSrc: '<%= image_path 'domain_icon.png' %>',
+  tabTitleTpl: 'FL{id}',
+  panelTitleTpl: '<div class="name">Flight </div><div class="value">{id}</div>',
+
+  form: 'flarc_flight_form',
+});

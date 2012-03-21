@@ -1,0 +1,12 @@
+Championship.create(:name => 'CID 2012', :icon => 'logo_acao_22.png', :valid_from => '2012-03-01', :valid_to => '2012-09-30', :driver => 'cid_2012', :symbol => 'cid_2012')
+
+
+
+Ranking::Cid2012.create(:name => 'CID 2012 - Classifica per Club', :official => true, :priority => 600, :color => 'ccc', :driver => 'cid_2012_club', :symbol => 'cid_2012_club', :championship => Championship.find_by_symbol(:cid_2012), :icon => 'logo_acao_22.png', :generated_at => Time.now)
+
+
+Ranking::Cid2012.create(:name => 'CID 2012 - Classifica Nazionale - Classe Libera', :official => true, :priority => 100, :color => 'ccc', :driver => 'cid_2012', :symbol => 'cid_2012_naz_open', :championship => Championship.find_by_symbol(:cid_2012), :icon => 'logo_acao_22.png', :generated_at => Time.now)
+Ranking::Cid2012.create(:name => 'CID 2012 - Classifica Nazionale - Classe 13.5 metri', :official => true, :priority => 300, :color => 'ccc', :driver => 'cid_2012', :symbol => 'cid_2012_naz_13m5', :championship => Championship.find_by_symbol(:cid_2012), :icon => 'logo_acao_22.png', :generated_at => Time.now)
+Ranking::Cid2012.create(:name => 'CID 2012 - Classifica Nazionale - Classe 15 metri', :official => true, :priority => 200, :color => 'ccc', :driver => 'cid_2012', :symbol => 'cid_2012_naz_15m', :championship => Championship.find_by_symbol(:cid_2012), :icon => 'logo_acao_22.png', :generated_at => Time.now)
+Ranking::Cid2012.create(:name => 'CID 2012 - Classifica Nazionale - Classe Club', :official => true, :priority => 400, :color => 'ccc', :driver => 'cid_2012', :symbol => 'cid_2012_naz_club', :championship => Championship.find_by_symbol(:cid_2012), :icon => 'logo_acao_22.png', :generated_at => Time.now)
+Ranking::Cid2012.create(:name => 'CID 2012 - Classifica Promozione - Classe unica', :official => true, :priority => 500, :color => 'ccc', :driver => 'cid_2012', :symbol => 'cid_2012_prom', :championship => Championship.find_by_symbol(:cid_2012), :icon => 'logo_acao_22.png', :generated_at => Time.now)

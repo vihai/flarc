@@ -1,0 +1,7 @@
+
+      <th><%= label_tag :csvva_category, 'Categoria' %></th>
+      <td><%= select_tag :csvva_category, options_for_select({
+             'Junior' => :junior, 
+             'Expert' => :expert,
+             'Master' => :master,
+             'SuperMaster' => :supermaster }) %></td>

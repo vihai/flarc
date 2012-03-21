@@ -23,6 +23,8 @@ LAYOUTS = {
   'sap-dev.orlandi.com' => 'sap'
 }
 
+require File.expand_path('../../../yggdra/hel/lib/ygg/hel/json_show_exceptions', __FILE__)
+
 module Flarc
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -35,7 +37,7 @@ module Flarc
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-    config.plugins = [ :embedded_models, :core_models, :core_asgard, :all ]
+    #config.plugins = [ :embedded_models, :core_models, :core_asgard, :all ]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
@@ -79,5 +81,11 @@ module Flarc
 
     config.assets.paths << File.join(Rails.root, 'app', 'assets', 'js')
     config.assets.paths << File.join(Rails.root, 'app', 'assets', 'css')
+
+    config.exceptions_app = Ygg::Hel::JsonShowExceptions.new
+
+    config.asgard.hel_host = '[::1]:81'
+#    config.asgard.faye_source_uri = '/faye.js'
+#    config.asgard.faye_interface_uri = '/faye'
   end
 end

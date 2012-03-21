@@ -13,6 +13,8 @@ class ApplicationController < ActionController::Base
 
   layout :select_proper_layout
 
+  respond_to :html, :json
+
   def select_proper_layout
     return LAYOUTS[request.host] || 'flarc'
   end
