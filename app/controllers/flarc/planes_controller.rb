@@ -7,12 +7,15 @@ class PlanesController < RestController
     empty!
     attribute(:id) { show! }
     attribute(:registration) { show! }
+    attribute(:handicap) { show! }
     attribute(:plane_type) do
       include!
       empty!
       attribute(:id) { show! }
       attribute(:configurations) { include! }
       attribute(:name) { show! }
+      attribute(:handicap) { show! }
+      attribute(:club_handicap) { show! }
     end
   end
 

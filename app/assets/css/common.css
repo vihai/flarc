@@ -517,7 +517,11 @@ div.flight_notes > div.contents
   background-color: #ddd;
 }
 
-div#porcocane
+div#flight-submit-container
+{
+}
+
+div#flight-submit-dialog
 {
  margin: 1em;
 }

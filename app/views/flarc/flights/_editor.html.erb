@@ -1,0 +1,434 @@
+<form id="flight-data-form" class="form-horizontal" style="display: none">
+  <input type="hidden" name="igc_tmp_file_id" id="igc_tmp_file_id" />
+  <input type="hidden" name="pilot_id" id="pilot_id" /><br />
+  <fieldset>
+    <legend>Dati del volo</legend>
+
+    <div class="control-group">
+      <% if authenticated_admin? %>
+        <label class="control-label" for="pilot">Pilota</label>
+        <div class="controls">
+          <input type="text" name="pilot" id="pilot" size="40" />
+        </div>
+      <% end %>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="plane">Marche aliante</label>
+      <div class="controls">
+        <input type="text" name="plane" id="plane" size="10" onkeyup="this.value=this.value.toUpperCase()" style="text-transform: uppercase;" />
+        <input type="hidden" name="plane_id" id="plane_id" />
+      </div>
+    </div>
+
+    <div id="plane_type_div" style="display: none" class="control-group">
+      <label class="control-label" for="plane">Tipo</label>
+      <div class="controls">
+        <input type="text" name="plane_type" id="plane_type" size="20" />
+        <input type="hidden" name="plane_type_id" id="plane_type_id" />
+      </div>
+    </div>
+
+    <div id="plane_type_configuration_div" style="display: none" class="control-group">
+      <label class="control-label" for="plane">Configurazione</label>
+      <div class="controls">
+        <select name="plane_type_configuration_id" id="plane_type_configuration_id">
+        </select>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset id="csvva_fieldset" style="display: none" class="control-group">
+    <legend>
+      <input type="checkbox" name="csvva_member" value="yes" id="csvva_member" />
+      <label class="control-label" for="csvva_member">CSVVA:</label>
+    </legend>
+    <input type="hidden" name="csvva_id" id="csvva_id" />
+    <div id="csvva_fieldset_contents">
+      <label class="control-label" for="csvva_distance">Distanza</label>
+      <input type="text" name="csvva_distance" id="csvva_distance" size="6" /> km
+    </div>
+  </fieldset>
+
+  <fieldset id="cid_fieldset" style="display: none" class="control-group">
+    <legend>
+      <input type="checkbox" name="cid_member" value="yes" id="cid_member" />
+      CID 2012:
+    </legend>
+
+    <input type="hidden" name="cid_id" id="cid_id" />
+
+    <div id="cid_fieldset_contents">
+
+      <div id="cid_ranking_div">
+        <label class="control-label" for="cid_ranking">Classifica</label>
+        <select id="cid_ranking" name="cid_ranking">
+          <option value=""></option>
+          <option value="naz_open">Nazionale Open</option>
+          <option value="naz_15m">Nazionale 15 m</option>
+          <option value="naz_13m5">Nazionale 13.5 m</option>
+          <option value="naz_club">Nazionale Club</option>
+        </select>
+      </div>
+
+      <table id="cid_calcs" class="table table-striped table-bordered table-condensed">
+        <caption>Dichiarazione</caption>
+        <tbody>
+          <tr>
+            <td><label class="control-label" for="cid_distance">Distanza</label></td>
+            <td><input type="text" name="cid_distance" id="cid_distance" size="6" /> km</td>
+            <td id="cid_distance_points" class="points"></td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label" for="cid_task_type">Tipo</label></td>
+            <td>
+              <select id="cid_task_type" name="cid_task_type">
+                <option value=""></option>
+                <option value="butterfly">Farfalla</option>
+                <option value="simple_triangle">Triangolo semplice</option>
+                <option value="round_trip">Andata e ritorno</option>
+                <option value="fai_triangle">Triangolo FAI</option>
+                <option value="straight_line">Linea retta</option>
+              </select>
+            </td>
+            <td id="cid_task_type_points" class="points"></td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label" for="cid_task_eval">Tema</label></td>
+            <td>
+              <select id="cid_task_eval" name="cid_task_eval">
+                <option value=""></option>
+                <option value="free">Libero</option>
+                <option value="not_completed">Dichiarato ma non completato</option>
+                <option value="completed">Dichiarato e completato</option>
+              </select>
+            </td>
+            <td id="cid_task_eval_points" class="points"></td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td>Totale punti</td>
+            <td></td>
+            <td id="cid_total_points" class="points total_points"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>Note:</legend>
+    <textarea name="notes" rows="8" cols="180" style="width: 100%"></textarea>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-large">&nbsp;&nbsp;Invia!&nbsp;&nbsp;</button>
+  </div>
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+
+function pilot_changed(pilot)
+{
+  if (!pilot) {
+    $('#pilot').val('');
+    $('#pilot_id').val('');
+    $('#csvva_fieldset').hide();
+    $('#cid_fieldset').hide();
+    return;
+  }
+
+  $('#pilot').val(pilot.person.name.first + ' ' + pilot.person.name.last);
+  $('#pilot_id').val(pilot.id);
+
+  cships = {};
+  $.each(pilot.championship_pilots, function(index, value) {
+    cships[value._type] = value;
+  });
+
+  csvva = cships['Flarc::Championship::Pilot::Csvva2012'];
+  if (csvva) {
+    $('#csvva_member').prop('checked', true);
+    $('#csvva_fieldset').fadeIn();
+  } else {
+    $('#csvva_member').prop('checked', false);
+    $('#csvva_fieldset').fadeOut();
+  }
+
+  cid = cships['Flarc::Championship::Pilot::Cid2012'];
+  if (cid) {
+    $('#cid_ranking_div').toggle(cid.cid_category != 'prom');
+    $('#cid_member').prop('checked', true);
+    $('#cid_fieldset').fadeIn();
+  } else {
+    $('#cid_member').prop('checked', false);
+    $('#cid_fieldset').fadeOut();
+  }
+}
+
+function plane_changed(plane)
+{
+ current_plane = plane;
+
+  if (!plane) {
+    $('#plane_type_div').fadeIn();
+    $('#plane_id').val('');
+    return;
+  }
+
+  $('#plane_type_div').fadeOut();
+  $('#plane').val(plane.registration);
+  $('#plane_id').val(plane.id);
+
+  update_configurations(plane.plane_type.configurations);
+  update_cid_calcs();
+}
+
+var current_plane = null;
+var new_plane_type = null;
+
+function plane_type_changed(plane_type)
+{
+ new_plane_type = plane_type;
+
+  if (!plane_type) {
+    $('#plane_type').val('');
+    $('#plane_type_id').val('');
+    return;
+  }
+
+  $('#plane_type').val(plane_type.registration);
+  $('#plane_type_id').val(plane_type.id);
+
+  update_configurations(plane_type.configurations);
+  update_cid_calcs();
+}
+
+function update_configurations(configurations)
+{
+  if (configurations.length > 0) {
+    $('#plane_type_configuration_div').fadeIn();
+    $('option', $('#plane_type_configuration_id')).remove();
+    $.each(configurations, function(key, val) {
+      $('#plane_type_configuration_id').append($('<option></option>').attr('value', val.id).text(val.name));
+    });
+  } else {
+    $('#plane_type_configuration_div').fadeOut();
+  }
+}
+
+function update_cid_calcs()
+{
+  $('#cid_calcs .points').html('');
+
+  var plane_type = current_plane ? current_plane.plane_type : new_plane_type;
+
+  var config;
+  $.each(plane_type.configurations, function(index, value) {
+    if (value.id == $('#plane_type_configuration_id').val()) {
+      config = value;
+      return false;
+    }
+  });
+
+  dist = parseFloat($('#cid_distance').val().replace(/,/, '.'));
+
+  if (!plane_type || !dist) {
+    $('#cid_distance_points').html('');
+    return false;
+  }
+
+  var handicap;
+  if ($('#cid_ranking').val() == 'naz_club')
+    handicap = config ? config.club_handicap : current_plane.plane_type.club_handicap;
+  else
+    handicap = config ? config.handicap : current_plane.plane_type.handicap;
+
+  if (!handicap) {
+    $('#cid_distance_points').html('Handicap non disponibile');
+    return;
+  }
+
+  var pts = dist / handicap;
+  $('#cid_distance_points').html(dist + ' / ' + handicap + ' = ' + Math.round(pts));
+
+  var mult = 1;
+  switch($('#cid_task_type').val()) {
+  case 'round_trip': mult = 1.3; break;
+  case 'fai_triangle': mult = 1.4; break;
+  case 'straight_line': mult = 1.6; break;
+  case 'simple_triangle':
+    if ($('#cid_task_eval').val() != 'free')
+      mult = 1.2;
+  }
+
+  $('#cid_task_type_points').html(Math.round(pts) + ' * ' + mult + ' = ' + Math.round(pts * mult));
+  pts = pts * mult;
+
+  mult = 1;
+  if ($('#cid_task_eval').val() == 'completed')
+    mult = 1.1;
+
+  $('#cid_task_eval_points').html(Math.round(pts) + ' * ' + mult + ' = ' + Math.round(pts * mult));
+  pts = pts * mult;
+
+  $('#cid_total_points').html(Math.round(pts));
+}
+
+var map;
+
+$(function() {
+
+  $('#cid_member').click(function(e) {
+    if (e.target.checked)
+      $('#cid_fieldset_contents').fadeIn();
+    else
+      $('#cid_fieldset_contents').fadeOut();
+  });
+
+  $('#csvva_member').click(function(e) {
+    if (e.target.checked)
+      $('#csvva_fieldset_contents').fadeIn();
+    else
+      $('#csvva_fieldset_contents').fadeOut();
+  });
+
+  $('#cid_distance').live('keyup', update_cid_calcs);
+  $('#cid_distance').change(update_cid_calcs);
+  $('#cid_task_type').change(update_cid_calcs);
+  $('#cid_task_eval').change(update_cid_calcs);
+  $('#cid_ranking').change(update_cid_calcs);
+  $('#plane_type_configuration_id').change(update_cid_calcs);
+
+  $('#pilot').autocomplete({
+    source: function(request, response) {
+      $('#pilot').spinner();
+
+      $.ajax({
+        url: '/flarc/pilots',
+        dataType: 'json',
+        data: {
+          view: 'combo_nf',
+          flt: 'combo',
+          sort: 'person.last_name,person.first_name',
+          search: request.term,
+          limit: 10
+        },
+        success: function(data) {
+          $('#pilot').spinner('remove');
+
+          response($.map(data, function(item) {
+            return {
+              label: (item.person.name.first + ' ' + item.person.name.last),
+              value: (item.person.name.first + ' ' + item.person.name.last),
+              id: item.id,
+              person: item.person,
+              championship_pilots: item.championship_pilots,
+            }
+          }));
+        }
+      });
+    },
+    minLength: 2,
+    select: function(event, ui) { pilot_changed(ui.item); },
+    change: function(event, ui) {
+      if (!ui.item) {
+        $('#pilot').val('');
+        $('#pilot_id').val('');
+      }
+    },
+  });
+
+  $('#plane').autocomplete({
+    source: function( request, response ) {
+      $('#plane').spinner();
+      $.ajax({
+        url: '/flarc/planes',
+        dataType: 'json',
+        data: {
+          view: 'combo',
+          flt: 'combo',
+          sort: 'registration',
+          search: request.term,
+          limit: 10
+        },
+        success: function(data) {
+          $('#plane').spinner('remove');
+          response( $.map(data, function(item) {
+            return {
+              label: item.registration,
+              value: item.registration,
+              id: item.id,
+              plane_type: item.plane_type
+            }
+          }));
+        }
+      });
+    },
+    minLength: 2,
+    select: function(event, ui) { plane_changed(ui.item); },
+    change: function(event, ui) {
+      if (!ui.item) {
+        $.ajax({ url: '/flarc/planes', dataType: 'json',
+          data: { view: 'combo', flt: 'combo', search: $('#plane').val(), limit: 1 },
+          success: function(data) {
+            if (data.length)
+              plane_changed(data[0]);
+            else
+              plane_changed(null);
+          }
+        });
+      }
+    },
+  }).data('autocomplete')._renderItem = function(ul, item) {
+        return $('<li></li>')
+        .data("item.autocomplete", item)
+        .append('<a><span class="ac_p_reg">' + item.label + '</span>' + item.plane_type.name + '</a>')
+        .appendTo(ul);
+  };
+
+  $('#plane_type').autocomplete({
+    source: function( request, response ) {
+      $('#plane_type').spinner();
+      $.ajax({
+        url: '/flarc/plane_types',
+        dataType: 'json',
+        data: {
+          view: 'combo',
+          flt: 'combo',
+          sort: 'name',
+          search: request.term,
+          limit: 10
+        },
+        success: function(data) {
+          $('#plane_type').spinner('remove');
+          response( $.map(data, function(item) {
+            return {
+              label: item.name,
+              value: item.name,
+              id: item.id,
+              configurations: item.configurations,
+            }
+          }));
+        }
+      });
+    },
+    minLength: 2,
+    select: function(event, ui) { plane_type_changed(ui.item); },
+    change: function(event, ui) {
+      if (!ui.item) {
+        $('#plane_type').val('');
+        $('#plane_type_id').val('');
+      }
+    },
+  });
+});
+
+//]]>
+</script>

@@ -1,0 +1,83 @@
+<form action="<%= flarc_igc_tmp_files_path %>" method="post" enctype="multipart/form-data"
+      id="igc_file_upload_form" target="upload_dialog_iframe" class="form-inline">
+  <fieldset>
+    <legend>Upload file IGC</legend>
+    <p>
+      Per le istruzioni sulla compilazione di questo form fare riferimento
+      all'<%= link_to 'Allegato C', '/cid/Allegato C.invio voli.pdf' %> del regolamento.
+    </p>
+    <div class="control-group">
+      <div class="controls">
+        <input type="file" name="file" id="file" size="38" onChange="upload_started(); this.form.submit();" />
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+<!--
+<div id="upload_failed_dialog" title="Upload fallito" style="display: none">
+  <p>
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+    L'upload del file è fallito, il server ha risposto:
+    <div id="upload_failed_message"></div>
+  </p>
+</div>
+
+<div id="save_failed_dialog" title="Errore" style="display: none">
+  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+  <div></div>
+</div>
+-->
+
+<script type="text/javascript">
+//<![CDATA[
+
+function upload_started()
+{
+  $('#file').spinner();
+}
+
+function upload_completed(id, data)
+{
+  $('#file').spinner('remove');
+  $('#igc_tmp_file_id').val(id);
+
+  var path = google.maps.geometry.encoding.decodePath(data.encpath);
+
+  var bounds = new google.maps.LatLngBounds();
+  for (var i = 0; i < path.length; i++) {
+    bounds.extend(path[i]);
+  }
+
+  poly = new google.maps.Polyline({
+    path: path,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 1
+  });
+
+  poly.setMap(map);
+
+  map.fitBounds(bounds);
+
+//  $('#pre_upload_div').fadeOut(600, 'swing', function() {
+    $('#flight-data-form').fadeIn(600, 'swing');
+//  });
+
+  pilot_changed(data.pilot);
+  plane_changed(data.plane);
+}
+
+function upload_failed(message)
+{
+  jQuery('#file').spinner('remove');
+
+  $('#upload_failed_message').html(message);
+  $('#upload_failed_dialog').dialog('open');
+}
+
+$(function() {
+});
+
+//]]>
+</script>

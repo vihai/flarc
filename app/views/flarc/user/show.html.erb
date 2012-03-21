@@ -24,10 +24,9 @@
       <td class="count"><%=h cship.pilots.count %></td>
       <td>
       <% if cship.pilots.include?(auth_person.pilot) %>
-        <span class="label label-info">Iscritto!</span>
+        <span class="label label-info">Iscritto</span>
       <% else %>
-        <%= link_to '<span class="label label-success">Iscriviti!</span>'.html_safe, '#',
-            'data-dismiss' => 'modal', 'data-toggle' => 'modal', 'data-target' => '#cid-registration-dialog' %>
+        <%= link_to '<span class="label label-success">Iscriviti!</span>'.html_safe, subscribe_flarc_championship_path(cship) %>
       <% end %>
       </td>
     </tr>

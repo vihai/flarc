@@ -21,3 +21,46 @@ function logout()
     },
   });
 }
+
+$.fn.selectOptions = function(value, clear)
+{
+  var v = value;
+  var vT = typeof(value);
+
+  // handle arrays
+  if(vT == "object" && v.constructor == Array)
+  {
+    var $this = this;
+    $.each(v, function()
+     {
+      $this.selectOptions(this, clear);
+     }
+    );
+  };
+
+  var c = clear || false;
+  // has to be a string or regular expression (object in IE, function in Firefox)
+  if(vT != "string" && vT != "function" && vT != "object") return this;
+  this.each(function() {
+    if(this.nodeName.toLowerCase() != "select") return this;
+    // get options
+    var o = this.options;
+    // get number of options
+    var oL = o.length;
+
+    for(var i = 0; i<oL; i++) {
+      if(v.constructor == RegExp) {
+        if(o[i].value.match(v))
+          o[i].selected = true;
+        else if(c)
+          o[i].selected = false;
+      } else {
+        if(o[i].value == v)
+          o[i].selected = true;
+        else if(c)
+          o[i].selected = false;
+      }
+    }
+  });
+  return this;
+};

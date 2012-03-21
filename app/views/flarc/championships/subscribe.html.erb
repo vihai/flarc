@@ -1,37 +1,35 @@
-<div id="registration_div">
-  <form id="cid-subscription-form" class="form-horizontal">
-    <fieldset>
-      <legend>Iscrizione al CID 2012</legend>
-      <div class="control-group">
-        <label class="control-label" for="fai_card">Tessera FAI</label>
-        <div class="controls">
-          <input type="text" name="fai_card" size="20" />
-        </div>
+<form id="cid-subscription-form" class="form-horizontal">
+  <fieldset>
+    <legend>Iscrizione al CID 2012</legend>
+    <div class="control-group">
+      <label class="control-label" for="fai_card">Tessera FAI</label>
+      <div class="controls">
+        <input type="text" name="fai_card" size="20" />
       </div>
-
-      <div class="control-group">
-        <label class="control-label" for="club_id">Club</label>
-        <div class="controls">
-          <%= select_tag :club_id,
-                options_for_select(
-                  [[ '' => '' ]] +
-                  Club.find(:all, :order => 'clubs.name ASC').collect { |c| [ c.name, c.id ] }) %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label class="control-label" for="cid_category">Categoria</label>
-        <div class="controls">
-          <%= select_tag :cid_category,
-                options_for_select({ '' => '', 'Nazionale' => :naz, 'Promozione' => :prom }) %>
-        </div>
-      </div>
-    </fieldset>
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Iscrivimi!</button>
     </div>
-  </form>
-</div>
+
+    <div class="control-group">
+      <label class="control-label" for="club_id">Club</label>
+      <div class="controls">
+        <%= select_tag :club_id,
+              options_for_select(
+                [[ '' => '' ]] +
+                Flarc::Club.find(:all, :order => 'clubs.name ASC').collect { |c| [ c.name, c.id ] }) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="cid_category">Categoria</label>
+      <div class="controls">
+        <%= select_tag :cid_category,
+              options_for_select({ '' => '', 'Nazionale' => :naz, 'Promozione' => :prom }) %>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Iscrivimi!</button>
+  </div>
+</form>
 
 <script type="text/javascript">
 //<![CDATA[

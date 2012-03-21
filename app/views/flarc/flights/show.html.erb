@@ -66,46 +66,11 @@
   <%= render :partial => "flarc/championships/flight/#{cf.class.name.split('::').last.underscore}", :object => cf %>
 <% end %>
 
-
-
-
-
-
-
-<% if authenticated_admin? %>
-  <%=
-# render :partial => 'admin_edit'
- %>
-  <% edit_box_enabled = true %>
-<% elsif authenticated? && @target.pilot_id == auth_person.pilot.id %>
-  <%= render :partial => 'flarc/user_edit' %>
-  <% edit_box_enabled = true %>
-<% else %>
-  <% edit_box_enabled = false %>
-<% end %>
-
-<% if edit_box_enabled %>
+<% if authenticated? && @target.pilot_id == auth_person.pilot.id %>
   <%= link_to_function '<i class="icon-pencil"></i>Modifica...'.html_safe,
             'jQuery("#edit_flight_dialog").dialog("open")',
             :class => 'btn btn-success btn-large' %>
 <% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </div>

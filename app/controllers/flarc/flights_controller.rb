@@ -115,6 +115,10 @@ class FlightsController < RestController
     end
   end
 
+  def edit
+    @target_json = @target.output(:rest, :format => :json, :view => rest_view)
+  end
+
   def submit
     if request.method == 'POST'
       @req = ActiveSupport::JSON.decode(request.body)

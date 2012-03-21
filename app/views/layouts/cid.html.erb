@@ -35,11 +35,11 @@
     Classifiche
     <ul>
       <li><%= link_to('Classifica per club', flarc_ranking_path('cid_2012_club')) %></li>
-      <li><%= link_to('Promozione', flarc_ranking_path('cid_2012_prom')) %></li>
-      <li><%= link_to('Nazionale Club', flarc_ranking_path('cid_2012_naz_club')) %></li>
-      <li><%= link_to('Nazionale 15 m', flarc_ranking_path('cid_2012_naz_15m')) %></li>
       <li><%= link_to('Nazionale Open', flarc_ranking_path('cid_2012_naz_open')) %></li>
+      <li><%= link_to('Nazionale 15 m', flarc_ranking_path('cid_2012_naz_15m')) %></li>
+      <li><%= link_to('Nazionale Club', flarc_ranking_path('cid_2012_naz_club')) %></li>
       <li><%= link_to('Nazionale 13.5 m', flarc_ranking_path('cid_2012_naz_13m5')) %></li>
+      <li><%= link_to('Promozione', flarc_ranking_path('cid_2012_prom')) %></li>
     </ul>
   </li>
   <li>Elenchi
@@ -68,12 +68,12 @@
       <% if !auth_person.pilot ||
             !auth_person.pilot.championships.include?(Flarc::Championship.find_by_symbol(:cid_2012))  %>
       <% else %>
-        <li><%= link_to('Invia il tuo volo', flarc_user_path('new_flight' => 1)) %></li>
+        <li><%= link_to('Invia il tuo volo', submit_flarc_flights_path) %></li>
         <li><%= link_to 'I tuoi voli', flarc_flights_path(:pilot_id => auth_person.pilot.id) %></li>
       <% end %>
 
       <% if hel_session && hel_session.authenticated_admin? %>
-        <li><%= link_to 'Amministrazione', flarc_static_path('administration_home') %></li>
+        <li><%= link_to 'Amministrazione', asgard_index_path %></li>
       <% end %>
         <li><%= link_to_function 'Logout', 'logout()' %></li>
       </ul>
@@ -100,8 +100,6 @@ jQuery(function($) {
 </script>
 
 <%= render :partial => '/layouts/login' %>
-
-<div id="freeow" class="freeow freeow-bottom-right"></div>
 
 </body>
 </html>
