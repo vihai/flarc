@@ -53,11 +53,11 @@ class RegistrationController < ApplicationController
         person.save!
 
         if current_site == :cid
-          Notifier::Cid.registration_complete(req[:email], password).deliver
+          Notifier::Cid.registration_complete(req[:email], password)
         elsif current_site == :csvva
-          Notifier::Csvva.registration_complete(req[:email], password).deliver
+          Notifier::Csvva.registration_complete(req[:email], password)
         else
-          Notifier.registration_complete(req[:email], password).deliver
+          Notifier.registration_complete(req[:email], password)
         end
       end
     end
@@ -86,7 +86,7 @@ class RegistrationController < ApplicationController
       end
 
       password = identity.credentials.first.password
-      Cid::RegistrationNotifier.send_password(identity.qualified, password).deliver
+      Cid::RegistrationNotifier.send_password(identity.qualified, password)
 
       respond_to do |format|
         format.json { render :json => { :success => true, :error => 'La password è stata inviata per e-mail' } }

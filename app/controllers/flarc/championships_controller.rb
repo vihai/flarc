@@ -26,7 +26,7 @@ class ChampionshipsController < RestController
 
         pilot.save!
 
-        Notifier::Cid.new_pilot_registered(pilot).deliver
+        Notifier::Cid.new_pilot_registered(pilot)
       end
 
       respond_to do |format|

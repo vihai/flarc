@@ -140,7 +140,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.7.1)
-    mime-types (1.17.2)
+    mime-types (1.18)
     multi_json (1.1.0)
     pg (0.13.2)
     polyglot (0.3.3)

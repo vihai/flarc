@@ -15,7 +15,7 @@ class Cid < ActionMailer::Base
     @password = password
 
     mail(:to => destination,
-         :subject => 'Registrazione al Campionato Italiano di Distanza')
+         :subject => 'Registrazione al Campionato Italiano di Distanza').deliver
   end
 
   def new_pilot_registered(pilot)
@@ -24,7 +24,7 @@ class Cid < ActionMailer::Base
     @pilot = pilot
 
     mail(:to => 'daniele@orlandi.com',
-         :subject => 'Nuovo pilota registrato al CID')
+         :subject => 'Nuovo pilota registrato al CID').deliver
   end
 
   def send_password(destination, password)
@@ -34,7 +34,21 @@ class Cid < ActionMailer::Base
     @password = password
 
     mail(:to => destination,
-         :subject => 'Password per il Campionato Italiano di Distanza')
+         :subject => 'Password per il Campionato Italiano di Distanza').deliver
+  end
+
+  def championship_started(pilot)
+    headers 'Auto-Submitted' => 'auto-generated'
+
+    pilot.person.identities.each do |identity|
+      next if identity.credentials.empty?
+
+      @email = identity.qualified
+      @password = identity.credentials.first.password # FIXME, choose the correct one
+
+      mail(:to => identity.qualified,
+           :subject => 'Campionato Italiano di Distanza 2012').deliver
+    end
   end
 
 end

@@ -14,7 +14,7 @@ class Csvva < ActionMailer::Base
     @password = password
 
     mail(:to => destination,
-         :subject => 'Registrazione al Campionato CSVVA di Distanza')
+         :subject => 'Registrazione al Campionato CSVVA di Distanza').deliver
   end
 
   def new_pilot_registered(pilot)
@@ -23,7 +23,7 @@ class Csvva < ActionMailer::Base
     @pilot = pilot
 
     mail(:to => 'voli@csvva.it',
-         :subject => 'Nuovo pilota registrato al Campionato CSVVA di Distanza')
+         :subject => 'Nuovo pilota registrato al Campionato CSVVA di Distanza').deliver
   end
 
   def send_password(destination, password)
@@ -33,7 +33,7 @@ class Csvva < ActionMailer::Base
     @password = password
 
     mail(:to => destination,
-         :subject => 'Password per il Campionato CSVVA di Distanza')
+         :subject => 'Password per il Campionato CSVVA di Distanza').deliver
   end
 
 end

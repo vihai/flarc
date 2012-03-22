@@ -14,7 +14,7 @@ class Notifier < ActionMailer::Base
     @password = password
 
     mail(:to => destination,
-         :subject => 'Registrazione all\'archivio voli')
+         :subject => 'Registrazione all\'archivio voli').deliver
   end
 
   def new_pilot_registered(pilot)
@@ -23,7 +23,7 @@ class Notifier < ActionMailer::Base
     @pilot = pilot
 
     mail(:to => 'daniele@orlandi.com',
-         :subject => 'Nuovo pilota registrato all\'archivio voli')
+         :subject => 'Nuovo pilota registrato all\'archivio voli').deliver
   end
 
   def send_password(destination, password)
@@ -33,7 +33,7 @@ class Notifier < ActionMailer::Base
     @password = password
 
     mail(:to => destination,
-         :subject => 'Password per l\'archivio voli')
+         :subject => 'Password per l\'archivio voli').deliver
   end
 
 end

@@ -26,7 +26,7 @@ Ext.define('Asgard.view.Viewport', {
      {
       text: 'Logout',
       name: 'logout',
-      icon: 'assets/exit.png',
+      icon: '/assets/exit.png',
      },
     ],
    },
@@ -82,12 +82,22 @@ Ext.define('Asgard.view.Viewport', {
       },
       items: [
        {
-        text: '',
+        text: 'Voli',
         symbol: '',
 //        icon: '/assets/shop/agreements_button.png',
        },
        {
-        text: '',
+        text: 'Piloti',
+        symbol: '',
+//        icon: '',
+       },
+       {
+        text: 'Alianti',
+        symbol: '',
+//        icon: '',
+       },
+       {
+        text: 'Tipi di aliante',
         symbol: '',
 //        icon: '',
        },
@@ -109,16 +119,6 @@ Ext.define('Asgard.view.Viewport', {
        {
         text: '',
         symbol: '',
-//        icon: '',
-       },
-       {
-        text: '',
-        symbol: '',
-//        icon: '',
-       },
-       {
-        text: 'DNS tester',
-        symbol: 'dns_tester',
 //        icon: '',
        },
       ]

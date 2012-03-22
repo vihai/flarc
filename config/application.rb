@@ -11,16 +11,9 @@ end
 
 LAYOUTS = {
   'campionato.csvva.it' => 'csvva',
-  'csvva.orlandi.com' => 'csvva',
-  'csvva-dev.orlandi.com' => 'csvva',
-  'flarc.orlandi.com' => 'cid',
-  'flarc-dev.orlandi.com' => 'cid',
   'cidvv.it' => 'cid',
-  'www.cidvv.it' => 'cid',
-  'cid.orlandi.com' => 'cid',
-  'cid-dev.orlandi.com' => 'cid',
-  'sap.orlandi.com' => 'sap',
-  'sap-dev.orlandi.com' => 'sap'
+  'staging.cidvv.it' => 'cid',
+  'dev.cidvv.it' => 'cid',
 }
 
 require File.expand_path('../../../yggdra/hel/lib/ygg/hel/json_show_exceptions', __FILE__)
@@ -41,7 +34,7 @@ module Flarc
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-    config.active_record.observers = 'Ygg/Core/LogCollector'
+#    config.active_record.observers = 'Ygg/Core/LogCollector'
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -76,8 +69,6 @@ module Flarc
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    config.assets.precompile += [ 'csvva.css', 'cid.css' ]
 
     config.assets.paths << File.join(Rails.root, 'app', 'assets', 'js')
     config.assets.paths << File.join(Rails.root, 'app', 'assets', 'css')

@@ -1,3 +1,3 @@
 
 //= require ext/ext
-//= require application
+//= require asgard
