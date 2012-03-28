@@ -50,15 +50,15 @@ class FlightsController < RestController
     end
   end
 
-  def flight_search_conditions
+  def apply_search_conditions
     conditions = {}
 
-    if params[:year] then
+    if params[:year]
       day_beg = Time.local(params[:year], params[:month], params[:day])
 
-      if params[:day] then
+      if params[:day]
          day_end = day_beg + 1.days
-      elsif params[:month] then
+      elsif params[:month]
          day_end = day_beg + 1.month
       else
          day_end = day_beg + 1.year
@@ -67,11 +67,16 @@ class FlightsController < RestController
       conditions[:takeoff_time] = day_beg...day_end
     end
 
-    conditions
+    @targets_relation = @targets_relation.where(conditions)
+
+    if params[:cship]
+      @targets_relation = @targets_relation.joins(:championships).where(:championships => { :symbol => params[:cship] })
+    end
   end
 
   def find_targets
-    @targets_relation = model.scoped.where(flight_search_conditions)
+    @targets_relation ||= model.scoped
+    apply_search_conditions
     super
   end
 
@@ -200,6 +205,85 @@ class FlightsController < RestController
 
         File.rename(igc_tmp_file.filename, @flight.igc_file_path)
         igc_tmp_file.destroy
+      end
+
+      respond_to do |format|
+        format.json { render :json => { :id => @flight.id } }
+      end
+    end
+  end
+
+  def submit_update
+    if request.method == 'POST'
+      @req = ActiveSupport::JSON.decode(request.body)
+      @req.symbolize_keys!
+
+      Ygg::Core::Transaction.new 'Flight update' do
+        fres = @req[:flight]
+        fres.symbolize_keys!
+
+        pres = @req[:plane]
+        if pres
+          pres.symbolize_keys!
+          plane = Plane.create(:registration => pres[:registration],
+                               :plane_type => PlaneType.find(pres[:plane_type_id]))
+          fres[:plane_id] = plane.id
+        end
+
+        @flight = Flight.find(fres[:id])
+        @flight.attributes = {
+          :pilot => Pilot.find(fres[:pilot_id]),
+          :plane => Plane.find(fres[:plane_id]),
+          :plane_type_configuration_id => fres[:plane_type_configuration_id],
+          :private => false,
+          :notes_public => fres[:notes_public]
+        }
+
+        # Override pilot if not an admin
+        if !hel_session.authenticated_admin?
+          @flight.pilot = auth_person.pilot
+        end
+
+        fres[:championship_flights].each do |cf|
+          cf.symbolize_keys!
+          cfr = @flight.championship_flights.find(cf[:id])
+
+          case cf[:_type]
+          when 'Championship::Flight::Cid2012'
+            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2012)).first
+            if !cp.cid_category
+              ranking = nil
+            elsif cp.cid_category.to_sym == :prom
+              ranking = :prom
+            else
+              ranking = cf[:cid_ranking].to_sym
+            end
+
+            cfr.attributes = {
+              :status => :pending,
+              :cid_ranking => ranking,
+              :distance => cf[:distance],
+              :task_eval => cf[:task_eval].to_sym,
+              :task_type => cf[:task_type].to_sym,
+            }
+
+          when 'Championship::Flight::Csvva2012'
+            cfr.attributes = {
+              :status => :pending,
+              :distance => cf[:distance],
+            }
+          end
+
+          cfr.save!
+        end
+
+        if !@flight.valid?
+          raise UnprocessableEntity.new('Dati invalidi',
+                  :per_field_msgs => @flight.errors.inject({}) { |h, (k, v)| h[k] = v; h },
+                  :retry_possible => false)
+        end
+
+        @flight.save!
       end
 
       respond_to do |format|

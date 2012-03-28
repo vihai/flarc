@@ -86,7 +86,7 @@ class RegistrationController < ApplicationController
       end
 
       password = identity.credentials.first.password
-      Cid::RegistrationNotifier.send_password(identity.qualified, password)
+      Notifier::Cid.send_password(identity.qualified, password)
 
       respond_to do |format|
         format.json { render :json => { :success => true, :error => 'La password è stata inviata per e-mail' } }

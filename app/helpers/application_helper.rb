@@ -17,21 +17,24 @@ module ApplicationHelper
   end
 
   def fmt_handicap(handicap)
-   handicap.nil? ? 'N/A' : sprintf('%.2f', handicap) 
+   handicap.nil? ? 'N/A' : sprintf('%.2f', handicap)
   end
 
   def status_icon(status)
     case status
     when 'pending'
       return image_tag('flight_status_pending.png',
+                       :class => :flight_status,
                        :alt => 'Pendente',
                        :title => 'Pendente')
     when 'invalid'
       return image_tag('flight_status_invalid.png',
+                       :class => :flight_status,
                        :alt => 'Invalido',
                        :title => 'Invalido')
     when 'approved'
       return image_tag('flight_status_approved.png',
+                       :class => :flight_status,
                        :alt => 'Approvato',
                        :title => 'Approvato')
     end

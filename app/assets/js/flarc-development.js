@@ -1,1 +1,1 @@
-//= require application
+//= require flarc

@@ -288,47 +288,38 @@ table.flight_calendar
 table.flight_calendar > tbody > tr > td
 {
  vertical-align: top;
- height: 2em;
+ border: solid 1px white;
+ padding: 0.5em 0.5em 0px 1em;
+ line-height: 1em;
+ width: 3em;
+ height: 2.5em;
 }
 
-table.flight_calendar > tbody > tr > td > span.dom
+table.flight_calendar > tbody > tr > td > div.dom
 {
- font-size: 50%;
+ font-size: 70%;
  vertical-align: top;
  margin-left: -1em;
  margin-top: -0.5em;
  margin-right: 0.5em;
 }
 
-table.flight_calendar > tbody > tr > td > span.cnt
+table.flight_calendar > tbody > tr > td > div.cnt
 {
  vertical-align: top;
  font-weight: bold;
+ text-align: right;
 }
 
-table.flight_calendar > tbody > tr > td.empty
-{
- background-color: #eee;
-}
+table.flight_calendar > tbody > tr > td.empty { background-color: #eee; }
+table.flight_calendar > tbody > tr > th { background-color: #9c9; }
+table.flight_calendar > tbody > tr > td.d5 { background-color: #ebb; }
+table.flight_calendar > tbody > tr > td.d6 { background-color: #ebb; }
+table.flight_calendar > tbody > tr > td.today { border: solid 3px red; }
 
-table.flight_calendar > tbody > tr > th
+img.flight_status
 {
- background-color: #9c9;
-}
-
-table.flight_calendar > tbody > tr > td.d5
-{
- background-color: #ebb;
-}
-
-table.flight_calendar > tbody > tr > td.d6
-{
- background-color: #ebb;
-}
-
-table.flight_calendar > tbody > tr > td.today
-{
- border: solid 3px red;
+ padding: 0;
 }
 
 .icon-pending { background-image: url('../images/flight_status_pending.png') !important; }

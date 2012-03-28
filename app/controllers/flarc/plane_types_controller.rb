@@ -12,8 +12,10 @@ class PlaneTypesController < RestController
     end
   end
 
-  filter :combo, lambda { |r| apply_search_to_relation(r, [ 'name' ]) }
-
+  def find_targets
+    @targets_relation = apply_search_to_relation(model.scoped, [ 'name' ])
+    super
+  end
 end
 
 end

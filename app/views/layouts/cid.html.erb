@@ -43,8 +43,8 @@
   </li>
   <li>Elenchi
     <ul>
-      <li><%= link_to('Voli', calendar_flarc_flights_path(:year => Time.now.year)) %></li>
-      <li><%= link_to('Piloti', flarc_pilots_path('championships.symbol' => 'cid_2012',
+      <li><%= link_to('Voli', calendar_flarc_flights_path(:cship => :cid_2012)) %></li>
+      <li><%= link_to('Piloti', flarc_pilots_path('cship' => :cid_2012,
                                             :sort => 'person.last_name,person.first_name')) %></li>
       <li><%= link_to('Alianti', flarc_planes_path(:sort => 'registration')) %></li>
     </ul>

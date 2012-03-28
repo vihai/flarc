@@ -33,12 +33,12 @@
           <% if dom > 0 %>
           <% today = Time.now.year == year && Time.now.month == month && Time.now.mday == dom %>
           <td class="d<%=h col %><%= today ? ' today' : '' %>">
-          <span class="dom"><%=h dom %></span>
-          <span class="cnt">
+          <div class="dom"><%=h dom %></div>
+          <div class="cnt">
           <% if dom > 0 && days[dom] %>
-            <%= link_to days[dom].cnt, flights_path(:year => year, :month => month, :day => dom) %>
+            <%= link_to days[dom].cnt, flarc_flights_path(:year => year, :month => month, :day => dom) %>
           <% end %>
-          </span>
+          </div>
           </td>
           <% else %>
             <td class="empty"></td>

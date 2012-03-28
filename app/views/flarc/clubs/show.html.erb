@@ -2,7 +2,6 @@
   <h1><%= @target.name %></h1>
 
 
-<% @flights = @target.flights.order('takeoff_time DESC') %>
-<%= render :partial => 'flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
+<%= render :partial => 'flarc/flights/flights', :object => @flights, :locals => { :options => { :hide_pilot => true } } %>
 
 </div>

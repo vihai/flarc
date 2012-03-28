@@ -43,8 +43,17 @@ class PilotsController < RestController
 #    apply_search_to_relation(r, [ 'person.first_name', 'person.last_name' ])
 #  }
 
+  def apply_search_conditions
+    if params[:cship]
+      @targets_relation = @targets_relation.joins(:championships).where(:championships => { :symbol => params[:cship] })
+    end
+
+    @targets_relation = apply_search_to_relation(@targets_relation, [ 'person.first_name', 'person.last_name' ])
+  end
+
   def find_targets
-    @targets_relation = apply_search_to_relation(model.scoped, [ 'person.first_name', 'person.last_name' ])
+    @targets_relation ||= model.scoped
+    apply_search_conditions
     super
   end
 

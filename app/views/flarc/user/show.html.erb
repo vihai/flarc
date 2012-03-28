@@ -1,41 +1,15 @@
 <div class="body_contents">
 <h1>Benvenuto <%= auth_person.first_name %></h1>
 
+
+<% if @current_championships.first.pilots.include?(auth_person.pilot) %>
 <%= link_to '<i class="icon-upload icon-white"></i>Invia un volo...'.html_safe, submit_flarc_flights_path,
             :class => 'btn btn-success btn-large' %>
-
-<% if @current_championships.any? %>
-<h3>Campionati in corso</h3>
-<table class="championships table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Da</th>
-      <th>Fino a</th>
-      <th>Iscritti</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @current_championships.each do |cship| %>
-    <tr>
-      <td><%= link_to(cship.name, cship) %></td>
-      <td class="valid_from"><%=h cship.valid_from.strftime("%d-%m-%Y") %></td>
-      <td class="valid_to"><%=h cship.valid_to.strftime("%d-%m-%Y") %></td>
-      <td class="count"><%=h cship.pilots.count %></td>
-      <td>
-      <% if cship.pilots.include?(auth_person.pilot) %>
-        <span class="label label-info">Iscritto</span>
-      <% else %>
-        <%= link_to '<span class="label label-success">Iscriviti!</span>'.html_safe, subscribe_flarc_championship_path(cship) %>
-      <% end %>
-      </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<% else %>
+  <%= link_to '<span class="label label-success">Iscriviti al CID 2012</span>'.html_safe, subscribe_flarc_championship_path(cship) %>
 <% end %>
 
-<h2>I tuoi voli:</h2>
+<h2><%= link_to 'I tuoi voli:', flarc_flights_path(:pilot_id => auth_person.pilot.id) %></h2>
 <p>
 <%= render :partial => 'flarc/flights/flights',
            :object => @flights_excerpt.all[0..10],

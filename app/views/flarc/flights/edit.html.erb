@@ -17,6 +17,8 @@
 
 function load_record(record)
 {
+console.log("LOADRECORD=", record);
+
   cships = {};
   $.each(record.championship_flights, function(index, value) {
     cships[value._type] = value;
@@ -24,11 +26,13 @@ function load_record(record)
 
   cid = cships['Flarc::Championship::Flight::Cid2012'];
   if (cid) {
+    $('#flight-data-form input[name=cid_id]').val(cid.id);
     $('#flight-data-form input[name=cid_distance]').val(cid.distance / 1000);
     $('#flight-data-form select[name=cid_task_type]').selectOptions(cid.data.task_type);
     $('#flight-data-form select[name=cid_task_eval]').selectOptions(cid.data.task_eval);
   }
 
+  $('#flight-data-form input[name=id]').val(record.id);
   $('#flight-data-form input[name=notes]').val(record.notes);
 
   pilot_changed(record.pilot);
@@ -57,6 +61,7 @@ $(function() {
     req.igc_tmp_file_id = $('#igc_tmp_file_id').val();
 
     req.flight = {};
+    req.flight.id = $('#flight-data-form input[name=id]').val();
     req.flight.plane_type_configuration_id = $('#plane_type_configuration_id').val();
     req.flight.championship_flights = [];
     req.flight.pilot_id = $('#pilot_id').val();
@@ -71,6 +76,7 @@ $(function() {
 
     if ($('#cid_member').prop('checked')) {
       var cid = {};
+      cid.id = $('#flight-data-form input[name=cid_id]').val();
       cid._type = 'Championship::Flight::Cid2012';
       cid.distance  = parseFloat($('#cid_distance').val().replace(/,/, '.')) * 1000;
       cid.cid_ranking = $('#cid_ranking').val();
@@ -82,6 +88,7 @@ $(function() {
 
     if ($('#csvva_member').prop('checked')) {
       var csvva = {};
+      csvva.id = $('#flight-data-form input[name=csvva_id]').val();
       csvva._type = 'Championship::Flight::Csvva2012';
       csvva.distance  = parseFloat($('#csvva_distance').val().replace(/,/, '.')) * 1000;
       req.flight.championship_flights.push(csvva);
@@ -91,7 +98,7 @@ $(function() {
     $('#flight-data-form .form-actions .btn-primary').spinner({ position: 'center', hide: true });
 
     $.ajax({
-      url: '/flarc/flights/submit',
+      url: '/flarc/flights/submit_update',
       dataType: 'json',
       type: 'POST',
       contentType: 'application/json; charset=utf-8',

@@ -67,8 +67,8 @@
 <% end %>
 
 <% if authenticated? && @target.pilot_id == auth_person.pilot.id %>
-  <%= link_to_function '<i class="icon-pencil"></i>Modifica...'.html_safe,
-            'jQuery("#edit_flight_dialog").dialog("open")',
+  <%= link_to '<i class="icon-pencil"></i>Modifica...'.html_safe,
+            edit_flarc_flight_path(@target),
             :class => 'btn btn-success btn-large' %>
 <% end %>
 

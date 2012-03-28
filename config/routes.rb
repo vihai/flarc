@@ -17,6 +17,7 @@ Flarc::Application.routes.draw do
 
       collection do
         match :submit
+        match :submit_update
         get :calendar
       end
     end

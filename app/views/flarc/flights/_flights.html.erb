@@ -3,7 +3,6 @@
   <table class="flights table table-striped table-bordered table-condensed">
     <thead>
       <tr>
-        <th></th>
         <% if !options[:hide_pilot] %>
           <th>Pilota</th>
         <% end %>
@@ -14,21 +13,21 @@
         <% if !options[:hide_plane] %>
           <th>Aliante</th>
         <% end %>
+
+        <th>Punteggio</th>
+        <th>Validazione</th>
       </tr>
     </thead>
     <tbody>
     <% for x in flights do %>
-      <tr>
-        <td class="view">
-          <%= link_to(image_tag('view.png', :alt => 'View', :title => 'Apri la pagina del volo'), x) %>
-        </td>
+      <tr style="cursor: pointer" onclick="window.location = '<%= url_for x %>'">
         <% if !options[:hide_pilot] %>
           <td class="pilot">
             <%= link_to(x.pilot.person.name, x.pilot) %>
           </td>
         <% end %>
-        <td class="takoff">
-          <%= link_to(l(x.takeoff_time, :format => :compact), x) %>
+        <td class="takeoff">
+          <%= l x.takeoff_time, :format => :compact %>
         </td>
         <td class="duration">
           <%=h fmt_duration(x.duration) %>
@@ -39,13 +38,12 @@
             (<%= link_to(x.plane.plane_type.name, x.plane.plane_type) -%><%=h x.plane_type_configuration ? (' ' + x.plane_type_configuration.name) : '' -%>)
           </td>
         <% end %>
-        <td class="tags">
-          <% x.championship_flights.each do |cf| %>
-            <%= image_tag cf.championship.icon,
-                          :alt => "Icona #{cf.championship.name}",
-                          :title => "#{cf.championship.name} (#{cf.status})",
-                          :class => "cf_status_icon_#{cf.status}" %>
-          <% end %>
+        <td class="points">
+          <%= x.championship_flights.first && x.championship_flights.first.respond_to?(:points) ?
+                fmt_points(x.championship_flights.first.points) : '' %>
+        </td>
+        <td class="validation" style="padding: 2px 0px 0px 2px">
+          <%= x.championship_flights.first ? status_icon(x.championship_flights.first.status) : '' %>
         </td>
       </tr>
     <% end %>

@@ -1,4 +1,5 @@
 <form id="flight-data-form" class="form-horizontal" style="display: none">
+  <input type="hidden" name="id" />
   <input type="hidden" name="igc_tmp_file_id" id="igc_tmp_file_id" />
   <input type="hidden" name="pilot_id" id="pilot_id" /><br />
   <fieldset>
@@ -24,7 +25,7 @@
     <div id="plane_type_div" style="display: none" class="control-group">
       <label class="control-label" for="plane">Tipo</label>
       <div class="controls">
-        <input type="text" name="plane_type" id="plane_type" size="20" />
+        <input type="text" name="plane_type" id="plane_type" size="20" autocomplete="off" />
         <input type="hidden" name="plane_type_id" id="plane_type_id" />
       </div>
     </div>
@@ -52,7 +53,7 @@
 
   <fieldset id="cid_fieldset" style="display: none" class="control-group">
     <legend>
-      <input type="checkbox" name="cid_member" value="yes" id="cid_member" />
+      <input type="checkbox" name="cid_member" value="yes" id="cid_member" disabled="disabled" />
       CID 2012:
     </legend>
 
@@ -172,15 +173,20 @@ function pilot_changed(pilot)
   }
 }
 
+var current_plane = null;
+var plane_type = null;
+
 function plane_changed(plane)
 {
- current_plane = plane;
+  current_plane = plane;
 
   if (!plane) {
     $('#plane_type_div').fadeIn();
     $('#plane_id').val('');
     return;
   }
+
+  plane_type = plane.plane_type;
 
   $('#plane_type_div').fadeOut();
   $('#plane').val(plane.registration);
@@ -190,12 +196,9 @@ function plane_changed(plane)
   update_cid_calcs();
 }
 
-var current_plane = null;
-var new_plane_type = null;
-
-function plane_type_changed(plane_type)
+function plane_type_changed(pt)
 {
- new_plane_type = plane_type;
+  plane_type = pt;
 
   if (!plane_type) {
     $('#plane_type').val('');
@@ -227,8 +230,6 @@ function update_cid_calcs()
 {
   $('#cid_calcs .points').html('');
 
-  var plane_type = current_plane ? current_plane.plane_type : new_plane_type;
-
   var config;
   $.each(plane_type.configurations, function(index, value) {
     if (value.id == $('#plane_type_configuration_id').val()) {
@@ -246,9 +247,9 @@ function update_cid_calcs()
 
   var handicap;
   if ($('#cid_ranking').val() == 'naz_club')
-    handicap = config ? config.club_handicap : current_plane.plane_type.club_handicap;
+    handicap = config ? config.club_handicap : plane_type.club_handicap;
   else
-    handicap = config ? config.handicap : current_plane.plane_type.handicap;
+    handicap = config ? config.handicap : plane_type.handicap;
 
   if (!handicap) {
     $('#cid_distance_points').html('Handicap non disponibile');
@@ -315,7 +316,6 @@ $(function() {
         dataType: 'json',
         data: {
           view: 'combo_nf',
-          flt: 'combo',
           sort: 'person.last_name,person.first_name',
           search: request.term,
           limit: 10
@@ -353,7 +353,6 @@ $(function() {
         dataType: 'json',
         data: {
           view: 'combo',
-          flt: 'combo',
           sort: 'registration',
           search: request.term,
           limit: 10
@@ -376,7 +375,7 @@ $(function() {
     change: function(event, ui) {
       if (!ui.item) {
         $.ajax({ url: '/flarc/planes', dataType: 'json',
-          data: { view: 'combo', flt: 'combo', search: $('#plane').val(), limit: 1 },
+          data: { view: 'combo', search: $('#plane').val(), limit: 1 },
           success: function(data) {
             if (data.length)
               plane_changed(data[0]);
@@ -401,7 +400,6 @@ $(function() {
         dataType: 'json',
         data: {
           view: 'combo',
-          flt: 'combo',
           sort: 'name',
           search: request.term,
           limit: 10
