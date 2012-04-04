@@ -1,5 +1,7 @@
 #require 'httpclient'
 
+ActiveRecord::Base # Workaround for https://github.com/rails/rails/issues/882
+
 namespace :chores do
   task :rankings => :environment do
     chore('Rankings') do
@@ -8,18 +10,18 @@ namespace :chores do
 #      RankingTrofeo.compute
 #      RankingCirSpeed.compute
 #      RankingCsvva2011.compute
-      Ranking::Cid2012.compute
-      Ranking::Cid2012Club.compute
+      Flarc::Ranking::Cid2012.compute
+      Flarc::Ranking::Cid2012Club.compute
     end
   end
 
   task :snapshot => :environment do
     chore('Snapshot') do
 
-      Ranking.transaction do
-        Ranking.all.each do |ranking|
+      Flarc::Ranking.transaction do
+        Flarc::Ranking.all.each do |ranking|
           ranking.standings.each do |standing|
-            histentry = Ranking::Standing::HistoryEntry.new(
+            histentry = Flarc::Ranking::Standing::HistoryEntry.new(
                           :standing => standing,
                           :snapshot_time => Time.now,
                           :position => standing.position,
@@ -31,7 +33,7 @@ namespace :chores do
           end
 
           ranking.club_standings.each do |standing|
-            histentry = Ranking::ClubStanding::HistoryEntry.new(
+            histentry = Flarc::Ranking::ClubStanding::HistoryEntry.new(
                           :club_standing => standing,
                           :snapshot_time => Time.now,
                           :position => standing.position,
@@ -50,7 +52,7 @@ namespace :chores do
     chore('Alptherm') do
       client = HTTPClient.new
 
-      AlpthermSource.all.each do |source|
+      Flarc::AlpthermSource.all.each do |source|
 
         data = client.get_content('http://www.thomas-weiss.ch/cgi-bin/regthermsource.pl?' + source.site_param)
 
@@ -67,7 +69,7 @@ namespace :chores do
           next
         end
 
-        AlpthermHistoryEntry.create(
+        Flarc::AlpthermHistoryEntry.create(
           :taken_at => Time.now,
           :source => source,
           :data => data[start..stop-1]

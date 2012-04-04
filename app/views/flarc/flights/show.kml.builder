@@ -5,7 +5,7 @@ xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
     xml.name("Volo di #{@target.pilot.person.name}")
     xml.description do |x|
       #FIXME ADD CDATA
-      x << "Aliante: #{link_to(@target.plane.registration, plane_path(@target.plane, :only_path => false))}<br/>"
+      x << "Aliante: #{link_to(@target.plane.registration, flarc_plane_path(@target.plane, :only_path => false))}<br/>"
       x << "Decollo: #{l(@target.takeoff_time, :format => :compact)}<br/>"
       x << "Atterraggio: #{l(@target.landing_time, :format => :compact)}<br/>"
       x << "Durata: #{l(Time.at(@target.landing_time-@target.takeoff_time), :format => '%H:%M')}<br/>"
@@ -96,7 +96,7 @@ xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
       xml.visibility(1)
       xml.open(0)
 
-      AlpthermSource.all.each do |source|
+      Flarc::AlpthermSource.all.each do |source|
         entry = source.entries.first(:conditions => [ "taken_at::date = ?::date", @target.takeoff_time ])
         next if entry.nil?
 

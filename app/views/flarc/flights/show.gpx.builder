@@ -9,7 +9,7 @@ xml.gpx(
     xml.name("Volo di #{@target.pilot.person.name}")
     xml.desc do |x|
       #FIXME Absolute url
-      x << "Aliante: #{link_to(@target.plane.registration, plane_path(@target.plane, :only_path => false))}<br/>"
+      x << "Aliante: #{link_to(@target.plane.registration, flarc_plane_path(@target.plane, :only_path => false))}<br/>"
       x << "Decollo: #{l(@target.takeoff_time, :format => :compact)}<br/>"
       x << "Atterraggio: #{l(@target.landing_time, :format => :compact)}<br/>"
       x << "Durata: #{l(Time.at(@target.landing_time-@target.takeoff_time), :format => '%H:%M')}<br/>"

@@ -6,7 +6,8 @@
 <%= link_to '<i class="icon-upload icon-white"></i>Invia un volo...'.html_safe, submit_flarc_flights_path,
             :class => 'btn btn-success btn-large' %>
 <% else %>
-  <%= link_to '<span class="label label-success">Iscriviti al CID 2012</span>'.html_safe, subscribe_flarc_championship_path(cship) %>
+  <%= link_to 'Iscriviti al CID 2012</span>'.html_safe, subscribe_flarc_championship_path(@current_championships.first),
+            :class => 'btn btn-success btn-large' %>
 <% end %>
 
 <h2><%= link_to 'I tuoi voli:', flarc_flights_path(:pilot_id => auth_person.pilot.id) %></h2>
