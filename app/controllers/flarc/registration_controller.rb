@@ -35,7 +35,7 @@ class RegistrationController < ApplicationController
 
         password = Password.phonemic(8)
 
-        credential = Ygg::Core::Credential::ObfuscatedPassword.new(:password => password)
+        credential = Ygg::Core::Identity::Credential::ObfuscatedPassword.new(:password => password)
         identity = Ygg::Core::Identity.new(
           :qualified => req[:email],
           :is_admin => false,
@@ -59,6 +59,10 @@ class RegistrationController < ApplicationController
         else
           Notifier.registration_complete(req[:email], password)
         end
+      end
+
+      respond_to do |format|
+        format.json { render :json => { :success => true } }
       end
     end
   end

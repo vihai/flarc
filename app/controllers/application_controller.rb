@@ -5,6 +5,10 @@
 
 class ApplicationController < ActionController::Base
 
+  include ActiveRest::Controller::Rescuer
+
+  rescue_from Exception, :with => :rest_ar_exception_rescue_action
+
   helper :all # include all helpers, all the time
 
   helper_method :facebook_uid, :hel_session, :auth_method, :auth_person
@@ -25,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
 #  protect_from_forgery
-  
+
   attr_accessor :hel_session
 
   def auth_method
@@ -52,7 +56,6 @@ class ApplicationController < ActionController::Base
         @hel_session.close(:not_authenticated_anymore)
       end
     end
-      
   end
 
   def facebook_session

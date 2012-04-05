@@ -66,7 +66,7 @@
   <%= render :partial => "flarc/championships/flight/#{cf.class.name.split('::').last.underscore}", :object => cf %>
 <% end %>
 
-<% if authenticated? && @target.pilot_id == auth_person.pilot.id %>
+<% if authenticated? && auth_person.pilot && @target.pilot_id == auth_person.pilot.id %>
   <%= link_to '<i class="icon-pencil"></i>Modifica...'.html_safe,
             edit_flarc_flight_path(@target),
             :class => 'btn btn-success btn-large' %>

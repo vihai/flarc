@@ -6,7 +6,7 @@
       <div class="control-group">
         <label class="control-label" for="email">e-Mail</label>
         <div class="controls">
-          <input type="text" name="email" class="input-xlarge">
+          <input type="text" name="email" class="input-xlarge" autocomplete="off">
           <p class="help-block">Inserisci il tuo indirizzo e-mail valido e funzionante.</p>
        </div>
       </div>
@@ -48,7 +48,7 @@ function wizardHandleEmail(wizard)
 
   $.ajax({
 //    url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
-    url: '/registration/check_email',
+    url: '<%= flarc_registration_check_email_path %>',
     dataType: 'json',
     type: 'POST',
     contentType: 'application/json; charset=utf-8',
@@ -94,8 +94,7 @@ function wizardHandlePersonalData(wizard)
   var phone = $('#registration-form input[name=phone]').val();
 
   $.ajax({
-//    url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
-    url: '/registration',
+    url: '<%= flarc_registration_path %>',
     dataType: 'json',
     type: 'POST',
     contentType: 'application/json; charset=utf-8',
@@ -113,7 +112,7 @@ function wizardHandlePersonalData(wizard)
         ' un\'e-mail con un link di attivazione. Appena la ricevi clicca sul link e il tuo account sarà attivato</div>');
 
       $('#registration-form fieldset div.step2 input').attr('disabled', 'disabled');
-      $('#registration-form .form-actions button').attr('disabled', 'disabled');
+      $('#registration-form .form-actions button').remove();
 
       wizard.state = 'done';
     },

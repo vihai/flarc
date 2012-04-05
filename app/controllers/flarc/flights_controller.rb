@@ -196,7 +196,7 @@ class FlightsController < RestController
         end
 
         if !@flight.valid?
-          raise UnprocessableEntity.new('Dati invalidi',
+          raise ActiveRest::Exception::UnprocessableEntity.new('Dati invalidi',
                   :per_field_msgs => @flight.errors.inject({}) { |h, (k, v)| h[k] = v; h },
                   :retry_possible => false)
         end
@@ -278,7 +278,7 @@ class FlightsController < RestController
         end
 
         if !@flight.valid?
-          raise UnprocessableEntity.new('Dati invalidi',
+          raise ActiveRest::Exception::UnprocessableEntity.new('Dati invalidi',
                   :per_field_msgs => @flight.errors.inject({}) { |h, (k, v)| h[k] = v; h },
                   :retry_possible => false)
         end

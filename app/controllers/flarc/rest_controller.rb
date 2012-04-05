@@ -37,6 +37,7 @@ class RestController < ApplicationController
     end
   end
 
+  rescue_from Exception, :with => :rest_ar_exception_rescue_action
 end
 
 end
