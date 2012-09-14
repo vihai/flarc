@@ -209,13 +209,11 @@ table.standard > tbody > tr > td.count { text-align: right; }
 
 table.ranking
 {
+ background-color: #f7f7f7;
 }
 
 table.ranking > caption
 {
- -webkit-border-radius: 8px;    /* for Safari */
- -moz-border-radius: 8px;       /* for Firefox */
- border-radius: 8px;
 }
 
 table.ranking > caption > span.generated_at
@@ -223,20 +221,12 @@ table.ranking > caption > span.generated_at
  font-size: 75%;
 }
 
-table.ranking { }
-table.ranking > tbody > tr > td.number { text-align: right; }
-table.ranking > tbody > tr > td.pending a { color: #eef; }
-
-
-table.cir_spd_ranking > tbody > tr > td
-{
- cursor: hand;
-}
-
-table.cir_spd_ranking > tbody > tr > td:hover
-{
- background-color: #f99;
-}
+table.ranking { max-width: 100em; }
+table.ranking > thead > tr > th.points { text-align: center; }
+table.ranking > tbody > tr > td.number { text-align: right; width: 3em; font-size: 200%; font-weight: bold; }
+table.ranking > tbody > tr > td.pending a { color: #aaa; }
+table.ranking > tbody > tr > td.points { text-align: center; width: 10em; font-size: 140%; }
+table.ranking > tbody > tr > td.total_points { font-weight: bold; }
 
 table.cir_speed > tbody > tr.record
 {
@@ -497,8 +487,6 @@ span.ac_p_reg
 }
 
 table#cid_calcs { width: 60em; }
-td.points { text-align: right; min-width: 10em; }
-td.total_points { font-weight: bold; }
 
 div.flight_notes {}
 div.flight_notes > div.contents

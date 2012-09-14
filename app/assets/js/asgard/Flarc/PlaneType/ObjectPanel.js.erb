@@ -1,0 +1,32 @@
+/*
+ * Copyright (C) 2008-2012, Daniele Orlandi
+ *
+ * Author:: Daniele Orlandi <daniele@orlandi.com>
+ *
+ * License:: You can redistribute it and/or modify it under the terms of the LICENSE file.
+ *
+ */
+
+Ext.define('Asgard.Flarc.PlaneType.ObjectPanel', {
+  extend: 'Asgard.ObjectPanelBase',
+  title: 'PlaneType...',
+  requires: [
+    'Asgard.Flarc.Plugin',
+    'Asgard.Flarc.PlaneType.Form',
+    'Flarc.Plane',
+  ],
+
+  model: 'Flarc.PlaneType',
+  imageSrc: '<%= image_path 'flarc/glider_100x100.png' %>',
+  tabTitleTpl: '{name}',
+  panelTitleTpl: '<div class="name">Plane Type </div><div class="value">{name}</div>',
+
+  form: 'flarc_planetype_form',
+
+  nav: [
+   {
+    text: 'Planes',
+    dataIndex: 'planes',
+   },
+  ],
+});

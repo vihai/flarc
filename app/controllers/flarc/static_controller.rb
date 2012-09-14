@@ -10,7 +10,7 @@ class StaticController < ApplicationController
     begin
       render :action => params[:path]
     rescue ActionView::MissingTemplate
-      raise ActionController::UnknownAction
+      raise AbstractController::ActionNotFound
     end
   end
 end

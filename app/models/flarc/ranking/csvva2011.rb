@@ -19,7 +19,7 @@ class Csvva2011 < Ranking
       pilot = flight.pilot
       championship_pilot = pilot.championship_pilots.find_by_championship_id(cship.id)
 
-      raise "Flight #{flight.id} Pilot '#{pilot.person.name}' not enrolled in championship" if !championship_pilot
+      raise "Flight #{flight.id} Pilot '#{pilot.name}' not enrolled in championship" if !championship_pilot
 
       r = results[championship_pilot.csvva_pilot_level.to_sym] ||= {}
       r[pilot.id] ||= {}

@@ -10,9 +10,9 @@
  */
 
 Ext.define('Asgard.Flarc.Flight.IndexPanel', {
-  extend: 'Asgard.IndexPanelBase',
+  extend: 'Asgard.index.GridPanelBase',
   requires: [
-    'Asgard.Flarc.Css',
+    'Asgard.Flarc.Plugin',
     'Flarc.Flight',
     'Flarc.Plane',
     'Flarc.PlaneType',
@@ -26,18 +26,24 @@ Ext.define('Asgard.Flarc.Flight.IndexPanel', {
     xtype: 'datecolumn',
     text: 'Takeoff',
     dataIndex: 'takeoff_time',
+    format: 'Y-m-d h:m:s',
+    width: 150,
+    filterable: true,
    },
    {
     xtype: 'datecolumn',
     text: 'Landing',
     dataIndex: 'landing_time',
+    format: 'Y-m-d h:m:s',
+    width: 150,
+    filterable: true,
    },
    {
     xtype: 'templatecolumn',
     text: 'Pilot',
     dataIndex: 'pilot',
-    tpl: '{pilot.person.name.first} {pilot.person.name.last}',
-    width: 200,
+    tpl: '<tpl if="pilot">{pilot.name.first} {pilot.name.last}</tpl>',
+    flex: 1,
    },
    {
     xtype: 'templatecolumn',
@@ -45,11 +51,12 @@ Ext.define('Asgard.Flarc.Flight.IndexPanel', {
     dataIndex: 'plane',
     tpl: '{plane.registration}',
    },
-   {
-    xtype: 'numbercolumn',
-    text: 'Distance',
-    dataIndex: 'distance',
-   },
+//   {
+//    xtype: 'templatecolumn',
+//    text: 'Distance',
+//    dataIndex: 'distance',
+//    tpl: '{distance/1000} km',
+//   },
 
 /*   {
     text: 'Name',

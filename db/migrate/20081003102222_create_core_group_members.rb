@@ -1,1 +1,0 @@
-../../vendor/plugins/core_models/db/migrate/20081003102222_create_core_group_members.rb

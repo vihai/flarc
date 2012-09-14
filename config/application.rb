@@ -14,6 +14,7 @@ LAYOUTS = {
   'cidvv.it' => 'cid',
   'staging.cidvv.it' => 'cid',
   'dev.cidvv.it' => 'cid',
+  'flarc.orlandi.com' => 'flarc',
 }
 
 require File.expand_path('../../../yggdra/hel/lib/ygg/hel/json_show_exceptions', __FILE__)
@@ -34,7 +35,7 @@ module Flarc
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-#    config.active_record.observers = 'Ygg/Core/LogCollector'
+    config.active_record.observers = 'Ygg/Core/LogCollector'
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -78,5 +79,7 @@ module Flarc
     config.asgard.hel_host = '[::1]:81'
 #    config.asgard.faye_source_uri = '/faye.js'
 #    config.asgard.faye_interface_uri = '/faye'
+
+    config.asgard.page_title = 'CID Administration'
   end
 end

@@ -22,7 +22,7 @@ class IgcTmpFilesController < Ygg::Hel::AuthenticatedController
   end
 
   def create
-    @igc_tmp_file = IgcTmpFile.new(:file => params[:file], :pilot => hel_session.auth_identity.person.pilot)
+    @igc_tmp_file = IgcTmpFile.new(:file => params[:file], :pilot => hel_session.auth_identity.person)
 
     IgcTmpFile.transaction do
 
@@ -33,20 +33,19 @@ class IgcTmpFilesController < Ygg::Hel::AuthenticatedController
           igcf = @igc_tmp_file.igc_file
           igcf.read_contents
         rescue IgcFile::InvalidFileFormat => e
-          @msg = "File IGC non valido o corrotto: #{e.to_s}"
-          render :template => 'igc_tmp_files/failed_ajax_upload', :layout => false
+          @message = "File IGC non valido o corrotto: #{e.to_s}"
+          render :template => 'flarc/igc_tmp_files/failed_ajax_upload', :layout => false
           return
         end
 
-        if hel_session.authenticated_admin? && igcf.pilot_name
+        if hel_session && hel_session.auth_identity && hel_session.auth_identity.has_capabilities?(:admin) && igcf.pilot_name
           sc = ActiveRecord::Base.send(:sanitize_sql_array,
                  ['similarity(LOWER(first_name || \' \' || last_name), ?) DESC',
                   igcf.pilot_name.downcase])
 
-          person = Ygg::Core::Person.joins(:pilot).order(sc).limit(1).first
-          @pilot = person.pilot
+          @pilot = Pilot.order(sc).limit(1).first
         else
-          @pilot = hel_session.auth_identity.person.pilot
+          @pilot = hel_session.auth_identity.person
         end
 
         if igcf.glider_id
@@ -61,8 +60,8 @@ class IgcTmpFilesController < Ygg::Hel::AuthenticatedController
         format.html { render :layout => false }
       else
         format.html {
-          @msg = 'File IGC non valido'
-          render :template => 'igc_tmp_files/failed_ajax_upload', :layout => false
+          @message = 'File IGC non valido'
+          render :template => 'flarc/igc_tmp_files/failed_ajax_upload', :layout => false
         }
       end
     end

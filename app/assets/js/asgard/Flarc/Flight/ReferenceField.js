@@ -13,7 +13,7 @@ Ext.define('Asgard.Core.Person.ReferenceField', {
   extend: 'Asgard.form.field.ReferenceField',
   alias: 'widget.core_person',
   requires: [
-    'Asgard.Core.Css',
+    'Asgard.Flarc.Plugin',
     'Ygg.Core.Person',
     'Asgard.Core.Person.Picker'
   ],

@@ -1,0 +1,24 @@
+/*
+ * Copyright (C) 2008-2012, Daniele Orlandi
+ *
+ * Author:: Daniele Orlandi <daniele@orlandi.com>
+ *
+ * License:: You can redistribute it and/or modify it under the terms of the LICENSE file.
+ *
+ */
+
+Ext.define('Asgard.Flarc.Championship.ObjectPanel', {
+  extend: 'Asgard.ObjectPanelBase',
+  requires: [
+    'Asgard.Flarc.Plugin',
+    'Asgard.Flarc.Championship.Form',
+  ],
+
+  model: 'Flarc.Championship',
+  title: 'Championship...',
+//  imageSrc: '<%= image_path 'domain_icon.png' %>',
+  tabTitleTpl: '{name}',
+  panelTitleTpl: '<div class="name">Championship </div><div class="value">{name}</div>',
+
+  form: 'flarc_championship_form',
+});

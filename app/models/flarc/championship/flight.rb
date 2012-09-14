@@ -13,7 +13,20 @@ class Flight < Ygg::BasicModel
 
   validates_presence_of :championship, :flight
 
-  serialize :data
+  interface :rest do
+    self.allow_polymorphic_creation = true
+
+    attribute(:sti_type) { exclude! }
+
+    attribute(:points) do
+      self.type = :float
+    end
+  end
+
+  def points
+    nil
+  end
+
 end
 
 end

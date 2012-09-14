@@ -40,7 +40,7 @@ class Cid < ActionMailer::Base
   def championship_started(pilot)
     headers 'Auto-Submitted' => 'auto-generated'
 
-    pilot.person.identities.each do |identity|
+    pilot.identities.each do |identity|
       next if identity.credentials.empty?
 
       @email = identity.qualified

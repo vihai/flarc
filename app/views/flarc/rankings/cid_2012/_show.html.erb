@@ -1,18 +1,21 @@
 <% limit ||= nil %>
 <% if !ranking.sorted_standings.empty? then %>
-  <table class="standard ranking">
+  <table class="table table-striped ranking">
     <caption style="background-color: #<%= ranking.color %>">
       Classifica <%= ranking.name %><br />
       <span class="generated_at">(aggiornata al <%= l(ranking.generated_at, :format => :short) %>)</span>
     </caption>
-    <tr>
-      <th>#</th>
-      <th>Nome</th>
-      <th>Punteggio</th>
-      <th>Volo 1</th>
-      <th>Volo 2</th>
-      <th>Volo 3</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th class="points">Punteggio</th>
+        <th class="points">Volo 1</th>
+        <th class="points">Volo 2</th>
+        <th class="points">Volo 3</th>
+      </tr>
+    </thead>
+    <tbody>
     <% cnt = 0 %>
     <% ranking.sorted_standings.each do |r| %>
     <tr>
@@ -39,13 +42,13 @@
         <% end %>
       </td>
       <td class="name">
-        <%= link_to(r.pilot.person.name, r.pilot) %>
+        <%= link_to(r.pilot.name, r.pilot) %>
       </td>
       <td class="points"><%= fmt_points(r.value) %></td>
       <% for i in 0..2 do %>
         <% flight = r.data[:flights_best][i] %>
         <% if flight %>
-        <td class="points small <%=flight.status %>">
+        <td class="points <%=flight.status %>">
            <%= link_to(fmt_points(flight.points), flarc_flight_path(flight.id)) %>
         </td>
         <% end %>
@@ -53,10 +56,11 @@
     </tr>
     <% if limit && cnt >= limit then %>
       <tr>
-        <td colspan=6><%= link_to("Classifica completa...", ranking) %></td>
+        <td colspan=6><%= link_to("Classifica completa...", flarc_ranking_path(ranking)) %></td>
       </tr>
       <% break %>
     <% end %>
+    </tbody>
     <% end %>
   </table>
 <% else %>

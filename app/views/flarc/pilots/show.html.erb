@@ -5,43 +5,7 @@
                 :width => '300px', :height => '200px',
                 :style => 'float: right;') %>
 
-<h1><%= @target.person.name %></h1>
-
-<table class="standard pilot">
-  <caption>Pilota</caption>
-  <% if authenticated_admin? %>
-    <% if @target.person.residence_location %>
-  <tr>
-    <th>Indirizzo</th>
-    <td class="address">
-      <%=h @target.person.residence_location %><br />
-    </td>
-  </tr>
-    <% end %>
-  <tr>
-    <th>Telefono</th>
-    <td class="phone">
-      <%=h @target.person.tmp_telefono %><br />
-    </td>
-  </tr>
-    <% if @target.person.tmp_cellulare %>
-  <tr>
-    <th>Cellulare</th>
-    <td class="phone">
-      <%=h @target.person.tmp_cellulare %><br />
-    </td>
-  </tr>
-    <% end %>
-  <tr>
-    <th>e-Mail</th>
-    <td class="email">
-      <% @target.person.identities.each do |identity|  %>
-          <%= mail_to identity.qualified %><br />
-      <% end %>
-    </td>
-  </tr>
-  <% end %>
-</table>
+<h1><%= @target.name %></h1>
 
 <% @target.championship_pilots.each do |x| %>
   <%= render :partial => "flarc/championships/pilot/#{x.class.name.split('::').last.underscore}", :object => x %>

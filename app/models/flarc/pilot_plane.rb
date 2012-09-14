@@ -6,6 +6,9 @@ class PilotPlane < Ygg::BasicModel
   belongs_to :pilot,
              :class_name => 'Flarc::Pilot'
 
+  belongs_to :old_pilot,
+             :class_name => 'Flarc::OldPilot'
+
   belongs_to :plane,
              :class_name => 'Flarc::Plane'
 end

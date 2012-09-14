@@ -3,6 +3,27 @@ class PlanesController < RestController
 
   rest_controller_for Plane
 
+  view :grid do
+    empty!
+    attribute(:id) { show! }
+    attribute(:registration) { show! }
+    attribute(:plane_type) do
+      include!
+      empty!
+      attribute(:id) { show! }
+      attribute(:name) { show! }
+    end
+  end
+
+  view :edit do
+    attribute(:plane_type) do
+      include!
+      attribute(:configurations) do
+        include!
+      end
+    end
+  end
+
   view :combo do
     empty!
     attribute(:id) { show! }

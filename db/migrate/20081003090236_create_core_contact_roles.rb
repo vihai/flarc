@@ -1,1 +1,0 @@
-../../vendor/plugins/core_models/db/migrate/20081003090236_create_core_contact_roles.rb

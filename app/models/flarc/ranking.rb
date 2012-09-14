@@ -33,21 +33,6 @@ class Ranking < Ygg::PublicModel
              :class_name => 'Ranking'
   end
 
-  class Member < Ygg::BasicModel
-    self.table_name = :ranking_members
-
-    belongs_to :ranking,
-               :class_name => 'Ranking'
-
-    belongs_to :pilot,
-               :class_name => 'Pilot'
-
-#    has_many :history_entries,
-#             :class_name => 'Ranking::HistoryEntry'
-
-    serialize :data
-  end
-
   class Standing < Ygg::BasicModel
     self.table_name = :ranking_standings
 
@@ -55,7 +40,10 @@ class Ranking < Ygg::PublicModel
                :class_name => 'Ranking'
 
     belongs_to :pilot,
-               :class_name => 'Pilot'
+               :class_name => 'Flarc::Pilot'
+
+    belongs_to :old_pilot,
+               :class_name => 'OldPilot'
 
     belongs_to :flight,
                :class_name => 'Flight'

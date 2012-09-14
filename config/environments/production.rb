@@ -50,8 +50,7 @@ Flarc::Application.configure do
     /\w+\.(?!js|css).+/,
     'flarc-production.js',
     'csvva.css', 'cid.css',
-    'asgard.css', 'asgard-production.js',
-    'ext/resources/css/ext-all.css',
+    /\/Plugin.js$/, 'asgard.css', 'asgard-production.js', 'asgard-stage2.js', 'ext/resources/css/ext-all.css',
   ]
 
   # Disable delivery errors, bad email addresses will be ignored
@@ -93,11 +92,6 @@ EXPIRES=false
 
 FLICKR_API_KEY = "b18c48dcc7c1f8811a291d537551c585"
 FLICKR_SHARED_KEY = "cf3bf707d062d898"
-
-GOOGLE_MAPS_KEY = {
-  "csvva.orlandi.com" => "ABQIAAAAVJLfFXWBxmyHNCyIIApsnxSc2yIvQoNUWDuSwbldoVMAKYyAbxTszy7ZWfIeC7-Gq8AF07pCq9le4A",
-  "cir.fivv.it" => "ABQIAAAAVJLfFXWBxmyHNCyIIApsnxStT6R7z5BM687XreQduSirwLQwRhTGunUCZCE96hn81ADkhUx-tl266w"
-}
 
 FLIGHTS_STORAGE_DIR = File.join(Rails.root, "data", Rails.env, "flights")
 FLIGHTS_TMP_DIR = File.join(Rails.root, "data", Rails.env, "igc_tmp_files")

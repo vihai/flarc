@@ -18,7 +18,7 @@
         <%= link_to(image_tag('view.png', :alt => 'View', :title => 'Apri la pagina del volo'), x) %>
       </td>
       <td class="pilot">
-        <%= link_to(x.pilot.person.name, x.pilot) %>
+        <%= link_to(x.pilot.name, x.pilot) %>
       </td>
       <td class="takoff">
         <%= link_to(l(x.takeoff_time, :format => :compact), x) %>

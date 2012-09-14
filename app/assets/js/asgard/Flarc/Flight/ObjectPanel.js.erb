@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011, Daniele Orlandi
+ * Copyright (C) 2008-2012, Daniele Orlandi
  *
  * Author:: Daniele Orlandi <daniele@orlandi.com>
  *
@@ -9,16 +9,73 @@
 
 Ext.define('Asgard.Flarc.Flight.ObjectPanel', {
   extend: 'Asgard.ObjectPanelBase',
-  title: 'ObjectPanel.js.erb...',
+  title: 'Flight...',
   requires: [
-    'Asgard.Flarc.Css',
+    'Asgard.Flarc.Plugin',
     'Asgard.Flarc.Flight.Form'
   ],
 
   model: 'Ygg.Flarc.Flight',
 //  imageSrc: '<%= image_path 'domain_icon.png' %>',
-  tabTitleTpl: 'FL{id}',
+  tabTitleTpl: 'Flight {id}',
   panelTitleTpl: '<div class="name">Flight </div><div class="value">{id}</div>',
 
   form: 'flarc_flight_form',
+
+  summarySheetButton: false,
+
+  actions: [
+   {
+    text: 'Open IGC →',
+    name: 'open_igc',
+   },
+  ],
+
+  initComponent: function() {
+    var me = this;
+
+    me.callParent(arguments);
+
+    me.down('toolbar button[name=open_igc]').on('click', function() {
+      window.location = '/flarc/flights/' + me.getRecord().getId() + '.igc';
+    });
+
+    me.down('flarc_championshipflights polyview').on('itemcontextmenu', function(el, record, item, index, event) {
+      var menu = new Ext.menu.Menu({
+        items: [
+         {
+          text: 'Approve',
+          name: 'approve',
+          icon: '/assets/core/green_checkmark_16x16.png',
+         },
+         {
+          text: 'Invalid',
+          name: 'invalid',
+          icon: '/assets/core/red_x_mark_16x16.png',
+         }
+        ],
+      });
+
+      menu.showAt(event.getXY());
+
+      menu.down('menuitem[name=approve]').on('click', function() { me.sendChampionshipAction(record.getId(), 'approve'); });
+      menu.down('menuitem[name=invalid]').on('click', function() { me.sendChampionshipAction(record.getId(), 'reject'); });
+
+      event.stopEvent();
+    });
+  },
+
+  sendChampionshipAction: function(championshipFlightId, action) {
+    var me = this;
+
+    me.setLoading('Requesting...');
+    Asgard.AjaxJson.request({
+      url: '/flarc/flights/' + me.getRecord().getId() + '/change_championship_status',
+      method: 'POST',
+      jsonData: { championship_flight_id: championshipFlightId, action: action },
+      callback: function() { me.setLoading(false); },
+      success: function() { me.refresh(); },
+      failure: Asgard.ExceptionWindow.ajaxFailure,
+    });
+  },
 });

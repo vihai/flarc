@@ -12,10 +12,10 @@
       <% for x in @targets do %>
       <tr>
         <td class="name">
-          <%= link_to(x.person.name, x) %>
+          <%= link_to(x.name, x) %>
         </td>
         <td class="club">
-          <%= x.club.name %>
+          <%= x.club ? x.club.name : nil %>
         </td>
       </tr>
       <% end %>

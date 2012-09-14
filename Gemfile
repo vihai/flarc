@@ -23,13 +23,14 @@ gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
 gem 'curb', '>= 0.7.17'
 
 gem 'jquery-rails'
-gem 'less-rails-bootstrap', :git => 'https://github.com/wmhobbes/less-rails-bootstrap.git'
+gem 'less-rails-bootstrap'#, :git => 'https://github.com/wmhobbes/less-rails-bootstrap.git'
+gem 'state_machine'
 
 gem 'ynetaddr', '>= 1.0.0'
 gem 'vihai-password', '>= 1.2.0'
 
-gem 'active_rest', '>= 4.1.0'
-#gem 'active_rest', '>= 4.1.0', :path => '../submodules/active_rest'
+#gem 'active_rest', '>= 4.11.0'
+gem 'active_rest', '>= 4.11.0', :path => '/opt/yggdra/submodules/active_rest'
 
 gem 'yggdra_plugins', :path => '/opt/yggdra/plugins/yggdra_plugins'
 
@@ -38,8 +39,11 @@ gem 'core_models', :path => '/opt/yggdra/plugins/core_models'
 gem 'hel', :path => '/opt/yggdra/plugins/hel'
 gem 'core_hel', :path => '/opt/yggdra/plugins/core_hel'
 
+gem 'extjs', :path => '/opt/yggdra/plugins/extjs'
 gem 'asgard', :path => '/opt/yggdra/plugins/asgard'
 gem 'core_asgard', :path => '/opt/yggdra/plugins/core_asgard'
+
+gem 'builder', '3.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

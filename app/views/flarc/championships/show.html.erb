@@ -10,9 +10,7 @@
     <th>Classifiche</th>
     <td class="rankings">
       <% @target.rankings.each do |ranking| %>
-        <%=
-# link_to ranking.name, ranking
- %><br />
+        <%= link_to ranking.name, flarc_ranking_path(ranking) %><br />
       <% end %>
     </td>
   </tr>

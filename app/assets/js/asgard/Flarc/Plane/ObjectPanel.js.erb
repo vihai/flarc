@@ -1,0 +1,32 @@
+/*
+ * Copyright (C) 2008-2012, Daniele Orlandi
+ *
+ * Author:: Daniele Orlandi <daniele@orlandi.com>
+ *
+ * License:: You can redistribute it and/or modify it under the terms of the LICENSE file.
+ *
+ */
+
+Ext.define('Asgard.Flarc.Plane.ObjectPanel', {
+  extend: 'Asgard.ObjectPanelBase',
+  title: 'Plane...',
+  requires: [
+    'Asgard.Flarc.Plugin',
+    'Asgard.Flarc.Plane.Form',
+    'Flarc.Flight',
+  ],
+
+  model: 'Flarc.Plane',
+//  imageSrc: '<%= image_path 'domain_icon.png' %>',
+  tabTitleTpl: '{registration}',
+  panelTitleTpl: '<div class="name">Plane </div><div class="value">{registration}</div>',
+
+  form: 'flarc_plane_form',
+
+  nav: [
+   {
+    text: 'Flights',
+    dataIndex: 'flights',
+   },
+  ],
+});

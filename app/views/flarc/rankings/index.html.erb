@@ -11,7 +11,7 @@
     <% for r in @rankings do %>
     <tr>
       <td class="name">
-        <%= link_to(r.name, r) %>
+        <%= link_to(r.name, flarc_ranking_path(r)) %>
       </td>
       <td class="count"><%=h r.pilots.count %></td>
     </tr>

@@ -1,1 +1,0 @@
-../../vendor/plugins/core_models/db/migrate/20080918003430_create_core_organizations.rb

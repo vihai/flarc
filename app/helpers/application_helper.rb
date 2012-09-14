@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def authenticated_admin?
-    hel_session && hel_session.authenticated_admin?
+    hel_session && hel_session.auth_identity && hel_session.auth_identity.has_capabilities?(:admin)
   end
 
   def fmt_points(pts)

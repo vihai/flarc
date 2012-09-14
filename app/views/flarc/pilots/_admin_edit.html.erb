@@ -80,8 +80,8 @@ $(function() {
         success: function(resource) {
           $('#dialog-form').data('resource', resource);
 
-          $('#first_name').val(resource.person.first_name);
-          $('#last_name').val(resource.person.last_name);
+          $('#first_name').val(resource.first_name);
+          $('#last_name').val(resource.last_name);
           $('#club_id').val(resource.club_id);
           $('#fai_card').val(resource.fai_card);
 

@@ -1,6 +1,6 @@
 Flarc::Application.routes.draw do
   namespace :flarc do
-    aresources :pilots do
+    hel_resources :pilots do
       member do
         get :stats_by_plane
       end
@@ -10,9 +10,10 @@ Flarc::Application.routes.draw do
       end
     end
 
-    aresources :flights do
+    hel_resources :flights do
       member do
         get :edit
+        post :change_championship_status
       end
 
       collection do
@@ -22,34 +23,34 @@ Flarc::Application.routes.draw do
       end
     end
 
-    aresources :planes do
+    hel_resources :planes do
       member do
         get :stats_by_pilot
       end
     end
 
-    aresources :clubs do
+    hel_resources :clubs do
     end
 
-    aresources :plane_types do
+    hel_resources :plane_types do
     end
 
-    aresources :igc_tmp_files do
+    hel_resources :igc_tmp_files do
     end
 
-    aresources :rankings do
+    hel_resources :rankings do
       member do
         get :history
       end
     end
 
-    aresources :championships do
+    hel_resources :championships do
       member do
         match 'subscribe'
       end
     end
 
-    aresources :alptherm_history_entry
+    hel_resources :alptherm_history_entry
 
     match 'registration/check_email' => 'registration#check_email'
     match 'registration/recover_password' => 'registration#recover_password'

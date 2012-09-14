@@ -1,18 +1,17 @@
 module Flarc
 
-
-
 # Exta-ugly hack to prevent unloading
 #require './app/models/pilot'
 #require 'core_models/app/models/ygg/core/person'
 #require '../yggdra/plugins/core_models/app/models/ygg/core/identity'
 
 
-class Pilot < Ygg::PublicModel
-  self.table_name = :pilots
+#class Pilot < Ygg::PublicModel
+class Pilot < Ygg::Core::Person
+#  self.table_name = :pilots
 
-  belongs_to :person,
-             :class_name => 'Ygg::Core::Person'
+#  belongs_to :person,
+#             :class_name => 'Ygg::Core::Person'
 
   belongs_to :club
 
@@ -31,8 +30,8 @@ class Pilot < Ygg::PublicModel
            :through => :championship_pilots,
            :uniq => true
 
-  validates_presence_of :person
-  validates_uniqueness_of :person_id
+#  validates_presence_of :person
+#  validates_uniqueness_of :person_id
 #  validates_presence_of :club
 
   def merge(other)

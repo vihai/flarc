@@ -145,7 +145,7 @@ function pilot_changed(pilot)
     return;
   }
 
-  $('#pilot').val(pilot.person.name.first + ' ' + pilot.person.name.last);
+  $('#pilot').val(pilot.name.first + ' ' + pilot.name.last);
   $('#pilot_id').val(pilot.id);
 
   cships = {};
@@ -316,7 +316,7 @@ $(function() {
         dataType: 'json',
         data: {
           view: 'combo_nf',
-          sort: 'person.last_name,person.first_name',
+          sort: 'last_name,first_name',
           search: request.term,
           limit: 10
         },
@@ -325,10 +325,9 @@ $(function() {
 
           response($.map(data, function(item) {
             return {
-              label: (item.person.name.first + ' ' + item.person.name.last),
-              value: (item.person.name.first + ' ' + item.person.name.last),
+              label: (item.name.first + ' ' + item.name.last),
+              value: (item.name.first + ' ' + item.name.last),
               id: item.id,
-              person: item.person,
               championship_pilots: item.championship_pilots,
             }
           }));

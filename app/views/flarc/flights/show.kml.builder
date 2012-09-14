@@ -2,7 +2,7 @@ xml.instruct!
 xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
   
   xml.Document {
-    xml.name("Volo di #{@target.pilot.person.name}")
+    xml.name("Volo di #{@target.pilot.name}")
     xml.description do |x|
       #FIXME ADD CDATA
       x << "Aliante: #{link_to(@target.plane.registration, flarc_plane_path(@target.plane, :only_path => false))}<br/>"
@@ -10,7 +10,7 @@ xml.kml(:xmlns => "http://earth.google.com/kml/2.2") {
       x << "Atterraggio: #{l(@target.landing_time, :format => :compact)}<br/>"
       x << "Durata: #{l(Time.at(@target.landing_time-@target.takeoff_time), :format => '%H:%M')}<br/>"
       if (!@target.passenger.nil?) then
-        x << "Passeggero: #{@target.passenger.person.name}<br/>"
+        x << "Passeggero: #{@target.passenger.name}<br/>"
       elsif (!@target.passenger_name.nil?) then
         x << "Passeggero: #{@target.passenger_name}<br/>"
       end

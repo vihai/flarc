@@ -1,1 +1,0 @@
-../../vendor/plugins/core_models/db/migrate/20080918003400_create_core_identities.rb

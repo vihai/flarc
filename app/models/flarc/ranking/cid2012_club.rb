@@ -19,7 +19,7 @@ class Cid2012Club < Ranking
       club = flight.pilot.club
       championship_pilot = flight.pilot.championship_pilots.find_by_championship_id(cship.id)
 
-      raise "Pilot '#{pilot.person.name}' not enrolled in championship" if !championship_pilot
+      raise "Pilot '#{pilot.name}' not enrolled in championship" if !championship_pilot
 
       results[club.id] ||= {}
 

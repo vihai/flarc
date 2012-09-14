@@ -50,21 +50,3 @@
 <% end %>
 </table>
 </div>
-
-<% if authenticated_admin? then %>
-  <div class="edit_box">
-  <%=
-# link_to image_tag(
-#         "action_edit.png", :alt => "Edit..."),
-#         :url => { :action => "edit" }, :method => :get, :remote => true
- %>
-  <%=
-# link_to image_tag(
-#         "action_delete.png", :alt => "Delete..."),
-#         :method => "DELETE",
-#         :confirm => "Sei sicurisssimo?",
-#         :remote => true
- %>
-  </div>
-<% end %>
-

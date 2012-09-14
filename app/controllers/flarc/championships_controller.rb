@@ -4,14 +4,15 @@ class ChampionshipsController < RestController
   rest_controller_for Championship
 
   def subscribe
-    if request.method == 'POST'
+    if request.method == 'GET'
+      # FIXME: support multi-championship again
+      @championship = Championship.find_by_symbol(:cid_2012)
+    elsif request.method == 'POST'
       req = ActiveSupport::JSON.decode(request.body).symbolize_keys!
 
       Ygg::Core::Transaction.new 'Registration wizard' do
 
-        person = auth_person
-
-        pilot = person.pilot || Pilot.new(:person => person)
+        pilot = auth_person
         pilot.attributes = {
           :club => Club.find(req[:club_id]),
           :fai_card => req[:fai_card],

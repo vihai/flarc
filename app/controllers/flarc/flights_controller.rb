@@ -15,11 +15,7 @@ class FlightsController < RestController
     attribute :pilot do
       empty!
       include!
-      attribute :person do
-        empty!
-        include!
-        attribute(:name) { include! }
-      end
+      attribute(:name) { include! }
     end
 
     attribute :plane do
@@ -35,11 +31,10 @@ class FlightsController < RestController
   end
 
   view :edit do
+#    self.limit = 1
+
     attribute :pilot do
       include!
-      attribute :person do
-        include!
-      end
     end
 
     attribute :plane do
@@ -47,6 +42,10 @@ class FlightsController < RestController
       attribute :plane_type do
         include!
       end
+    end
+
+    attribute :plane_type_configuration do
+      include!
     end
   end
 
@@ -157,8 +156,8 @@ class FlightsController < RestController
         }
 
         # Override pilot if not an admin
-        if !hel_session.authenticated_admin?
-          @flight.pilot = auth_person.pilot
+        if !hel_session.auth_identity.has_capabilities?(:admin)
+          @flight.pilot = auth_person
         end
 
         fres[:championship_flights].each do |cf|
@@ -179,10 +178,10 @@ class FlightsController < RestController
               :championship => Championship.find_by_symbol(:cid_2012),
               :flight => @flight, # Workaround for validations
               :status => :pending,
-              :cid_ranking => ranking,
               :distance => cf[:distance],
-              :task_eval => cf[:task_eval].to_sym,
-              :task_type => cf[:task_type].to_sym,
+              :cid_ranking => ranking,
+              :cid_task_eval => cf[:cid_task_eval],
+              :cid_task_type => cf[:cid_task_type],
               ))
 
           when 'Championship::Flight::Csvva2012'
@@ -240,8 +239,8 @@ class FlightsController < RestController
         }
 
         # Override pilot if not an admin
-        if !hel_session.authenticated_admin?
-          @flight.pilot = auth_person.pilot
+        if !hel_session.auth_identity.has_capabilities?(:admin)
+          @flight.pilot = auth_person
         end
 
         fres[:championship_flights].each do |cf|
@@ -256,15 +255,15 @@ class FlightsController < RestController
             elsif cp.cid_category.to_sym == :prom
               ranking = :prom
             else
-              ranking = cf[:cid_ranking].to_sym
+              ranking = cf[:cid_ranking]
             end
 
             cfr.attributes = {
               :status => :pending,
-              :cid_ranking => ranking,
               :distance => cf[:distance],
-              :task_eval => cf[:task_eval].to_sym,
-              :task_type => cf[:task_type].to_sym,
+              :cid_ranking => ranking,
+              :cid_task_eval => cf[:cid_task_eval],
+              :cid_task_type => cf[:cid_task_type],
             }
 
           when 'Championship::Flight::Csvva2012'
@@ -289,6 +288,27 @@ class FlightsController < RestController
       respond_to do |format|
         format.json { render :json => { :id => @flight.id } }
       end
+    end
+  end
+
+  def change_championship_status
+    raise "AAA" if request.method != 'POST'
+
+    @req = ActiveSupport::JSON.decode(request.body)
+    @req.symbolize_keys!
+
+    find_target
+
+    cship_flight = @target.championship_flights.find(@req[:championship_flight_id])
+
+    Ygg::Core::Transaction.new("#{@req[:action]} flight in championship #{cship_flight.championship.name}") do
+      cship_flight.status = @req[:action]
+      cship_flight.save!
+      @target.save!
+    end
+
+    respond_to do |format|
+      format.json { render :json => { } }
     end
   end
 

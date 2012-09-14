@@ -3,7 +3,7 @@ Ext.define('Asgard.Core.Person.Picker', {
   extend: 'Asgard.ObjectPicker',
   alias: 'widget.person_picker',
   requires: [
-    'Asgard.Core.Css',
+    'Asgard.Flarc.Plugin',
     'Asgard.Core.Person.View',
   ],
 

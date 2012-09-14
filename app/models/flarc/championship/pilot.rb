@@ -7,10 +7,14 @@ class Pilot < Ygg::BasicModel
 
   belongs_to :pilot,
              :class_name => 'Flarc::Pilot'
+
+  belongs_to :old_pilot,
+             :class_name => 'Flarc::OldPilot'
+
   belongs_to :championship,
              :class_name => 'Flarc::Championship'
 
-  validates_presence_of :pilot, :championship
+#  validates_presence_of :pilot, :championship
 end
 
 end

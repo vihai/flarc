@@ -6,6 +6,9 @@ class IgcTmpFile < ActiveRecord::Base
   belongs_to :pilot,
              :class_name => 'Flarc::Pilot'
 
+  belongs_to :old_pilot,
+             :class_name => 'Flarc::OldPilot'
+
   belongs_to :club
 
   after_create do

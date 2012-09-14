@@ -46,8 +46,7 @@ $(function() {
     };
 
     $.ajax({
-  //    url: '<%= ygg_session_authenticate_by_fqda_and_password_path %>',
-      url: '',
+      url: '<%= subscribe_flarc_championship_path(@championship.id) %>',
       dataType: 'json',
       type: 'POST',
       contentType: 'application/json; charset=utf-8',

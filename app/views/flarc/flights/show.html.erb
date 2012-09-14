@@ -14,7 +14,7 @@
   <tr>
     <th>Pilota</th>
     <td class="pilot">
-        <%= link_to(@target.pilot.person.name, @target.pilot) %>
+        <%= link_to(@target.pilot.name, @target.pilot) %>
     </td>
   </tr>
   <tr>
@@ -66,7 +66,7 @@
   <%= render :partial => "flarc/championships/flight/#{cf.class.name.split('::').last.underscore}", :object => cf %>
 <% end %>
 
-<% if authenticated? && auth_person.pilot && @target.pilot_id == auth_person.pilot.id %>
+<% if authenticated? && auth_person && @target.pilot_id == auth_person.id %>
   <%= link_to '<i class="icon-pencil"></i>Modifica...'.html_safe,
             edit_flarc_flight_path(@target),
             :class => 'btn btn-success btn-large' %>
@@ -78,7 +78,7 @@
 
 <% if @target.encoded_polyline && @target.encoded_polyline.size > 0 %>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&sensor=false"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false"></script>
 
 <div id="map_container" class="map_container" style="position: absolute; right: 0; bottom: 0; top: 0; left: 352px; height: 100%">
   <div id="map" class="map" style="width: 100%; height: 100%;"></div>

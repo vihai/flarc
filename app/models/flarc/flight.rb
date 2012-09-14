@@ -5,7 +5,10 @@ class Flight < Ygg::PublicModel
 
   belongs_to :pilot,
              :class_name => 'Flarc::Pilot'
-  validates_presence_of :pilot
+#  validates_presence_of :pilot
+
+  belongs_to :old_pilot,
+             :class_name => 'Flarc::OldPilot'
 
   belongs_to :passenger,
              :class_name => 'Ygg::Core::Person'
@@ -30,6 +33,19 @@ class Flight < Ygg::PublicModel
   has_many :championships,
            :through => :championship_flights,
            :uniq => true
+
+  interface :rest do
+    attribute :encoded_polyline do
+      not_writable!
+      ignore!
+    end
+
+    attribute :encoded_polyline_cache do
+      not_readable!
+      not_writable!
+      ignore!
+    end
+  end
 
   def championship_flight(symbol)
     championship_flights.joins(:championship).where('championships.symbol' => symbol).first
@@ -86,13 +102,11 @@ class Flight < Ygg::PublicModel
   def update_from_igcfile(igc_file, original_filename = nil)
 
     if igc_file.pilot_name
-      person = Ygg::Core::Person.first(
-        :conditions => [ 'LOWER(first_name||last_name) = ? OR ' +
-                         'LOWER(last_name||first_name) = ?',
-                         igc_file.pilot_name.downcase.tr('^a-z',''),
-                         igc_file.pilot_name.downcase.tr('^a-z','') ])
-
-      self.pilot = Pilot.first(:conditions => ['person_id = ?', person.id ]) if person
+      self.pilot = Flarc::Pilot.where(
+        'LOWER(first_name||last_name) = ? OR ' +
+        'LOWER(last_name||first_name) = ?',
+        igc_file.pilot_name.downcase.tr('^a-z',''),
+        igc_file.pilot_name.downcase.tr('^a-z','')).first
     end
 
     if (!self.plane && igc_file.glider_id)
@@ -124,7 +138,7 @@ class Flight < Ygg::PublicModel
       self.encoded_polyline_cache =
         GMapPolylineEncoder.new(:dp_threshold => 0.001).encode(
             self.track.collect { |x| [x.lat, x.lon] })[:points]
-      save
+#      save
     end
 
     return self.encoded_polyline_cache

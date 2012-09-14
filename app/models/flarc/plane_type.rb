@@ -3,7 +3,8 @@ module Flarc
 class PlaneType < Ygg::BasicModel
   self.table_name = :plane_types
 
-  has_many :planes
+  has_many :planes,
+           :class_name => 'Flarc::Plane'
 
   has_many :configurations,
            :class_name => 'Flarc::PlaneType::Configuration',

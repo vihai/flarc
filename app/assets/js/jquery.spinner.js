@@ -46,8 +46,8 @@
             
             // retrieve element positioning
             var pos = $this.offset();
-            w = $this.outerWidth();
-            h = $this.outerHeight();
+            w = $this.outerWidth(false);
+            h = $this.outerHeight(false);
             
             // calculate vertical centering
             if (h > opts.height) shim = Math.round((h - opts.height)/ 2);
@@ -62,7 +62,7 @@
             } else {
                 l = pos.left + Math.round(.5 * w) - Math.round(.5 * opts.width) + 'px';
             }
-            
+
             // call start callback
             opts.onStart.call(this);
             

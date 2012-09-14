@@ -6,7 +6,7 @@
   <div class="container">
     <div class="title"><%= cid2011.championship.name %> <%= fmt_cid_ranking_to_name(cid2011.cid_ranking) %></div>
     <div class="body">
-      <% case cid2011.task_eval %>
+      <% case cid2011.cid_task_eval.to_sym %>
       <% when :free %>
         Tema libero
       <% when :not_completed %>
@@ -15,7 +15,7 @@
         Tema dichiarato e completato
       <% end %><br />
       Tipo: <%=
-        case cid2011.task_type
+        case cid2011.cid_task_type.to_sym
         when :butterfly ; 'Farfalla'
         when :simple_triangle ; 'Triangolo semplice'
         when :round_trip ; 'Andata e ritorno'
