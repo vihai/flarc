@@ -47,7 +47,7 @@
 %>
 
  var data = {
-   encpath: '<%=escape_javascript @igc_tmp_file.encoded_polyline %>',
+   path: <%= @igc_tmp_file.json_polyline %>,
    pilot: <%=raw pilot %>,
    plane: <%=raw plane %>,
  };

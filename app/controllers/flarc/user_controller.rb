@@ -10,9 +10,9 @@ class UserController < ApplicationController
 
     @current_championships = Championship.current
 
-    if auth_person
-      @old_championships = auth_person.championships.where('valid_to < ?', Time.now).order('valid_from DESC')
-      @flights_excerpt = auth_person.flights.joins(:championships).where(:championships => { :symbol => :cid_2012 }).order('takeoff_time DESC').limit(11)
+    if auth_pilot
+      @old_championships = auth_pilot.championships.where('valid_to < ?', Time.now).order('valid_from DESC')
+      @flights_excerpt = auth_pilot.flights.joins(:championships).where(:championships => { :symbol => :cid_2012 }).order('takeoff_time DESC').limit(11)
     else
       @old_championships = []
       @flights_excerpt = []

@@ -42,14 +42,14 @@ Ext.define('Asgard.controller.Menu', {
     var me = this;
 
     if (button.symbol == 'flights')
-      me.openUri('ygg/flarc/flights/');
+      me.openUri('flarc/flights/');
     else if (button.symbol == 'planes')
-      me.openUri('ygg/flarc/planes/');
+      me.openUri('flarc/planes/');
     else if (button.symbol == 'plane_types')
-      me.openUri('ygg/flarc/plane_types/');
+      me.openUri('flarc/plane_types/');
     else if (button.symbol == 'championships')
-      me.openUri('ygg/flarc/championships/');
-    else if (button.symbol == 'people')
-      me.openUri('ygg/core/people/');
+      me.openUri('flarc/championships/');
+    else if (button.symbol == 'pilots')
+      me.openUri('flarc/pilots/');
   },
 });

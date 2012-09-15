@@ -13,16 +13,21 @@ class Pilot < Ygg::Core::Person
 #  belongs_to :person,
 #             :class_name => 'Ygg::Core::Person'
 
-  belongs_to :club
+  belongs_to :club,
+             :class_name => '::Flarc::Club'
 
-  has_many :pilot_planes
-  has_many :planes, :through => :pilot_planes
-  has_many :flights
+#  has_many :pilot_planes,
+#           :class_name => '::Flarc::Pilot::Plane'
+
+#  has_many :planes, :through => :pilot_planes
+
+  has_many :flights,
+           :class_name => '::Flarc::Flight'
 
   has_many :ranking_standings
 
   has_many :championship_pilots,
-           :class_name => 'Flarc::Championship::Pilot',
+           :class_name => '::Flarc::Championship::Pilot',
            :dependent => :destroy,
            :embedded => true
 

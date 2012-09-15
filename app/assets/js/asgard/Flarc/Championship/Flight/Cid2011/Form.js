@@ -48,6 +48,7 @@ Ext.define('Asgard.Flarc.Championship.Flight.Cid2011.Form', {
     width: 370,
     queryMode: 'local',
     store: [
+     [ 'prom', 'Promozione' ],
      [ 'naz_open', 'Nazionale Open' ],
      [ 'naz_15m', 'Nazionale 15 m' ],
      [ 'naz_13m5', 'Nazionale 13.5 m' ],

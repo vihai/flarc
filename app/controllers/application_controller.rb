@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   helper :all # include all helpers, all the time
 
-  helper_method :facebook_uid, :hel_session, :auth_method, :auth_person
+  helper_method :facebook_uid, :hel_session, :auth_method, :auth_person, :auth_pilot
 
   before_filter :load_session
 
@@ -38,6 +38,10 @@ class ApplicationController < ActionController::Base
 
   def auth_person
     hel_session && hel_session.authenticated? ? hel_session.auth_identity.person : nil
+  end
+
+  def auth_pilot
+    auth_person && Flarc::Pilot.find_by_id(auth_person.id)
   end
 
   def load_session

@@ -73,8 +73,8 @@ Ext.define('Asgard.view.Menu', {
       icon: '/assets/flarc/glider_100x100.png',
      },
      {
-      text: 'People',
-      symbol: 'people',
+      text: 'Pilots',
+      symbol: 'pilots',
       icon: '/assets/core/person_100x100.png',
      },
      {

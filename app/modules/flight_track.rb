@@ -20,12 +20,12 @@ class FlightTrack < Array
     return nearest_point
   end
 
-  def decimate(step)
+  def decimate(max_distance)
     prevpoint = nil
     newtrack = []
 
     each do |x|
-      if !prevpoint || prevpoint.rough_distance(x) > 0.01
+      if !prevpoint || prevpoint.rough_distance(x) > max_distance
         newtrack << x
         prevpoint = x
       end

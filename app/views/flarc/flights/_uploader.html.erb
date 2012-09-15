@@ -14,20 +14,20 @@
   </fieldset>
 </form>
 
-<div id="upload_failed_dialog" title="Upload fallito" style="display: none">
-  <p>
+<div id="upload_failed_dialog" class="modal fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Login</h3>
+  </div>
+  <div class="modal-body">
     <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
     L'upload del file è fallito, il server ha risposto:
     <div id="upload_failed_message"></div>
-  </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+  </div>
 </div>
-
-<!--
-<div id="save_failed_dialog" title="Errore" style="display: none">
-  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
-  <div></div>
-</div>
--->
 
 <script type="text/javascript">
 //<![CDATA[
@@ -42,10 +42,11 @@ function upload_completed(id, data)
   $('#file').spinner('remove');
   $('#igc_tmp_file_id').val(id);
 
-  var path = google.maps.geometry.encoding.decodePath(data.encpath);
-
+  var path = data.path;
   var bounds = new google.maps.LatLngBounds();
-  for (var i = 0; i < path.length; i++) {
+
+  for(var i = 0; i < path.length; i++) {
+    path[i] = new google.maps.LatLng(path[i][0], path[i][1]);
     bounds.extend(path[i]);
   }
 
@@ -73,7 +74,7 @@ function upload_failed(message)
   jQuery('#file').spinner('remove');
 
   $('#upload_failed_message').html(message);
-  $('#upload_failed_dialog').dialog('open');
+  $('#upload_failed_dialog').modal();
 }
 
 $(function() {

@@ -1,0 +1,40 @@
+/*
+ * Copyright (C) 2008-2012, Intercom Srl, Daniele Orlandi
+ *
+ * Author:: Daniele Orlandi <daniele@orlandi.com>
+ *          Lele Forzani <lele@windmill.it>
+ *          Alfredo Cerutti <acerutti@intercom.it>
+ *
+ * License:: You can redistribute it and/or modify it under the terms of the LICENSE file.
+ *
+ */
+
+Ext.define('Asgard.Flarc.Pilot.ObjectPanel', {
+  extend: 'Asgard.ObjectPanelBase',
+  requires: [
+    'Asgard.Core.Plugin',
+    'Asgard.Flarc.Pilot.Form',
+    'Flarc.Pilot',
+    'Flarc.Flight',
+  ],
+
+  model: 'Flarc.Pilot',
+
+  title: 'Person...',
+//  imageSrc: '<%= image_path 'domain_icon.png' %>',
+  tabTitleTpl: '{name.first} {name.last}',
+  panelTitleTpl: '<div class="name">Person </div><div class="value">{first_name} {last_name}</div>',
+
+  form: 'flarc_pilot_form',
+
+  nav: [
+   {
+    text: 'Identities',
+    dataIndex: 'identities',
+   },
+   {
+    text: 'Flights',
+    dataIndex: 'flights',
+   },
+  ],
+});

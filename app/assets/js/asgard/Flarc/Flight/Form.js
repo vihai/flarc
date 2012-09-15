@@ -41,6 +41,7 @@ Ext.define('Asgard.Flarc.Flight.Form', {
     'Asgard.gmaps.Loader',
     'Asgard.gmaps.Panel',
     'Asgard.Core.Person.ReferenceField',
+    'Asgard.Flarc.Pilot.ReferenceField',
     'Asgard.Flarc.Championship.Flight.CollectionField',
   ],
   alias: 'widget.flarc_flight_form',
@@ -68,7 +69,7 @@ Ext.define('Asgard.Flarc.Flight.Form', {
       name: 'landing_time',
      },
      {
-      xtype: 'core_person',
+      xtype: 'flarc_pilot',
       fieldLabel: 'Pilot',
       name: 'pilot_id',
      },

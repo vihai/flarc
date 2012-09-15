@@ -157,7 +157,7 @@ class FlightsController < RestController
 
         # Override pilot if not an admin
         if !hel_session.auth_identity.has_capabilities?(:admin)
-          @flight.pilot = auth_person
+          @flight.pilot = auth_pilot
         end
 
         fres[:championship_flights].each do |cf|
@@ -240,7 +240,7 @@ class FlightsController < RestController
 
         # Override pilot if not an admin
         if !hel_session.auth_identity.has_capabilities?(:admin)
-          @flight.pilot = auth_person
+          @flight.pilot = auth_pilot
         end
 
         fres[:championship_flights].each do |cf|

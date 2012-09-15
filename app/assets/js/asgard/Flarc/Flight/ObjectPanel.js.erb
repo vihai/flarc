@@ -29,6 +29,10 @@ Ext.define('Asgard.Flarc.Flight.ObjectPanel', {
     text: 'Open IGC →',
     name: 'open_igc',
    },
+   {
+    text: 'Open CID page →',
+    name: 'open_cid',
+   },
   ],
 
   initComponent: function() {
@@ -38,6 +42,10 @@ Ext.define('Asgard.Flarc.Flight.ObjectPanel', {
 
     me.down('toolbar button[name=open_igc]').on('click', function() {
       window.location = '/flarc/flights/' + me.getRecord().getId() + '.igc';
+    });
+
+    me.down('toolbar button[name=open_cid]').on('click', function() {
+      window.open('/flarc/flights/' + me.getRecord().getId());
     });
 
     me.down('flarc_championshipflights polyview').on('itemcontextmenu', function(el, record, item, index, event) {

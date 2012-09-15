@@ -35,16 +35,6 @@ class Flight < Ygg::PublicModel
            :uniq => true
 
   interface :rest do
-    attribute :encoded_polyline do
-      not_writable!
-      ignore!
-    end
-
-    attribute :encoded_polyline_cache do
-      not_readable!
-      not_writable!
-      ignore!
-    end
   end
 
   def championship_flight(symbol)
@@ -94,7 +84,8 @@ class Flight < Ygg::PublicModel
     rescue Errno::ENOENT
       nil
     else
-      @igc_file.read_contents { |x| @track << x }
+      @igc_file.read_contents
+      @track = @igc_file.track
       @igc_file
     end
   end
@@ -133,17 +124,9 @@ class Flight < Ygg::PublicModel
     return self.landing_time - self.takeoff_time
   end
 
-  def encoded_polyline(options = {})
-    if options[:force] || (!self.encoded_polyline_cache && !self.track.empty?)
-      self.encoded_polyline_cache =
-        GMapPolylineEncoder.new(:dp_threshold => 0.001).encode(
-            self.track.collect { |x| [x.lat, x.lon] })[:points]
-#      save
-    end
-
-    return self.encoded_polyline_cache
+  def json_polyline(options = {})
+    @json_polyline ||= self.track.decimate(0.003).collect { |x| [x.lat.round(5), x.lon.round(5)] }.to_json
   end
-
 end
 
 end

@@ -40,9 +40,8 @@ class IgcTmpFile < ActiveRecord::Base
     @igc_file ||= IgcFile.open(self.filename, 'rb')
   end
 
-  def encoded_polyline(options = {})
-    GMapPolylineEncoder.new(:dp_threshold => 0.001).encode(
-        self.igc_file.track.collect { |x| [x.lat, x.lon] })[:points]
+  def json_polyline(options = {})
+    @json_polyline ||= self.igc_file.track.decimate(0.003).collect { |x| [x.lat.round(5), x.lon.round(5)] }.to_json
   end
 end
 

@@ -12,7 +12,7 @@ class ChampionshipsController < RestController
 
       Ygg::Core::Transaction.new 'Registration wizard' do
 
-        pilot = auth_person
+        pilot = auth_pilot
         pilot.attributes = {
           :club => Club.find(req[:club_id]),
           :fai_card => req[:fai_card],

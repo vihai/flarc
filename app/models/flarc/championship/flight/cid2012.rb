@@ -42,8 +42,8 @@ class Cid2012 < Flight
   def points
     return nil if !distance
 
-    if self.championship.symbol.to_sym == :cid_2012 &&
-       self.cid_ranking.to_sym == :naz_club
+    if self.championship.symbol == 'cid_2012' &&
+       self.cid_ranking == 'naz_club'
       hcap = club_handicap
     else
       hcap = handicap
@@ -54,16 +54,16 @@ class Cid2012 < Flight
     pts = (distance / 1000.0) / hcap
 
     case self.cid_task_type
-    when :round_trip ; pts = pts * 1.3
-    when :fai_triangle ; pts = pts * 1.4
-    when :straight_line ; pts = pts * 1.6
-    when :simple_triangle
-      if cid_task_eval != :free
+    when 'round_trip' ; pts = pts * 1.3
+    when 'fai_triangle' ; pts = pts * 1.4
+    when 'straight_line' ; pts = pts * 1.6
+    when 'simple_triangle'
+      if cid_task_eval != 'free'
         pts = pts * 1.2
       end
     end
 
-    if cid_task_eval == :completed
+    if cid_task_eval == 'completed'
       pts = pts * 1.1
     end
 

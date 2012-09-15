@@ -9,15 +9,16 @@
  *
  */
 
-Ext.define('Asgard.Flarc.Flight.ReferenceField', {
+Ext.define('Asgard.Flarc.Pilot.ReferenceField', {
   extend: 'Asgard.form.field.ReferenceField',
-  alias: 'widget.flarc_flight',
   requires: [
-    'Asgard.Flarc.Plugin',
-    'Flarc.Flight',
-    'Asgard.Flarc.Flight.Picker'
+    'Asgard.Core.Plugin',
+    'Flarc.Pilot',
+    'Asgard.Flarc.Pilot',
+    'Asgard.Flarc.Pilot.Picker',
   ],
-  model: 'Ygg.Flarc.Flight',
-  tpl: '<tpl for="."><div class="asgard_object">{id}</div></tpl>',
-  pickerClass: 'Asgard.Flarc.Flight.Picker',
+  alias: 'widget.flarc_pilot',
+
+  asgardObject: 'Asgard.Flarc.Pilot',
+  pickerClass: 'Asgard.Flarc.Pilot.Picker',
 });
