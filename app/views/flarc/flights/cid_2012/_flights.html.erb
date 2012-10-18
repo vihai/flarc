@@ -12,7 +12,7 @@
       <th>Stato</th>
     </tr>
     <% flights.each do |x| %>
-    <% cf = x.championship_flight(:cid_2012) %>
+    <% cf = x.championship_flight('cid_2012') %>
     <tr>
       <td class="view">
         <%= link_to(image_tag('view.png', :alt => 'View', :title => 'Apri la pagina del volo'), x) %>

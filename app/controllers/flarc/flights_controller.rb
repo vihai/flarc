@@ -28,6 +28,17 @@ class FlightsController < RestController
         attribute(:name) { show! }
       end
     end
+
+    attribute :championship_flights do
+      include!
+      empty!
+      attribute(:distance) { show! }
+      attribute(:championship) do
+        include!
+        empty!
+        attribute(:name) { show! }
+      end
+    end
   end
 
   view :edit do
@@ -69,7 +80,7 @@ class FlightsController < RestController
     @targets_relation = @targets_relation.where(conditions)
 
     if params[:cship]
-      @targets_relation = @targets_relation.joins(:championships).where(:championships => { :symbol => params[:cship] })
+      @targets_relation = @targets_relation.joins(:championships).where(:championships => { :sym => params[:cship] })
     end
   end
 
@@ -165,17 +176,17 @@ class FlightsController < RestController
 
           case cf[:_type]
           when 'Championship::Flight::Cid2012'
-            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2012)).first
+            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_sym('cid_2012')).first
             if !cp.cid_category
               ranking = nil
             elsif cp.cid_category.to_sym == :prom
               ranking = :prom
             else
-              ranking = cf[:cid_ranking].to_sym
+              ranking = cf[:cid_ranking]
             end
 
             @flight.championship_flights << (a=Championship::Flight::Cid2012.new(
-              :championship => Championship.find_by_symbol(:cid_2012),
+              :championship => Championship.find_by_sym('cid_2012'),
               :flight => @flight, # Workaround for validations
               :status => :pending,
               :distance => cf[:distance],
@@ -186,7 +197,7 @@ class FlightsController < RestController
 
           when 'Championship::Flight::Csvva2012'
             @flight.championship_flights << Championship::Flight::Csvva2012.new(
-              :championship => Championship.find_by_symbol(:csvva_2012),
+              :championship => Championship.find_by_sym('csvva_2012'),
               :flight => @flight, # Workaround for validations
               :status => :pending,
               :distance => cf[:distance],
@@ -249,7 +260,7 @@ class FlightsController < RestController
 
           case cf[:_type]
           when 'Championship::Flight::Cid2012'
-            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_symbol(:cid_2012)).first
+            cp = @flight.pilot.championship_pilots.where(:championship_id => Championship.find_by_sym('cid_2012')).first
             if !cp.cid_category
               ranking = nil
             elsif cp.cid_category.to_sym == :prom

@@ -18,13 +18,21 @@ class RankingsController < ApplicationController
   def history
   end
 
+  def regenerate
+    Flarc::Ranking.compute_all
+
+    respond_to do |format|
+      format.json { render :json => {} }
+    end
+  end
+
   protected
 
   def find_object
     if (params[:id] =~ /^[0-9]+$/)
       @ranking = Ranking.find(params[:id])
     else
-      @ranking = Ranking.find_by_symbol(params[:id])
+      @ranking = Ranking.find_by_sym(params[:id])
       raise ActiveRecord::RecordNotFound if !@ranking
     end
   end

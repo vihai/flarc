@@ -42,7 +42,7 @@ class Cid2012 < Flight
   def points
     return nil if !distance
 
-    if self.championship.symbol == 'cid_2012' &&
+    if self.championship.sym == 'cid_2012' &&
        self.cid_ranking == 'naz_club'
       hcap = club_handicap
     else

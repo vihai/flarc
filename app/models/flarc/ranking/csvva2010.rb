@@ -9,7 +9,7 @@ class Csvva2010 < Ranking
     # Pass 1: Obtain all flights and organize them by ranking
     flights = Flight.select('flights.*, tags.id AS tag_id, championship_pilots.csvva_pilot_level AS pilot_level').
                 joins(:flight_tags).joins(:tags).joins(:pilot => { :championship_pilots => :championship }).
-                where("tags.symbol='csvva_2010' AND flight_tags.status='approved' AND championships.symbol='csvva_2010'").all
+                where("tags.sym='csvva_2010' AND flight_tags.status='approved' AND championships.sym='csvva_2010'").all
 
     results = {}
     flights.each do |flight|
@@ -40,7 +40,7 @@ class Csvva2010 < Ranking
 
 #      Ranking.transaction do
 
-        ranking = Ranking.find_by_symbol("csvva_#{pilot_level}_2010")
+        ranking = Ranking.find_by_sym("csvva_#{pilot_level}_2010")
         ranking.generated_at = Time.now
         ranking.save!
 

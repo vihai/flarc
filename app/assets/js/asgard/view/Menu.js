@@ -59,42 +59,42 @@ Ext.define('Asgard.view.Menu', {
     items: [
      {
       text: 'Voli',
-      symbol: 'flights',
+      name: 'flights',
       icon: '/assets/flarc/flight_100x100.png',
      },
      {
       text: 'Alianti',
-      symbol: 'planes',
+      name: 'planes',
       icon: '/assets/flarc/glider_100x100.png',
      },
      {
-      text: 'Tipi',
-      symbol: 'plane_types',
+      text: 'Tipi di Alianti',
+      name: 'plane_types',
       icon: '/assets/flarc/glider_100x100.png',
      },
      {
       text: 'Pilots',
-      symbol: 'pilots',
+      name: 'pilots',
       icon: '/assets/core/person_100x100.png',
      },
      {
       text: 'Championships',
-      symbol: 'championships',
+      name: 'championships',
+//      icon: '',
+     },
+     {
+      text: 'Rigenera classifiche',
+      name: 'regenerate_rankings',
 //      icon: '',
      },
      {
       text: '',
-      symbol: '',
+      name: '',
 //      icon: '',
      },
      {
       text: '',
-      symbol: '',
-//      icon: '',
-     },
-     {
-      text: '',
-      symbol: '',
+      name: '',
 //      icon: '',
      },
     ]

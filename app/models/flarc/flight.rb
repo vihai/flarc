@@ -37,15 +37,15 @@ class Flight < Ygg::PublicModel
   interface :rest do
   end
 
-  def championship_flight(symbol)
-    championship_flights.joins(:championship).where('championships.symbol' => symbol).first
+  def championship_flight(sym)
+    championship_flights.joins(:championship).where('championships.sym' => sym).first
   end
 
 #  validates_presence_of :pilot, :plane, :takeoff_time, :landing_time, :distance
 #  validates_numericality_of :distance
 
   scope :pending, lambda { joins(:flight_tags).joins(:tags).
-                           where('tags.symbol' => 'csvva_2010', 'flight_tags.status' => 'pending') }
+                           where('tags.sym' => 'csvva_2010', 'flight_tags.status' => 'pending') }
 
   def igc_file_path
     return File.join(Rails.root, 'db', 'igc_files', Rails.env, 'flights', self.id.to_s + '.igc')
@@ -77,7 +77,7 @@ class Flight < Ygg::PublicModel
   def igc_file
     return @igc_file if @igc_file
 
-    @track = []
+    @track = FlightTrack.new
 
     begin
       @igc_file = IgcFile.open(self.igc_file_path)

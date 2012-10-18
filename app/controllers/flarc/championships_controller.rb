@@ -6,7 +6,7 @@ class ChampionshipsController < RestController
   def subscribe
     if request.method == 'GET'
       # FIXME: support multi-championship again
-      @championship = Championship.find_by_symbol(:cid_2012)
+      @championship = Championship.find_by_sym('cid_2012')
     elsif request.method == 'POST'
       req = ActiveSupport::JSON.decode(request.body).symbolize_keys!
 
@@ -18,7 +18,7 @@ class ChampionshipsController < RestController
           :fai_card => req[:fai_card],
         }
 
-        cid = Championship.find_by_symbol(:cid_2012)
+        cid = Championship.find_by_sym('cid_2012')
 
         cp = pilot.championship_pilots.where(:championship_id => cid.id).first ||
                Championship::Pilot::Cid2012.new(:pilot => pilot, :championship => cid)

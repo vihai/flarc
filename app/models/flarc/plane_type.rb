@@ -30,6 +30,15 @@ class PlaneType < Ygg::BasicModel
     validates_numericality_of :handicap, :allow_nil => true
     validates_numericality_of :club_handicap, :allow_nil => true
   end
+
+  def self.used
+    where { id.in(Flarc::Plane.select { plane_type_id }) }
+  end
+
+  def self.used_in_cid_2012
+    where { id.in(Flarc::Plane.joins { flights.championship_flights.championship }.
+             where { flights.championship_flights.championship.sym == 'cid_2012' }.select { plane_type_id }) }
+  end
 end
 
 end

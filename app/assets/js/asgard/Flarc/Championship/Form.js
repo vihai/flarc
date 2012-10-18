@@ -33,7 +33,7 @@ Ext.define('Asgard.Flarc.Championship.Form', {
    },
    {
     fieldLabel: 'Symbol',
-    name: 'symbol',
+    name: 'sym',
    },
   ],
 });

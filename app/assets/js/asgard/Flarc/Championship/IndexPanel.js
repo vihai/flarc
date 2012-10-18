@@ -17,6 +17,12 @@ Ext.define('Asgard.Flarc.Championship.IndexPanel', {
   ],
   title: 'Championships',
   model: 'Flarc.Championship',
+  storeConfig: {
+    sorters: {
+      property: 'valid_from',
+      direction: 'ASC',
+    },
+  },
   columns: [
    {
     text: 'Name',

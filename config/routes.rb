@@ -42,6 +42,10 @@ Flarc::Application.routes.draw do
       member do
         get :history
       end
+
+      collection do
+        post :regenerate
+      end
     end
 
     hel_resources :championships do

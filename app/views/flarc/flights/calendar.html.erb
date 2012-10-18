@@ -36,7 +36,7 @@
           <div class="dom"><%=h dom %></div>
           <div class="cnt">
           <% if dom > 0 && days[dom] %>
-            <%= link_to days[dom].cnt, flarc_flights_path(:cship => :cid_2012, :year => year, :month => month, :day => dom) %>
+            <%= link_to days[dom].cnt, flarc_flights_path(:cship => 'cid_2012', :year => year, :month => month, :day => dom) %>
           <% end %>
           </div>
           </td>

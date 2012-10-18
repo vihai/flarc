@@ -51,12 +51,12 @@ Ext.define('Asgard.Flarc.Championship.Flight.CollectionField', {
       ],
       'Flarc::Championship::Flight::Cid2011': [
         '<b>CID 2011</b> - {cid_ranking}<br />',
-        '{distance / 1000} km - {points:number("0,000")} points',
+        '{cid_task_type} - {cid_task_eval} - {distance / 1000} km - {points:number("0,000")} points',
         '<span style="float: right">{status}</span>',
       ],
       'Flarc::Championship::Flight::Cid2012': [
         '<b>CID 2012</b> - {cid_ranking}<br />',
-        '{distance / 1000} km - {points:number("0,000")} points',
+        '{cid_task_type} - {cid_task_eval} - {distance / 1000} km - {points:number("0,000")} points',
         '<span style="float: right">{status}</span>',
       ],
     },

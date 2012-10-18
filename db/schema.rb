@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,14 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110206190707) do
+ActiveRecord::Schema.define(:version => 20121010192150) do
 
-  create_table "aaas", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "published"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "a", :id => false, :force => true do |t|
+    t.integer "a"
   end
 
   create_table "alptherm_history_entries", :force => true do |t|
@@ -35,9 +32,10 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "site_param"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uuid",       :limit => 36
   end
 
-  create_table "attic_cid_flights", :id => false, :force => true do |t|
+  create_table "attic_cid_flights", :force => true do |t|
     t.integer "id_volo",                    :default => 0,  :null => false
     t.integer "id_pilota",                  :default => 0,  :null => false
     t.date    "data"
@@ -53,11 +51,9 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string  "aeroporto",    :limit => 40, :default => "", :null => false
     t.string  "file_igc",     :limit => 40, :default => "", :null => false
     t.integer "pena"
-    t.integer "id",                                         :null => false
   end
 
-  create_table "attic_cid_pilots", :id => false, :force => true do |t|
-    t.integer "id",                                               :null => false
+  create_table "attic_cid_pilots", :force => true do |t|
     t.string  "cognome",            :limit => 40, :default => "", :null => false
     t.string  "nome",               :limit => 40, :default => "", :null => false
     t.integer "id_club",                          :default => 0,  :null => false
@@ -86,8 +82,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.integer "id",                         :null => false
   end
 
-  create_table "attic_identities", :id => false, :force => true do |t|
-    t.integer  "id",                                               :null => false
+  create_table "attic_identities", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "person_id"
@@ -103,8 +98,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   add_index "attic_identities", ["person_id"], :name => "index_identities_on_person_id"
   add_index "attic_identities", ["uuid"], :name => "index_identities_on_uuid", :unique => true
 
-  create_table "attic_locations", :id => false, :force => true do |t|
-    t.integer  "id",                              :null => false
+  create_table "attic_locations", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "address"
@@ -118,8 +112,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "geocode_precision", :limit => 16
   end
 
-  create_table "attic_people", :id => false, :force => true do |t|
-    t.integer  "id",                                :null => false
+  create_table "attic_people", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "first_name",          :limit => 64, :null => false
@@ -139,13 +132,37 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.integer  "fb_uid",              :limit => 8
   end
 
+  create_table "championship_flights", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "championship_id"
+    t.integer  "flight_id"
+    t.string   "sti_type"
+    t.string   "status",          :limit => 8
+    t.text     "data"
+    t.integer  "distance"
+    t.float    "speed"
+    t.string   "cid_ranking",     :limit => 32
+    t.string   "cid_task_type",   :limit => 32
+    t.string   "cid_task_eval",   :limit => 32
+  end
+
+  add_index "championship_flights", ["championship_id", "flight_id"], :name => "index_championship_flights_on_championship_id_and_flight_id", :unique => true
+  add_index "championship_flights", ["championship_id"], :name => "index_championship_flights_on_championship_id"
+  add_index "championship_flights", ["flight_id"], :name => "index_championship_flights_on_flight_id"
+
   create_table "championship_pilots", :force => true do |t|
     t.integer "championship_id"
     t.integer "pilot_id"
     t.string  "csvva_pilot_level", :limit => 16
+    t.string  "cid_category",      :limit => 32
+    t.string  "sti_type"
+    t.integer "old_pilot_id"
   end
 
   add_index "championship_pilots", ["championship_id", "pilot_id"], :name => "index_championship_pilots_on_championship_id_and_pilot_id", :unique => true
+  add_index "championship_pilots", ["championship_id"], :name => "index_championship_pilots_on_championship_id"
+  add_index "championship_pilots", ["pilot_id"], :name => "index_championship_pilots_on_pilot_id"
 
   create_table "championships", :force => true do |t|
     t.datetime "created_at"
@@ -156,99 +173,40 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.datetime "valid_to"
     t.string   "driver",     :limit => 16
     t.string   "symbol",     :limit => 32
+    t.string   "uuid",       :limit => 36
   end
 
-  create_table "cid_flights", :force => true do |t|
-    t.integer "id_volo",                    :default => 0,  :null => false
-    t.integer "id_pilota",                  :default => 0,  :null => false
-    t.date    "data"
-    t.string  "aliante",      :limit => 40, :default => "", :null => false
-    t.float   "fca",                                        :null => false
-    t.string  "classe",       :limit => 40, :default => "", :null => false
-    t.string  "tipo_volo",    :limit => 40, :default => "", :null => false
-    t.float   "fcv",                                        :null => false
-    t.float   "km",                                         :null => false
-    t.float   "punti",                                      :null => false
-    t.integer "approvazione",               :default => 0,  :null => false
-    t.integer "primato",                    :default => 0,  :null => false
-    t.string  "aeroporto",    :limit => 40, :default => "", :null => false
-    t.string  "file_igc",     :limit => 40, :default => "", :null => false
-    t.integer "pena"
-  end
-
-  create_table "cid_pilots", :force => true do |t|
-    t.string  "cognome",            :limit => 40, :default => "", :null => false
-    t.string  "nome",               :limit => 40, :default => "", :null => false
-    t.integer "id_club",                          :default => 0,  :null => false
-    t.string  "club",               :limit => 20, :default => "", :null => false
-    t.string  "password",                         :default => "", :null => false
-    t.string  "username",           :limit => 40, :default => "", :null => false
-    t.text    "indirizzo",                        :default => "", :null => false
-    t.string  "citta",              :limit => 30, :default => "", :null => false
-    t.string  "provincia",          :limit => 2,  :default => "", :null => false
-    t.string  "nazione",            :limit => 20, :default => "", :null => false
-    t.string  "cap",                :limit => 10, :default => "", :null => false
-    t.string  "telefono",           :limit => 20, :default => "", :null => false
-    t.string  "cellulare",          :limit => 20, :default => "", :null => false
-    t.string  "email",              :limit => 50, :default => "", :null => false
-    t.string  "n_brevetto",         :limit => 20, :default => "", :null => false
-    t.string  "scadenza_brev",      :limit => 20, :default => ""
-    t.string  "tessera_fai",        :limit => 10, :default => "", :null => false
-    t.date    "license_expiration"
-  end
-
-  create_table "cids", :id => false, :force => true do |t|
-    t.string  "filename",     :limit => 40
-    t.integer "anno"
-    t.integer "cid_pilot_id"
-    t.string  "cid_cir",      :limit => 1
-    t.integer "id",                         :null => false
-  end
-
-  create_table "cities", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name",                      :null => false
-    t.string   "name_foreign"
-    t.string   "istat_id",     :limit => 6
-    t.string   "fiscal_code",  :limit => 4
-    t.integer  "province_id"
-    t.string   "zip",          :limit => 8
-    t.boolean  "is_capoluogo",              :null => false
-    t.boolean  "suppressed",                :null => false
-    t.integer  "country_id",                :null => false
-  end
+  add_index "championships", ["symbol"], :name => "index_championships_on_symbol", :unique => true
 
   create_table "clubs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "old_club_id"
+    t.string   "symbol",      :limit => 32
+    t.string   "uuid",        :limit => 36
   end
 
-  create_table "contact_areas", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name",       :limit => 32
-    t.text     "descr"
+  add_index "clubs", ["symbol"], :name => "clubs_symbol", :unique => true
+
+  create_table "core_acl_entries", :force => true do |t|
+    t.integer "group_id"
+    t.integer "identity_id"
+    t.integer "obj_id",                    :null => false
+    t.string  "obj_type",                  :null => false
+    t.string  "capability",  :limit => 32, :null => false
   end
 
-  create_table "contact_roles", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name",       :limit => 32
-    t.text     "descr"
+  add_index "core_acl_entries", ["group_id"], :name => "index_core_acl_entries_on_group_id"
+  add_index "core_acl_entries", ["identity_id"], :name => "index_core_acl_entries_on_identity_id"
+  add_index "core_acl_entries", ["obj_id", "obj_type"], :name => "index_core_acl_entries_on_obj_id_and_obj_type"
+
+  create_table "core_capabilities", :force => true do |t|
+    t.string "name",  :limit => 32, :null => false
+    t.string "descr"
   end
 
-  create_table "contacts", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "identity_id"
-    t.integer  "organization_id"
-    t.integer  "contact_area_id"
-    t.integer  "contact_role_id"
-    t.text     "notes"
-  end
+  add_index "core_capabilities", ["name"], :name => "index_core_capabilities_on_name"
 
   create_table "core_channels", :force => true do |t|
     t.datetime "created_at"
@@ -287,15 +245,16 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   end
 
   create_table "core_credentials", :force => true do |t|
-    t.integer "identity_id",                   :null => false
-    t.string  "sti_type",        :limit => 64, :null => false
-    t.text    "descr"
-    t.text    "data",                          :null => false
-    t.string  "x509_m_serial",   :limit => 32
-    t.string  "x509_i_dn"
-    t.string  "x509_s_dn"
-    t.string  "x509_s_dn_cn"
-    t.string  "x509_s_dn_email"
+    t.integer  "identity_id",                   :null => false
+    t.string   "sti_type",        :limit => 64, :null => false
+    t.text     "descr"
+    t.text     "data",                          :null => false
+    t.string   "x509_m_serial",   :limit => 32
+    t.string   "x509_i_dn"
+    t.string   "x509_s_dn"
+    t.string   "x509_s_dn_cn"
+    t.string   "x509_s_dn_email"
+    t.datetime "expires_at"
   end
 
   add_index "core_credentials", ["identity_id", "sti_type"], :name => "index_core_credentials_on_identity_id_and_sti_type"
@@ -319,7 +278,6 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   create_table "core_http_sessions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "session_id",                       :null => false
     t.string   "remote_addr",        :limit => 42
     t.integer  "remote_port"
     t.text     "x_forwarded_for"
@@ -336,19 +294,31 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "auth_confidence",    :limit => 16
     t.string   "close_reason",       :limit => 32
     t.datetime "close_time"
+    t.string   "uuid",               :limit => 36,                    :null => false
+    t.string   "status",             :limit => 32, :default => "new", :null => false
   end
 
-  add_index "core_http_sessions", ["session_id"], :name => "index_core_http_sessions_on_session_id"
   add_index "core_http_sessions", ["updated_at"], :name => "index_core_http_sessions_on_updated_at"
+  add_index "core_http_sessions", ["uuid"], :name => "index_core_http_sessions_on_uuid"
 
   create_table "core_identities", :force => true do |t|
     t.integer "person_id"
     t.string  "qualified",  :limit => 128, :null => false
     t.string  "confidence", :limit => 20
+    t.boolean "is_admin",                  :null => false
+    t.string  "uuid",       :limit => 36
   end
 
   add_index "core_identities", ["person_id"], :name => "index_core_identities_on_person_id"
   add_index "core_identities", ["qualified"], :name => "index_core_identities_on_qualified", :unique => true
+
+  create_table "core_identity_capabilities", :force => true do |t|
+    t.integer "identity_id"
+    t.integer "capability_id"
+  end
+
+  add_index "core_identity_capabilities", ["capability_id"], :name => "index_core_identity_capabilities_on_capability_id"
+  add_index "core_identity_capabilities", ["identity_id"], :name => "index_core_identity_capabilities_on_identity_id"
 
   create_table "core_locations", :force => true do |t|
     t.integer "locatable_id"
@@ -363,7 +333,8 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.float   "lng"
     t.string  "provider",       :limit => 16
     t.integer "accuracy"
-    t.text    "raw_address"
+    t.string  "location_type",  :limit => 32
+    t.string  "region",         :limit => 128
   end
 
   create_table "core_log_entries", :force => true do |t|
@@ -371,7 +342,6 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.datetime "updated_at"
     t.datetime "timestamp",                      :null => false
     t.string   "transaction_uuid", :limit => 36
-    t.integer  "person_id"
     t.integer  "identity_id"
     t.text     "description",                    :null => false
     t.text     "notes"
@@ -380,7 +350,6 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   end
 
   add_index "core_log_entries", ["identity_id"], :name => "index_core_log_entries_on_identity_id"
-  add_index "core_log_entries", ["person_id"], :name => "index_core_log_entries_on_person_id"
   add_index "core_log_entries", ["timestamp"], :name => "index_core_log_entries_on_timestamp"
 
   create_table "core_log_entry_details", :force => true do |t|
@@ -408,67 +377,65 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "vat_number",                    :limit => 16
     t.string   "italian_fiscal_code",           :limit => 16
     t.text     "notes"
+    t.string   "handle",                        :limit => 16, :null => false
+    t.integer  "reseller_id"
+    t.integer  "admin_group_id"
   end
 
   create_table "core_people", :force => true do |t|
-    t.string   "uuid",                  :limit => 36, :null => false
+    t.string   "uuid",                       :limit => 36, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title",                 :limit => 16
-    t.string   "first_name",            :limit => 64, :null => false
-    t.string   "middle_name",           :limit => 64
-    t.string   "last_name",             :limit => 64, :null => false
-    t.string   "nickname",              :limit => 32
-    t.string   "gender",                :limit => 1
+    t.string   "title",                      :limit => 16
+    t.string   "first_name",                 :limit => 64, :null => false
+    t.string   "middle_name",                :limit => 64
+    t.string   "last_name",                  :limit => 64, :null => false
+    t.string   "nickname",                   :limit => 32
+    t.string   "gender",                     :limit => 1
     t.integer  "residence_location_id"
     t.datetime "birth_date"
     t.integer  "birth_location_id"
     t.string   "document_type"
     t.string   "document_number"
     t.integer  "invoicing_location_id"
-    t.string   "vat_number",            :limit => 16
-    t.string   "italian_fiscal_code",   :limit => 16
+    t.string   "vat_number",                 :limit => 16
+    t.string   "italian_fiscal_code",        :limit => 16
     t.text     "notes"
-    t.string   "tmp_telefono",          :limit => 32
-    t.string   "tmp_cellulare",         :limit => 32
+    t.string   "tmp_telefono",               :limit => 32
+    t.string   "tmp_cellulare",              :limit => 32
     t.boolean  "is_admin"
     t.integer  "fb_uid"
+    t.string   "handle",                     :limit => 16, :null => false
+    t.integer  "reseller_id"
+    t.integer  "club_id"
+    t.string   "fai_card",                   :limit => 32
+    t.string   "gliding_license",            :limit => 32
+    t.datetime "gliding_license_expiration"
+    t.string   "sti_type",                   :limit => 64
   end
 
-  create_table "core_service_classes", :force => true do |t|
+  create_table "core_tasks", :force => true do |t|
+    t.string   "uuid",                :limit => 36, :null => false
     t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "class_name"
+    t.datetime "expected_completion"
+    t.datetime "completed_at"
+    t.string   "status",              :limit => 32
+    t.string   "description"
+    t.integer  "obj_id"
+    t.string   "obj_type"
+    t.integer  "depends_on_id"
+    t.string   "subsystem",           :limit => 32
+    t.string   "node",                :limit => 64
+    t.string   "operation",           :limit => 32
+    t.text     "request_data"
+    t.text     "result_data"
+    t.text     "log"
+    t.integer  "precent"
+    t.float    "percent"
   end
 
-  create_table "countries", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "a2",                       :limit => 2, :null => false
-    t.string   "a3",                       :limit => 3, :null => false
-    t.integer  "num",                                   :null => false
-    t.string   "name",                                  :null => false
-    t.string   "area_code",                :limit => 4
-    t.boolean  "cities_are_authoritative"
-  end
-
-  add_index "countries", ["a2"], :name => "index_countries_on_a2", :unique => true
-  add_index "countries", ["a3"], :name => "index_countries_on_a3", :unique => true
-  add_index "countries", ["num"], :name => "index_countries_on_num", :unique => true
-
-  create_table "credentials", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "identity_id",               :null => false
-    t.string   "scheme",      :limit => 32, :null => false
-    t.string   "encoding",    :limit => 32, :null => false
-    t.string   "diameter",    :limit => 32, :null => false
-    t.text     "data",                      :null => false
-  end
-
-  add_index "credentials", ["identity_id", "scheme", "diameter"], :name => "index_credentials_on_identity_id_and_scheme_and_diameter"
-  add_index "credentials", ["identity_id", "scheme"], :name => "index_credentials_on_identity_id_and_scheme"
-  add_index "credentials", ["identity_id"], :name => "index_credentials_on_identity_id"
+  add_index "core_tasks", ["obj_type", "obj_id"], :name => "index_core_provisioning_requests_on_obj_type_and_obj_id"
+  add_index "core_tasks", ["uuid"], :name => "index_core_provisioning_requests_on_uuid", :unique => true
 
   create_table "flight_photos", :force => true do |t|
     t.datetime "created_at"
@@ -487,9 +454,13 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   create_table "flight_tags", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "tag_id",                  :null => false
-    t.integer  "flight_id",               :null => false
+    t.integer  "tag_id",                   :null => false
+    t.integer  "flight_id",                :null => false
     t.string   "status",     :limit => 8
+    t.text     "data"
+    t.string   "sti_type",   :limit => 64
+    t.integer  "distance"
+    t.integer  "speed"
   end
 
   add_index "flight_tags", ["flight_id"], :name => "index_flight_tags_on_flight_id"
@@ -509,54 +480,23 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.boolean  "private",                                   :null => false
     t.date     "logger_date"
     t.string   "passenger_name",              :limit => 64
-    t.text     "encoded_polyline_cache"
-    t.integer  "tmp_cid_id"
-    t.date     "tmp_date"
-    t.text     "tmp_glider"
-    t.float    "tmp_fca"
-    t.string   "tmp_classe",                  :limit => 32
-    t.string   "tmp_tipo_volo",               :limit => 32
-    t.float    "tmp_fcv"
-    t.float    "tmp_punti"
-    t.integer  "tmp_approvazione"
-    t.integer  "tmp_primato"
-    t.text     "tmp_aeroporto"
-    t.integer  "tmp_pena"
-    t.integer  "tmp_id"
     t.string   "igc_fr_serial",               :limit => 3
     t.integer  "igc_fr_fotd"
     t.string   "igc_fr_manuf",                :limit => 3
     t.float    "speed"
     t.text     "notes_public"
     t.text     "notes_private"
+    t.string   "uuid",                        :limit => 36
+    t.integer  "old_pilot_id"
   end
+
+  add_index "flights", ["takeoff_time"], :name => "flights_takeoff_time"
 
   create_table "glider_classes", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "group_members", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "groups", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "identities", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "person_id"
-    t.string   "fqdn",           :limit => 128,                    :null => false
-    t.string   "password",       :limit => 32
-    t.boolean  "email_verified"
-    t.string   "uuid",           :limit => 22,                     :null => false
-    t.boolean  "is_admin",                      :default => false, :null => false
-    t.boolean  "privacy",                       :default => true,  :null => false
+    t.string   "uuid",       :limit => 36
   end
 
   create_table "igc_tmp_files", :force => true do |t|
@@ -565,6 +505,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "original_filename", :limit => 64
     t.integer  "pilot_id"
     t.integer  "club_id"
+    t.integer  "old_pilot_id"
   end
 
   create_table "images", :force => true do |t|
@@ -577,61 +518,6 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.datetime "updated_at"
     t.string   "image_uid"
     t.string   "image_ext"
-  end
-
-  create_table "locations", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.text     "address"
-    t.text     "city"
-    t.string   "zip",               :limit => 10
-    t.text     "state"
-    t.string   "country",           :limit => 2
-    t.float    "lat"
-    t.float    "lon"
-    t.string   "geocoder",          :limit => 16
-    t.string   "geocode_precision", :limit => 16
-  end
-
-  create_table "logs", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "log_time",                           :null => false
-    t.integer  "identity_id",                        :null => false
-    t.string   "operation",            :limit => 16
-    t.string   "object_class_name"
-    t.integer  "object_id"
-    t.text     "descr",                              :null => false
-    t.text     "changes"
-    t.text     "notes"
-    t.string   "http_remote_addr",     :limit => 64
-    t.integer  "http_remote_port"
-    t.string   "http_server_addr",     :limit => 64
-    t.integer  "http_server_port"
-    t.text     "http_host"
-    t.text     "http_url"
-    t.text     "http_user_agent"
-    t.text     "http_referer"
-    t.text     "http_x_forwarded_for"
-    t.text     "http_via"
-  end
-
-  create_table "organizations", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "ro_address"
-    t.integer  "ro_city_id"
-    t.string   "ro_zip",              :limit => 8
-    t.string   "op_address"
-    t.integer  "op_city_id"
-    t.string   "op_zip",              :limit => 8
-    t.string   "billing_address"
-    t.integer  "billing_city_id"
-    t.string   "billing_zip",         :limit => 8
-    t.string   "vat_number",          :limit => 16
-    t.string   "italian_fiscal_code", :limit => 16
-    t.text     "notes"
   end
 
   create_table "page_part_translations", :force => true do |t|
@@ -698,31 +584,12 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
   add_index "pages", ["rgt"], :name => "index_pages_on_rgt"
 
-  create_table "people", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "first_name",          :limit => 64, :null => false
-    t.string   "middle_name",         :limit => 64
-    t.string   "last_name",           :limit => 64, :null => false
-    t.string   "nickname",            :limit => 32
-    t.string   "gender",              :limit => 1
-    t.date     "birth_date"
-    t.string   "vat_number",          :limit => 16
-    t.string   "italian_fiscal_code", :limit => 16
-    t.text     "notes"
-    t.integer  "home_location_id"
-    t.integer  "birth_location_id"
-    t.string   "tmp_cellulare",       :limit => 32
-    t.string   "tmp_telefono",        :limit => 32
-    t.integer  "fb_uid",              :limit => 8
-    t.boolean  "is_admin"
-  end
-
   create_table "pilot_planes", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pilot_id"
     t.integer  "plane_id"
+    t.integer  "old_pilot_id"
   end
 
   create_table "pilots", :force => true do |t|
@@ -734,6 +601,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "gliding_license",            :limit => 20
     t.integer  "old_pilot_id"
     t.string   "gliding_license_expiration", :limit => 20
+    t.string   "uuid",                       :limit => 36
   end
 
   create_table "plane_type_configurations", :force => true do |t|
@@ -742,35 +610,54 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "name",          :limit => 32, :null => false
     t.integer  "plane_type_id",               :null => false
     t.float    "handicap",                    :null => false
+    t.float    "club_handicap"
   end
 
   create_table "plane_types", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "manufacturer", :limit => 64, :null => false
-    t.string   "name",         :limit => 32, :null => false
+    t.string   "manufacturer",  :limit => 64, :null => false
+    t.string   "name",          :limit => 32, :null => false
     t.integer  "seats"
     t.integer  "motor"
     t.float    "handicap"
     t.string   "link_wp"
+    t.float    "club_handicap"
   end
 
   create_table "planes", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "registration",  :limit => 8, :null => false
-    t.integer  "plane_type_id",              :null => false
+    t.string   "registration",  :limit => 8,  :null => false
+    t.integer  "plane_type_id",               :null => false
+    t.string   "uuid",          :limit => 36
   end
 
-  create_table "provinces", :force => true do |t|
+  create_table "ranking_club_standing_history_entries", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "short_name",    :limit => 2
-    t.string   "istat_id",      :limit => 3
-    t.integer  "region_id"
-    t.string   "old_region_id"
+    t.integer  "club_standing_id", :null => false
+    t.datetime "snapshot_time"
+    t.integer  "position"
+    t.float    "value"
+    t.text     "data"
   end
+
+  add_index "ranking_club_standing_history_entries", ["club_standing_id"], :name => "index_ranking_club_standing_history_entries_on_standing_id"
+
+  create_table "ranking_club_standings", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "ranking_id", :null => false
+    t.integer  "club_id",    :null => false
+    t.integer  "position"
+    t.float    "value"
+    t.text     "data"
+  end
+
+  add_index "ranking_club_standings", ["club_id"], :name => "index_ranking_club_standings_on_club_id"
+  add_index "ranking_club_standings", ["ranking_id", "club_id"], :name => "index_ranking_club_standings_on_ranking_id_and_club_id", :unique => true
+  add_index "ranking_club_standings", ["ranking_id"], :name => "index_ranking_club_standings_on_ranking_id"
 
   create_table "ranking_flights", :force => true do |t|
     t.integer "ranking_id"
@@ -786,17 +673,17 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string "name"
   end
 
-  create_table "ranking_history_entries", :force => true do |t|
+  create_table "ranking_standing_history_entries", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "ranking_standing_id", :null => false
+    t.integer  "standing_id",   :null => false
     t.datetime "snapshot_time"
     t.integer  "position"
     t.float    "value"
     t.text     "data"
   end
 
-  add_index "ranking_history_entries", ["ranking_standing_id"], :name => "index_ranking_history_entries_on_ranking_standing_id"
+  add_index "ranking_standing_history_entries", ["standing_id"], :name => "index_ranking_history_entries_on_ranking_standing_id"
 
   create_table "ranking_standings", :force => true do |t|
     t.integer  "ranking_id"
@@ -807,6 +694,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.integer  "flight_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "old_pilot_id"
   end
 
   add_index "ranking_standings", ["flight_id"], :name => "index_ranking_standings_on_flight_id"
@@ -837,6 +725,8 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.string   "symbol",          :limit => 32
     t.integer  "championship_id"
     t.text     "icon"
+    t.string   "uuid",            :limit => 36
+    t.string   "sti_type",        :limit => 63
   end
 
   create_table "refinery_settings", :force => true do |t|
@@ -852,13 +742,6 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
   end
 
   add_index "refinery_settings", ["name"], :name => "index_refinery_settings_on_name"
-
-  create_table "regions", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "istat_id",   :limit => 2
-    t.string   "name",                    :null => false
-  end
 
   create_table "resources", :force => true do |t|
     t.string   "file_mime_type"
@@ -923,6 +806,7 @@ ActiveRecord::Schema.define(:version => 20110206190707) do
     t.integer  "ranking_id"
     t.text     "icon"
     t.integer  "depends_on_championship_id"
+    t.string   "uuid",                       :limit => 36
   end
 
   add_index "tags", ["symbol"], :name => "index_tags_on_symbol"

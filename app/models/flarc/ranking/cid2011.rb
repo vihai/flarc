@@ -10,7 +10,7 @@ class Cid2011 < Ranking
 
     results = {}
 
-    cship = Championship.find_by_symbol(:cid_2011)
+    cship = Championship.find_by_sym('cid_2011')
 
     cship.championship_flights.each do |cf|
       next if !cf.points
@@ -48,7 +48,7 @@ class Cid2011 < Ranking
     # Pass 3: Update standings
     results.each do |ranking_sym,ranking_results|
 
-      ranking = Ranking.find_by_symbol("cid_2011_#{ranking_sym}")
+      ranking = Ranking.find_by_sym("cid_2011_#{ranking_sym}")
       ranking.generated_at = Time.now
       ranking.save!
 

@@ -41,15 +41,28 @@ Ext.define('Asgard.controller.Menu', {
   onMenuButton: function(button) {
     var me = this;
 
-    if (button.symbol == 'flights')
+    if (button.name == 'flights')
       me.openUri('flarc/flights/');
-    else if (button.symbol == 'planes')
+    else if (button.name == 'planes')
       me.openUri('flarc/planes/');
-    else if (button.symbol == 'plane_types')
+    else if (button.name == 'plane_types')
       me.openUri('flarc/plane_types/');
-    else if (button.symbol == 'championships')
+    else if (button.name == 'championships')
       me.openUri('flarc/championships/');
-    else if (button.symbol == 'pilots')
+    else if (button.name == 'pilots')
       me.openUri('flarc/pilots/');
+    else if (button.name == 'regenerate_rankings') {
+      button.setLoading('Requesting...');
+      Asgard.AjaxJson.request({
+        url: '/flarc/rankings/regenerate',
+        method: 'POST',
+        jsonData: { },
+        callback: function() { button.setLoading(false); },
+        success: function() {
+          Ext.Msg.alert('Done', 'Rankings updated');
+        },
+        failure: Asgard.ExceptionWindow.ajaxFailure,
+      });
+    }
   },
 });

@@ -5,13 +5,7 @@ ActiveRecord::Base # Workaround for https://github.com/rails/rails/issues/882
 namespace :chores do
   task :rankings => :environment do
     chore('Rankings') do
-#      RankingBestThree.compute
-#      RankingCsvva2010.compute
-#      RankingTrofeo.compute
-#      RankingCirSpeed.compute
-#      RankingCsvva2011.compute
-      Flarc::Ranking::Cid2012.compute
-      Flarc::Ranking::Cid2012Club.compute
+      Flarc::Ranking.compute_all
     end
   end
 

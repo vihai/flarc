@@ -12,6 +12,9 @@ class PlaneTypesController < RestController
     end
   end
 
+  scope :used
+  scope :used_in_cid_2012
+
   def find_targets
     @targets_relation = apply_search_to_relation(model.scoped, [ 'name' ])
     super

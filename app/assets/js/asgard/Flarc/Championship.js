@@ -20,6 +20,6 @@ Ext.define('Asgard.Flarc.Championship', {
 
   subTpl: [
     '<b>{name}</b><br/> ',
-    '{symbol}',
+    '{sym}',
   ],
 });

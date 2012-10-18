@@ -1,7 +1,7 @@
 /*
  * Flarc
  *
- * Copyright (C) 2009-2011 Daniele Orlandi
+ * Copyright (C) 2009-2012 Daniele Orlandi
  *
  * Author:: Daniele Orlandi <daniele@orlandi.com>
  *
@@ -17,10 +17,17 @@ Ext.define('Asgard.Flarc.Flight.IndexPanel', {
     'Flarc.Plane',
     'Flarc.PlaneType',
     'Flarc.Pilot',
+    'Flarc.Championship',
     'Ygg.Core.Person',
   ],
   title: 'Flights',
   model: 'Flarc.Flight',
+  storeConfig: {
+    sorters: {
+      property: 'takeoff_time',
+      direction: 'DESC',
+    },
+  },
   columns: [
    {
     xtype: 'datecolumn',
@@ -41,38 +48,33 @@ Ext.define('Asgard.Flarc.Flight.IndexPanel', {
    {
     xtype: 'templatecolumn',
     text: 'Pilot',
-    dataIndex: 'pilot',
     tpl: '<tpl if="pilot">{pilot.name.first} {pilot.name.last}</tpl>',
     flex: 1,
+    sortable: true,
+    searchable: true,
+    searchIn: [ 'pilot.last_name', 'pilot.first_name' ],
+    getSortParam: function() {
+      return [ 'pilot.last_name', 'pilot.first_name' ];
+    },
+   },
+   {
+    xtype: 'templatecolumn',
+    text: 'Championships',
+    tpl: '<tpl for="championship_flights"><tpl for="championship">{name}</tpl> {distance / 1000} km</tpl>',
+    flex: 2,
+    sortable: true,
+    searchable: true,
+    searchIn: [ 'championship_flights.championship.name' ],
+    getSortParam: function() {
+      return 'championships.name';
+    },
    },
    {
     xtype: 'templatecolumn',
     text: 'Plane',
     dataIndex: 'plane',
     tpl: '{plane.registration}',
+    sortable: false,
    },
-//   {
-//    xtype: 'templatecolumn',
-//    text: 'Distance',
-//    dataIndex: 'distance',
-//    tpl: '{distance/1000} km',
-//   },
-
-/*   {
-    text: 'Name',
-    searchIn: [ 'first_name', 'last_name' ], // Temporary until we also decouple search form actual record schema
-    tpl: '{name.first} {name.last}',
-    xtype: 'stringtemplatecolumn',
-    flex: 1,
-    filterable: true,
-    searchable: true,
-   },
-   {
-    text: 'Italian fiscal code',
-    dataIndex: 'italian_fiscal_code',
-    filterable: true,
-    searchable: true,
-    width: 130,
-   },*/
   ],
 });

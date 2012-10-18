@@ -15,6 +15,12 @@ Ext.define('Asgard.Flarc.PlaneType.IndexPanel', {
   ],
   title: 'PlaneTypes',
   model: 'Flarc.PlaneType',
+  storeConfig: {
+    sorters: {
+      property: 'name',
+      direction: 'ASC',
+    },
+  },
   columns: [
    {
     text: 'Name',
@@ -49,4 +55,10 @@ Ext.define('Asgard.Flarc.PlaneType.IndexPanel', {
     name: 'new',
    },
   ],
+
+  scopes: {
+    used: { text: 'Used' },
+    used_in_cid_2012: { text: 'Used in CID 2012' },
+  },
+
 });

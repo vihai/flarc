@@ -72,6 +72,12 @@
             :class => 'btn btn-success btn-large' %>
 <% end %>
 
+<% if hel_session && hel_session.auth_identity && hel_session.auth_identity.has_capabilities?(:admin) %>
+  <%= link_to '<i class="icon-pencil"></i>Amministra...'.html_safe,
+            asgard_index_path + "\#flarc/flights/#{@target.id}",
+            :class => 'btn btn-success btn-large',
+            :target => 'asgard' %>
+<% end %>
 
 </div>
 </div>

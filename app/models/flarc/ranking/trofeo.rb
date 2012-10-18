@@ -7,8 +7,8 @@ class Trofeo < Ranking
 
     results = {}
 
-    ranking = Ranking.find_by_symbol(:csvva_tt_2011)
-    cship = Championship.find_by_symbol(:csvva_2011)
+    ranking = Ranking.find_by_sym('csvva_tt_2011')
+    cship = Championship.find_by_sym('csvva_2011')
 
     cship.championship_flights.where(:status => :approved).includes(:flight).includes(:flight => :pilot).each do |cf|
       results[cf.flight.pilot.id] ||= {}

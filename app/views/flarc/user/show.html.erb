@@ -1,12 +1,14 @@
 <div class="body_contents">
 <h1>Benvenuto <%= auth_person.first_name %></h1>
 
-<% if @current_championships.first.pilots.include?(auth_pilot) %>
-<%= link_to '<i class="icon-upload icon-white"></i>Invia un volo...'.html_safe, submit_flarc_flights_path,
-            :class => 'btn btn-success btn-large' %>
-<% else %>
-  <%= link_to 'Iscriviti al CID 2012</span>'.html_safe, subscribe_flarc_championship_path(@current_championships.first),
-            :class => 'btn btn-success btn-large' %>
+<% if @current_championships.count > 0 %>
+  <% if @current_championships.first.pilots.include?(auth_pilot) %>
+  <%= link_to '<i class="icon-upload icon-white"></i>Invia un volo...'.html_safe, submit_flarc_flights_path,
+              :class => 'btn btn-success btn-large' %>
+  <% else %>
+    <%= link_to 'Iscriviti al CID 2012</span>'.html_safe, subscribe_flarc_championship_path(@current_championships.first),
+              :class => 'btn btn-success btn-large' %>
+  <% end %>
 <% end %>
 
 <% if auth_pilot %>

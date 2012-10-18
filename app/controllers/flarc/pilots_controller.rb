@@ -45,7 +45,7 @@ class PilotsController < RestController
 
   def apply_search_conditions
     if params[:cship]
-      @targets_relation = @targets_relation.joins(:championships).where(:championships => { :symbol => params[:cship] })
+      @targets_relation = @targets_relation.joins(:championships).where(:championships => { :sym => params[:cship] })
     end
 
     @targets_relation = apply_search_to_relation(@targets_relation, [ 'person.first_name', 'person.last_name' ])

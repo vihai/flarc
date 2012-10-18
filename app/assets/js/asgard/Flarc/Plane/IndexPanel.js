@@ -18,6 +18,12 @@ Ext.define('Asgard.Flarc.Plane.IndexPanel', {
   ],
   title: 'Planes',
   model: 'Flarc.Plane',
+  storeConfig: {
+    sorters: {
+      property: 'registration',
+      direction: 'ASC',
+    },
+  },
   columns: [
    {
     xtype: 'stringcolumn',

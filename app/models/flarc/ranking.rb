@@ -87,7 +87,15 @@ class Ranking < Ygg::PublicModel
     end
   end
 
-
+  def self.compute_all
+    Cid2012.compute
+    Cid2012Club.compute
+#      RankingBestThree.compute
+#      RankingCsvva2010.compute
+#      RankingTrofeo.compute
+#      RankingCirSpeed.compute
+#      RankingCsvva2011.compute
+  end
 end
 
 end

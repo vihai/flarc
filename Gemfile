@@ -18,8 +18,6 @@ gem 'geokit-rails3'
 
 gem 'exception_notification'
 
-gem 'thinking-sphinx', '>= 2.0.0', :require => 'thinking_sphinx'
-
 gem 'curb', '>= 0.7.17'
 
 gem 'jquery-rails'
@@ -28,6 +26,12 @@ gem 'state_machine'
 
 gem 'ynetaddr', '>= 1.0.0'
 gem 'vihai-password', '>= 1.2.0'
+
+gem 'tire'
+gem 'tire-contrib'
+
+#gem 'squeel'
+gem 'squeel', :git => 'https://github.com/ernie/squeel.git'
 
 #gem 'active_rest', '>= 4.11.0'
 gem 'active_rest', '>= 4.11.0', :path => '/opt/yggdra/submodules/active_rest'

@@ -10,7 +10,7 @@ class Cid2012 < Ranking
 
     results = {}
 
-    cship = Championship.find_by_symbol(:cid_2012)
+    cship = Championship.find_by_sym('cid_2012')
 
     cship.championship_flights.each do |cf|
       next if !cf.points
@@ -48,12 +48,13 @@ class Cid2012 < Ranking
     # Pass 3: Update standings
     results.each do |ranking_sym,ranking_results|
 
-      ranking = Ranking.find_by_symbol("cid_2012_#{ranking_sym}")
+      touched_standings = {}
+
+      ranking = Ranking.find_by_sym("cid_2012_#{ranking_sym}")
       ranking.generated_at = Time.now
       ranking.save!
 
       ranking_results.each do |pilot_id,pilot|
-
         standing = ranking.standings.find_by_pilot_id(pilot_id) ||
                     Ranking::Standing.new(:ranking => ranking,
                                         :pilot_id => pilot_id)
@@ -62,13 +63,13 @@ class Cid2012 < Ranking
         standing.value = pilot[:flights_best].collect { |x| x.points }.sum
 
         ranking.standings << standing
-        standing.touch
+        touched_standings[standing.id] = true
       end
 
       pos = 0
       ranking.standings.all(:order => "value DESC, id ASC").each do |standing|
 
-        if standing.updated_at < Time.now - 30.minutes
+        if !touched_standings[standing.id]
           standing.destroy
           next
         end

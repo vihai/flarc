@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/ernie/squeel.git
+  revision: 92c01948b5599ab7385613aff0dcba2fd3010459
+  specs:
+    squeel (1.1.0)
+      activerecord (~> 3.0)
+      activesupport (~> 3.0)
+      polyamorous (~> 0.5.0)
+
 PATH
   remote: /opt/yggdra/plugins/asgard
   specs:
@@ -47,7 +56,7 @@ PATH
 PATH
   remote: /opt/yggdra/submodules/active_rest
   specs:
-    active_rest (4.11.0)
+    active_rest (4.11.1)
 
 GEM
   remote: http://rubygems.org/
@@ -80,12 +89,12 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    amq-client (0.9.4)
+    amq-client (0.9.5)
       amq-protocol (>= 0.9.4)
       eventmachine
-    amq-protocol (0.9.4)
-    amqp (0.9.7)
-      amq-client (~> 0.9.4)
+    amq-protocol (0.9.5)
+    amqp (0.9.8)
+      amq-client (~> 0.9.5)
       amq-protocol (>= 0.9.4)
       eventmachine
     arel (3.0.2)
@@ -96,14 +105,15 @@ GEM
     builder (3.0.0)
     case (0.5.2.1)
     changelog (0.8)
-    coderay (1.0.7)
+    coderay (1.0.8)
     commonjs (0.2.6)
     curb (0.8.1)
     diff-lcs (1.1.3)
     erubis (2.7.0)
-    eventmachine (0.12.10)
-    exception_notification (2.6.1)
+    eventmachine (1.0.0)
+    exception_notification (3.0.0)
       actionmailer (>= 3.0.4)
+      tinder (~> 1.8)
     execjs (1.4.0)
       multi_json (~> 1.0)
     factory_girl (4.1.0)
@@ -111,6 +121,10 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
+    faraday (0.8.4)
+      multipart-post (~> 1.1)
+    faraday_middleware (0.8.8)
+      faraday (>= 0.7.4, < 0.9)
     ffi (1.1.5)
     geokit (1.6.5)
       multi_json
@@ -118,8 +132,11 @@ GEM
       geokit (~> 1.5)
       rails (~> 3.0)
     git (1.2.5)
+    hashie (1.2.0)
+    hashr (0.0.22)
     hike (1.2.1)
-    httpclient (2.2.7)
+    http_parser.rb (0.5.3)
+    httpclient (2.3.0.1)
     i18n (0.6.1)
     jeweler (1.8.4)
       bundler (~> 1.0)
@@ -127,7 +144,7 @@ GEM
       rake
       rdoc
     journey (1.0.4)
-    jquery-rails (2.1.2)
+    jquery-rails (2.1.3)
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
@@ -143,23 +160,26 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    method_source (0.8)
+    method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.3.6)
+    multipart-post (1.1.5)
     pg (0.14.1)
+    polyamorous (0.5.0)
+      activerecord (~> 3.0)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
-    pry-rails (0.2.1)
+    pry-rails (0.2.2)
       pry (>= 0.9.10)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     rails (3.2.8)
       actionmailer (= 3.2.8)
@@ -179,7 +199,8 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
-    riddle (1.5.3)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
       rspec-expectations (~> 2.11.0)
@@ -187,8 +208,8 @@ GEM
     rspec-core (2.11.1)
     rspec-expectations (2.11.3)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.11.2)
-    rspec-rails (2.11.0)
+    rspec-mocks (2.11.3)
+    rspec-rails (2.11.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -200,6 +221,7 @@ GEM
       sass (>= 3.1.10)
       tilt (~> 1.3)
     scruffy (0.2.6)
+    simple_oauth (0.1.9)
     slop (3.3.3)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -208,13 +230,27 @@ GEM
     state_machine (1.1.2)
     therubyracer (0.10.2)
       libv8 (~> 3.3.10)
-    thinking-sphinx (2.0.13)
-      activerecord (>= 3.0.3)
-      builder (>= 2.1.2)
-      riddle (>= 1.5.3)
     thor (0.14.6)
     tilt (1.3.3)
-    tomte-core (0.8.4)
+    tinder (1.9.1)
+      eventmachine (>= 0.12.0, < 2)
+      faraday (~> 0.8)
+      faraday_middleware (~> 0.8)
+      hashie (~> 1.0)
+      json (~> 1.6)
+      mime-types (~> 1.16)
+      multi_json (~> 1.0)
+      multipart-post (~> 1.1)
+      twitter-stream (~> 0.1)
+    tire (0.4.3)
+      activemodel (>= 3.0)
+      hashr (~> 0.0.19)
+      multi_json (~> 1.0)
+      rake
+      rest-client (~> 1.6)
+    tire-contrib (0.1.1)
+      tire
+    tomte-core (0.8.5)
       activesupport (~> 3.2.0)
       bson (~> 1.6.0)
       bson_ext (~> 1.6.0)
@@ -229,15 +265,19 @@ GEM
       thor (~> 0.14.5)
       uuidtools (>= 2.1.0)
       wml-compat (~> 0.8.0)
-    tomte-protocol (0.8.4.1)
-      amq-client (~> 0.9.1)
-      amqp (~> 0.9.2)
-      eventmachine (~> 0.12.10)
+    tomte-protocol (0.8.5.1)
+      amq-client (~> 0.9.4)
+      amqp (~> 0.9.7)
+      eventmachine (~> 1.0.0)
       jeweler
-      tomte-core (~> 0.8.4)
-    treetop (1.4.10)
+      tomte-core (~> 0.8.5)
+    treetop (1.4.11)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-stream (0.1.16)
+      eventmachine (>= 0.12.8)
+      http_parser.rb (~> 0.5.1)
+      simple_oauth (~> 0.1.4)
     tzinfo (0.3.33)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -279,9 +319,11 @@ DEPENDENCIES
   rspec-rails (>= 2.0.0)
   sass-rails (~> 3.2.0)
   scruffy
+  squeel!
   state_machine
   therubyracer
-  thinking-sphinx (>= 2.0.0)
+  tire
+  tire-contrib
   uglifier (>= 1.0.3)
   uuidtools
   vihai-assert2
